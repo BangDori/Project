@@ -1,0 +1,36 @@
+.section{
+    display: inline-block;
+}
+
+.article{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.preview-essentials, .preview-group-buy, .preview-board{
+    border: 1px solid gray;
+}
+
+.preview-dabang, .preview-succession{
+    display: inline-block;
+    width: 314px;
+    border: 1px solid gray;
+}
+
+.preview-title{
+    text-align: left;
+    font-size: 20px;
+    padding: 15px 0 0 15px;
+}
+
+.preview-article{
+    margin: 5px 15px;
+    border: 1px solid gray;
+}
+
+.preview-more{
+    text-align: right;
+    padding: 0 15px 5px 0;
+    color: #ccc;
+}

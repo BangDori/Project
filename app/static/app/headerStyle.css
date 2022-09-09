@@ -1,0 +1,34 @@
+.gnb{
+    height: 100%;
+}
+
+.top-box{
+    
+}
+
+
+.menu-box{
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    background-color: slategrey;
+}
+
+.menu-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-item{
+    display: inline;
+    flex-grow: 1;
+    border-right: 1px solid #ccc;
+    padding: 5px 0;
+}
+
+.menu-list:last-child{
+    border-right: none;
+}
