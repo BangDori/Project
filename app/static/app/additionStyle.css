@@ -6,15 +6,21 @@
     border: 1px solid gray;
 }
 .aside1{
-    left: 180px;
+    left: 150px;
 }
 
 .aside2{
-    right: 180px;
+    right: 150px;
 }
 
 .footer{
     border-top: 1px solid gray;
     margin-top: 30px;
     padding-top: 30px;
+}
+
+@media(max-width: 1500px) {
+    .aside1, .aside2{
+        display: none;
+    }
 }
