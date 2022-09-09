@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../static/app/registerCSS/registerStyle.css">
+        <title>register</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="logo-box">
+                <a href="/"><img src="https://cdn.logojoy.com/wp-content/uploads/2019/01/25131619/text_logo_12.png" alt="logo" width="250px"></a>
+            </div>
+            <div class="main">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="info-id">
+                        <input id="idBox" class="input-box" type="text" name="register_user_id" placeholder="아이디 입력(8~20자)">
+                        <button class="check-btn">중복 확인</button>
+                    </div>
+                    <input class="input-box" type="password" name="register_user_pwd" placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
+                    <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력">
+                    <div class="input-email">
+                        <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
+                        <span class="separte-line">@</span>
+                        <select class="input-box" name="regiser_user_email" id="">
+                            <option value="">naver.com</option>
+                            <option vlaue="">직접 입력하기</option>
+                        </select>
+                    </div>
+
+                    <div class="input-birth">
+                        <select name="register_user_year" id="" aria-placeholder="년도">
+                            <option value="">2022</option>
+                        </select>
+                        <select name="register_user_month" id="">
+                            <option value="">9</option>
+                        </select>
+                        <select name="register_user_day" id="">
+                            <option value="">10</option>
+                        </select>
+                    </div>
+
+                    <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+
+                    <div class="check-box">
+                        <div class="check-essential">
+                            <input type="checkbox" name="check1">
+                            <span>[필수] 개인정보 수집 동의</span>
+                        </div>
+                        <div class="check-essential">
+                            <input type="checkbox" name="check2">
+                            <span>[필수] 고유 식별정보 수집 동의</span>
+                        </div>
+                        <div class="check-essential">
+                            <input type="checkbox" name="check3">
+                            <span>[필수] 개인정보 유출 동의</span>
+                        </div>
+                        <div class="check-option">
+                            <input type="checkbox" name="check4">
+                            <span>[선택] 개인정보 해외 판매 동의</span>
+                        </div>
+                        <div class="check-option">
+                            <input type="checkbox" name="check5">
+                            <span>[선택] 개인정보의 제 3자 제공 동의</span>
+                        </div>
+                    </div>
+
+                    <input class="submit-btn" type="submit" value="가입하기">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
