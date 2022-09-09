@@ -9,13 +9,13 @@
 }
 
 .preview-essentials, .preview-group-buy, .preview-board{
-    border: 1px solid gray;
+    border: 1px solid #ccc;
 }
 
 .preview-dabang, .preview-succession{
     display: inline-block;
     width: 314px;
-    border: 1px solid gray;
+    border: 1px solid #ccc;
 }
 
 .preview-title{
@@ -26,7 +26,7 @@
 
 .preview-article{
     margin: 5px 15px;
-    border: 1px solid gray;
+    border: 1px solid #ccc;
 }
 
 .preview-more{

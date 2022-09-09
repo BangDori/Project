@@ -1,26 +1,20 @@
-.aside1, .aside2{
+.aside{
     position: absolute;
     width: 100px;
     height: 500px;
     top: 200px;
-    border: 1px solid gray;
-}
-.aside1{
-    left: 150px;
-}
-
-.aside2{
     right: 150px;
+    border: 1px solid gray;
 }
 
 .footer{
-    border-top: 1px solid gray;
+    border-top: 1px solid #ccc;
     margin-top: 30px;
     padding-top: 30px;
 }
 
 @media(max-width: 1500px) {
-    .aside1, .aside2{
+    .aside, .aside{
         display: none;
     }
 }

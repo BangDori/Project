@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" dir="ltr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../static/app/wrapStyle.css">
-        <link rel="stylesheet" href="../../static/app/headerStyle.css">
-        <link rel="stylesheet" href="../../static/app/sectionStyle.css">
-        <link rel="stylesheet" href="../../static/app/snbStyle.css">
-        <link rel="stylesheet" href="../../static/app/additionStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/wrapStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/headerStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/sectionStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/snbStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css">
+        <!-- title icon 설정 필요 -->
+        <link rel="shortcum icon" href="#">
         <title>자취 플랫폼</title>
-        <style>
-
-        </style>
     </head>
     <body>
         <div class="wrapper">
@@ -169,9 +168,9 @@
                     <!-- 로그인 박스 -->
                     <div class="login-box">
                         <div class="login-user">
-                            <form class="login-form" action="#" method="post">
-                                <input id="submit_btn" type="submit" name="submit" value="로그인">
-                            </form>
+                            <a href="./login">
+                                <button id="login_btn">로그인</button>
+                            </a>
                         </div>
                         <div class="info-user">
                             <a href="#">회원가입</a>
@@ -224,13 +223,8 @@
             </div>
 
             <!-- 화면 줄일시 광고 삭제 -->
-            <!-- 왼쪽 광고 -->
-            <div class="aside1">
-                AD
-            </div>
-
-            <!-- 오른쪽 광고 -->
-            <div class="aside2">
+            <!-- 오른쪽 배너 광고 -->
+            <div class="aside">
                 AD
             </div>
             
