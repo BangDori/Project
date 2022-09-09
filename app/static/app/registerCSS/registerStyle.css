@@ -59,6 +59,7 @@ body{
     margin: 0 7px 0 0;
     flex-grow: 1;
     height: 50px;
+    padding-inline-start: 20px;
 }
 
 .input-birth>:last-child{
