@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../static/app/boardCSS/boardStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/wrapStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/headerStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/snbStyle.css">
+        <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css">
+        <link rel="stylesheet" href="../../static/app/boardSectionStyle.css">
+        <!-- title icon 설정 필요 -->
+        <link rel="shortcum icon" href="#">
+        <title>자유 게시판</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="gnb">
+                    <!-- 로고 -->
+                    <div class="top-box">
+                        <a href="/"><img src="https://cdn.logojoy.com/wp-content/uploads/2019/01/25131619/text_logo_12.png" alt="logo" width=300px height=80px></a>
+                    </div>
+                    <!-- 메뉴 박스 -->
+                    <div class="menu-box">
+                        <div class="menu-list">
+                            <div class="menu-item">
+                                <a href="#">다방</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#">승계</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#">자취생 필수템</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#">공동 구매</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="./board">자유 게시판</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#">공지사항</a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="#">문의하기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 게시판 -->
+            <div class="main">
+                <div class="section">
+                    <div class="top-ad">
+                        top-ad
+                    </div>
+                    <div class="top-info">
+                        <div class="id"><span>번호</span></div>
+                        <div class="title"><span>제목</span></div>
+                        <div class="writer"><span>글쓴이</span></div>
+                        <div class="date"><span>작성일</span></div>
+                        <div class="views"><span>조회</span></div>
+                        <div class="recommendation"><span>추천</span></div>
+                    </div>
+                    <div class="article">
+                        Content
+                    </div>
+                    <div class="lnb">
+                        <div class="writting-box">
+                            <span class="writting-btn">글쓰기</span>
+                        </div>
+    
+                        <div class="paging-box">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                        </div>
+    
+                        <div class="search-box">
+                            <div class="search-type-box">
+                                <select name="search-type" id="">
+                                    <option value="">제목+내용</option>
+                                    <option value="">제목</option>
+                                    <option value="">제목</option>
+                                    <option value="">글쓴이</option>
+                                    <option value="">댓글</option>
+                                </select>
+                            </div>
+                            <div class="search-keyword">
+                                <form action="" method="get">
+                                    <input type="text" >
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 사이드바 -->
+                <div class="snb">
+                    <!-- 로그인 박스 -->
+                    <div class="login-box">
+                        <div class="login-user">
+                            <a href="./login">
+                                <button id="login_btn">로그인</button>
+                            </a>
+                        </div>
+                        <div class="info-user">
+                            <a href="/register">회원가입</a>
+                            <div class="separate-line">|</div>
+                            <a href="#">아이디 찾기</a>
+                            <div class="separate-line">|</div>
+                            <a href="#">비밀번호 찾기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- footer 정보 -->
+            <div class="footer">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et molestiae optio explicabo cupiditate tempore dolores suscipit quo corporis, adipisci exercitationem nesciunt consequatur atque dolorem officiis labore reprehenderit voluptates amet deserunt?
+            </div>
+        </div>
+    </body>
+</html>

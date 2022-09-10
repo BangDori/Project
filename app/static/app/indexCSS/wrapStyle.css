@@ -7,15 +7,14 @@ html{
 body{
     margin: 0;
     padding: 0;
-    text-align: center;
 }
 .wrapper{
-    display: inline-block;
+    width: 900px;
+    margin: 0 auto;
 }
 
 .header{
-    display: inline-block;
-    width: 900px;
+    text-align: center; 
     border-bottom: 1px solid #ccc;
 }
 .main{

@@ -1,0 +1,52 @@
+.top-info{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+}
+
+.id, .views, .recommendation{
+    flex-grow: 1;
+}
+
+.title{
+    flex-grow: 7;
+}
+
+.writer, .date{
+    flex-grow: 2;
+}
+
+.lnb{
+
+}
+
+.writting-box{
+    padding-top: 15px;
+    text-align: right;
+    height: 30px;
+}
+
+.writting-btn{
+    border: 1px solid gray;
+    background-color:lightcoral;
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.paging-box{
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.search-box{
+    margin-top: 15px;
+    text-align: center;
+}
