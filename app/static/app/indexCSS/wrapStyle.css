@@ -21,7 +21,7 @@ body{
 .main{
     display: flex;
     flex-direction: row;
-    width: 900px;
+    width: 976px;
     margin: 10px auto;
     justify-content: space-between;
 }

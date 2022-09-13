@@ -1,5 +1,6 @@
 .section{
     display: inline-block;
+    flex-grow: 1;
 }
 
 .article{
@@ -14,8 +15,14 @@
 
 .preview-dabang, .preview-succession{
     display: inline-block;
-    width: 314px;
+    flex-grow: 1;
     border: 1px solid #ccc;
+}
+
+.preview-find-house{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .preview-title{

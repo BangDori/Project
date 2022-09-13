@@ -1,5 +1,5 @@
 .section{
-    width: 672px;
+    flex-grow: 1;
 }
 
 .top-ad{

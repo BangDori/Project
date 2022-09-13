@@ -1,8 +1,8 @@
 .snb{
     display: flex;
     flex-direction: column;
-    width: 250px;
     gap: 150px;
+    margin-left: 10px;
 }
 
 .login-box{
@@ -31,7 +31,7 @@
 }
 
 .separate-line{
-    margin: 0 8px;
+    margin: 0 5px;
 }
 
 .category-box{

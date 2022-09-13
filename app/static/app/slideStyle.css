@@ -1,6 +1,6 @@
 .top-banner{
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     justify-content: center;
 }
 
@@ -22,15 +22,15 @@
 .banner-content{
     position: relative;
     display: inline-block;
-    width: 576px;
-    height: 108px;
+    width: 672px;
+    height: 112px;
     overflow: hidden;
 }
 
 .banner{
     position: absolute;
     left: 0;
-    width: 576px;
+    width: inherit;
     height: inherit;
     opacity: 0;
 }
