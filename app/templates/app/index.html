@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../static/app/indexCSS/sectionStyle.css">
         <link rel="stylesheet" href="../../static/app/indexCSS/snbStyle.css">
         <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css">
+        <link rel="stylesheet" href="../../static/app/slideStyle.css">
         <!-- title icon 설정 필요 -->
         <link rel="shortcum icon" href="#">
         <title>자취 플랫폼</title>
@@ -52,6 +53,28 @@
             <!-- index 화면의 미리보기 게시판 -->
             <div class="main">
                 <div class="section">
+                    <div class="top-banner">
+                        <div class="direction-move">
+                            <img src="../../static/app/Images/left-direction.png" alt="left-direction" name="left" width="24px">
+                        </div>
+                        <div class="banner-content">
+                            <div class="banner showing"></div>
+                            <div class="banner js-next"></div>
+                            <div class="banner js-next"></div>
+                            <div class="banner js-next"></div>
+
+                            <div class="banner-count">
+                                <div class="count js-clicked-count"></div>
+                                <div class="count"></div>
+                                <div class="count"></div>
+                                <div class="count"></div>
+                            </div>
+                        </div>
+                        <div class="direction-move">
+                            <img src="../../static/app/Images/right-direction.png" alt="right-direction" name="right" width="24px">
+                        </div>
+                    </div>
+
                     <div class="article">
                         <!-- 자취생 필수템 미리보기 -->
                         <div class="preview-essentials">
@@ -232,6 +255,8 @@
             <div class="footer">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Et molestiae optio explicabo cupiditate tempore dolores suscipit quo corporis, adipisci exercitationem nesciunt consequatur atque dolorem officiis labore reprehenderit voluptates amet deserunt?
             </div>
+
+            <script src="../../static/app/sliderBanner.js"></script>
         </div>
     </body>
 </html>

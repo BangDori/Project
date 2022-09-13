@@ -7,10 +7,11 @@ html{
 body{
     margin: 0;
     padding: 0;
+    background-color: white;
 }
 .wrapper{
-    width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }
 
 .header{
@@ -18,10 +19,10 @@ body{
     border-bottom: 1px solid #ccc;
 }
 .main{
-    margin-top: 5px;
     display: flex;
     flex-direction: row;
     width: 900px;
+    margin: 10px auto;
     justify-content: space-between;
 }
 

@@ -1,0 +1,78 @@
+.top-banner{
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.direction-move {
+    display: inline-block;
+    flex-grow: 1;
+    margin: auto 0;
+    cursor: pointer;
+}
+
+.direction-move:first-child{
+    margin-right: 8px;
+}
+
+.direction-move:last-child{
+    margin-left: 8px;
+}
+
+.banner-content{
+    position: relative;
+    display: inline-block;
+    width: 576px;
+    height: 108px;
+    overflow: hidden;
+}
+
+.banner{
+    position: absolute;
+    left: 0;
+    width: 576px;
+    height: inherit;
+    opacity: 0;
+}
+
+.banner:nth-child(odd){
+    background: orange;
+}
+.banner:nth-child(even){
+    background: orangered;
+}
+
+.js-prev{
+    left: -100%;
+}
+
+.js-next{
+    left: 100%;
+}
+
+.showing{
+    opacity: 1;
+
+    transition: all 0.8s ease-in-out;
+}
+.banner-count{
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.count{
+    display: inline-block;
+    border: 1px solid black;
+    background: transparent;
+    border-radius: 16px;
+    padding: 3px;
+    margin: 1px;
+
+    transition: background 0.2s ease-in-out;
+}
+
+.js-clicked-count{
+    background: black;
+}
