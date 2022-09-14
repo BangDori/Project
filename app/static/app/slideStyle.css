@@ -1,29 +1,12 @@
-.top-banner{
-    display: flex;
-    margin-bottom: 10px;
-    justify-content: center;
-}
-
-.direction-move {
-    display: inline-block;
-    flex-grow: 1;
-    margin: auto 0;
-    cursor: pointer;
-}
-
-.direction-move:first-child{
-    margin-right: 8px;
-}
-
-.direction-move:last-child{
-    margin-left: 8px;
+.ad-banner{
+    overflow: hidden;
 }
 
 .banner-content{
     position: relative;
     display: inline-block;
-    width: 672px;
-    height: 112px;
+    width: 100%;
+    height: 128px;
     overflow: hidden;
 }
 
@@ -42,14 +25,6 @@
     background: orangered;
 }
 
-.js-prev{
-    left: -100%;
-}
-
-.js-next{
-    left: 100%;
-}
-
 .showing{
     opacity: 1;
 
@@ -58,7 +33,7 @@
 .banner-count{
     display: inline-block;
     position: absolute;
-    right: 5px;
+    right: 20px;
     bottom: 5px;
 }
 
@@ -69,6 +44,7 @@
     border-radius: 16px;
     padding: 3px;
     margin: 1px;
+    cursor: pointer;
 
     transition: background 0.2s ease-in-out;
 }

@@ -6,9 +6,9 @@
         <link rel="stylesheet" href="../../static/app/indexCSS/wrapStyle.css">
         <link rel="stylesheet" href="../../static/app/indexCSS/headerStyle.css">
         <link rel="stylesheet" href="../../static/app/indexCSS/sectionStyle.css">
-        <link rel="stylesheet" href="../../static/app/indexCSS/snbStyle.css">
         <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css">
         <link rel="stylesheet" href="../../static/app/slideStyle.css">
+        <link rel="stylesheet" href="../../static/app/boardSectionStyle.css">
         <!-- title icon 설정 필요 -->
         <link rel="shortcum icon" href="#">
         <title>자취 플랫폼</title>
@@ -17,9 +17,18 @@
         <div class="wrapper">
             <div class="header">
                 <div class="gnb">
-                    <!-- 로고 -->
                     <div class="top-box">
-                        <a href="/"><img src="https://cdn.logojoy.com/wp-content/uploads/2019/01/25131619/text_logo_12.png" alt="logo" width=300px height=80px></a>
+                        <div class="top-content">
+                            <!-- 로고 -->
+                            <div class="logo-box">
+                                <a href="/"><img src="../../static/app/Images/logo.png" alt="logo" width="288px" height="76px"></a>
+                            </div>
+
+                            <div class="logo-title">
+                                <span>자취생들을 위한 커뮤니티</span>
+                            </div>
+                            
+                        </div>
                     </div>
                     <!-- 메뉴 박스 -->
                     <div class="menu-box">
@@ -50,51 +59,97 @@
                 </div>
             </div>
 
-            <!-- index 화면의 미리보기 게시판 -->
+            <!-- index 화면의 main 내용 -->
             <div class="main">
-                <div class="section">
-                    <div class="top-banner">
-                        <div class="direction-move">
-                            <img src="../../static/app/Images/left-direction.png" alt="left-direction" name="left" width="24px">
-                        </div>
-                        <div class="banner-content">
-                            <div class="banner showing"></div>
-                            <div class="banner js-next"></div>
-                            <div class="banner js-next"></div>
-                            <div class="banner js-next"></div>
+                <div class="container">
+                    <div class="section">
+                        <!-- 자취생 필수템 및 로그인 박스 -->
+                        <div class="article">
+                            <!-- 자취생 필수템 미리보기 -->
+                            <div class="preview-essentials">
+                                <div class="preview-title">
+                                    자취생 필수템
+                                </div>
+        
+                                <div class="preview-article">
+                                    height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                                    <div class="preview-more">
+                                        <a class="more" href="">더보기 ...</a>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div class="banner-count">
-                                <div class="count js-clicked-count"></div>
-                                <div class="count"></div>
-                                <div class="count"></div>
-                                <div class="count"></div>
-                            </div>
-                        </div>
-                        <div class="direction-move">
-                            <img src="../../static/app/Images/right-direction.png" alt="right-direction" name="right" width="24px">
-                        </div>
-                    </div>
+                            <div class="article1-box">
+                                <!-- 로그인 박스 -->
+                                <div class="login-box">
+                                    <div class="login-user">
+                                        <a href="./login">
+                                            <button id="login_btn">로그인</button>
+                                        </a>
+                                    </div>
+                                    <div class="info-user">
+                                        <a href="/register">회원가입</a>
+                                        <div class="separate-line">|</div>
+                                        <a href="#">아이디 찾기</a>
+                                        <div class="separate-line">|</div>
+                                        <a href="#">비밀번호 찾기</a>
+                                    </div>
+                                </div>
 
-                    <div class="article">
-                        <!-- 자취생 필수템 미리보기 -->
-                        <div class="preview-essentials">
-                            <div class="preview-title">
-                                자취생 필수템
+                                <!-- 광고 -->
+                                <div class="small-ad">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2314/2314044.png" alt="ad" height="127px">
+                                </div>
                             </div>
-    
-                            <div class="preview-article">
-                                게<br>시<br>판
-                                <br>동<br>적<br>
-                                으로<br>받아오기
+                        </div>
+
+                        <!-- 최신 & 핫 게시물 -->
+                        <div class="article">
+                            <div class="preview-post">
+                                <div class="preview-title">
+                                    핫 게시물
+                                </div>
+                                <div class="preview-post-content">
+                                    <div class="top-info preview-top-info">
+                                        <div class="id"><span>순위</span></div>
+                                        <div class="title"><span>제목</span></div>
+                                        <div class="recommendation"><span>추천</span></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="preview-post">
+                                <div class="preview-title">
+                                    최신 게시물
+                                </div>
+                                <div class="preview-post-content">
+                                    <div class="top-info preview-top-info">
+                                        <div class="id"><span>순위</span></div>
+                                        <div class="title"><span>제목</span></div>
+                                        <div class="writer"><span>글쓴이</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 광고 배너 -->
+                        <div class="ad-banner">
+                            <div class="banner-content">
+                                <div class="first banner showing">1</div>
+                                <div class="second banner">2</div>
+                                <div class="third banner">3</div>
+                                <div class="fourth banner">4</div>
     
-                            <div class="preview-more">
-                                <a href="">더보기 ...</a>
+                                <div class="banner-count">
+                                    <div class="first count js-clicked-count"></div>
+                                    <div class="second count"></div>
+                                    <div class="third count"></div>
+                                    <div class="fourth count"></div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- 다방, 승계 미리보기 -->
-                        <div class="preview-find-house">
+                        <!-- <div class="preview-find-house">
                             <div class="preview-dabang">
                                 <div class="preview-title">
                                     다방
@@ -120,10 +175,10 @@
                                     <a href="">더보기 ...</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- 공동 구매 미리보기 -->
-                        <div class="preview-group-buy">
+                        <!-- <div class="preview-group-buy">
                             <div class="preview-title">
                                 공동 구매
                             </div>
@@ -137,70 +192,23 @@
                             <div class="preview-more">
                                 <a href="">더보기 ...</a>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- 자유 게시판 미리보기 -->
-                        <div class="preview-board">
+                        <!-- <div class="preview-board">
                             <div class="preview-title">
                                 자유 게시판
                             </div>
     
                             <div class="preview-article">
-                                자유 게시판
-                                <br>
-                                동적으로 받아오깅
+                                height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                                <div class="preview-more">
+                                    <a href="./board">더보기 ...</a>
+                                </div>
                             </div>
-    
-                            <div class="preview-more">
-                                <a href="./board">더보기 ...</a>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-
-                <!-- 사이드바 -->
-                <div class="snb">
-                    <!-- 로그인 박스 -->
-                    <div class="login-box">
-                        <div class="login-user">
-                            <a href="./login">
-                                <button id="login_btn">로그인</button>
-                            </a>
-                        </div>
-                        <div class="info-user">
-                            <a href="/register">회원가입</a>
-                            <div class="separate-line">|</div>
-                            <a href="#">아이디 찾기</a>
-                            <div class="separate-line">|</div>
-                            <a href="#">비밀번호 찾기</a>
-                        </div>
-                    </div>
-
-                    <!-- 카테고리 박스 -->
-                    <div class="category-box">
-                        <div class="category">
-                            <a href="/dabang">다방</a>
-                        </div>
-                        <div class="category">
-                            <a href="/succession">승계</a>
-                        </div>
-                        <div class="category">
-                            <a href="/essentials">자취방 필수템</a>
-                        </div>
-                        <div class="category">
-                            <a href="/group">공동 구매</a>
-                        </div>
-                        <div class="category">
-                            <a href="/board">자유 게시판</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 화면 줄일시 광고 삭제 -->
-            <!-- 오른쪽 배너 광고 -->
-            <div class="aside">
-                AD
             </div>
             
             <!-- footer 정보 -->

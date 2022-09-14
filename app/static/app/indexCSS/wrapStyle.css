@@ -19,11 +19,8 @@ body{
     border-bottom: 1px solid #ccc;
 }
 .main{
-    display: flex;
-    flex-direction: row;
     width: 976px;
     margin: 10px auto;
-    justify-content: space-between;
 }
 
 a{

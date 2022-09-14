@@ -1,71 +1,72 @@
-const directions = document.querySelectorAll(".direction-move"),
-    banner_content = document.querySelector(".banner-content"),
+const banner_content = document.querySelector(".banner-content"),
     banner = document.querySelector(".banner"),
-    banner_count = document.querySelector(".banner-count");
+    banner_count = document.querySelector(".banner-count"),
+    counts = document.querySelectorAll(".count");
 
 const SHOWING = "showing",
-    PREV_MOVING = "js-prev",
-    NEXT_MOVING = "js-next",
     CLICKED_BANNER = "js-clicked-count";
 
 let mode = 'auto';
 
-function handleDirection() {
-    directions.forEach(direction => {
-        direction.addEventListener("click", (event) => {
+function handleClick() {
+    counts.forEach(count => {
+        count.addEventListener("click", (event) => {
             const current_slide = banner_content.querySelector(`.${SHOWING}`);
             const current_count = banner_count.querySelector(`.${CLICKED_BANNER}`);
+            const click_count = event.target.classList[0];
             mode = 'click';
-
-            if(event.target.name === 'left') {
-                if(current_slide.previousElementSibling === null) return;
-                handleLeft(current_slide, current_count);
-            } else if(event.target.name === 'right')  {
-                if(current_slide.nextElementSibling === null) return;
-                handleRight(current_slide, current_count);
+            if(current_count.classList.contains(click_count)) {
+                null;
+            } else {
+                showBanner(current_slide, current_count, click_count);
             }
         });
     })
 }
 
-function handleLeft(current_slide, current_count) {
-    const prev_slide = current_slide.previousElementSibling;
-    const prev_count = current_count.previousElementSibling;
+function showBanner(current_slide, current_count, click_count){
+    const clicked_slide = banner_content.querySelector(`.${click_count}`);
+    const clicked_count = banner_count.querySelector(`.${click_count}`);
 
-    prev_slide.classList.remove(PREV_MOVING);
-    prev_slide.classList.add(SHOWING);
-    prev_count.classList.add(CLICKED_BANNER);
+    clicked_slide.classList.add(SHOWING);
+    clicked_count.classList.add(CLICKED_BANNER);
 
     current_slide.classList.remove(SHOWING);
-    current_slide.classList.add(NEXT_MOVING);
     current_count.classList.remove(CLICKED_BANNER);
 }
 
-function handleRight(current_slide, current_count) {
-    const next_slide = current_slide.nextElementSibling;
-    const next_count = current_count.nextElementSibling;
+function autoMoving() {
+    const current_slide = banner_content.querySelector(`.${SHOWING}`);
+    const current_count = banner_count.querySelector(`.${CLICKED_BANNER}`);
 
-    if(next_slide.nextElementSibling === null) {
-        mode = 'stop';
-        return;
+    current_slide.classList.remove(SHOWING);
+    current_count.classList.remove(CLICKED_BANNER);
+
+    if(!current_slide.classList.contains('fourth')) {
+        const next_slide = current_slide.nextElementSibling;
+        const next_count = current_count.nextElementSibling;
+
+        if(next_slide !== null) {
+            next_slide.classList.add(SHOWING);
+            next_count.classList.add(CLICKED_BANNER);    
+        } else {
+            const first_count = banner_count.querySelector(".count");
+            banner.classList.add(SHOWING);
+            first_count.classList.add(CLICKED_BANNER);    
+        }
+    } else {
+        const first_count = banner_count.querySelector(".count");
+        banner.classList.add(SHOWING);
+        first_count.classList.add(CLICKED_BANNER);
     }
-
-    next_slide.classList.add(SHOWING);
-    next_slide.classList.remove(NEXT_MOVING);
-    next_count.classList.add(CLICKED_BANNER);
-
-    current_slide.classList.remove(SHOWING);
-    current_slide.classList.add(PREV_MOVING);
-    current_count.classList.remove(CLICKED_BANNER);
 }
 
-function autoDirection() {
+function autoBanner() {
     let timer = setInterval(function () {
-        console.log(mode);
         if(mode === 'click') {
             mode = 'auto';
         } else if(mode == 'auto') {
-            handleRight(banner_content.querySelector(`.${SHOWING}`), banner_count.querySelector(`.${CLICKED_BANNER}`));
+            autoMoving();
         } else if(mode == 'stop') {
             clearInterval(timer);
         }
@@ -73,8 +74,8 @@ function autoDirection() {
 }
 
 function init() {
-    handleDirection();
-    autoDirection();
+    handleClick();
+    autoBanner();
 }
 
 init();
