@@ -31,3 +31,6 @@ def notice(request):
 
 def contact(request):
     return render(request, 'app/contact.html')
+
+def write(request):
+    return render(request, 'app/write.html')

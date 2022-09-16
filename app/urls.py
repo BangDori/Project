@@ -13,4 +13,5 @@ urlpatterns = [
     path('board/', views.board, name='board'),
     path('notice/', views.notice, name='notice'),
     path('contact/', views.contact, name='contact'),
+    path('write/', views.write, name='write'),
 ]
