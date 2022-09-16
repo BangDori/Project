@@ -22,14 +22,8 @@
           <div class="top-content">
             <!-- 로고 -->
             <div class="logo-box">
-              <a href="/"
-                ><img
-                  class="logo"
-                  src="../../static/app/Images/logo.png"
-                  alt="logo"
-                  width="288px"
-                  height="76px"
-              /></a>
+              <a href={% url 'index' %}>
+                <img class="logo" src="../../static/app/Images/logo.png" alt="logo" width="288px" height="76px" /></a>
             </div>
 
             <!-- 로고&웹사이트 설명 -->
@@ -37,64 +31,63 @@
               <span>자취생들을 위한 커뮤니티</span>
             </div>
 
-            <!-- 미니로고&검색창 -->
+            <!-- 검색창 -->
             <div class="top-content-search">
-              <img
-                class="logo"
-                src="../../static/app/Images/logo.png"
-                alt="logo"
-                width="114px"
-                height="27px"
-              />
-              <form class="top-search-form" action="">
-                <div class="top-search-keyword-box">
-                  <input
-                    class="top-search-keyword"
-                    type="text"
-                    name="search_keyword"
-                    placeholder="검색"
-                  />
+                <form class="top-search-form" action="">
+                  <div class="top-search-keyword-box">
+                    <input
+                      class="top-search-keyword"
+                      type="text"
+                      name="search_keyword"
+                      placeholder="검색"
+                    />
+                    <img
+                      class="reset"
+                      src="https://kr.seaicons.com/wp-content/uploads/2022/07/Very-Basic-Cancel-icon.png"
+                      alt="cancle"
+                      onclick="resetKeyword()"
+                      width="15px"
+                    />
+                  </div>
                   <img
-                    class="reset"
-                    src="https://kr.seaicons.com/wp-content/uploads/2022/07/Very-Basic-Cancel-icon.png"
-                    alt="cancle"
-                    onclick="resetKeyword()"
-                    width="15px"
+                    class="search"
+                    src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
+                    alt="search"
+                    width="25px"
+                    onclick="searchKeyword()"
                   />
-                </div>
-                <img
-                  class="search"
-                  src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
-                  alt="search"
-                  width="25px"
-                  onclick="searchKeyword()"
-                />
-              </form>
+                </form>
+            </div>
+
+            <!-- 미니로고 -->
+            <div class="logo-on-search">
+                <a href={% url 'index' %}><img class="logo" src="../../static/app/Images/miniLogo.png" alt="logo" width="86px" height="96px"></a>
             </div>
           </div>
+
           <!-- 메뉴 박스 -->
           <div class="menu-box">
             <div class="menu-list">
               <div class="menu-item">
-                <a href="/dabang">다방</a>
+                <a href={% url 'dabang' %}>다방</a>
               </div>
               <div class="menu-item">
-                <a href="/succession">승계</a>
+                <a href={% url 'succession' %}>승계</a>
               </div>
               <div class="menu-item">
-                <a href="/essentials">자취생 필수템</a>
+                <a href={% url 'essentials' %}>자취생 필수템</a>
               </div>
               <div class="menu-item">
-                <a href="/group">공동 구매</a>
+                <a href={% url 'group' %}>공동 구매</a>
               </div>
               <div class="menu-item">
-                <a href="/board">자유 게시판</a>
+                <a href={% url 'board' %}>자유 게시판</a>
               </div>
               <div class="menu-item">
-                <a href="/notice">공지사항</a>
+                <a href={% url 'notice' %}>공지사항</a>
               </div>
               <div class="menu-item">
-                <a href="/contact">문의하기</a>
+                <a href={% url 'contact' %}>문의하기</a>
               </div>
             </div>
           </div>
@@ -105,49 +98,50 @@
       <div class="main">
         <div class="container">
           <div class="section">
-            <!-- 자취생 필수템 & 로그인 박스 -->
+            <!-- 자취생 필수템 및 로그인 박스 -->
             <div class="article">
-              <!-- 자취생 필수템 미리보기 -->
-              <div class="preview-essentials">
-                <div class="preview-title">자취생 필수템</div>
-
-                <div class="preview-article essentials-board-size">
-                  height 임의로 설정해뒀음(content 작성 후 height style 제거)
-                  all
-                  <div class="preview-more">
-                    <a class="more" href="">더보기 ...</a>
+                <!-- 자취생 필수템 미리보기 -->
+                <div class="preview-essentials">
+                  <div class="preview-title">자취생 필수템</div>
+  
+                  <div class="preview-article essentials-board-size">
+                    height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                    <div class="preview-more">
+                      <a class="more" href={% url 'essentials' %}>더보기 ...</a>
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- 로그인 박스 및 광고 -->
+                <div class="article-box">
+                  <!-- 로그인 박스 -->
+                  <div class="login-box">
+                    <div class="login-user">
+                      <a href={% url 'login' %}>
+                        <button id="login_btn">로그인</button>
+                      </a>
+                    </div>
+                    <div class="info-user">
+                      <a href={% url 'register' %}>회원가입</a>
+                      <div class="separate-line">|</div>
+                      <a href="#">아이디 찾기</a>
+                      <div class="separate-line">|</div>
+                      <a href="#">비밀번호 찾기</a>
+                    </div>
+                  </div>
+  
+                  <!-- 광고 -->
+                  <div class="small-ad">
+                    <img
+                        src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png"
+                        alt="ad"
+                        width="226px"
+                        height="127px"
+                    />
                   </div>
                 </div>
               </div>
-
-              <!-- 로그인 & 광고 박스 -->
-              <div class="article-box">
-                <!-- 로그인 박스 -->
-                <div class="login-box">
-                  <div class="login-user">
-                    <a href="./login">
-                      <button id="login_btn">로그인</button>
-                    </a>
-                  </div>
-                  <div class="info-user">
-                    <a href="/register">회원가입</a>
-                    <div class="separate-line">|</div>
-                    <a href="#">아이디 찾기</a>
-                    <div class="separate-line">|</div>
-                    <a href="#">비밀번호 찾기</a>
-                  </div>
-                </div>
-
-                <!-- 광고 -->
-                <div class="small-ad">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/2314/2314044.png"
-                    alt="ad"
-                    height="127px"
-                  />
-                </div>
-              </div>
-            </div>
+  
 
             <!-- 공지사항 게시판 -->
             <div class="board">

@@ -7,7 +7,6 @@
   margin: 0 auto;
   position: relative;
   text-align: left;
-  padding: 10px 0 0;
 }
 
 .logo-box {
@@ -16,6 +15,7 @@
 
 .logo {
   vertical-align: bottom;
+  height: 90px;
 }
 
 .logo-title {
@@ -26,6 +26,13 @@
 
   position: relative;
   bottom: 10px;
+}
+
+.logo-on-search{
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    left: 112px;
 }
 
 .top-content-search {

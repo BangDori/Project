@@ -12,8 +12,8 @@
         <div class="wrapper">
             <div class="main">
                 <div class="lnb-logo">
-                    <a href="/">
-                        <img src="https://cdn.logojoy.com/wp-content/uploads/2019/01/25131619/text_logo_12.png" alt="logo" height=150px>
+                    <a href={% url 'index' %}>
+                        <img src="../../static/app/Images/logo.png" alt="logo" height=150px style="vertical-align: bottom;">
                     </a>
                 </div>
 
@@ -27,7 +27,7 @@
                     <input id="submit_btn" type="submit" value="로그인">
                 </form>
                 <div class="info-user">
-                    <a href="/register">회원가입</a>
+                    <a href={% url 'register' %}>회원가입</a>
                     <a href="">아이디 찾기</a>
                     <a href="">비밀번호 찾기</a>
                 </div>
