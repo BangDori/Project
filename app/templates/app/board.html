@@ -1,194 +1,221 @@
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="stylesheet" href="../../static/app/indexCSS/wrapStyle.css">
-        <link rel="stylesheet" href="../../static/app/indexCSS/headerStyle.css">
-        <link rel="stylesheet" href="../../static/app/boardCSS/boardStyle.css">
-        <link rel="stylesheet" href="../../static/app/boardSectionStyle.css">
-        <link rel="stylesheet" href="../../static/app/indexCSS/snbStyle.css">
-        <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css">
-        <link rel="stylesheet" href="../../static/app/slideStyle.css">
-        <!-- title icon 설정 필요 -->
-        <link rel="shortcum icon" href="#">
-        <title>자취 플랫폼</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="header">
-                <div class="gnb">
-                    <!-- 로고 -->
-                    <div class="top-box">
-                        <a href="/"><img src="https://cdn.logojoy.com/wp-content/uploads/2019/01/25131619/text_logo_12.png" alt="logo" width=300px height=80px></a>
-                    </div>
-                    <!-- 메뉴 박스 -->
-                    <div class="menu-box">
-                        <div class="menu-list">
-                            <div class="menu-item">
-                                <a href="/dabang">다방</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/succession">승계</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/essentials">자취생 필수템</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/group">공동 구매</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/board">자유 게시판</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/notice">공지사항</a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/contact">문의하기</a>
-                            </div>
-                        </div>
-                    </div>
+    <link rel="stylesheet" href="../../static/app/indexCSS/wrapStyle.css" />
+    <link rel="stylesheet" href="../../static/app/indexCSS/headerStyle.css" />
+    <link rel="stylesheet" href="../../static/app/indexCSS/sectionStyle.css" />
+    <link rel="stylesheet" href="../../static/app/indexCSS/additionStyle.css" />
+    <link rel="stylesheet" href="../../static/app/slideStyle.css" />
+    <link rel="stylesheet" href="../../static/app/boardSectionStyle.css" />
+    <!-- title icon 설정 필요 -->
+    <link rel="shortcum icon" href="#" />
+    <title>자취 플랫폼</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- 로고 & 메뉴 -->
+      <div class="header">
+        <div class="gnb">
+          <div class="top-content">
+            <!-- 로고 -->
+            <div class="logo-box">
+              <a href="/"
+                ><img
+                  class="logo"
+                  src="../../static/app/Images/logo.png"
+                  alt="logo"
+                  width="288px"
+                  height="76px"
+              /></a>
+            </div>
+
+            <div class="logo-title">
+              <span>자취생들을 위한 커뮤니티</span>
+            </div>
+
+            <div class="top-content-search">
+              <img
+                class="logo"
+                src="../../static/app/Images/logo.png"
+                alt="logo"
+                width="114px"
+                height="27px"
+              />
+              <form class="top-search-form" action="">
+                <div class="top-search-keyword-box">
+                  <input
+                    class="top-search-keyword"
+                    type="text"
+                    name="search_keyword"
+                    placeholder="검색"
+                  />
                 </div>
+                <img
+                  src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
+                  alt="search"
+                  width="25px"
+                  style="padding: 5px; cursor: pointer"
+                />
+              </form>
+            </div>
+          </div>
+          <!-- 메뉴 박스 -->
+          <div class="menu-box">
+            <div class="menu-list">
+              <div class="menu-item">
+                <a href="/dabang">다방</a>
+              </div>
+              <div class="menu-item">
+                <a href="/succession">승계</a>
+              </div>
+              <div class="menu-item">
+                <a href="/essentials">자취생 필수템</a>
+              </div>
+              <div class="menu-item">
+                <a href="/group">공동 구매</a>
+              </div>
+              <div class="menu-item">
+                <a href="/board">자유 게시판</a>
+              </div>
+              <div class="menu-item">
+                <a href="/notice">공지사항</a>
+              </div>
+              <div class="menu-item">
+                <a href="/contact">문의하기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 자유 게시판 -->
+      <div class="main">
+        <div class="container">
+          <div class="section">
+            <!-- 자취생 필수템 & 로그인 박스 -->
+            <div class="article">
+              <!-- 자취생 필수템 미리보기 -->
+              <div class="preview-essentials">
+                <div class="preview-title">자취생 필수템</div>
+
+                <div class="preview-article essentials-board-size">
+                  height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                  all
+                  <div class="preview-more">
+                    <a class="more" href="">더보기 ...</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 로그인 & 광고 박스 -->
+              <div class="article-box">
+                <!-- 로그인 박스 -->
+                <div class="login-box">
+                  <div class="login-user">
+                    <a href="./login">
+                      <button id="login_btn">로그인</button>
+                    </a>
+                  </div>
+                  <div class="info-user">
+                    <a href="/register">회원가입</a>
+                    <div class="separate-line">|</div>
+                    <a href="#">아이디 찾기</a>
+                    <div class="separate-line">|</div>
+                    <a href="#">비밀번호 찾기</a>
+                  </div>
+                </div>
+
+                <!-- 광고 -->
+                <div class="small-ad">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/2314/2314044.png"
+                    alt="ad"
+                    height="127px"
+                  />
+                </div>
+              </div>
             </div>
 
             <!-- 자유 게시판 -->
-            <div class="main">
-                <div class="section">
-                    <div class="top-banner">
-                        <div class="direction-move">
-                            <img src="../../static/app/Images/left-direction.png" alt="left-direction" name="left" width="24px">
-                        </div>
-                        <div class="banner-content">
-                            <div class="banner showing"></div>
-                            <div class="banner js-next"></div>
-                            <div class="banner js-next"></div>
-                            <div class="banner js-next"></div>
+            <div class="board">
+              <div class="preview-title board-title">
+                <span>자유 게시판</span>
+              </div>
 
-                            <div class="banner-count">
-                                <div class="count js-clicked-count"></div>
-                                <div class="count"></div>
-                                <div class="count"></div>
-                                <div class="count"></div>
-                            </div>
-                        </div>
-                        <div class="direction-move">
-                            <img src="../../static/app/Images/right-direction.png" alt="right-direction" name="right" width="24px">
-                        </div>
-                    </div>
+              <div class="top-info">
+                <div class="id"><span>번호</span></div>
+                <div class="title"><span>제목</span></div>
+                <div class="writer"><span>글쓴이</span></div>
+                <div class="date"><span>작성일</span></div>
+                <div class="views"><span>조회</span></div>
+                <div class="recommendation"><span>추천</span></div>
+              </div>
 
-                    <div class="section-title">
-                        <span>자유 게시판</span>
-                    </div>
+              <div class="article">Content</div>
 
-                    <div class="top-info">
-                        <div class="id"><span>번호</span></div>
-                        <div class="title"><span>제목</span></div>
-                        <div class="writer"><span>글쓴이</span></div>
-                        <div class="date"><span>작성일</span></div>
-                        <div class="views"><span>조회</span></div>
-                        <div class="recommendation"><span>추천</span></div>
-                    </div>
-
-                    <div class="article">
-                        Content
-                    </div>
-                    
-                    <div class="lnb">
-                        <div class="writting-box">
-                            <a class="writting-btn" href="">글쓰기</a>
-                        </div>
-    
-                        <div class="paging-box">
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                        </div>
-    
-                        <div class="search-box">
-                            <div class="search-type-box">
-                                <select name="search-type" id="">
-                                    <option value="">제목+내용</option>
-                                    <option value="">제목</option>
-                                    <option value="">제목</option>
-                                    <option value="">글쓴이</option>
-                                    <option value="">댓글</option>
-                                </select>
-                            </div>
-                            <div class="search-keyword">
-                                <form action="" method="get">
-                                    <input type="text" >
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+              <div class="lnb">
+                <div class="writting-box">
+                  <a class="writting-btn" href="">글쓰기</a>
                 </div>
 
-                <!-- 사이드바 -->
-                <div class="snb">
-                    <!-- 로그인 박스 -->
-                    <div class="login-box">
-                        <div class="login-user">
-                            <a href="./login">
-                                <button id="login_btn">로그인</button>
-                            </a>
-                        </div>
-                        <div class="info-user">
-                            <a href="/register">회원가입</a>
-                            <div class="separate-line">|</div>
-                            <a href="#">아이디 찾기</a>
-                            <div class="separate-line">|</div>
-                            <a href="#">비밀번호 찾기</a>
-                        </div>
-                    </div>
-
-                    <!-- 카테고리 박스 -->
-                    <div class="category-box">
-                        <div class="category">
-                            <a href=""><strong>자취생 필수템</strong></a>
-                            <ul>
-                                <li>자취생 필수템1</li>
-                                <li>자취생 필수템2</li>
-                            </ul>
-                        </div>
-                        <div class="category">
-                            <a href=""><strong>다방</strong></a>
-                            <ul>
-                                <li>다방1</li>
-                                <li>다방2</li>
-                            </ul>
-                        </div>
-                        <div class="category">
-                            <a href=""><strong>승계</strong></a>
-                            <ul>
-                                <li>승계1</li>
-                                <li>승계2</li>
-                            </ul>
-                        </div>
-                        <div class="category">
-                            <a href=""><strong>공동 구매</strong></a>
-                            <ul>
-                                <li>공동 구매1</li>
-                                <li>공동 구매2</li>
-                            </ul>
-                        </div>
-                        <div class="category">
-                            <a href=""><strong>자유 게시판</strong></a>
-                            <ul>
-                                <li>자유 게시판1</li>
-                                <li>자유 게시판2</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="paging-box">
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
                 </div>
+
+                <div class="search-box">
+                  <div class="search-type-box">
+                    <select name="search-type" id="">
+                      <option value="">제목+내용</option>
+                      <option value="">제목</option>
+                      <option value="">제목</option>
+                      <option value="">글쓴이</option>
+                      <option value="">댓글</option>
+                    </select>
+                  </div>
+                  <div class="search-keyword">
+                    <form action="" method="get">
+                      <input type="text" />
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- footer 정보 -->
-            <div class="footer">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et molestiae optio explicabo cupiditate tempore dolores suscipit quo corporis, adipisci exercitationem nesciunt consequatur atque dolorem officiis labore reprehenderit voluptates amet deserunt?
-            </div>
+            <!-- 광고 배너 -->
+            <div class="ad-banner board-banner">
+              <div class="banner-content">
+                <div class="first banner showing"></div>
+                <div class="second banner"></div>
+                <div class="third banner"></div>
+                <div class="fourth banner"></div>
 
-            <script src="../../static/app/sliderBanner.js"></script>
+                <div class="banner-count">
+                  <div class="first count js-clicked-count"></div>
+                  <div class="second count"></div>
+                  <div class="third count"></div>
+                  <div class="fourth count"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </body>
+      </div>
+
+      <!-- footer 정보 -->
+      <div class="footer">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et molestiae
+        optio explicabo cupiditate tempore dolores suscipit quo corporis,
+        adipisci exercitationem nesciunt consequatur atque dolorem officiis
+        labore reprehenderit voluptates amet deserunt?
+      </div>
+
+      <script src="../../static/app/topSearch.js"></script>
+      <script src="../../static/app/sliderBanner.js"></script>
+    </div>
+  </body>
 </html>
