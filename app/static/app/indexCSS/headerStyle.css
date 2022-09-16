@@ -49,12 +49,14 @@
   background-color: rgba(128, 128, 128, 0.3);
 }
 .top-search-keyword-box {
+  position: relative;
   border-right: 1px solid gray;
 }
 
 .top-search-keyword {
-  width: 228px;
-  height: 32px;
+  width: 244px;
+  height: 35px;
+  padding: 0;
   padding-inline-start: 15px;
 
   border: none;
@@ -63,6 +65,24 @@
 .top-search-keyword:focus {
   outline: none;
   border-right: 1px solid rgba(0, 0, 255, 0.5);
+}
+
+.reset {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  padding: 5px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible !important;
+}
+
+.search {
+  padding: 5px;
+  cursor: pointer;
 }
 
 .menu-box {
