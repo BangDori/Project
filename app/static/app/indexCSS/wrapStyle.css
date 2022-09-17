@@ -3,6 +3,7 @@ html{
     padding: 0;
     box-sizing: border-box;
     font-size: 12px;
+    scroll-behavior: smooth;
 }
 body{
     margin: 0;
