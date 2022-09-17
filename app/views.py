@@ -37,3 +37,6 @@ def contact(request):
 
 def write(request):
     return render(request, 'app/write.html')
+
+def fintID(request):
+    return render(request, 'app/findID.html')

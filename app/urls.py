@@ -15,4 +15,5 @@ urlpatterns = [
     path('index/notice/', views.notice, name='notice'),
     path('index/contact/', views.contact, name='contact'),
     path('index/write/', views.write, name='write'),
+    path('findID/', views.fintID, name='findID'),
 ]
