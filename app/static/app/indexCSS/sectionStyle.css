@@ -69,6 +69,32 @@
   vertical-align: bottom;
 }
 
+.after-login{
+  margin: 0;
+}
+
+.login-after-user-info{
+  display: flex;
+  flex-direction: row;
+  padding: 10px 15px;
+  gap: 10px;
+}
+
+.login-user-img{
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 36px;
+  width: 24px;
+}
+
+.login-user-info{
+  width: 145px;
+}
+
+.login-after-user-bar{
+  padding: 10px 5px;
+}
+
 .preview-even {
   gap: 10px;
 }
