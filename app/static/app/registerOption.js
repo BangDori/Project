@@ -1,7 +1,7 @@
-const email_box = document.querySelector("#emailBox"),
-    year_box = document.querySelector("#yearBox"),
-    month_box = document.querySelector("#monthBox"),
-    day_box = document.querySelector("#dayBox"),
+const email_box = document.querySelector("#regEmail"),
+    year_box = document.querySelector("#regYear"),
+    month_box = document.querySelector("#regMonth"),
+    day_box = document.querySelector("#regDay"),
     select_email_box = document.querySelector(".select-email-box"),
     input_email_box = document.querySelector(".input-email-box");
 
@@ -19,7 +19,7 @@ function setAddress() {
     addres.unshift({value: '', register_user_email: '주소 입력'});
 
     for(const addr of addres) {
-        let option = document.createElement("option");
+        option = document.createElement("option");
         option.value = addr.value;
         option.innerText = addr.register_user_email;
         email_box.appendChild(option);
