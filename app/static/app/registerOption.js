@@ -1,7 +1,7 @@
 const email_box = document.querySelector("#regEmail"),
-    year_box = document.querySelector("#regYear"),
-    month_box = document.querySelector("#regMonth"),
-    day_box = document.querySelector("#regDay"),
+    year_box = document.querySelector("#register_user_year"),
+    month_box = document.querySelector("#register_user_month"),
+    day_box = document.querySelector("#register_user_day"),
     select_email_box = document.querySelector(".select-email-box"),
     input_email_box = document.querySelector(".input-email-box");
 
@@ -32,7 +32,7 @@ function setBirth() {
 
     for(let i = 1970; i <= 2022; i++) {
         option = document.createElement("option");
-        option.innerText = i;
+        option.innerText = i.toString();
         year_box.appendChild(option);
     }
     for(let i = 1; i <= 12; i++) {
