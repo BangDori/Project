@@ -26,21 +26,31 @@
                         <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
                         <span class="separte-line email-separate">@</span>
                         <div class="js-email">
-                            <div class="select-email-box">
-                            </div>
-                            <input class="input-email-box hidden" type="text" name="register_user_email">    
+                            <div class="select-email-box"></div>
+                            <input class="input-email-box hidden" type="text" name="register_user_email">
                         </div>
                         <select id="regEmail" class="input-box email-box" name="regiser_user_email">
                         </select>
                     </div>
 
                     <div class="input-birth">
-                        <select id="regYear" name="register_user_year">
+                        <input type="text" id="register_user_year" name="register_user_year">
+                        <select id="register_user_month" name="register_user_month">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
                         </select>
-                        <select id="regMonth" name="register_user_month">
-                        </select>
-                        <select id="regDay" name="register_user_day">
-                        </select>
+                        <input type="text" id="register_user_day" name="register_user_day">
+                        </input>
                     </div>
 
                     <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">

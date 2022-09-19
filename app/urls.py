@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.goIndex, name='go'),
     path('index/', views.index, name='index'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('index/dabang/', views.dabang, name='dabang'),
     path('index/succession/', views.succession, name='succession'),

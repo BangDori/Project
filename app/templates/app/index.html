@@ -118,7 +118,6 @@
                     <a href={% url 'findPW1' %}>비밀번호 찾기</a>
                   </div>
                 </div>
-
                 <!-- 광고 -->
                 <div class="small-ad">
                   <img
@@ -143,7 +142,10 @@
                       <img src="" alt="">
                     </div>
                     <div class="login-user-info">
-                      닉네임 + 로그아웃 버튼
+                      <h6>{{user_id}}님이 로그인중</h6>
+                     <a href={% url 'logout' %}>
+                      <button class="login_btn">로그아웃</button>
+                    </a>
                       <br>
                       이메일 주소
                       <br>
