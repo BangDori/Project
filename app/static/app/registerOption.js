@@ -9,6 +9,7 @@ const DIRECT = "hidden";
 
 function setAddress() {
     let option;
+    
     let addres = [
         {value: 'naver.com', register_user_email: 'naver.com'},
         {value: 'daum.com', register_user_email: 'daum.com'},
@@ -47,8 +48,6 @@ function setBirth() {
 }
 
 function changeEmail(event) {
-    console.log(event.target.value);
-
     if(event.target.value === 'direct') {
         console.log("yes");
         select_email_box.innerText = "";
