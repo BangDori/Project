@@ -13,10 +13,9 @@
     <!-- title icon 설정 필요 -->
     <link rel="shortcum icon" href="#" />
     <title>자취 플랫폼</title>
-
     <style>
       .none{
-        display: none !important;
+        display: none;
       }
     </style>
   </head>
@@ -129,10 +128,6 @@
                 </div>
               </div>
 
-              <!-- 로그인 구현후 삭제해주세요. + 아래 script 코드까지 -->
-              <div class="master-login" style="position: absolute; border: 1px solid gray; right: 15px; padding: 15px; background-color: #ccc; cursor: pointer">
-                admin 로그인/로그아웃
-              </div>
               <!-- 로그인 이후 -->
               <div class="after-login article-box none">
                 <!-- 로그인 이후 박스 -->
@@ -276,29 +271,20 @@
     </div>
 
     <script>
-      const master = document.querySelector(".master-login"),
-        before_login = document.querySelector(".before-login"),
-        after_login = document.querySelector(".after-login");
+      const after_login = document.querySelector(".after-login"),
+            before_login = document.querySelector(".before-login");
 
       const NONE = "none";
+      const logined = "{{user_logined}}";
 
-      function loginUser() {
-        if(before_login.classList.contains(NONE)) {
-          before_login.classList.remove(NONE);
-          after_login.classList.add(NONE);
-        } else {
-          before_login.classList.add(NONE);
-          after_login.classList.remove(NONE);
-        }
+      if(logined) {
+        before_login.classList.add(NONE);
+        after_login.classList.remove(NONE);
+      } else {
+        after_login.classList.add(NONE);
+        before_login.classList.remove(NONE);
       }
-
-      function init() {
-        master.addEventListener("click", loginUser);
-      }
-
-      init();
     </script>
-
     <script src="../../static/app/topMove.js"></script>
     <script src="../../static/app/topSearch.js"></script>
     <script src="../../static/app/sliderBanner.js"></script>

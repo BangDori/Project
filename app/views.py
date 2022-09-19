@@ -1,3 +1,4 @@
+from tkinter import TRUE
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect
 
@@ -18,7 +19,10 @@ def index(request):
         username['user_email']= user.email
         username['user_birth']= user.birthday
         username['user_phone'] = user.phone
+        username['user_logined'] = TRUE
+
     return render(request, 'app/index.html', username)
+
 def login(request):
     if request.method == "GET":
         return render(request, 'app/login.html')
