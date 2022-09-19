@@ -36,12 +36,53 @@ body{
     margin-bottom: 15px;
 }
 
+.input-email{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 57px;
+    margin-bottom: 15px;
+}
+
 .input-email>:first-child{
-    width: 180px;
+    width: 150px;
 }
 
 .input-email>:last-child{
-    width: 239px;
+    width: 135px;
+    height: 58px;
+}
+
+.input-email-box{
+    position: absolute;
+    top: 0;
+    padding-inline-start: 15px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid gray;
+    width: 109px;
+    height: 55px;
+}
+
+.hidden{
+    visibility: hidden !important;
+}
+
+.email-separate{
+    display: flex;
+    align-items: center;
+}
+
+.js-email{
+    position: relative;
+}
+
+.select-email-box{
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    padding-inline-start: 15px;
+    width: 111px;
     height: 58px;
 }
 
@@ -70,7 +111,7 @@ body{
     display: block;
     width: 200px;
     height: 40px;
-    margin: 32px auto ;
+    margin: 32px auto;
     font-size: 20px;
     color: white;
     background-color: #8b00ff;
