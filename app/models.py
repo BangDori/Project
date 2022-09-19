@@ -13,4 +13,4 @@ class CustomerUser(models.Model):
     phone = models.IntegerField(default=None, db_column='phone', verbose_name='phone')
 
     def __str__(self):
-        return '이름: '+ self.userid + ", 이메일: "+ self.email + "생년월일"+ self.email
+        return '이름: '+ self.userid + ", 이메일: "+ self.email + "생년월일"+ self.birthday
