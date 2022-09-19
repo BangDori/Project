@@ -104,3 +104,13 @@
     font-weight: bold;
     font-size: 40px;
 }
+
+.input_ID_box_shape{
+    width: 94%;
+    padding: 10px 12px 9px;
+    font-size: 14px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    display: block;
+    margin: 0
+}

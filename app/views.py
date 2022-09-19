@@ -38,5 +38,11 @@ def contact(request):
 def write(request):
     return render(request, 'app/write.html')
 
-def fintID(request):
+def findID(request):
     return render(request, 'app/findID.html')
+
+def findPW1(request):
+    return render(request, 'app/findPW1.html')
+
+def findPW2(request):
+    return render(request, 'app/findPW2.html')

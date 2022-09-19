@@ -41,27 +41,10 @@
             <div class="top-content-search">
                 <form class="top-search-form" action="">
                   <div class="top-search-keyword-box">
-                    <input
-                      class="top-search-keyword"
-                      type="text"
-                      name="search_keyword"
-                      placeholder="검색"
-                    />
-                    <img
-                      class="reset"
-                      src="https://kr.seaicons.com/wp-content/uploads/2022/07/Very-Basic-Cancel-icon.png"
-                      alt="cancle"
-                      onclick="resetKeyword()"
-                      width="15px"
-                    />
+                    <input class="top-search-keyword" type="text" name="search_keyword" placeholder="검색"/>
+                    <img class="reset" src="https://kr.seaicons.com/wp-content/uploads/2022/07/Very-Basic-Cancel-icon.png" alt="cancle" onclick="resetKeyword()" width="15px"/>
                   </div>
-                  <img
-                    class="search"
-                    src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
-                    alt="search"
-                    width="25px"
-                    onclick="searchKeyword()"
-                  />
+                  <img class="search" src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png" alt="search" width="25px" onclick="searchKeyword()"/>
                 </form>
             </div>
 
@@ -132,7 +115,7 @@
                     <div class="separate-line">|</div>
                     <a href={% url 'findID' %}>아이디 찾기</a>
                     <div class="separate-line">|</div>
-                    <a href="#">비밀번호 찾기</a>
+                    <a href={% url 'findPW1' %}>비밀번호 찾기</a>
                   </div>
                 </div>
 
