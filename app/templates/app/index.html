@@ -146,10 +146,9 @@
                      <a href={% url 'logout' %}>
                       <button class="login_btn">로그아웃</button>
                     </a>
-                      <br>
-                      이메일 주소
-                      <br>
-                      기타 정보
+                      <h6>이메일: {{user_email}}</h6>
+                      <h6>생년월일: {{user_birth}}</h6>
+                      <h6>전화번호: {{user_phone}}</h6>
                     </div>
                   </div>
                   <hr style="border: 1px solid #ccc;">

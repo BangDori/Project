@@ -15,6 +15,9 @@ def index(request):
     if user_pk:
         user = CustomerUser.objects.get(pk=user_pk)
         username['user_id'] = user.userid
+        username['user_email']= user.email
+        username['user_birth']= user.birthday
+        username['user_phone'] = user.phone
     return render(request, 'app/index.html', username)
 def login(request):
     if request.method == "GET":
