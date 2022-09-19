@@ -1,11 +1,13 @@
+from io import StringIO
+
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 # Create your models here.
 
 class CustomerUser(models.Model):
-
     userid = models.CharField(max_length=50, db_column='userid', verbose_name='userid')
     passwd = models.CharField(max_length=50, db_column='passwd', verbose_name='passwd')
     email = models.CharField(max_length=30, db_column='email', verbose_name='email', blank=True)
@@ -13,4 +15,12 @@ class CustomerUser(models.Model):
     phone = models.IntegerField(default=None, db_column='phone', verbose_name='phone')
 
     def __str__(self):
-        return '이름: '+ self.userid + ", 이메일: "+ self.email + "생년월일"+ self.birthday
+        sio = StringIO()
+        sio.write('이름 : ')
+        sio.write(self.userid)
+        sio.write(', 이메일 : ')
+        sio.write(self.email)
+        sio.write(', 생년월일 : ')
+        sio.write(self.birthday)
+
+        return sio.getvalue()
