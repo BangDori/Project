@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
     <!-- title icon 설정 필요 -->
     <link rel="shortcum icon" href="#">
-    <title>register</title>
+    <title>회원가입</title>
 </head>
 <body>
 <div class="wrapper">
     <div class="logo-box">
-        <a href="/static"><img src="{% static 'imgs/logo.png' %}" alt="logo" width="250px"></a>
+        <a href={% url 'index' %}><img src="{% static 'imgs/logo.png' %}" alt="logo" width="250px"></a>
+    </div>
+    <div class="error-box">
+        <label>Error message</label>
     </div>
     <div class="main">
         <form action="" method="post">
@@ -36,22 +39,9 @@
             </div>
 
             <div class="input-birth">
-                <input type="text" id="register_user_year" name="register_user_year">
-                <select id="register_user_month" name="register_user_month">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                </select>
-                <input type="text" id="register_user_day" name="register_user_day">
+                <select id="register_user_year" name="register_user_year"></select>
+                <select id="register_user_month" name="register_user_month"></select>
+                <select id="register_user_day" name="register_user_day"></select>
             </div>
 
             <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">

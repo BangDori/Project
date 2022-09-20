@@ -151,3 +151,7 @@
 .board-banner {
   margin: 30px 0;
 }
+
+.none {
+  display: none;
+}

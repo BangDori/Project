@@ -31,20 +31,15 @@
                             <div class="info-user">
                                 <a href={% url 'register' %}>회원가입</a>
                                 <div class="separate-line">|</div>
-                                <a href="#">아이디 찾기</a>
+                                <a href={% url 'findID' %}>아이디 찾기</a>
                                 <div class="separate-line">|</div>
-                                <a href="#">비밀번호 찾기</a>
+                                <a href={% url 'findPW1' %}>비밀번호 찾기</a>
                             </div>
                         </div>
 
                         <!-- 광고 -->
                         <div class="small-ad">
-                            <img
-                                    src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png"
-                                    alt="ad"
-                                    width="226px"
-                                    height="127px"
-                            />
+                            <img src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png" alt="ad" width="226px" height="127px" />
                         </div>
                     </div>
                 </div>
@@ -69,7 +64,7 @@
 
                     <div class="lnb">
                         <div class="writting-box">
-                            <a class="writting-btn" href="">글쓰기</a>
+                            <a class="writting-btn" href={% url 'write' %}>글쓰기</a>
                         </div>
 
                         <div class="paging-box">

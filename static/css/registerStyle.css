@@ -15,7 +15,14 @@ body{
 }
 .logo-box{
     text-align: center;
-    margin: 46px 0;
+    margin: 46px 0 20px 0;
+}
+
+.error-box {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 16px;
+    color: red;
 }
 
 .main{

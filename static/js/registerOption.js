@@ -32,17 +32,20 @@ function setBirth() {
 
     for(let i = 1970; i <= 2022; i++) {
         option = document.createElement("option");
+        option.value = i.toString();
         option.innerText = i.toString();
         year_box.appendChild(option);
     }
     for(let i = 1; i <= 12; i++) {
         option = document.createElement("option");
-        option.innerText = i;
+        option.value = i.toString().padStart(2, 0);
+        option.innerText = i.toString();
         month_box.appendChild(option);
     }
     for(let i = 1; i <= 31; i++) {
         option = document.createElement("option");
-        option.innerText = i;
+        option.value = i.toString().padStart(2, 0);
+        option.innerText = i.toString();
         day_box.appendChild(option);
     }
 }
