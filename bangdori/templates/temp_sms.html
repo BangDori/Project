@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id = "send_message">전송</button>
+    <form action="./sms/auth" method="post">
+        {% csrf_token %}
+        <input type="text" name="phone_number" id="phone_number">
+        <input type="text" name="message_number" id="message_number">
+        <button type="submit">인증</button>
+    </form>
+    
+
+
+    <script src="{% static 'js/csrf.js' %}"></script>
+
+    <script type="text/javascript">
+        $('#send_message').on('click', function(e) {
+            var csrftoken = getCookie('csrftoken');
+            $.ajax({
+                type:'POST',
+                url:'./sms/send',
+                data:{
+                'phone_number':$('#phone_number').val(),
+                'csrfmiddlewaretoken':csrftoken,
+                },
+                success:function(json){
+                    console.log("data pass success",json);
+                },
+                error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); 
+                }
+        });
+        });
+  </script>
+</body>
+</html>

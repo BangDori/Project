@@ -5,11 +5,16 @@ from django.db import models
 
 # Create your models here.
 class CustomerUser(models.Model):
-    userid = models.CharField(max_length=50, db_column='userid', verbose_name='userid', primary_key=True)
-    passwd = models.CharField(max_length=50, db_column='passwd', verbose_name='passwd')
-    email = models.CharField(max_length=30, db_column='email', verbose_name='email', blank=True)
-    birthday = models.CharField(default="19001011", max_length=10, db_column='birth', verbose_name='birth')
-    phone = models.IntegerField(default=None, db_column='phone', verbose_name='phone')
+    userid = models.CharField(
+        max_length=50, db_column='userid', verbose_name='userid', primary_key=True)
+    passwd = models.CharField(
+        max_length=50, db_column='passwd', verbose_name='passwd')
+    email = models.CharField(
+        max_length=30, db_column='email', verbose_name='email', blank=True)
+    birthday = models.CharField(
+        default="19001011", max_length=10, db_column='birth', verbose_name='birth')
+    phone = models.CharField(
+        max_length=30, db_column='phone', verbose_name='phone')
 
     def __str__(self):
         sio = StringIO()
@@ -21,6 +26,17 @@ class CustomerUser(models.Model):
         sio.write(self.birthday)
 
         return sio.getvalue()
+
+# Create your models here.
+
+
+class Authentication(models.Model):
+    phone_number = models.CharField('휴대폰 번호', max_length=30)
+    auth_number = models.CharField('인증번호', max_length=30)
+
+    class Meta:
+        db_table = 'authentications'  # DB 테이블명
+        verbose_name_plural = "휴대폰인증 관리 페이지"  # Admin 페이지에서 나타나는 설명
 
 
 class Article(models.Model):
@@ -45,7 +61,8 @@ class Article(models.Model):
     """
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, verbose_name='제목')
-    writer = models.ForeignKey('CustomerUser', on_delete=models.CASCADE, verbose_name='글쓴이')
+    writer = models.ForeignKey(
+        'CustomerUser', on_delete=models.CASCADE, verbose_name='글쓴이')
     date = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     views = models.PositiveIntegerField(default=0, verbose_name='조회')
     upvote = models.PositiveIntegerField(default=0, verbose_name='추천')

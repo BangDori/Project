@@ -17,6 +17,9 @@ urlpatterns = [
     path('index/contact/', views.contact, name='contact'),
     path('index/write/', views.write, name='write'),
     path('findID/', views.findID, name='findID'),
+    path('findID/sms', views.SMS),
+    path('findID/sms/send', views.SmsSendView.as_view()),
+    path('findID/sms/auth',views.SmsVerifyView.as_view()),
     path('findPW1/', views.findPW1, name='findPW1'),
     path('findPW1/findPW2/', views.findPW2, name='findPW2'),
 ]
