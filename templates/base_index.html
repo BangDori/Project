@@ -15,6 +15,52 @@
     <!-- title icon 설정 필요 -->
     <link rel="shortcum icon" href="#"/>
     <title>방도리</title>
+    <style>
+        .testABC{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .moving-board{
+            left: -440px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .house-section{
+            z-index: -1;
+            position: absolute;
+            top: 178px;
+            right: 20px;
+            width: 848px;
+            height: 100%;
+            
+            opacity: 0;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .house-article{
+            flex-grow: 1;
+            padding: 20px 15px;
+            border: 1px solid #ccc;
+        }
+
+        .house-article:first-child{
+            border-right: 1px solid #ccc;
+        }
+
+        .show-house-box{
+            opacity: 1;
+
+            transition: all 1s ease-in-out;
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -23,20 +69,29 @@
 </div>
 
 <script>
-    const after_login = document.querySelector(".after-login"),
-        before_login = document.querySelector(".before-login");
+    const after_login = document.querySelector("#after-login"),
+    before_login = document.querySelector("#before-login");
 
     const NONE = "none";
     const logged_in = "{{user_logged_in}}";
 
-    if (logged_in) {
-        before_login.classList.add(NONE);
-        after_login.classList.remove(NONE);
-    } else {
-        after_login.classList.add(NONE);
-        before_login.classList.remove(NONE);
+    function checkLogin() {
+        if (logged_in) {
+            before_login.classList.add(NONE);
+            after_login.classList.remove(NONE);
+        } else {
+            after_login.classList.add(NONE);
+            before_login.classList.remove(NONE);
+        }
     }
+
+    function init() {
+        checkLogin();
+    }
+
+    init();
 </script>
+<script src="{% static 'js/checkLogin.js' %}"></script>
 <script src="{% static 'js/topMove.js' %}"></script>
 <script src="{% static 'js/topSearch.js' %}"></script>
 <script src="{% static 'js/sliderBanner.js' %}"></script>
