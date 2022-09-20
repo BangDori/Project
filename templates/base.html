@@ -30,7 +30,8 @@
                 <!-- 로고 -->
                 <div class="logo-box">
                     <a href={% url 'index' %}>
-                        <img class="logo" src="{% static 'imgs/logo.png' %}" alt="logo" width="288px" height="76px"/></a>
+                        <img class="logo" src="{% static 'imgs/logo.png' %}" alt="logo" width="288px"
+                             height="76px"/></a>
                 </div>
 
                 <!-- 로고&웹사이트 설명 -->
@@ -291,8 +292,8 @@
         before_login.classList.remove(NONE);
     }
 </script>
-<script src="../static/js/topMove.js"></script>
-<script src="../static/js/topSearch.js"></script>
-<script src="../static/js/sliderBanner.js"></script>
+<script src="{% static 'js/topMove.js' %}"></script>
+<script src="{% static 'js/topSearch.js' %}"></script>
+<script src="{% static 'js/sliderBanner.js' %}"></script>
 </body>
 </html>
