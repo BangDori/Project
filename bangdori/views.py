@@ -10,7 +10,6 @@ from bangdori.models import CustomerUser
 def goIndex(request):
     return redirect('index')
 
-
 def index(request):
     user_pk = request.session.get('user')
     username = {}
@@ -39,7 +38,7 @@ def login(request):
         else:
             user = CustomerUser.objects.get(userid=user_id)
             if check_password(passwd, user.passwd):
-                request.session['user'] = user.id
+                request.session['user'] = user.userid
                 return redirect('/index')
             else:
                 context['error'] = "비밀번호가 틀렸습니다."
@@ -49,7 +48,7 @@ def login(request):
 def logout(request):
     if request.session['user']:
         del (request.session['user'])
-    return redirect('/login')
+    return redirect('/index')
 
 
 def register(request):
