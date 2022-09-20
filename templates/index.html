@@ -1,0 +1,298 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'css/wrapStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/headerStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/sectionStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/additionStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/slideStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/boardSectionStyle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/topMoveBtn.css' %}"/>
+    <!-- title icon 설정 필요 -->
+    <link rel="shortcum icon" href="#"/>
+    <title>자취 플랫폼</title>
+    <style>
+        .none {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 로고 & 메뉴 -->
+    <div class="header">
+        <div class="gnb">
+            <div class="top-content">
+                <!-- 로고 -->
+                <div class="logo-box">
+                    <a href={% url 'index' %}>
+                        <img class="logo" src="{% static 'imgs/logo.png' %}" alt="logo" width="288px" height="76px"/></a>
+                </div>
+
+                <!-- 로고&웹사이트 설명 -->
+                <div class="logo-title">
+                    <span>자취생들을 위한 커뮤니티</span>
+                </div>
+
+                <!-- 검색창 -->
+                <div class="top-content-search">
+                    <form class="top-search-form" action="">
+                        <div class="top-search-keyword-box">
+                            <input class="top-search-keyword" type="text" name="search_keyword" placeholder="검색"/>
+                            <img class="reset"
+                                 src="https://kr.seaicons.com/wp-content/uploads/2022/07/Very-Basic-Cancel-icon.png"
+                                 alt="cancle" onclick="resetKeyword()" width="15px"/>
+                        </div>
+                        <img class="search" src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
+                             alt="search" width="25px" onclick="searchKeyword()"/>
+                    </form>
+                </div>
+
+                <!-- 미니로고 -->
+                <div class="logo-on-search">
+                    <a href={% url 'index' %}><img class="logo" src="{% static 'imgs/miniLogo.png' %}" alt="logo"
+                                                   width="86px" height="96px"></a>
+                </div>
+            </div>
+
+            <!-- 메뉴 박스 -->
+            <div class="menu-box">
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <a href={% url 'dabang' %}>다방</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'succession' %}>승계</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'essentials' %}>자취생 필수템</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'group' %}>공동 구매</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'board' %}>자유 게시판</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'notice' %}>공지사항</a>
+                    </div>
+                    <div class="menu-item">
+                        <a href={% url 'contact' %}>문의하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- index 화면의 main 내용 -->
+    <div class="main">
+        <div class="container">
+            <div class="section">
+                <!-- 자취생 필수템 및 로그인 박스 -->
+                <div class="article">
+                    <!-- 자취생 필수템 미리보기 -->
+                    <div class="preview-essentials">
+                        <div class="preview-title">자취생 필수템</div>
+
+                        <div class="preview-article essentials-board-size">
+                            height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                            <div class="preview-more">
+                                <a class="more" href={% url 'essentials' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 로그인 이전 박스 및 광고 -->
+                    <div class="before-login article-box">
+                        <!-- 로그인 박스 -->
+                        <div class="login-box">
+                            <div class="login-user">
+                                <a href={% url 'login' %}>
+                                    <button id="login_btn">로그인</button>
+                                </a>
+                            </div>
+                            <div class="info-user">
+                                <a href={% url 'register' %}>회원가입</a>
+                                <div class="separate-line">|</div>
+                                <a href={% url 'findID' %}>아이디 찾기</a>
+                                <div class="separate-line">|</div>
+                                <a href={% url 'findPW1' %}>비밀번호 찾기</a>
+                            </div>
+                        </div>
+                        <!-- 광고 -->
+                        <div class="small-ad">
+                            <img
+                                    src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png"
+                                    alt="ad"
+                                    width="226px"
+                                    height="127px"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 로그인 이후 -->
+                    <div class="after-login article-box none">
+                        <!-- 로그인 이후 박스 -->
+                        <div class="login-box after-login">
+                            <div class="login-after-user-info">
+                                <div class="login-user-img">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="login-user-info">
+                                    <h6>{{ user_id }}님이 로그인중</h6>
+                                    <a href={% url 'logout' %}>
+                                        <button class="login_btn">로그아웃</button>
+                                    </a>
+                                    <h6>이메일: {{ user_email }}</h6>
+                                    <h6>생년월일: {{ user_birth }}</h6>
+                                    <h6>전화번호: {{ user_phone }}</h6>
+                                </div>
+                            </div>
+                            <hr style="border: 1px solid #ccc;">
+                            <div class="login-after-user-bar">
+                                1. 주소 등록하기 (등록시 주소 표시?)
+                                <br>
+                                2. 내 게시글 확인
+                                <br>
+                                3. 공동구매 참여 현황
+                                <br>
+                                4. 기타 등등의 정보 표시
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 최신 & 핫 게시물 -->
+                <div class="article preview-even">
+                    <div class="preview-post">
+                        <div class="preview-title">핫 게시물</div>
+                        <div class="preview-post-content">
+                            <div class="top-info preview-top-info">
+                                <div class="id"><span>순위</span></div>
+                                <div class="title"><span>제목</span></div>
+                                <div class="recommendation"><span>추천</span></div>
+                            </div>
+
+                            <div class="preview-post-box">content</div>
+                        </div>
+                    </div>
+                    <div class="preview-post">
+                        <div class="preview-title">최신 게시물</div>
+                        <div class="preview-post-content">
+                            <div class="top-info preview-top-info">
+                                <div class="id"><span>순위</span></div>
+                                <div class="title"><span>제목</span></div>
+                                <div class="writer"><span>글쓴이</span></div>
+                            </div>
+
+                            <div class="preview-post-box">content</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 광고 배너 -->
+                <div class="ad-banner">
+                    <div class="banner-content">
+                        <div class="first banner showing"></div>
+                        <div class="second banner"></div>
+                        <div class="third banner"></div>
+                        <div class="fourth banner"></div>
+
+                        <div class="banner-count">
+                            <div class="first count js-clicked-count"></div>
+                            <div class="second count"></div>
+                            <div class="third count"></div>
+                            <div class="fourth count"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자유 게시판 미리보기 -->
+                <div class="article preview-board">
+                    <div class="preview-title">자유 게시판</div>
+
+                    <div class="preview-article">
+                        자유 게시판
+                        <div class="preview-more">
+                            <a class="more" href={% url 'board' %}>더보기 ...</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 다방, 승계 미리보기 -->
+                <div class="article preview-even">
+                    <div class="preview-dabang">
+                        <div class="preview-title">다방</div>
+                        <div class="preview-article">
+                            다방 게시판
+                            <div class="preview-more">
+                                <a class="more" href={% url 'dabang' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-succession">
+                        <div class="preview-title">승계</div>
+
+                        <div class="preview-article">
+                            승계 게시판
+                            <div class="preview-more">
+                                <a class="more" href={% url 'succession' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공동 구매 미리보기 -->
+                <div class="article preview-group-buy">
+                    <div class="preview-title">공동 구매</div>
+
+                    <div class="preview-article">
+                        게시판
+                        <div class="preview-more">
+                            <a class="more" href={% url 'group' %}>더보기 ...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer 정보 -->
+    <div class="footer">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et molestiae
+        optio explicabo cupiditate tempore dolores suscipit quo corporis,
+        adipisci exercitationem nesciunt consequatur atque dolorem officiis
+        labore reprehenderit voluptates amet deserunt?
+    </div>
+
+    <!-- Scroll To top btn -->
+    <div class="scroll-top-btn">
+        <span><a href="#header">TOP</a></span>
+    </div>
+</div>
+
+<script>
+    const after_login = document.querySelector(".after-login"),
+        before_login = document.querySelector(".before-login");
+
+    const NONE = "none";
+    const logined = "{{user_logined}}";
+
+    if (logined) {
+        before_login.classList.add(NONE);
+        after_login.classList.remove(NONE);
+    } else {
+        after_login.classList.add(NONE);
+        before_login.classList.remove(NONE);
+    }
+</script>
+<script src="../static/js/topMove.js"></script>
+<script src="../static/js/topSearch.js"></script>
+<script src="../static/js/sliderBanner.js"></script>
+</body>
+</html>
