@@ -1,0 +1,177 @@
+{% extends 'footer.html' %}
+{% load static %}
+{% block content %}
+    <!-- index 화면의 main 내용 -->
+    <div class="main">
+        <div class="container">
+            <div class="section">
+                <!-- 자취생 필수템 및 로그인 박스 -->
+                <div class="article">
+                    <!-- 자취생 필수템 미리보기 -->
+                    <div class="preview-essentials">
+                        <div class="preview-title">자취생 필수템</div>
+
+                        <div class="preview-article essentials-board-size">
+                            height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                            <div class="preview-more">
+                                <a class="more" href={% url 'essentials' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 로그인 이전 박스 및 광고 -->
+                    <div class="before-login article-box">
+                        <!-- 로그인 박스 -->
+                        <div class="login-box">
+                            <div class="login-user">
+                                <a href={% url 'login' %}>
+                                    <button id="login_btn">로그인</button>
+                                </a>
+                            </div>
+                            <div class="info-user">
+                                <a href={% url 'register' %}>회원가입</a>
+                                <div class="separate-line">|</div>
+                                <a href={% url 'findID' %}>아이디 찾기</a>
+                                <div class="separate-line">|</div>
+                                <a href={% url 'findPW1' %}>비밀번호 찾기</a>
+                            </div>
+                        </div>
+                        <!-- 광고 -->
+                        <div class="small-ad">
+                            <img
+                                    src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png"
+                                    alt="ad"
+                                    width="226px"
+                                    height="127px"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 로그인 이후 -->
+                    <div class="after-login article-box none">
+                        <!-- 로그인 이후 박스 -->
+                        <div class="login-box after-login">
+                            <div class="login-after-user-info">
+                                <div class="login-user-img">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="login-user-info">
+                                    <h6>{{ user_id }}님이 로그인중</h6>
+                                    <a href={% url 'logout' %}>
+                                        <button class="login_btn">로그아웃</button>
+                                    </a>
+                                    <h6>이메일: {{ user_email }}</h6>
+                                    <h6>생년월일: {{ user_birth }}</h6>
+                                    <h6>전화번호: {{ user_phone }}</h6>
+                                </div>
+                            </div>
+                            <hr style="border: 1px solid #ccc;">
+                            <div class="login-after-user-bar">
+                                1. 주소 등록하기 (등록시 주소 표시?)
+                                <br>
+                                2. 내 게시글 확인
+                                <br>
+                                3. 공동구매 참여 현황
+                                <br>
+                                4. 기타 등등의 정보 표시
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 최신 & 핫 게시물 -->
+                <div class="article preview-even">
+                    <div class="preview-post">
+                        <div class="preview-title">핫 게시물</div>
+                        <div class="preview-post-content">
+                            <div class="top-info preview-top-info">
+                                <div class="id"><span>순위</span></div>
+                                <div class="title"><span>제목</span></div>
+                                <div class="recommendation"><span>추천</span></div>
+                            </div>
+
+                            <div class="preview-post-box">content</div>
+                        </div>
+                    </div>
+                    <div class="preview-post">
+                        <div class="preview-title">최신 게시물</div>
+                        <div class="preview-post-content">
+                            <div class="top-info preview-top-info">
+                                <div class="id"><span>순위</span></div>
+                                <div class="title"><span>제목</span></div>
+                                <div class="writer"><span>글쓴이</span></div>
+                            </div>
+
+                            <div class="preview-post-box">content</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 광고 배너 -->
+                <div class="ad-banner">
+                    <div class="banner-content">
+                        <div class="first banner showing"></div>
+                        <div class="second banner"></div>
+                        <div class="third banner"></div>
+                        <div class="fourth banner"></div>
+
+                        <div class="banner-count">
+                            <div class="first count js-clicked-count"></div>
+                            <div class="second count"></div>
+                            <div class="third count"></div>
+                            <div class="fourth count"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자유 게시판 미리보기 -->
+                <div class="article preview-board">
+                    <div class="preview-title">자유 게시판</div>
+
+                    <div class="preview-article">
+                        자유 게시판
+                        <div class="preview-more">
+                            <a class="more" href={% url 'board' %}>더보기 ...</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 다방, 승계 미리보기 -->
+                <div class="article preview-even">
+                    <div class="preview-dabang">
+                        <div class="preview-title">다방</div>
+                        <div class="preview-article">
+                            다방 게시판
+                            <div class="preview-more">
+                                <a class="more" href={% url 'dabang' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="preview-succession">
+                        <div class="preview-title">승계</div>
+
+                        <div class="preview-article">
+                            승계 게시판
+                            <div class="preview-more">
+                                <a class="more" href={% url 'succession' %}>더보기 ...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공동 구매 미리보기 -->
+                <div class="article preview-group-buy">
+                    <div class="preview-title">공동 구매</div>
+
+                    <div class="preview-article">
+                        게시판
+                        <div class="preview-more">
+                            <a class="more" href={% url 'group' %}>더보기 ...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
