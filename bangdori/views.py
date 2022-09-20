@@ -22,7 +22,7 @@ def index(request):
         username['user_phone'] = user.phone
         username['user_logined'] = TRUE
 
-    return render(request, 'index.html', username)
+    return render(request, 'base.html', username)
 
 
 def login(request):
