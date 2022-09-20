@@ -3,17 +3,12 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect
 from dotenv import load_dotenv
 from django.views import View
-from bangdori.models import CustomerUser, Authentication
-import os
-import json
-import requests
-import time
-import random
+from .models import CustomerUser, Authentication
+import os, json, requests, time, random
 from django.http import JsonResponse
 from .utils import make_signature
 load_dotenv()
 # Create your views here.
-
 
 def goIndex(request):
     return redirect('index')
@@ -45,14 +40,16 @@ def login(request):
         if not (user_id and passwd):
             context['error'] = "빈칸없이 입력해주세요."
         else:
-            user = CustomerUser.objects.get(userid=user_id)
-            if check_password(passwd, user.passwd):
-                request.session['user'] = user.userid
-                return redirect('/index')
-            else:
-                context['error'] = "비밀번호가 틀렸습니다."
+            if CustomerUser.objects.filter(userid=user_id):
+                user = CustomerUser.objects.get(userid=user_id)
+                if check_password(passwd, user.passwd):
+                    request.session['user'] = user.userid
+                    return redirect('/index')
+                else:
+                    context['error'] = "비밀번호가 틀렸습니다."
+            else :
+                context['error'] = "해당 회원정보가 존재하지 않습니다."
     return render(request, 'login.html', context)
-
 
 def logout(request):
     if request.session['user']:
