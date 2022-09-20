@@ -8,6 +8,7 @@ import os, json, requests, time, random
 from django.http import JsonResponse
 from .utils import make_signature
 load_dotenv()
+
 # Create your views here.
 
 def goIndex(request):
@@ -46,9 +47,10 @@ def login(request):
                     request.session['user'] = user.userid
                     return redirect('/index')
                 else:
-                    context['error'] = "비밀번호가 틀렸습니다."
+                    context['error'] = "해당 회원정보가 존재하지 않습니다."
             else :
                 context['error'] = "해당 회원정보가 존재하지 않습니다."
+        
     return render(request, 'login.html', context)
 
 def logout(request):

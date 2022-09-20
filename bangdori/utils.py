@@ -3,6 +3,7 @@ import hmac
 import base64
 import os
 from dotenv import load_dotenv
+
 def make_signature(timestamp):
     load_dotenv()
 

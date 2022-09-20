@@ -18,12 +18,12 @@
             </a>
         </div>
 
+        <div class="error-box">
+            <label>{{ error }}</label>
+        </div>
+
         <form class="login-form" action="" method="post">
             {% csrf_token %}
-            <div class="error-box">
-                <label>{{ error }}</label>
-            </div>
-
             <input class="input-box" type="text" name="login_user_id" placeholder="아이디 입력">
             <input class="input-box" type="password" name="login_user_pwd" placeholder="패스워드 입력">
             <div class="login-checkbox">
