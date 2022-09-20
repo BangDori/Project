@@ -1,87 +1,89 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/css/registerStyle.css">
-        <!-- title icon 설정 필요 -->
-        <link rel="shortcum icon" href="#">
-        <title>register</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="logo-box">
-                <a href="/static"><img src="../static/imgs/logo.png" alt="logo" width="250px"></a>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
+    <!-- title icon 설정 필요 -->
+    <link rel="shortcum icon" href="#">
+    <title>register</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="logo-box">
+        <a href="/static"><img src="{% static 'imgs/logo.png' %}" alt="logo" width="250px"></a>
+    </div>
+    <div class="main">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="info-id">
+                <input id="idBox" class="input-box" type="text" name="register_user_id" placeholder="아이디 입력(8~20자)">
+                <button class="check-btn">중복 확인</button>
             </div>
-            <div class="main">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="info-id">
-                        <input id="idBox" class="input-box" type="text" name="register_user_id" placeholder="아이디 입력(8~20자)">
-                        <button class="check-btn">중복 확인</button>
-                    </div>
-                    <input class="input-box" type="password" name="register_user_pwd" placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
-                    <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력">
-                    <div class="input-email">
-                        <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
-                        <span class="separte-line email-separate">@</span>
-                        <div class="js-email">
-                            <div class="select-email-box"></div>
-                            <input class="input-email-box hidden" type="text" name="register_user_email">
-                        </div>
-                        <select id="regEmail" class="input-box email-box" name="register_user_email">
-                        </select>
-                    </div>
-
-                    <div class="input-birth">
-                        <input type="text" id="register_user_year" name="register_user_year">
-                        <select id="register_user_month" name="register_user_month">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                        <input type="text" id="register_user_day" name="register_user_day">
-                    </div>
-
-                    <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
-
-                    <div class="check-box">
-                        <div class="check-essential">
-                            <input type="checkbox" name="check1">
-                            <span>[필수] 개인정보 수집 동의</span>
-                        </div>
-                        <div class="check-essential">
-                            <input type="checkbox" name="check2">
-                            <span>[필수] 고유 식별정보 수집 동의</span>
-                        </div>
-                        <div class="check-essential">
-                            <input type="checkbox" name="check3">
-                            <span>[필수] 개인정보 유출 동의</span>
-                        </div>
-                        <div class="check-option">
-                            <input type="checkbox" name="check4">
-                            <span>[선택] 개인정보 해외 판매 동의</span>
-                        </div>
-                        <div class="check-option">
-                            <input type="checkbox" name="check5">
-                            <span>[선택] 개인정보의 제 3자 제공 동의</span>
-                        </div>
-                    </div>
-
-                    <input class="submit-btn" type="submit" value="가입하기">
-                </form>
+            <input class="input-box" type="password" name="register_user_pwd"
+                   placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
+            <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력">
+            <div class="input-email">
+                <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
+                <span class="separte-line email-separate">@</span>
+                <div class="js-email">
+                    <div class="select-email-box"></div>
+                    <input class="input-email-box hidden" type="text" name="register_user_email">
+                </div>
+                <select id="regEmail" class="input-box email-box" name="register_user_email">
+                </select>
             </div>
-        </div>
 
-        <script src="../static/js/registerOption.js"></script>
-    </body>
+            <div class="input-birth">
+                <input type="text" id="register_user_year" name="register_user_year">
+                <select id="register_user_month" name="register_user_month">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <input type="text" id="register_user_day" name="register_user_day">
+            </div>
+
+            <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+
+            <div class="check-box">
+                <div class="check-essential">
+                    <input type="checkbox" name="check1">
+                    <span>[필수] 개인정보 수집 동의</span>
+                </div>
+                <div class="check-essential">
+                    <input type="checkbox" name="check2">
+                    <span>[필수] 고유 식별정보 수집 동의</span>
+                </div>
+                <div class="check-essential">
+                    <input type="checkbox" name="check3">
+                    <span>[필수] 개인정보 유출 동의</span>
+                </div>
+                <div class="check-option">
+                    <input type="checkbox" name="check4">
+                    <span>[선택] 개인정보 해외 판매 동의</span>
+                </div>
+                <div class="check-option">
+                    <input type="checkbox" name="check5">
+                    <span>[선택] 개인정보의 제 3자 제공 동의</span>
+                </div>
+            </div>
+
+            <input class="submit-btn" type="submit" value="가입하기">
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/registerOption.js' %}"></script>
+</body>
 </html>
