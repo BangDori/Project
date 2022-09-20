@@ -20,7 +20,7 @@ def index(request):
         username['user_email'] = user.email
         username['user_birth'] = user.birthday
         username['user_phone'] = user.phone
-        username['user_logined'] = TRUE
+        username['user_logged_in'] = TRUE
 
     return render(request, 'index.html', username)
 
