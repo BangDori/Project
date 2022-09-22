@@ -1,33 +1,39 @@
 from io import StringIO
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 # Create your models here.
-class CustomerUser(models.Model):
-    userid = models.CharField(
-        max_length=50, db_column='userid', verbose_name='userid', primary_key=True)
-    passwd = models.CharField(
-        max_length=50, db_column='passwd', verbose_name='passwd')
+# AbstractUser를 상속받는 모델로 변경
+class CustomerUser(AbstractUser):
+    """
+    CustomerUser : 사용자 정보를 저장하는 Model
+
+    Parameters
+    ----------
+    email : CharField
+        이메일 저장
+    birthday : CharField
+        수정할 것
+    phone : CharField
+        전화번호 영역
+    """
+
+    ''' # 부모 클래스에서 제공하는 부분은 비활성화
+    # userid = models.CharField(
+    #     max_length=50, db_column='userid', verbose_name='userid', primary_key=True)
+    # passwd = models.CharField(
+    #     max_length=50, db_column='passwd', verbose_name='passwd') '''
     email = models.CharField(
         max_length=30, db_column='email', verbose_name='email', blank=True)
     birthday = models.CharField(
-        default="19001011", max_length=10, db_column='birth', verbose_name='birth')
+        default="19700101", max_length=10, db_column='birth', verbose_name='birth')
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
 
     def __str__(self):
-        sio = StringIO()
-        sio.write('이름 : ')
-        sio.write(self.userid)
-        sio.write(', 이메일 : ')
-        sio.write(self.email)
-        sio.write(', 생년월일 : ')
-        sio.write(self.birthday)
-
-        return sio.getvalue()
-
-# Create your models here.
+        return self.username
 
 
 class Authentication(models.Model):
@@ -50,7 +56,7 @@ class Article(models.Model):
     title : CharField
         게시글 제목
     writer : ForeignKey
-        작성자, CustomerUser의 userid를 FK로 함
+        작성자, CustomerUser의 username를 FK로 함
         1:N 특성을 가지므로, 계정 삭제시 같이 삭제될 수 있는 CASCADE 특성 사용
     date :
         글 작성 일자, auto_now_add 파라미터를 True로 하여 INSERT시 자동으로 날짜가 생성되는 옵션 사용
