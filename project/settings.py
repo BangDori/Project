@@ -125,3 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 유저에 해당하는 모델을 등록
 AUTH_USER_MODEL = 'bangdori.CustomerUser'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
