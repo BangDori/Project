@@ -1,4 +1,4 @@
-{% extends 'footer.html' %}
+{% extends 'extends/main.html' %}
 {% block content %}
     <!-- 승계 게시판 -->
     <div class="board">
@@ -46,4 +46,6 @@
             </div>
         </div>
     </div>
+    
+    {% include 'extends/banner.html' %}
 {% endblock %}

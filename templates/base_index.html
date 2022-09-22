@@ -66,8 +66,13 @@
 </head>
 <body>
 <div class="wrapper">
-    {% block body %}
+    {% include "extends/header.html" %}
+
+    <!-- main.html -->
+    {% block main %}
     {% endblock %}
+
+    {% include "extends/footer.html" %}
 </div>
 
 <script src="{% static 'js/checkLogin.js' %}"></script>

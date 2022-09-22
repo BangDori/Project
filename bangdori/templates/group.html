@@ -1,4 +1,5 @@
-{% extends 'footer.html' %}
+{% extends 'extends/main.html' %}
+{% load static %}
 {% block content %}
     <!-- 공동구매 게시판 -->
     <div class="board">
@@ -46,4 +47,6 @@
             </div>
         </div>
     </div>
+
+    {% include 'extends/banner.html' %}
 {% endblock %}

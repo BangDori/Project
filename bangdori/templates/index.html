@@ -1,4 +1,4 @@
-{% extends 'footer.html' %}
+{% extends 'extends/main.html' %}
 {% load static %}
 {% block content %}
     <!-- 최신 & 핫 게시물 -->
@@ -29,22 +29,7 @@
         </div>
     </div>
 
-    <!-- 광고 배너 -->
-    <div class="ad-banner">
-        <div class="banner-content">
-            <div class="first banner showing"></div>
-            <div class="second banner"></div>
-            <div class="third banner"></div>
-            <div class="fourth banner"></div>
-
-            <div class="banner-count">
-                <div class="first count js-clicked-count"></div>
-                <div class="second count"></div>
-                <div class="third count"></div>
-                <div class="fourth count"></div>
-            </div>
-        </div>
-    </div>
+    {% include 'extends/banner.html' %}
 
     <!-- 자유 게시판 미리보기 -->
     <div class="article preview-board">

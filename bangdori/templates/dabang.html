@@ -1,7 +1,6 @@
-{% extends 'footer.html' %}
+{% extends 'extends/main.html' %}
 {% load static %}
 {% block content %}
-    <!-- dabang 게시판 -->
     <!-- 다방 게시판 -->
     <div class="board">
         <button class="testABC">TEST</button>
@@ -65,5 +64,6 @@
         </div>
     </div>
 
+    {% include 'extends/banner.html' %}
     <script src="{% static 'js/compareHouse.js' %}"></script>
 {% endblock %}
