@@ -14,7 +14,7 @@
     <div class="main">
         <div class="lnb-logo">
             <a href={% url 'index' %}>
-            <img src="{% static 'imgs/logo.png' %}" alt="logo" height=150px style="vertical-align: bottom;">
+                <img src="{% static 'imgs/logo.png' %}" alt="logo" height=150px style="vertical-align: bottom;">
             </a>
         </div>
 
@@ -24,8 +24,8 @@
 
         <form class="login-form" action="" method="post">
             {% csrf_token %}
-            <input class="input-box" type="text" name="login_user_id" placeholder="아이디 입력">
-            <input class="input-box" type="password" name="login_user_pwd" placeholder="패스워드 입력">
+            <input class="input-box" type="text" name="username" placeholder="아이디 입력">
+            <input class="input-box" type="password" name="password" placeholder="패스워드 입력">
             <div class="login-checkbox">
                 <input class="input-checkbox" type="checkbox" name="maintain">로그인 상태 유지
             </div>
