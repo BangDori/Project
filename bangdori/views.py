@@ -91,7 +91,9 @@ def register(request):
     if request.method == "GET":
         return render(request, 'register.html')
     elif request.method == "POST":
+        # register로 POST 요청이 들어오면, 새로운 User를 생성하는 절차
         context = {}
+
         username = request.POST.get('register_username', None)
         password = request.POST.get('register_user_pwd', None)
         password2 = request.POST.get('register_user_repwd', None)
@@ -101,23 +103,24 @@ def register(request):
         month = request.POST.get('register_user_month', None)
         day = request.POST.get('register_user_day', None)
         phone = request.POST.get('register_user_phone', None)
-        if not (username and password and password2 and email_id and email_net
-                and year and month and day and phone):
-            context['error'] = "빈칸없이 입력해주세요."
-        elif password != password2:
+
+        # 중복 확인 구현할 것
+        if CustomerUser.objects.filter(username=username).exists():
+            context['error'] = "사용할 수 없는 ID입니다."
+
+        if password != password2:
             context['error'] = "비밀번호가 다릅니다."
+        elif not (username and password and password2 and email_id and email_net
+                  and year and month and day and phone):
+            context['error'] = "빈칸없이 입력해주세요."
         else:
-            birth = year + month + day
-            email = email_id + "@" + email_net
-            user = CustomerUser(
-                username=username,
-                password=make_password(password),
-                email=email,
-                birthday=birth,
-                phone=phone,
-            )
-            user.save()
-            return redirect('/login')
+            user = CustomerUser.objects.create_user(username=username,
+                                                    password=password2,
+                                                    email=f'{email_id}@{email_net}',
+                                                    birthday=f'{year}-{month}-{day}',
+                                                    phone=phone)
+            auth.login(request, user)
+            return redirect('/')
 
         return render(request, 'register.html', context)
 
