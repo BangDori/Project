@@ -1,4 +1,7 @@
 from tkinter import TRUE
+
+from django.contrib import auth
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect
 from dotenv import load_dotenv
@@ -7,7 +10,9 @@ from .models import CustomerUser, Authentication
 import os, json, requests, time, random
 from django.http import JsonResponse
 from .utils import make_signature
+
 load_dotenv()
+
 
 # Create your views here.
 
@@ -16,46 +21,69 @@ def goIndex(request):
 
 
 def index(request):
-    user_pk = request.session.get('user')
-    username = {}
-    if user_pk:
-        user = CustomerUser.objects.get(pk=user_pk)
-        username['user_id'] = user.userid
-        username['user_email'] = user.email
-        username['user_birth'] = user.birthday
-        username['user_phone'] = user.phone
-        username['user_logged_in'] = TRUE
+    context = {}
+    """ 
+    로그인 정보는 Session에 기록되도록 설정되어 있음.
+    dict 형식으로 request 전달 비활성화
+    """
+    # logged_user = request.session.get('user')
+    # print(logged_user)
+    # logged_user = {}
+    # if logged_user:
+    #     user = CustomerUser.objects.get(username=username)
+    #     username['username'] = user.username
+    #     username['user_email'] = user.email
+    #     username['user_birth'] = user.birthday
+    #     username['user_phone'] = user.phone
+    #     username['user_logged_in'] = TRUE
 
-    return render(request, 'index.html', username)
+    return render(request, 'index.html', {})
 
 
 def login(request):
-    if request.method == "GET":
-        return render(request, 'login.html')
-    else:
+    # 기본이 POST로 수정
+    if request.method == "POST":
         context = {}
+        # AuthenticationForm으로부터 인증 Form을 받아옴
+        form = AuthenticationForm(request=request, data=request.POST)
 
-        user_id = request.POST.get('login_user_id')
-        passwd = request.POST.get('login_user_pwd')
+        if form.is_valid():
+            # cleaned_data 형식으로 아이디와 비밀번호를 가져옴
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            # Django의 auth 클래스를 사용해 로그인
+            user = auth.authenticate(request=request, username=username, password=password)
 
-        if not (user_id and passwd):
-            context['error'] = "빈칸없이 입력해주세요."
-        else:
-            if CustomerUser.objects.filter(userid=user_id):
-                user = CustomerUser.objects.get(userid=user_id)
-                if check_password(passwd, user.passwd):
-                    request.session['user'] = user.userid
-                    return redirect('/index')
-                else:
-                    context['error'] = "해당 회원정보가 존재하지 않습니다."
-            else :
-                context['error'] = "해당 회원정보가 존재하지 않습니다."
-        
+            # 해당하는 유저가 존재해서 로그인이 가능한 경우
+            if user is not None:
+                auth.login(request, user)
+                return redirect('/index')
+
+        """
+        DB에서 Filter를 이용하지 않고, auth 클래스를 이용하여 로그인하도록 수정함
+        오류 메시지는 아직 구현되지 않음
+        """
+        # if not (username and password):
+        #     context['error'] = "빈칸없이 입력해주세요."
+        # else:
+        #     if CustomerUser.objects.filter(username=username):
+        #         user = CustomerUser.objects.get(username=username)
+        #         if check_password(password, user.password):
+        #             request.session['user'] = user.username
+        #             return redirect('/index')
+        #         else:
+        #             context['error'] = "해당 회원정보가 존재하지 않습니다."
+        #     else:
+        #         context['error'] = "해당 회원정보가 존재하지 않습니다."
+    else:
+        return render(request, 'login.html')
+
     return render(request, 'login.html', context)
 
+
 def logout(request):
-    if request.session['user']:
-        del (request.session['user'])
+    # del 방식을 이용하지 않고, auth에서 제공하는 메서드를 이용
+    auth.logout(request)
     return redirect('/index')
 
 
@@ -64,26 +92,26 @@ def register(request):
         return render(request, 'register.html')
     elif request.method == "POST":
         context = {}
-        user_id = request.POST.get('register_user_id', None)
-        passwd = request.POST.get('register_user_pwd', None)
-        passwd2 = request.POST.get('register_user_repwd', None)
+        username = request.POST.get('register_username', None)
+        password = request.POST.get('register_user_pwd', None)
+        password2 = request.POST.get('register_user_repwd', None)
         email_id = request.POST.get('register_user_email_id', None)
         email_net = request.POST.get('register_user_email', None)
         year = request.POST.get('register_user_year', None)
         month = request.POST.get('register_user_month', None)
         day = request.POST.get('register_user_day', None)
         phone = request.POST.get('register_user_phone', None)
-        if not (user_id and passwd and passwd2 and email_id and email_net
+        if not (username and password and password2 and email_id and email_net
                 and year and month and day and phone):
             context['error'] = "빈칸없이 입력해주세요."
-        elif passwd != passwd2:
+        elif password != password2:
             context['error'] = "비밀번호가 다릅니다."
         else:
             birth = year + month + day
             email = email_id + "@" + email_net
             user = CustomerUser(
-                userid=user_id,
-                passwd=make_password(passwd),
+                username=username,
+                password=make_password(password),
                 email=email,
                 birthday=birth,
                 phone=phone,
@@ -161,7 +189,8 @@ class SmsSendView(View):
         }
         body = json.dumps(body)
         requests.post(
-            'https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:292652557635:sms_auth/messages', headers=headers, data=body)
+            'https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:292652557635:sms_auth/messages', headers=headers,
+            data=body)
 
     def post(self, request):
         # data = json.loads(request.body)
@@ -193,11 +222,11 @@ class SmsVerifyView(View):
 
         auth_mobile = Authentication.objects.get(
             phone_number=input_mobile_num)
-        if(auth_mobile.auth_number == message):
-            user_id = CustomerUser.objecvts.filter(
-                phone=input_mobile_num).alues('userid')
-            if(user_id):
-                return JsonResponse({'message': str(user_id)}, status=200)
+        if (auth_mobile.auth_number == message):
+            username = CustomerUser.objecvts.filter(
+                phone=input_mobile_num).alues('username')
+            if (username):
+                return JsonResponse({'message': str(username)}, status=200)
             else:
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
