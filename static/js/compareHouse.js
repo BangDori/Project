@@ -1,5 +1,5 @@
 const move_btn = document.querySelector(".testABC"),
-    dabang_board = document.querySelector("#dabang_board"),
+    dabang_board = document.querySelector(".dabang_board"),
     comparing_house_box = document.querySelector(".house-section");
 
 const MOVE_BOARD = "moving-board";

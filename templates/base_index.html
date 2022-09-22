@@ -18,7 +18,8 @@
     <style>
         .testABC{
             position: absolute;
-            top: 50%;
+            font-size: 46px;
+            top: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
@@ -68,31 +69,6 @@
     {% endblock %}
 </div>
 
-<!--
-<script>
-    const after_login = document.querySelector("#after-login"),
-    before_login = document.querySelector("#before-login");
-
-    const NONE = "none";
-    const logged_in = "{{user_logged_in}}";
-
-    function checkLogin() {
-        if (logged_in) {
-            before_login.classList.add(NONE);
-            after_login.classList.remove(NONE);
-        } else {
-            after_login.classList.add(NONE);
-            before_login.classList.remove(NONE);
-        }
-    }
-
-    function init() {
-        checkLogin();
-    }
-
-    init();
-</script>
--->
 <script src="{% static 'js/checkLogin.js' %}"></script>
 <script src="{% static 'js/topMove.js' %}"></script>
 <script src="{% static 'js/topSearch.js' %}"></script>
