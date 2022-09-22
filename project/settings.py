@@ -121,3 +121,6 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 유저에 해당하는 모델을 등록
+AUTH_USER_MODEL = 'bangdori.CustomerUser'
