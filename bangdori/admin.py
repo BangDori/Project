@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from bangdori.models import CustomerUser
+from .models import CustomerUser
 
 
 # Register your models here.
