@@ -3,10 +3,14 @@ from tkinter import TRUE
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password, check_password
-from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from django.shortcuts import render, redirect, get_object_or_404
 from dotenv import load_dotenv
 from django.views import View
-from .models import CustomerUser, Authentication
+
+from project.settings import MAX_ARTICLES
+from .models import *
 import os, json, requests, time, random
 from django.http import JsonResponse
 from .utils import make_signature
@@ -141,8 +145,44 @@ def group(request):
     return render(request, 'group.html')
 
 
-def board(request):
-    return render(request, 'board.html')
+def board(request, name):
+    # 페이지에 넘겨줄 Context
+    context = {}
+
+    # 게시판 내용 불러올 Article 객체
+    articles = None
+
+    # URL로부터 넘겨받은 게시판 유형에 따라 다른 context 전달
+    if name == 'board':
+        articles = BoardArticle
+    elif name == 'dabang':
+        articles = DabangArticle
+    elif name == 'succession':
+        articles = SuccessionArticle
+    elif name == 'essentials':
+        articles = EssentialsArticle
+    elif name == 'notice':
+        articles = NoticeArticle
+    elif name == 'context':
+        articles = ContactArticle
+
+    # 페이지 정보 전달
+    # context['name'] : 페이지가 표시되는 한글 이름
+    context['name'] = articles._meta.verbose_name
+    # context['url'] : 페이지에서 url로 전달받은 이름
+    context['url'] = name
+
+    # 모든 글 가져옴, 날짜 내림차순으로 조회
+    articles = articles.objects.all().order_by('-date')
+    # Paginator 사용
+    paginator = Paginator(articles, MAX_ARTICLES)
+    # GET 요청이 들어오면 page 파라미터를 읽어옴
+    page = int(request.GET.get('page', 1))
+
+    # 현재 페이지에 맞는 게시물 목록을 Context로 넘겨줌
+    context['articles'] = paginator.get_page(page)
+
+    return render(request, 'board.html', context)
 
 
 def notice(request):
@@ -153,7 +193,28 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def write(request):
+def write(request, name):
+    loginSession = request.session.get('login_session', '')
+    context = { 'loginSession': loginSession }
+
+    if request.method == "POST":
+        article = None
+
+        if name == 'board':
+            article = BoardArticle(title=request.POST.get('title'), writer=User.objects.get(user_id=loginSession),
+                                   )
+        elif name == 'dabang':
+            article = DabangArticle()
+        elif name == 'succession':
+            article = SuccessionArticle()
+        elif name == 'essentials':
+            article = EssentialsArticle()
+        elif name == 'notice':
+            article = NoticeArticle()
+        elif name == 'context':
+            article = ContactArticle()
+
+
     return render(request, 'write.html')
 
 
