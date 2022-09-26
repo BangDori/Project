@@ -60,6 +60,8 @@ class Article(models.Model):
     writer : ForeignKey
         작성자, CustomerUser의 username를 FK로 함
         1:N 특성을 가지므로, 계정 삭제시 같이 삭제될 수 있는 CASCADE 특성 사용
+    content : TextField
+        게시글 내용
     date :
         글 작성 일자, auto_now_add 파라미터를 True로 하여 INSERT시 자동으로 날짜가 생성되는 옵션 사용
     views : PositiveIntegerField
@@ -71,6 +73,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='제목')
     writer = models.ForeignKey(
         'CustomerUser', on_delete=models.CASCADE, verbose_name='글쓴이')
+    content = models.TextField(verbose_name='내용')
     date = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     views = models.PositiveIntegerField(default=0, verbose_name='조회')
     upvote = models.PositiveIntegerField(default=0, verbose_name='추천')
