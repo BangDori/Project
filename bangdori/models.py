@@ -81,6 +81,81 @@ class Article(models.Model):
 
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)
-        db_table = 'board'
-        verbose_name = '게시판'
-        verbose_name_plural = '게시판'
+        abstract = True
+
+
+class DabangArticle(Article):
+    """
+    다방 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_dabang'
+        verbose_name = '다방'
+        verbose_name_plural = '다방'
+
+
+class SuccessionArticle(Article):
+    """
+    승계 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_succession'
+        verbose_name = '승계'
+        verbose_name_plural = '승계'
+
+
+class EssentialsArticle(Article):
+    """
+    필수템 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_essentials'
+        verbose_name = '필수템'
+        verbose_name_plural = '필수템'
+
+
+class GroupArticle(Article):
+    """
+    공동구매 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_group'
+        verbose_name = '공동구매'
+        verbose_name_plural = '공동구매'
+
+
+class BoardArticle(Article):
+    """
+    자유 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_board'
+        verbose_name = '자유'
+        verbose_name_plural = '자유'
+
+
+class NoticeArticle(Article):
+    """
+    공지 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_notice'
+        verbose_name = '공지'
+        verbose_name_plural = '공지'
+
+
+class ContactArticle(Article):
+    """
+    자유 게시판으로, Article을 상속받음
+    """
+
+    class Meta:
+        db_table = 'article_contact'
+        verbose_name = '문의'
+        verbose_name_plural = '문의'
