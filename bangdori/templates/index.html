@@ -50,7 +50,7 @@
             <div class="preview-article">
                 다방 게시판
                 <div class="preview-more">
-                    <a class="more" href={% url 'dabang' %}>더보기 ...</a>
+                    <a class="more" href={% url 'board' name='dabang' %}>더보기 ...</a>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="preview-article">
                 승계 게시판
                 <div class="preview-more">
-                    <a class="more" href={% url 'succession' %}>더보기 ...</a>
+                    <a class="more" href={% url 'board' name='succession' %}>더보기 ...</a>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="preview-article">
             게시판
             <div class="preview-more">
-                <a class="more" href={% url 'group' %}>더보기 ...</a>
+                <a class="more" href={% url 'board' name='group' %}>더보기 ...</a>
             </div>
         </div>
     </div>
