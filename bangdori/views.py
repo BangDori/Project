@@ -13,7 +13,7 @@ from project.settings import MAX_ARTICLES
 from .models import *
 import os, json, requests, time, random
 from django.http import JsonResponse
-from .utils import make_signature
+from .utils import make_signature, getModelByName
 
 load_dotenv()
 
@@ -146,25 +146,15 @@ def group(request):
 
 
 def board(request, name):
+    """
+    board : 게시판 목록을 보여주는 view
+    """
+
     # 페이지에 넘겨줄 Context
     context = {}
 
     # 게시판 내용 불러올 Article 객체
-    articles = None
-
-    # URL로부터 넘겨받은 게시판 유형에 따라 다른 context 전달
-    if name == 'board':
-        articles = BoardArticle
-    elif name == 'dabang':
-        articles = DabangArticle
-    elif name == 'succession':
-        articles = SuccessionArticle
-    elif name == 'essentials':
-        articles = EssentialsArticle
-    elif name == 'notice':
-        articles = NoticeArticle
-    elif name == 'context':
-        articles = ContactArticle
+    articles = getModelByName(name)
 
     # 페이지 정보 전달
     # context['name'] : 페이지가 표시되는 한글 이름
@@ -193,27 +183,48 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+def article(request, name, pk):
+    """
+    article : 게시글 내용을 보여주는 view
+    """
+
+    context = {}
+
+    # 게시글 정보 불러옴
+    article = getModelByName(name)
+    article = article.objects.all().get(id=pk)
+
+    # 조회수 올림
+    article.views = article.views + 1
+    article.save()
+
+    # Context에 전달
+    context['article'] = article
+    context['url'] = name
+
+    return render(request, 'article.html', context)
+
+
 def write(request, name):
-    loginSession = request.session.get('login_session', '')
-    context = { 'loginSession': loginSession }
+    """
+    write : 게시글을 작성하는 view
+    """
+
+    # 현재 로그인된 사용자의 정보를 가져옴
+    user = request.user
 
     if request.method == "POST":
-        article = None
+        # 현재 게시판에 맞는 모델을 가져옴
+        article = getModelByName(name)
+        # 게시글 작성
+        article = article(title=request.POST.get('title'),
+                          writer=CustomerUser.objects.get(username=user),
+                          content=request.POST.get('content'))
 
-        if name == 'board':
-            article = BoardArticle(title=request.POST.get('title'), writer=User.objects.get(user_id=loginSession),
-                                   )
-        elif name == 'dabang':
-            article = DabangArticle()
-        elif name == 'succession':
-            article = SuccessionArticle()
-        elif name == 'essentials':
-            article = EssentialsArticle()
-        elif name == 'notice':
-            article = NoticeArticle()
-        elif name == 'context':
-            article = ContactArticle()
-
+        # 게시글 저장
+        article.save()
+        # 게시판으로 다시 돌아감
+        return redirect('board', name=name)
 
     return render(request, 'write.html')
 
