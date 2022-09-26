@@ -1,10 +1,16 @@
 {% extends 'extends/main.html' %}
 
 {% block content %}
-    <!-- index 화면의 main 내용 -->
-    <div class="main">
-        <div class="container">
-            <div class="section">aa</div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                제목<br>
+                <input type="text" name="postname"><br>
+                내용<br>
+                <textarea rows="10" cols="50" name="contents"></textarea><br>
+                <input type="submit" value="글쓰기">
+            </form>
         </div>
     </div>
 {% endblock %}
