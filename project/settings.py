@@ -129,3 +129,6 @@ AUTH_USER_MODEL = 'bangdori.CustomerUser'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+
+# 한 페이지에 글을 몇 개 띄울지 설정
+MAX_ARTICLES = 10
