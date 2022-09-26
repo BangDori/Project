@@ -4,6 +4,9 @@ import base64
 import os
 from dotenv import load_dotenv
 
+from bangdori.models import *
+
+
 def make_signature(timestamp):
     load_dotenv()
 
@@ -19,5 +22,35 @@ def make_signature(timestamp):
     message = bytes(message, 'UTF-8')
     signingKey = base64.b64encode(
         hmac.new(secret_key, message, digestmod=hashlib.sha256).digest())
-        
+
     return signingKey
+
+
+def getModelByName(name):
+    """
+    getModelByName : name에 따라 적절한 Model 객체를 반환하는 클래스
+
+    Parameters
+    ----------
+    name : url에 사용된 이름
+    """
+
+    articles = None
+
+    # URL로부터 넘겨받은 게시판 유형에 따라 다른 context 전달
+    if name == 'board':
+        articles = BoardArticle
+    elif name == 'dabang':
+        articles = DabangArticle
+    elif name == 'succession':
+        articles = SuccessionArticle
+    elif name == 'essentials':
+        articles = EssentialsArticle
+    elif name == 'notice':
+        articles = NoticeArticle
+    elif name == 'contact':
+        articles = ContactArticle
+    elif name == 'group':
+        articles = GroupArticle
+
+    return articles
