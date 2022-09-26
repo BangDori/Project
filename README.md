@@ -1,5 +1,3 @@
 # SEA
-
-<h3>hi</h3>
-
-<h3>pip install -r pip_list.txt 치고 해야함<h3>
+- 필요 패키지 설치
+  * `pip install -r requirements.txt`

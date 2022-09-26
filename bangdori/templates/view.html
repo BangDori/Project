@@ -7,7 +7,7 @@
 <body>
     <div>
         <h1>{{request.user.username}} 의 프로필 </h1>
-        <img src="{{target_user.profile.image.url}}" width="80%" alt="">
+        <img src="{{target_user.profile.image.url}}" width="30%" alt="">
         {% if target_user.profile %}
         <h2>닉네임: {{ target_user.profile.nickname }}</h2>
 

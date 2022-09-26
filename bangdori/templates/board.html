@@ -18,16 +18,20 @@
 
         <div class="article">
             <!-- 게시물 목록 영역 -->
-            {% if articles %}
-                {% for article in articles %}
-                    <td style="text-align:center;">{{ forloop.counter }}</td>
-                    <td>
-                        <a href="{% url '' article.title %}">
-                            {{ article.title }}
-                        </a>
-                    </td>
-                {% endfor %}
-            {% endif %}
+            <table>
+                {% if articles %}
+                    {% for article in articles %}
+                        <tr>
+                            <td style="text-align:center;">{{ forloop.counter }}</td>
+                            <td><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></td>
+                            <td>{{ article.writer }}</td>
+                            <td>{{ article.date }}</td>
+                            <td>{{ article.views }}</td>
+                            <td>{{ article.upvote }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
         </div>
 
         <div class="lnb">

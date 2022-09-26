@@ -1,0 +1,17 @@
+{% extends 'extends/main.html' %}
+
+{% block content %}
+    <div class="row mt-5">
+        <div class="col-12">
+            제목 : {{ article.title }}<br>
+            작성자 : {{ article.writer }}<br>
+            내용 : {{ article.content }}<br>
+            날짜 : {{ article.date }}<br>
+            조회수 : {{ article.views }}<br>
+            추천수 : {{ article.upvote }}<br>
+        </div>
+    </div>
+
+    <br>
+    <a href={% url 'board' name=url %}>돌아가기</a>
+{% endblock %}
