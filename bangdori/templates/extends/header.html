@@ -41,7 +41,7 @@
         <div class="menu-box">
             <div class="menu-list">
                 <div class="menu-item">
-                    <a href={% url 'dabang' %}>다방</a>
+                    <a href={% url 'board' name='board' %}>다방</a>
                 </div>
                 <div class="menu-item">
                     <a href={% url 'succession' %}>승계</a>
@@ -52,9 +52,9 @@
                 <div class="menu-item">
                     <a href={% url 'group' %}>공동 구매</a>
                 </div>
-                <div class="menu-item">
-                    <a href={% url 'board' %}>자유 게시판</a>
-                </div>
+{#                <div class="menu-item">#}
+{#                    <a href={% url 'board' %}>자유 게시판</a>#}
+{#                </div>#}
                 <div class="menu-item">
                     <a href={% url 'notice' %}>공지사항</a>
                 </div>

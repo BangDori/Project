@@ -1,10 +1,10 @@
 {% extends 'extends/main.html' %}
 {% load static %}
 {% block content %}
-    <!-- 자유 게시판 -->
+    <!-- 게시판 공통 레이아웃 -->
     <div class="board">
         <div class="preview-title board-title">
-            <span>자유 게시판</span>
+            <span>{{ name }} 게시판</span>
         </div>
 
         <div class="top-info">
@@ -16,17 +16,38 @@
             <div class="recommendation"><span>추천</span></div>
         </div>
 
-        <div class="article">Content</div>
+        <div class="article">
+            <!-- 게시물 목록 영역 -->
+            {% if articles %}
+                {% for article in articles %}
+                    <td style="text-align:center;">{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url '' article.title %}">
+                            {{ article.title }}
+                        </a>
+                    </td>
+                {% endfor %}
+            {% endif %}
+        </div>
 
         <div class="lnb">
             <div class="writting-box">
-                <a class="writting-btn" href={% url 'write' %}>글쓰기</a>
+                <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
             </div>
 
+            <!-- 페이지 번호 영역 -->
             <div class="paging-box">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
+                {% for page in articles.paginator.page_range %}
+                    <!-- 현재 페이지를 기준으로, 앞 뒤 2개의 페이지가 보여짐 -->
+                    {% if page >= articles.number|add:-2 and page <= articles.number|add:2 %}
+                        <span class="{% if page == articles.number %}current{% endif %}">
+                            <a href="?page={{ page }}">{{ page }}</a>
+                        </span>
+                        <!-- 현재 페이지를 기준으로, 앞 뒤 3개의 페이지는 ...으로 보여짐 -->
+                    {% elif page >= articles.number|add:-3 and page <= articles.number|add:3 %}
+                        ...
+                    {% endif %}
+                {% endfor %}
             </div>
 
             <div class="search-box">
@@ -47,6 +68,6 @@
             </div>
         </div>
     </div>
-    
+
     {% include 'extends/banner.html' %}
 {% endblock %}
