@@ -18,13 +18,6 @@
     opacity: 0;
 }
 
-.banner:nth-child(odd){
-    background: orange;
-}
-.banner:nth-child(even){
-    background: orangered;
-}
-
 .showing{
     opacity: 1;
 
