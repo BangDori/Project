@@ -17,16 +17,35 @@
     font-weight: bold;
 }
 
+.top-title{
+    text-align: center !important;
+}
+
+.total-article-info{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.article-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0;
+}
+
 .id, .views, .recommendation{
-    flex-grow: 1;
+    width: 96px;
 }
 
 .title{
-    flex-grow: 7;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .writer, .date{
-    flex-grow: 2;
+    width: 112px;
 }
 
 .lnb{

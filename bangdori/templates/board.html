@@ -7,31 +7,29 @@
             <span>{{ name }} 게시판</span>
         </div>
 
-        <div class="top-info">
-            <div class="id"><span>번호</span></div>
-            <div class="title"><span>제목</span></div>
-            <div class="writer"><span>글쓴이</span></div>
-            <div class="date"><span>작성일</span></div>
-            <div class="views"><span>조회</span></div>
-            <div class="recommendation"><span>추천</span></div>
-        </div>
+        <div class="total-article-info">
+            <div class="top-info">
+                <div class="id"><span>번호</span></div>
+                <div class="title top-title"><span>제목</span></div>
+                <div class="writer"><span>글쓴이</span></div>
+                <div class="date"><span>작성일</span></div>
+                <div class="views"><span>조회</span></div>
+                <div class="recommendation"><span>추천</span></div>
+            </div>
 
-        <div class="article">
             <!-- 게시물 목록 영역 -->
-            <table>
-                {% if articles %}
-                    {% for article in articles %}
-                        <tr>
-                            <td style="text-align:center;">{{ forloop.counter }}</td>
-                            <td><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></td>
-                            <td>{{ article.writer }}</td>
-                            <td>{{ article.date }}</td>
-                            <td>{{ article.views }}</td>
-                            <td>{{ article.upvote }}</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            </table>
+            {% if articles %}
+                {% for article in articles %}
+                    <div class="article-info">
+                            <div class="id"><span>{{ forloop.counter }}</span></div>
+                            <div class="title"><span><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></span></div>
+                            <div class="writer"><span>{{ article.writer }}</span></div>
+                            <div class="date js-date"><span>{{ article.date }}</span></div>
+                            <div class="views"><span>{{ article.views }}</span></div>
+                            <div class="recommendation"><span>{{ article.upvote }}</span></div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="lnb">
