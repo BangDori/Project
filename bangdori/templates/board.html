@@ -9,24 +9,24 @@
 
         <div class="total-article-info">
             <div class="top-info">
-                <div class="id"><span>번호</span></div>
-                <div class="title top-title"><span>제목</span></div>
-                <div class="writer"><span>글쓴이</span></div>
-                <div class="date"><span>작성일</span></div>
-                <div class="views"><span>조회</span></div>
-                <div class="recommendation"><span>추천</span></div>
+                <div class="id">번호</div>
+                <div class="title top-title">제목</div>
+                <div class="writer">글쓴이</div>
+                <div class="date">작성일</div>
+                <div class="views">조회</div>
+                <div class="recommendation">추천</div>
             </div>
 
             <!-- 게시물 목록 영역 -->
             {% if articles %}
                 {% for article in articles %}
                     <div class="article-info">
-                            <div class="id"><span>{{ forloop.counter }}</span></div>
-                            <div class="title"><span><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></span></div>
-                            <div class="writer"><span>{{ article.writer }}</span></div>
-                            <div class="date js-date"><span>{{ article.date }}</span></div>
-                            <div class="views"><span>{{ article.views }}</span></div>
-                            <div class="recommendation"><span>{{ article.upvote }}</span></div>
+                            <div class="id">{{ forloop.counter }}</div>
+                            <div class="title"><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></div>
+                            <div class="writer">{{ article.writer }}</div>
+                            <div class="date js-date">{{ article.date }}</div>
+                            <div class="views">{{ article.views }}</div>
+                            <div class="recommendation">{{ article.upvote }}</div>
                     </div>
                 {% endfor %}
             {% endif %}

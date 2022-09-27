@@ -27,6 +27,8 @@ def goIndex(request):
 
 
 def index(request):
+
+    
     context = {}
     """ 
     로그인 정보는 Session에 기록되도록 설정되어 있음.
