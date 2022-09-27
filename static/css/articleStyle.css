@@ -1,0 +1,114 @@
+.board-article{
+    width: 100%;
+    height: 100%;
+}
+
+.article-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.article-title{
+    padding-inline-start: 15px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.article-date{
+    padding-inline-end: 5px;
+    font-size: 15px;
+}
+
+.article-info{
+    padding: 3 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article-writer{
+    padding-inline-start: 15px;
+    font-size: 18px;
+}
+
+.article-user{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding-inline-end: 5px;
+}
+
+.article-content-box{
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.article-content{
+    margin: 30px 0;
+    padding-inline: 15px;
+}
+
+.board-article-lnb{
+    margin: 30px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.board-article-before{
+    padding-inline-start: 15px;
+}
+
+.board-article-after{
+    padding-inline-end: 15px;
+}
+
+.move-article{
+    padding: 5px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.board-article-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 256px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.move-article-list{
+    padding: 5px;
+}
+
+.move-article:hover, .board-article-home:hover{
+    background-color: rgba(127, 127, 127, 0.5);
+}
+
+.board-article-comment{
+    border-top: 1px solid #ccc;
+    padding: 15px 0;
+}
+
+.comment-count{
+    padding-inline-start: 15px;
+    font-size: 14px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.comment-box{
+    padding-inline-start: 15px;
+    padding-top: 30px;
+}
+

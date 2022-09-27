@@ -3,15 +3,62 @@
 {% block content %}
     <div class="row mt-5">
         <div class="col-12">
-            제목 : {{ article.title }}<br>
-            작성자 : {{ article.writer }}<br>
-            내용 : {{ article.content }}<br>
-            날짜 : {{ article.date }}<br>
-            조회수 : {{ article.views }}<br>
-            추천수 : {{ article.upvote }}<br>
+            <div class="board-article">
+                <div class="article-top">
+                    <div class="article-title">
+                        <span>{{ article.title }}</span>
+                    </div>
+                    <div class="article-date">
+                        <span>{{ article.date }}</span>
+                    </div>
+                </div>
+                <div class="article-info">
+                    <div class="article-writer">
+                        ㅇ{{ article.writer }}
+                    </div>
+                    <div class="article-user">
+                        <div class="article-views">
+                            조회 수 {{ article.views }}
+                        </div>
+                        <div class="article-upvote">
+                            추천 수 {{ article.upvote }}
+                        </div>
+                        <div class="article-comment">
+                            댓글 수 ??
+                        </div>
+                    </div>
+                </div>
+                <div class="article-content-box">
+                    <div class="article-content">
+                        {{ article.content }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-article-lnb">
+                <div class="board-article-before">
+                    <a class="move-article" href="">< 이전 글</a>
+                </div>
+                <div class="board-article-home">
+                    <a class="move-article-list" href={% url 'board' name=url %}>목록으로</a>
+                </div>
+                <div class="board-article-after">
+                    <a class="move-article" href="">다음 글 ></a>
+                </div>
+            </div>
+
+            <div class="board-article-comment">
+                <div class="comment-count">
+                    댓글 ??개
+                </div>
+                <div class="comment-box">
+                    댓글 -------
+                </div>
+            </div>
         </div>
     </div>
 
     <br>
-    <a href={% url 'board' name=url %}>돌아가기</a>
+
+    
 {% endblock %}
