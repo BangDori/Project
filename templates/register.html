@@ -20,13 +20,19 @@
     <div class="main">
         <form action="" method="post">
             {% csrf_token %}
+            <!-- 아이디 입력란 -->
             <div class="info-id">
                 <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
                 <button class="check-btn">중복 확인</button>
             </div>
-            <input class="input-box" type="password" name="register_user_pwd"
-                   placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
+
+            <!-- 패스워드 입력란 -->
+            <input class="input-box" type="password" name="register_user_pwd" placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
+
+            <!-- 패스워드 재입력란 -->
             <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력">
+
+            <!-- 이메일 입력받는 란 -->
             <div class="input-email">
                 <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
                 <span class="separte-line email-separate">@</span>
@@ -38,13 +44,21 @@
                 </select>
             </div>
 
+            <!-- 생년월일 선택란 -->
             <div class="input-birth">
                 <select id="register_user_year" name="register_user_year"></select>
                 <select id="register_user_month" name="register_user_month"></select>
                 <select id="register_user_day" name="register_user_day"></select>
             </div>
 
-            <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+            <!-- 휴대폰 번호 입력란 -->
+            <div class="info-phone">
+                <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+                <button class="check-btn">인증하기</button>
+            </div>
+
+            <!-- 닉네임 입력란 -->
+            <input class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
 
             <div class="check-box">
                 <div class="check-essential">
