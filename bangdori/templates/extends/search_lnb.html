@@ -1,0 +1,37 @@
+{% load static %}
+
+<div class="lnb">
+    <div class="writting-box">
+        <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
+    </div>
+
+    <!-- 페이지 번호 영역 -->
+    <div class="paging-box">
+        {% for page in articles.paginator.page_range %}
+            <!-- 현재 페이지를 기준으로, 앞 뒤 2개의 페이지가 보여짐 -->
+            {% if page >= articles.number|add:-2 and page <= articles.number|add:2 %}
+                <span class="{% if page == articles.number %}current{% endif %}">
+                    <a href="?page={{ page }}">{{ page }}</a>
+                </span>
+                <!-- 현재 페이지를 기준으로, 앞 뒤 3개의 페이지는 ...으로 보여짐 -->
+            {% elif page >= articles.number|add:-3 and page <= articles.number|add:3 %}
+                ...
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="search-box">
+        <select class="search-type-box" name="search-type" id="">
+            <option value="">제목+내용</option>
+            <option value="">제목</option>
+            <option value="">제목</option>
+            <option value="">글쓴이</option>
+            <option value="">댓글</option>
+        </select>
+        <div class="board-search-keyword-box">
+            <form action="" method="get">
+                <input class="board-search-keyword" type="text" placeholder="검색어 입력"/>
+            </form>
+        </div>
+    </div>
+</div>

@@ -74,6 +74,21 @@
 }
 
 .search-box{
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+
+.search-type-box{
+    padding: 5px;
+    width: 100px;
+}
+
+.board-search-keyword{
+    padding: 5px;
+    width: 192px;
+    padding-inline-start: 5px;
 }
