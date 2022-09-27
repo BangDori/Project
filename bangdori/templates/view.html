@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DetailView</title>
+</head>
+<body>
+    <div>
+        <h1>{{request.user.username}} 의 프로필 </h1>
+        <img src="{{target_user.profile.image.url}}" width="30%" alt="">
+        {% if target_user.profile %}
+        <h2>닉네임: {{ target_user.profile.nickname }}</h2>
+
+        {% else %}
+        <h2>프로필을 만들어라</h2>
+        <a href="{% url 'profileapp:create' %}">프로필 생성</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

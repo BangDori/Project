@@ -6,6 +6,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import DetailView
 from dotenv import load_dotenv
 from django.views import View
 
@@ -128,6 +130,10 @@ def register(request):
 
         return render(request, 'register.html', context)
 
+class DetailView(DetailView):
+    model = CustomerUser
+    context_object_name = 'target_user'
+    template_name = 'view.html'
 
 def dabang(request):
     return render(request, 'dabang.html')
