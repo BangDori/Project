@@ -54,11 +54,3 @@ def getModelByName(name):
         articles = GroupArticle
 
     return articles
-
-
-def getAllArticleModels():
-    """
-    getAllArticleModels : 게시판의 모든 모델을 리스트로 가져옴
-    """
-    return [BoardArticle, DabangArticle, SuccessionArticle, EssentialsArticle,
-            NoticeArticle, ContactArticle, GroupArticle]
