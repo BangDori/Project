@@ -83,12 +83,6 @@ class Article(models.Model):
         # __str__ 오버라이드로 제목만 표시
         return self.title
 
-    def __dict__(self):
-        # __dict__ 오버라이드로 dict 전달
-        return {'id': self.id, 'title': self.title, 'writer': self.writer.nickname,
-                'content': self.content, 'date': self.date, 'views': self.views,
-                'upvote': self.upvote}
-
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)
         abstract = True
