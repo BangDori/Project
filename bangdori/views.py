@@ -13,7 +13,11 @@ from django.views import View
 
 from project.settings import MAX_ARTICLES
 from .models import *
-import os, json, requests, time, random
+import os
+import json
+import requests
+import time
+import random
 from django.http import JsonResponse
 from .utils import make_signature, getModelByName
 
@@ -28,7 +32,6 @@ def goIndex(request):
 
 def index(request):
 
-    
     context = {}
     """ 
     로그인 정보는 Session에 기록되도록 설정되어 있음.
@@ -60,7 +63,8 @@ def login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             # Django의 auth 클래스를 사용해 로그인
-            user = auth.authenticate(request=request, username=username, password=password)
+            user = auth.authenticate(
+                request=request, username=username, password=password)
 
             # 해당하는 유저가 존재해서 로그인이 가능한 경우
             if user is not None:
@@ -132,10 +136,12 @@ def register(request):
 
         return render(request, 'register.html', context)
 
+
 class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
     template_name = 'view.html'
+
 
 def dabang(request):
     return render(request, 'dabang.html')
@@ -314,3 +320,31 @@ class SmsVerifyView(View):
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
             return JsonResponse({'message': 'Not Correct Number!'}, status=200)
+
+
+class kakaologin(View):
+    def get(self, request):
+        kakao_api = "https://kauth.kakao.com/oauth/authorize?response_type=code"
+        redirect_uri = "http://localhost:8000/login/kakao/callback/"
+        client_id = "061401748822539ecf6d032fcc459c14"
+
+        return redirect(
+            f"{kakao_api}&client_id={client_id}&redirect_uri={redirect_uri}")
+
+
+class kakaocallback(View):
+    def get(self, request):
+        data = {
+            "grant_type": "authorization_code",
+            "client_id": "061401748822539ecf6d032fcc459c14",
+            "redirection_uri": "http://localhost:8000/login/kakao",
+            "code": request.GET["code"]
+        }
+        kakao_token_api = "https://kauth.kakao.com/oauth/token"
+        access_token = requests.post(kakao_token_api, data=data).json()[
+            "access_token"]
+
+        kakao_user_api = "https://kapi.kakao.com/v2/user/me"
+        header = {"Authorization": f"Bearer ${access_token}"}
+        user_information = requests.get(kakao_user_api, headers=header).json()
+        print(user_information)
