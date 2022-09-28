@@ -33,7 +33,7 @@ def goIndex(request):
 def index(request):
 
     context = {}
-    """ 
+    """
     로그인 정보는 Session에 기록되도록 설정되어 있음.
     dict 형식으로 request 전달 비활성화
     """
@@ -348,3 +348,36 @@ class kakaocallback(View):
         header = {"Authorization": f"Bearer ${access_token}"}
         user_information = requests.get(kakao_user_api, headers=header).json()
         print(user_information)
+
+
+class googlelogin(View):
+    def get(self, request):
+        google_api = "https://accounts.google.com/o/oauth2/v2/auth?response_type=code"
+        redirect_uri = "http://localhost:8000/login/google/callback/"
+        client_id = "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com"
+        scope = "https%3A//www.googleapis.com/auth/drive.metadata.readonly"
+
+        return redirect(
+            f"{google_api}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}")
+
+
+class googlecallback(View):
+    def get(self, request):
+        google_token_api = 'https://oauth2.googleapis.com/token'
+        # secret key 일부러 빼놓음.
+        data = {
+            "code": request.GET['code'],
+            "client_id": "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com",
+            "redirect_uri": "http://localhost:8000/login/google/callback/",
+            "client_secret": "",
+            "grant_type": "authorization_code",
+        }
+        access_token = requests.post(google_token_api, data=data).json()[
+            "access_token"]
+        google_user_api = "https://www.googleapis.com/oauth2/v3/userinfo"
+        user = requests.get(google_user_api, params={
+            'access_token': access_token
+        }).json()
+        for temp in user:
+            print(temp)
+        print(user)
