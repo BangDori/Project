@@ -207,11 +207,9 @@ def article(request, name, pk):
     article.save()
 
     # Context에 전달
+    context['article'] = article
     context['url'] = name
-    # Context에 게시글 정보 추가
-    context = {**context, **article.__dict__()}
 
-    print(context)
     return render(request, 'article.html', context)
 
 
