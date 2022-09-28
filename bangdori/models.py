@@ -34,12 +34,6 @@ class CustomerUser(AbstractUser):
         default=datetime.MINYEAR, db_column='birth', verbose_name='birth')
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
-    nickname = models.CharField(
-        max_length=10, db_column='nickname', verbose_name='nickname')
-    blocked_at = models.DateTimeField(
-        default=datetime.MINYEAR, db_column='blocked_at', verbose_name='blocked_at')
-    corp_num = models.CharField(
-        max_length=10, blank=True, db_column='corp_num', verbose_name='corp_num')
 
     def __str__(self):
         return self.username
