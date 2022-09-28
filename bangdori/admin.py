@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from .models import CustomerUser
+from .utils import getAllArticleModels
 
 
 # Register your models here.
@@ -10,3 +11,4 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CustomerUser, UserAdmin)
+admin.site.register([x for x in getAllArticleModels()])
