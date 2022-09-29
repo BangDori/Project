@@ -346,8 +346,8 @@ class kakaocallback(View):
 
         kakao_user_api = "https://kapi.kakao.com/v2/user/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user_information = requests.get(kakao_user_api, headers=header).json()
-        print(user_information)
+        user = requests.get(kakao_user_api, headers=header).json()
+        return JsonResponse(user, status=200)
 
 
 class googlelogin(View):
@@ -378,4 +378,4 @@ class googlecallback(View):
         google_user_api = "https://www.googleapis.com/oauth2/v3/userinfo"
         user = requests.get(google_user_api,
                             params={"access_token": access_token}).json()
-        print(user)
+        return JsonResponse(user, status=200)
