@@ -355,7 +355,8 @@ class googlelogin(View):
         google_api = "https://accounts.google.com/o/oauth2/v2/auth?response_type=code"
         redirect_uri = "http://localhost:8000/login/google/callback/"
         client_id = "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com"
-        scope = "https%3A//www.googleapis.com/auth/drive.metadata.readonly"
+        scope = "https://www.googleapis.com/auth/userinfo.email " + \
+                "https://www.googleapis.com/auth/userinfo.profile"
 
         return redirect(
             f"{google_api}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}")
@@ -369,15 +370,12 @@ class googlecallback(View):
             "code": request.GET['code'],
             "client_id": "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com",
             "redirect_uri": "http://localhost:8000/login/google/callback/",
-            "client_secret": "",
+            "client_secret": "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",
             "grant_type": "authorization_code",
         }
         access_token = requests.post(google_token_api, data=data).json()[
             "access_token"]
         google_user_api = "https://www.googleapis.com/oauth2/v3/userinfo"
-        user = requests.get(google_user_api, params={
-            'access_token': access_token
-        }).json()
-        for temp in user:
-            print(temp)
+        user = requests.get(google_user_api,
+                            params={"access_token": access_token}).json()
         print(user)
