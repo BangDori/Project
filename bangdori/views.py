@@ -379,3 +379,33 @@ class googlecallback(View):
         user = requests.get(google_user_api,
                             params={"access_token": access_token}).json()
         return JsonResponse(user, status=200)
+
+
+class naverlogin(View):
+    def get(self, request):
+        naver_api = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+        redirect_uri = "http://localhost:8000/login/naver/callback/"
+        client_id = "wbvRsxRzlRkolqqiMZq1"
+        state = "bangdori"
+        return redirect(
+            f"{naver_api}&client_id={client_id}&redirect_uri={redirect_uri}&state={state}")
+
+
+class navercallback(View):
+    def get(self, request):
+        naver_token_api = "https://nid.naver.com/oauth2.0/token"
+        data = {
+            "code": request.GET['code'],
+            "client_id": "wbvRsxRzlRkolqqiMZq1",
+            "redirect_uri": "http://localhost:8000/login/naver/callback/",
+            "client_secret": "ff_Bbw3Iba",
+            "state": "bandori",
+            "grant_type": "authorization_code",
+        }
+        access_token = requests.post(naver_token_api, data=data).json()[
+            'access_token']
+        naver_user_api = "https://openapi.naver.com/v1/nid/me"
+        header = {"Authorization": f"Bearer ${access_token}"}
+        user = requests.get(naver_user_api,
+                            params={"access_token": access_token}).json()
+        return JsonResponse(user, status=200)

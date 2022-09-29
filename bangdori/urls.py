@@ -24,4 +24,9 @@ urlpatterns = [
     path('login/google', views.googlelogin.as_view(), name='googleLogin'),
     path('login/google/callback/',
          views.googlecallback.as_view(), name='googleCallback'),
+    path('login/naver', views.naverlogin.as_view(), name='naverLogin'),
+    path('login/naver/callback/',
+         views.navercallback.as_view(), name='naverCallback'),
+
+
 ]
