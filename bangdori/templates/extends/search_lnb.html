@@ -1,9 +1,11 @@
 {% load static %}
 
 <div class="lnb">
+    {% if request.user.is_authenticated %}
     <div class="writting-box">
         <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
     </div>
+    {% endif %}
 
     <!-- 페이지 번호 영역 -->
     <div class="paging-box">
