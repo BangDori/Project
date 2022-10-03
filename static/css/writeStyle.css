@@ -1,0 +1,59 @@
+.board-title-name{
+    padding-top: 32px;
+    font-size: 21px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid gray;
+}
+
+.write-container{
+    background-color: rgba(127, 127, 127, 0.3);
+}
+
+.write-form {
+    position: relative;
+    padding: 15px 10px;
+}
+
+.write-title-box{
+    display: flex;
+    height: 48px;
+    margin-bottom: 16px;
+    gap: 8px;
+}
+
+.form-select{
+    display: inline;
+    width: 160px;
+}
+
+#post_title{
+    flex-grow: 1;
+    padding-inline-start: 8px;
+}
+
+.write-btn-box{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding-bottom: 15px;
+}
+
+.upload-btn{
+    width: 96px;
+}
+
+.write-content-box{
+    display: flex;
+    padding: 8px 0 16px;
+}
+
+.write-content{
+    flex-grow: 1;
+    padding: 12px 0;
+    padding-inline-start: 8px;
+    font-size: 16px;
+}
+
+.write-footer{
+    text-align: right;
+}

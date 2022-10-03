@@ -1,16 +1,38 @@
 {% extends 'extends/main.html' %}
 
 {% block content %}
-    <div class="row mt-5">
-        <div class="col-12">
-            <form method="POST">
-                {% csrf_token %}
-                제목<br>
-                <input type="text" name="title"><br>
-                내용<br>
-                <textarea rows="10" cols="50" name="content"></textarea><br>
+    <div class="board-title-name">
+        게시판 글쓰기
+    </div>
+
+    <div class="col-12 write-container">
+        <form class="write-form" method="POST">
+            {% csrf_token %}
+            <div class="write-title-box">
+                <select class="form-select" name="form-select" id="">
+                    <option value="tap" selected>선택</option>
+                    <option value="dabang">승계 게시판</option>
+                    <option value="essestials">자취생 필수템 게시판</option>
+                    <option value="group">공동 구매 게시판</option>
+                    <option value="board">자유 게시판</option>
+                </select>
+    
+                <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요.">
+            </div>
+
+            <div class="write-btn-box">
+                <button id="image_upload_btn" class="upload-btn">사진</button>
+                <button id="left_align_btn" class="upload-btn">왼쪽 정렬</button>
+                <button id="middle_align_btn" class="upload-btn">중앙 정렬</button>
+                <button id="right_align_btn" class="upload-btn">오른쪽 정렬</button>
+                <button id="font_btn" class="upload-btn">글꼴</button>
+            </div>
+            <div class="write-content-box">
+                <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."></textarea>
+            </div>
+            <div class="write-footer">
                 <input type="submit" value="글쓰기">
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 {% endblock %}
