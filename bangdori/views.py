@@ -230,7 +230,7 @@ def write(request, name):
     if request.method == "POST":
         # 현재 게시판에 맞는 모델을 가져옴
         article = getModelByName(name)
-        
+
         # 게시글 작성
         article = article(title=request.POST.get('title'),
                           writer=CustomerUser.objects.get(username=user),
@@ -251,6 +251,8 @@ def findID(request):
 def SMS(request):
     return render(request, 'temp_sms.html')
 
+def SMSPW(request):
+    return render(request, 'temp_smsPW.html')
 
 def findPW1(request):
     return render(request, 'findPW1.html')

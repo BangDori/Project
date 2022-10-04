@@ -6,9 +6,11 @@
     <meta name="views" content="width=device-width, initial-scale=1.0">
     <link rel="shortcum icon" href="{% static 'imgs/house_icon.png' %}"/>
     <link rel="stylesheet" href="{% static 'css/findIDStyle.css' %}">
+    <script src="js/findID.js"></script>
     <title>아이디 찾기</title>
 </head>
 <body class="whole">
+
 <div>
     <!--header-->
     <header class="main">
@@ -79,10 +81,20 @@
                         </button>
                     </div>
                     <div style="padding-top: 20px; text-align: center;">
-                        <a href="./sms" class="next_btn" onclick>
+                        <a href="./sms" role = "button" class="next_btn" data-toggle = "modal">
                             <span>다음단계</span>
                         </a>
                     </div>
+                        <div class = "hidden" id = "myModal">
+                            <div class="modal__background"></div>
+                            <div class="modal__content">
+                                <h1 style = "margin: 0;">전화번호 입력</h1>
+                                <div>
+                                    <input type = "text">
+                                </div>
+                                <button>닫기</button>
+                            </div>
+                        </div>
                 </article>
             </section>
         </div>

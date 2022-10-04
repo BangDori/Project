@@ -27,6 +27,6 @@ urlpatterns = [
     path('login/naver', views.naverlogin.as_view(), name='naverLogin'),
     path('login/naver/callback/',
          views.navercallback.as_view(), name='naverCallback'),
-
+    path('findPW1/findPW2/smspw', views.SMSPW, name = 'smspw'),
 
 ]

@@ -31,7 +31,7 @@
             <section>
                 <article class="notification">
                     <div class="notification_deco">
-                        <img src="{% static 'imgs/findID.jpg' %}" alt="findIDImage">
+                        <img src="{% static 'imgs/findPW.jpg' %}" alt="findIDImage">
                     </div>
                     <dl class="notification_txt">
                         <dt></dt>
@@ -56,7 +56,7 @@
                                         {% csrf_token %}
                                         <div class = "send_phoneN">
                                         <input class = "input_phoneN" type="tel" name="phone_number" id="phone_number" maxlength="11" placeholder = " -를 제외한 전화번호를 입력해주세요" autofocus>
-                                            <input type="button" id = "send_message" value="전송" onclick>
+                                            <input type="submit" id = "send_message" value="전송">
                                         </div>
                                 </label>
                             </dt>
@@ -96,7 +96,7 @@
                     console.log("data pass success",json);
                 },
                 error : function(xhr,errmsg,err) {
-                console.log(xhr.status + ": " + xhr.responseText); 
+                console.log(xhr.status + ": " + xhr.responseText);
                 }
         });
         });

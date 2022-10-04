@@ -31,7 +31,7 @@
             <section>
                 <article class="notification">
                     <div class="notification_deco">
-                        <img src=".{% static '/imgs/findPW.jpg' %}" alt="findIDImage">
+                        <img src="{% static '/imgs/findPW.jpg' %}" alt="findIDImage">
                     </div>
                     <dl class="notification_txt">
                         <dt></dt>
@@ -50,7 +50,7 @@
                             <dt style="padding-bottom: 5px">
                                 <label>
                                             <span>
-                                                <input type="radio">
+                                                <input type="radio" name = "auth_method">
                                             </span>
                                     휴대폰 인증
                                 </label>
@@ -63,7 +63,7 @@
                             <dt style="padding-bottom: 5px">
                                 <label>
                                     <spna>
-                                        <input type="radio">
+                                        <input type="radio" name = "auth_method">
                                     </spna>
                                     아이핀 인증
                                 </label>
@@ -72,7 +72,7 @@
                         </dl>
                     </div>
                     <div style="padding-top: 20px; text-align: center;">
-                        <a href="#" class="next_btn" onclick>
+                        <a href="./smspw" class="next_btn" onclick>
                             <span>다음단계</span>
                         </a>
                     </div>
