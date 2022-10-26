@@ -88,6 +88,17 @@ class Article(models.Model):
         abstract = True
 
 
+class Comment(models.Model):
+    # Article과 유사하게 abstract로 선언후 필요 Article에만 사용
+    content = models.TextField()
+    writer = models.TextField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 class DabangArticle(Article):
     """
     다방 게시판으로, Article을 상속받음
@@ -108,6 +119,16 @@ class SuccessionArticle(Article):
         db_table = 'article_succession'
         verbose_name = '승계'
         verbose_name_plural = '승계'
+
+
+class SuccessionComment(Comment):
+    """
+    승계 댓글로, Comment를 상속받음
+    """
+    class Meta:
+        db_table = 'comment_succession'
+        verbose_name = '승계댓글'
+        verbose_name_plural = '승계댓글'
 
 
 class EssentialsArticle(Article):
@@ -141,6 +162,17 @@ class BoardArticle(Article):
         db_table = 'article_board'
         verbose_name = '자유'
         verbose_name_plural = '자유'
+
+
+class BoardComment(Comment):
+    """
+    자유 게시판 댓글로, Comment를 상속받음
+    """
+
+    class Meta:
+        db_table = 'comment_board'
+        verbose_name = '자유댓글'
+        verbose_name_plural = '자유댓글'
 
 
 class NoticeArticle(Article):
