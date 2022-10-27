@@ -4,25 +4,25 @@
     <div id="map" style="width:100%;height:350px;"></div>
     <form class="address-form" method="POST">
         {% csrf_token %}
-        <input type="text" id="postcode" placeholder="우편번호">
+        <input type="text" id="postcode" name="postcode" placeholder="우편번호">
         <input type="button" onclick="launchDaum()" value="우편번호 찾기"><br>
-        <input type="text" id="road" placeholder="도로명주소">
-        <input type="text" id="jibun" placeholder="지번주소">
+        <input type="text" id="road" name="road" placeholder="도로명주소">
+        <input type="text" id="jibun" name="jibun" placeholder="지번주소">
         <span id="guide" style="color:#999;display:none"></span>
-        <input type="text" id="detail" placeholder="상세주소">
-        <input type="text" id="extra" placeholder="참고항목">
+        <input type="text" id="detail" name="detail" placeholder="상세주소">
+        <input type="text" id="extra" name="extra" placeholder="참고항목">
 
-        <input type="hidden" id="lat">
-        <input type="hidden" id="lng">
-        <input type="hidden" id="sido">
-        <input type="hidden" id="sigungu">
-        <input type="hidden" id="roadname">
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="lng" name="lng">
+        <input type="hidden" id="sido" name="sido">
+        <input type="hidden" id="sigungu" name="sigungu">
+        <input type="hidden" id="roadname" name="roadname">
 
         <input type="submit" value="확인">
     </form>
 
     <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42a75472a2c1f5dc76966d731fce7707"></script>
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42a75472a2c1f5dc76966d731fce7707&libraries=services"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -91,13 +91,48 @@
                             guideTextBox.style.display = 'none';
                         }
 
-
+                        getInfo(roadAddr, data);
                     }
                 }
             ).open();
         }
 
-        function getInfo() {
+        function getInfo(roadAddr, data) {
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function (result, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+                    });
+                    infowindow.open(map, marker);
+
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+
+                    document.getElementById("lat").value = coords.getLat();
+                    document.getElementById("lng").value = coords.getLng();
+                }
+            });
+
+            document.getElementById("sido").value = data.sido;
+            document.getElementById("sigungu").value = data.sigungu;
+            document.getElementById("roadname").value = data.roadname;
+
+
             // 지도의 현재 중심좌표를 얻어옵니다
             var center = map.getCenter();
 
@@ -127,8 +162,8 @@
             message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
             message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
 
-            // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-            console.log(message);
+            {#console.log(message);#}
+
         }
     </script>
 {% endblock %}
