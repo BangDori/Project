@@ -386,7 +386,7 @@ class googlelogin(View):
         redirect_uri = "http://localhost:8000/login/google/callback/"
         client_id = "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com"
         scope = "https://www.googleapis.com/auth/userinfo.email " + \
-            "https://www.googleapis.com/auth/userinfo.profile"
+                "https://www.googleapis.com/auth/userinfo.profile"
 
         return redirect(
             f"{google_api}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}")
@@ -446,4 +446,20 @@ class address(View):
         return render(request, 'address.html')
 
     def post(self, request):
+        addr = Address()
+        try:
+            addr.postcode = int(request.POST.get('postcode'))
+            addr.road = request.POST.get('road')
+            addr.lot = request.POST.get('lot')
+            addr.detail = request.POST.get('detail')
+            addr.extra = request.POST.get('extra')
+            addr.city = request.POST.get('city')
+            addr.state = request.POST.get('state')
+            addr.road_name = request.POST.get('road_name')
+            addr.lat = float(request.POST.get('lat'))
+            addr.lng = float(request.POST.get('lng'))
+        except:
+            print()
+
+
         return render(request, 'address.html')
