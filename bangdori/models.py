@@ -198,4 +198,46 @@ class ContactArticle(Article):
 
 
 class Address(models.Model):
-    pass
+    """
+    주소를 저장하는 Model
+
+    Parameters
+    ----------
+    id : AutoField
+        Integer 형식의 SeqID를 나타내는 PK
+    postcode : IntegerField
+        우편번호 (예시 : 13536)
+    road : CharField
+        도로명 주소 (예시 : 경기 성남시 분당구 판교역로 235)
+    lot : CharField
+        지번 주소 (예시 : 경기 성남시 분당구 삼평동 681)
+    detail : CharField
+        상세 주소
+    extra : CharField
+        도/시 이름 (예시 : 경기)
+    state : CharField
+        시/군/구 이름 (예시 : 성남시 분당구)
+    road_name : CharField
+        도로명 값, 검색 결과 중 선택한 도로명주소의 "도로명" 값
+    lat : FloatField
+        위도
+    lng : FloatField
+        경도
+    """
+    id = models.AutoField(primary_key=True)
+    postcode = models.IntegerField(verbose_name='우편번호')
+    road = models.CharField(max_length=50, verbose_name='도로명주소')
+    lot = models.CharField(max_length=50, verbose_name='지번주소')
+    detail = models.CharField(max_length=50, verbose_name='상세주소')
+    extra = models.CharField(max_length=50, verbose_name='참고항목')
+    city = models.CharField(max_length=10, verbose_name='도/시 이름')
+    state = models.CharField(max_length=10, verbose_name='시/군/구 이름')
+    road_name = models.CharField(max_length=10, verbose_name='도로명')
+    lat = models.FloatField(verbose_name='위도')
+    lng = models.FloatField(verbose_name='경도')
+
+    def getTags(self):
+        # 카카오에서 제공하는 data에 해당하는 Model 변수 이름 dict 반환
+        return {'postcode': 'postcode', 'road': 'road', 'lot': 'jibun',
+                'detail': 'detail', 'extra': 'extra', 'city': 'sido',
+                'state': 'sigungu', 'roadname': 'roadname'}
