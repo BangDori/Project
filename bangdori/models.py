@@ -34,6 +34,8 @@ class CustomerUser(AbstractUser):
         default=datetime.MINYEAR, db_column='birth', verbose_name='birth')
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
+    addr = models.ForeignKey(
+        'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
 
     def __str__(self):
         return self.username
@@ -125,6 +127,7 @@ class SuccessionComment(Comment):
     """
     승계 댓글로, Comment를 상속받음
     """
+
     class Meta:
         db_table = 'comment_succession'
         verbose_name = '승계댓글'
@@ -226,13 +229,13 @@ class Address(models.Model):
     """
     id = models.AutoField(primary_key=True)
     postcode = models.IntegerField(verbose_name='우편번호', null=False)
-    road = models.CharField(max_length=50, verbose_name='도로명주소', null=False)
-    lot = models.CharField(max_length=50, verbose_name='지번주소', null=False)
+    road = models.CharField(max_length=50, verbose_name='도로명주소')
+    lot = models.CharField(max_length=50, verbose_name='지번주소')
     detail = models.CharField(max_length=50, verbose_name='상세주소')
     extra = models.CharField(max_length=50, verbose_name='참고항목')
-    city = models.CharField(max_length=10, verbose_name='도/시 이름', null=False)
-    state = models.CharField(max_length=10, verbose_name='시/군/구 이름', null=False)
-    road_name = models.CharField(max_length=10, verbose_name='도로명', null=False)
+    city = models.CharField(max_length=10, verbose_name='도/시 이름')
+    state = models.CharField(max_length=10, verbose_name='시/군/구 이름')
+    road_name = models.CharField(max_length=10, verbose_name='도로명')
     lat = models.FloatField(verbose_name='위도', null=False)
     lng = models.FloatField(verbose_name='경도', null=False)
 
@@ -240,4 +243,7 @@ class Address(models.Model):
         # 카카오에서 제공하는 data에 해당하는 Model 변수 이름 dict 반환
         return {'postcode': 'postcode', 'road': 'road', 'lot': 'jibun',
                 'detail': 'detail', 'extra': 'extra', 'city': 'sido',
-                'state': 'sigungu', 'roadname': 'roadname'}
+                'state': 'sigungu', 'road_name': 'roadname'}
+
+    def __str__(self):
+        return f'{self.road}{self.extra}{self.detail}'

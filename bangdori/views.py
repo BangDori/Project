@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView
 from dotenv import load_dotenv
 from django.views import View
@@ -443,23 +443,29 @@ class navercallback(View):
 
 class address(View):
     def get(self, request):
+        if request.user.is_anonymous:
+            return redirect(reverse('index'))
+
         return render(request, 'address.html')
 
     def post(self, request):
         addr = Address()
         try:
             addr.postcode = int(request.POST.get('postcode'))
-            addr.road = request.POST.get('road')
-            addr.lot = request.POST.get('lot')
-            addr.detail = request.POST.get('detail')
-            addr.extra = request.POST.get('extra')
-            addr.city = request.POST.get('city')
-            addr.state = request.POST.get('state')
-            addr.road_name = request.POST.get('road_name')
-            addr.lat = float(request.POST.get('lat'))
-            addr.lng = float(request.POST.get('lng'))
         except:
-            print()
+            pass
+
+        addr.road = request.POST.get('road')
+        addr.lot = request.POST.get('lot')
+        addr.detail = request.POST.get('detail')
+        addr.extra = request.POST.get('extra')
+        addr.city = request.POST.get('sido')
+        addr.state = request.POST.get('sigungu')
+        addr.road_name = request.POST.get('roadname')
+        addr.lat = float(request.POST.get('lat'))
+        addr.lng = float(request.POST.get('lng'))
+
+        user = request.user
 
 
         return render(request, 'address.html')
