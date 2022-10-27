@@ -9,9 +9,12 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('detail/<int:pk>', views.DetailView.as_view(), name='detail'),
+
     path('board/<str:name>/', views.board, name='board'),
     path('board/<str:name>/<int:pk>', views.article, name='article'),
-    path('board/<str:name>/write', views.write, name='write'),
+    path('board/<str:name>/write/', views.write, name='write'),
+    path('board/<str:name>/update/<int:pk>', views.update, name='update'),
+
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
     path('findID/sms/send', views.SmsSendView.as_view()),
@@ -27,6 +30,6 @@ urlpatterns = [
     path('login/naver', views.naverlogin.as_view(), name='naverLogin'),
     path('login/naver/callback/',
          views.navercallback.as_view(), name='naverCallback'),
-    path('findPW1/findPW2/smspw', views.SMSPW, name = 'smspw'),
+    path('findPW1/findPW2/smspw', views.SMSPW, name='smspw'),
 
 ]

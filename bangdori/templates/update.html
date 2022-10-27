@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-12 write-container">
-        <form class="write-form" method="POST">
+        <form class="update-form" method="POST">
             {% csrf_token %}
             <div class="write-title-box">
                 <select class="form-select" name="form-select" id="">
@@ -32,7 +32,7 @@
                 >{{ content }}</textarea>
             </div>
             <div class="write-footer">
-                <input type="submit" value="글쓰기">
+                <input type="submit" value="수정">
             </div>
         </form>
     </div>

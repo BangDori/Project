@@ -219,11 +219,36 @@ def article(request, name, pk):
     return render(request, 'article.html', context)
 
 
+def update(request, name, pk):
+    """
+    update : 게시글 update하는 view
+    """
+    user = request.user
+
+    # if request.method ==
+
+    Article = getModelByName(name)
+    article = Article.objects.all().get(id=pk)
+    if article.writer != user:
+        # return redirect('board', name=name)
+        return redirect('article', name=name, pk=pk)
+    if request.method == "POST":
+        # 게시글 수정
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        return redirect('article', name=name, pk=pk)
+
+    context = {}
+    context['title'] = article.title
+    context['content'] = article.content
+    return render(request, 'update.html', context)
+
+
 def write(request, name):
     """
     write : 게시글을 작성하는 view
     """
-
     # 현재 로그인된 사용자의 정보를 가져옴
     user = request.user
 
@@ -237,6 +262,7 @@ def write(request, name):
                           content=request.POST.get('content'))
 
         # 게시글 저장
+
         article.save()
         # 게시판으로 다시 돌아감
         return redirect('board', name=name)
@@ -251,8 +277,10 @@ def findID(request):
 def SMS(request):
     return render(request, 'temp_sms.html')
 
+
 def SMSPW(request):
     return render(request, 'temp_smsPW.html')
+
 
 def findPW1(request):
     return render(request, 'findPW1.html')
@@ -359,7 +387,7 @@ class googlelogin(View):
         redirect_uri = "http://localhost:8000/login/google/callback/"
         client_id = "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com"
         scope = "https://www.googleapis.com/auth/userinfo.email " + \
-                "https://www.googleapis.com/auth/userinfo.profile"
+            "https://www.googleapis.com/auth/userinfo.profile"
 
         return redirect(
             f"{google_api}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}")
