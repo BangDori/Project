@@ -195,3 +195,7 @@ class ContactArticle(Article):
         db_table = 'article_contact'
         verbose_name = '문의'
         verbose_name_plural = '문의'
+
+
+class Address(models.Model):
+    pass

@@ -31,7 +31,6 @@ def goIndex(request):
 
 
 def index(request):
-
     context = {}
     """
     로그인 정보는 Session에 기록되도록 설정되어 있음.
@@ -440,3 +439,11 @@ class navercallback(View):
         user = requests.get(naver_user_api,
                             params={"access_token": access_token}).json()
         return JsonResponse(user, status=200)
+
+
+class address(View):
+    def get(self, request):
+        return render(request, 'address.html')
+
+    def post(self, request):
+        return render(request, 'address.html')
