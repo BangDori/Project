@@ -35,6 +35,11 @@ class CustomerUser(AbstractUser):
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
 
+    # Local Login , Social Login 구분자
+    provider = models.CharField(
+        max_length=30, db_column='provider', verbose_name='provider',null=True
+    )
+
     def __str__(self):
         return self.username
 

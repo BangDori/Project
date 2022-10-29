@@ -1,3 +1,6 @@
+from ast import Not
+from asyncio.windows_events import NULL
+from numbers import Number
 from tkinter import TRUE
 
 from django.contrib import auth
@@ -65,10 +68,10 @@ def login(request):
             # Django의 auth 클래스를 사용해 로그인
             user = auth.authenticate(
                 request=request, username=username, password=password)
-
             # 해당하는 유저가 존재해서 로그인이 가능한 경우
             if user is not None:
                 auth.login(request, user)
+                print(user.pk)
                 return redirect('/index')
 
         """
@@ -224,13 +227,9 @@ def update(request, name, pk):
     update : 게시글 update하는 view
     """
     user = request.user
-
-    # if request.method ==
-
     Article = getModelByName(name)
     article = Article.objects.all().get(id=pk)
     if article.writer != user:
-        # return redirect('board', name=name)
         return redirect('article', name=name, pk=pk)
     if request.method == "POST":
         # 게시글 수정
@@ -377,7 +376,19 @@ class kakaocallback(View):
 
         kakao_user_api = "https://kapi.kakao.com/v2/user/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user = requests.get(kakao_user_api, headers=header).json()
+        json = requests.get(kakao_user_api, headers=header).json()
+        try:
+            user = CustomerUser.objects.all().get(provider=json['id'])
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+        user = CustomerUser.objects.create_user(provider=json['id'],
+                                                email=json['kakao_account']['email'],
+                                                username=json['kakao_account']['profile']['nickname'],
+                                                )
+
         return JsonResponse(user, status=200)
 
 
@@ -407,9 +418,24 @@ class googlecallback(View):
         access_token = requests.post(google_token_api, data=data).json()[
             "access_token"]
         google_user_api = "https://www.googleapis.com/oauth2/v3/userinfo"
-        user = requests.get(google_user_api,
+        json = requests.get(google_user_api,
                             params={"access_token": access_token}).json()
-        return JsonResponse(user, status=200)
+        # 받아오는 숫자가 16자리로 너무 커서 SQL에서 변환 도중 오류가 남
+
+        try:
+            user = CustomerUser.objects.all().get(provider=json['sub'])
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+
+        user = CustomerUser.objects.create_user(provider=json['sub'],
+                                                email=json['email'],
+                                                username=json['name'],
+                                                )
+        auth.login(request, user)
+        return redirect('/index')
 
 
 class naverlogin(View):
@@ -437,6 +463,22 @@ class navercallback(View):
             'access_token']
         naver_user_api = "https://openapi.naver.com/v1/nid/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user = requests.get(naver_user_api,
-                            params={"access_token": access_token}).json()
-        return JsonResponse(user, status=200)
+        json = requests.get(naver_user_api,
+                            params={"access_token": access_token}).json()['response']
+        uid = int(json['mobile_e164'][1:])
+        try:
+            user = CustomerUser.objects.all().get(provider=uid)
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+        user = CustomerUser.objects.create_user(provider=uid,
+                                                email=json['email'],
+                                                birthday=json['birthyear'] +
+                                                '-' + json['birthday'],
+                                                username=json['nickname'],
+                                                phone=json['mobile'],
+                                                )
+        auth.login(request, user)
+        return redirect('/index')
