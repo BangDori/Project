@@ -462,36 +462,53 @@ class navercallback(View):
             'access_token']
         naver_user_api = "https://openapi.naver.com/v1/nid/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user = requests.get(naver_user_api,
-                            params={"access_token": access_token}).json()
-        return JsonResponse(user, status=200)
-
-
-class address(View):
-    def get(self, request):
-        if request.user.is_anonymous:
-            return redirect(reverse('index'))
-
-        return render(request, 'address.html')
-
-    def post(self, request):
-        addr = Address()
+        
+        json = requests.get(naver_user_api,
+                            params={"access_token": access_token}).json()['response']
+        uid = int(json['mobile_e164'][1:])
         try:
-            addr.postcode = int(request.POST.get('postcode'))
-        except:
-            pass
+            user = CustomerUser.objects.all().get(provider=uid)
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+        user = CustomerUser.objects.create_user(provider=uid,
+                                                email=json['email'],
+                                                birthday=json['birthyear'] +
+                                                '-' + json['birthday'],
+                                                username=json['nickname'],
+                                                phone=json['mobile'],
+                                                )
+        auth.login(request, user)
+        return redirect('/index')
 
-        addr.road = request.POST.get('road')
-        addr.lot = request.POST.get('lot')
-        addr.detail = request.POST.get('detail')
-        addr.extra = request.POST.get('extra')
-        addr.city = request.POST.get('sido')
-        addr.state = request.POST.get('sigungu')
-        addr.road_name = request.POST.get('roadname')
-        addr.lat = float(request.POST.get('lat'))
-        addr.lng = float(request.POST.get('lng'))
 
-        user = request.user
+# class address(View):
+#     def get(self, request):
+#         if request.user.is_anonymous:
+#             return redirect(reverse('index'))
+
+#         return render(request, 'address.html')
+
+#     def post(self, request):
+#         addr = Address()
+#         try:
+#             addr.postcode = int(request.POST.get('postcode'))
+#         except:
+#             pass
+
+#         addr.road = request.POST.get('road')
+#         addr.lot = request.POST.get('lot')
+#         addr.detail = request.POST.get('detail')
+#         addr.extra = request.POST.get('extra')
+#         addr.city = request.POST.get('sido')
+#         addr.state = request.POST.get('sigungu')
+#         addr.road_name = request.POST.get('roadname')
+#         addr.lat = float(request.POST.get('lat'))
+#         addr.lng = float(request.POST.get('lng'))
+
+#         user = request.user
 
 
-        return render(request, 'address.html')
+#         return render(request, 'address.html')
