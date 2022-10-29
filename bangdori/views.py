@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView
 from dotenv import load_dotenv
 from django.views import View
@@ -34,7 +34,6 @@ def goIndex(request):
 
 
 def index(request):
-
     context = {}
     """
     로그인 정보는 Session에 기록되도록 설정되어 있음.
@@ -398,7 +397,7 @@ class googlelogin(View):
         redirect_uri = "http://localhost:8000/login/google/callback/"
         client_id = "423096054112-5hoh9i9p6i9bppac2cs3dea30cc5jvr6.apps.googleusercontent.com"
         scope = "https://www.googleapis.com/auth/userinfo.email " + \
-            "https://www.googleapis.com/auth/userinfo.profile"
+                "https://www.googleapis.com/auth/userinfo.profile"
 
         return redirect(
             f"{google_api}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}")
@@ -463,22 +462,36 @@ class navercallback(View):
             'access_token']
         naver_user_api = "https://openapi.naver.com/v1/nid/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        json = requests.get(naver_user_api,
-                            params={"access_token": access_token}).json()['response']
-        uid = int(json['mobile_e164'][1:])
+        user = requests.get(naver_user_api,
+                            params={"access_token": access_token}).json()
+        return JsonResponse(user, status=200)
+
+
+class address(View):
+    def get(self, request):
+        if request.user.is_anonymous:
+            return redirect(reverse('index'))
+
+        return render(request, 'address.html')
+
+    def post(self, request):
+        addr = Address()
         try:
-            user = CustomerUser.objects.all().get(provider=uid)
-        except CustomerUser.DoesNotExist:
-            user = None
-        if user is not None:
-            auth.login(request, user)
-            return redirect('/index')
-        user = CustomerUser.objects.create_user(provider=uid,
-                                                email=json['email'],
-                                                birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
-                                                username=json['nickname'],
-                                                phone=json['mobile'],
-                                                )
-        auth.login(request, user)
-        return redirect('/index')
+            addr.postcode = int(request.POST.get('postcode'))
+        except:
+            pass
+
+        addr.road = request.POST.get('road')
+        addr.lot = request.POST.get('lot')
+        addr.detail = request.POST.get('detail')
+        addr.extra = request.POST.get('extra')
+        addr.city = request.POST.get('sido')
+        addr.state = request.POST.get('sigungu')
+        addr.road_name = request.POST.get('roadname')
+        addr.lat = float(request.POST.get('lat'))
+        addr.lng = float(request.POST.get('lng'))
+
+        user = request.user
+
+
+        return render(request, 'address.html')
