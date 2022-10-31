@@ -12,7 +12,7 @@ def make_signature(timestamp):
 
     access_key = os.getenv('ncloud_private_Accesskey')
     secret_key = os.getenv('ncloud_private_Secretkey')
-
+    
     secret_key = bytes(secret_key, 'UTF-8')
 
     uri = "/sms/v2/services/ncp:sms:kr:292652557635:sms_auth/messages"

@@ -70,7 +70,6 @@ def login(request):
             # 해당하는 유저가 존재해서 로그인이 가능한 경우
             if user is not None:
                 auth.login(request, user)
-                print(user.pk)
                 return redirect('/index')
 
         """
@@ -306,25 +305,24 @@ class SmsSendView(View):
             "messages": [{"to": f"{phone_number}"}]
         }
         body = json.dumps(body)
-        requests.post(
+        result = requests.post(
             'https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:292652557635:sms_auth/messages', headers=headers,
             data=body)
 
     def post(self, request):
         # data = json.loads(request.body)
-        print('dd')
         try:
             input_mobile_num = request.POST['phone_number']
             auth_num = random.randint(10000, 100000)  # 랜덤숫자 생성, 5자리로 계획하였다.
             auth_mobile = Authentication.objects.get(
                 phone_number=input_mobile_num)
             auth_mobile.auth_number = auth_num
+            print(auth_num)
             auth_mobile.save()
             self.send_sms(
                 phone_number=input_mobile_num, auth_number=auth_num)
             return JsonResponse({'message': 'Complete 발송완료'}, status=200)
-        except:  # 인증요청번호 미 존재 시 DB 입력 로직 작성
-            Authentication.DoesNotExist
+        except Authentication.DoesNotExist:  # 인증요청번호 미 존재 시 DB 입력 로직 작성
             Authentication.objects.create(
                 phone_number=input_mobile_num,
                 auth_number=auth_num,
@@ -337,14 +335,14 @@ class SmsVerifyView(View):
     def post(self, request):
         input_mobile_num = request.POST['phone_number']
         message = request.POST['message_number']
-
         auth_mobile = Authentication.objects.get(
             phone_number=input_mobile_num)
         if (auth_mobile.auth_number == message):
-            username = CustomerUser.objecvts.filter(
-                phone=input_mobile_num).alues('username')
-            if (username):
-                return JsonResponse({'message': str(username)}, status=200)
+            user = CustomerUser.objects.get(
+                phone=input_mobile_num)
+            if (user):
+                auth_mobile.delete()
+                return JsonResponse({'message': str(user.username)}, status=200)
             else:
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
@@ -462,7 +460,7 @@ class navercallback(View):
             'access_token']
         naver_user_api = "https://openapi.naver.com/v1/nid/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        
+
         json = requests.get(naver_user_api,
                             params={"access_token": access_token}).json()['response']
         uid = int(json['mobile_e164'][1:])
