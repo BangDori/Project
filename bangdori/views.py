@@ -1,24 +1,20 @@
-from tkinter import TRUE
+import json
+import os
+import random
+import time
 
+import requests
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import DetailView
 from dotenv import load_dotenv
-from django.views import View
 
 from project.settings import MAX_ARTICLES
 from .models import *
-import os
-import json
-import requests
-import time
-import random
-from django.http import JsonResponse
 from .utils import make_signature, getModelByName
 
 load_dotenv()
@@ -64,7 +60,6 @@ def login(request):
             # Django의 auth 클래스를 사용해 로그인
             user = auth.authenticate(
                 request=request, username=username, password=password)
-
             # 해당하는 유저가 존재해서 로그인이 가능한 경우
             if user is not None:
                 auth.login(request, user)
@@ -242,13 +237,9 @@ def update(request, name, pk):
     update : 게시글 update하는 view
     """
     user = request.user
-
-    # if request.method ==
-
     Article = getModelByName(name)
     article = Article.objects.all().get(id=pk)
     if article.writer != user:
-        # return redirect('board', name=name)
         return redirect('article', name=name, pk=pk)
     if request.method == "POST":
         # 게시글 수정
@@ -332,7 +323,6 @@ class SmsSendView(View):
 
     def post(self, request):
         # data = json.loads(request.body)
-        print('dd')
         try:
             input_mobile_num = request.POST['phone_number']
             auth_num = random.randint(10000, 100000)  # 랜덤숫자 생성, 5자리로 계획하였다.
@@ -343,8 +333,7 @@ class SmsSendView(View):
             self.send_sms(
                 phone_number=input_mobile_num, auth_number=auth_num)
             return JsonResponse({'message': 'Complete 발송완료'}, status=200)
-        except:  # 인증요청번호 미 존재 시 DB 입력 로직 작성
-            Authentication.DoesNotExist
+        except Authentication.DoesNotExist:  # 인증요청번호 미 존재 시 DB 입력 로직 작성
             Authentication.objects.create(
                 phone_number=input_mobile_num,
                 auth_number=auth_num,
@@ -357,14 +346,14 @@ class SmsVerifyView(View):
     def post(self, request):
         input_mobile_num = request.POST['phone_number']
         message = request.POST['message_number']
-
         auth_mobile = Authentication.objects.get(
             phone_number=input_mobile_num)
         if (auth_mobile.auth_number == message):
-            username = CustomerUser.objecvts.filter(
-                phone=input_mobile_num).alues('username')
-            if (username):
-                return JsonResponse({'message': str(username)}, status=200)
+            user = CustomerUser.objects.get(
+                phone=input_mobile_num)
+            if (user):
+                auth_mobile.delete()
+                return JsonResponse({'message': str(user.username)}, status=200)
             else:
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
@@ -395,8 +384,21 @@ class kakaocallback(View):
 
         kakao_user_api = "https://kapi.kakao.com/v2/user/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user = requests.get(kakao_user_api, headers=header).json()
-        return JsonResponse(user, status=200)
+        json = requests.get(kakao_user_api, headers=header).json()
+        try:
+            user = CustomerUser.objects.all().get(provider=json['id'])
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+        user = CustomerUser.objects.create_user(provider=json['id'],
+                                                email=json['kakao_account']['email'],
+                                                username=json['kakao_account']['profile']['nickname'],
+                                                )
+        user.save()
+        auth.login(request, user)
+        return redirect('/index')
 
 
 class googlelogin(View):
@@ -425,9 +427,24 @@ class googlecallback(View):
         access_token = requests.post(google_token_api, data=data).json()[
             "access_token"]
         google_user_api = "https://www.googleapis.com/oauth2/v3/userinfo"
-        user = requests.get(google_user_api,
+        json = requests.get(google_user_api,
                             params={"access_token": access_token}).json()
-        return JsonResponse(user, status=200)
+        # 받아오는 숫자가 16자리로 너무 커서 SQL에서 변환 도중 오류가 남
+
+        try:
+            user = CustomerUser.objects.all().get(provider=json['sub'])
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+
+        user = CustomerUser.objects.create_user(provider=json['sub'],
+                                                email=json['email'],
+                                                username=json['name'],
+                                                )
+        auth.login(request, user)
+        return redirect('/index')
 
 
 class naverlogin(View):
@@ -455,35 +472,57 @@ class navercallback(View):
             'access_token']
         naver_user_api = "https://openapi.naver.com/v1/nid/me"
         header = {"Authorization": f"Bearer ${access_token}"}
-        user = requests.get(naver_user_api,
-                            params={"access_token": access_token}).json()
-        return JsonResponse(user, status=200)
 
-
-class address(View):
-    def get(self, request):
-        if request.user.is_anonymous:
-            return redirect(reverse('index'))
-
-        return render(request, 'address.html')
-
-    def post(self, request):
-        addr = Address()
+        json = requests.get(naver_user_api,
+                            params={"access_token": access_token}).json()['response']
+        uid = int(json['mobile_e164'][1:])
         try:
-            addr.postcode = int(request.POST.get('postcode'))
-        except:
-            pass
+            user = CustomerUser.objects.all().get(provider=uid)
+        except CustomerUser.DoesNotExist:
+            user = None
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/index')
+        user = CustomerUser.objects.create_user(provider=uid,
+                                                email=json['email'],
+                                                birthday=json['birthyear'] +
+                                                '-' + json['birthday'],
+                                                username=json['nickname'],
+                                                phone=json['mobile'],
+                                                )
+        auth.login(request, user)
+        return redirect('/index')
 
-        addr.road = request.POST.get('road')
-        addr.lot = request.POST.get('lot')
-        addr.detail = request.POST.get('detail')
-        addr.extra = request.POST.get('extra')
-        addr.city = request.POST.get('sido')
-        addr.state = request.POST.get('sigungu')
-        addr.road_name = request.POST.get('roadname')
-        addr.lat = float(request.POST.get('lat'))
-        addr.lng = float(request.POST.get('lng'))
-
-        user = request.user
-
+<<<<<<< HEAD
         return render(request, 'address.html')
+=======
+
+# class address(View):
+#     def get(self, request):
+#         if request.user.is_anonymous:
+#             return redirect(reverse('index'))
+
+#         return render(request, 'address.html')
+
+#     def post(self, request):
+#         addr = Address()
+#         try:
+#             addr.postcode = int(request.POST.get('postcode'))
+#         except:
+#             pass
+
+#         addr.road = request.POST.get('road')
+#         addr.lot = request.POST.get('lot')
+#         addr.detail = request.POST.get('detail')
+#         addr.extra = request.POST.get('extra')
+#         addr.city = request.POST.get('sido')
+#         addr.state = request.POST.get('sigungu')
+#         addr.road_name = request.POST.get('roadname')
+#         addr.lat = float(request.POST.get('lat'))
+#         addr.lng = float(request.POST.get('lng'))
+
+#         user = request.user
+
+
+#         return render(request, 'address.html')
+>>>>>>> 0b7edf4dc08e4534627ce233ece5e227cffa976c
