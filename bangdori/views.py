@@ -493,10 +493,6 @@ class navercallback(View):
         auth.login(request, user)
         return redirect('/index')
 
-<<<<<<< HEAD
-        return render(request, 'address.html')
-=======
-
 # class address(View):
 #     def get(self, request):
 #         if request.user.is_anonymous:
@@ -525,4 +521,3 @@ class navercallback(View):
 
 
 #         return render(request, 'address.html')
->>>>>>> 0b7edf4dc08e4534627ce233ece5e227cffa976c

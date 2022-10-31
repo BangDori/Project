@@ -32,16 +32,11 @@ class CustomerUser(AbstractUser):
         default=django.utils.timezone.now, db_column='birth', verbose_name='birth', null=True)
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
-<<<<<<< HEAD
-    # addr = models.ForeignKey(
-    #     'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
-=======
     addr = models.ForeignKey(
         'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
     # Local Login , Social Login 구분자
     provider = models.CharField(
         max_length=30, db_column='provider', verbose_name='provider', null=True)
->>>>>>> 0b7edf4dc08e4534627ce233ece5e227cffa976c
 
     def __str__(self):
         return self.username
