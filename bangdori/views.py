@@ -305,7 +305,7 @@ class SmsSendView(View):
             "messages": [{"to": f"{phone_number}"}]
         }
         body = json.dumps(body)
-        result = requests.post(
+        requests.post(
             'https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:292652557635:sms_auth/messages', headers=headers,
             data=body)
 
@@ -317,7 +317,6 @@ class SmsSendView(View):
             auth_mobile = Authentication.objects.get(
                 phone_number=input_mobile_num)
             auth_mobile.auth_number = auth_num
-            print(auth_num)
             auth_mobile.save()
             self.send_sms(
                 phone_number=input_mobile_num, auth_number=auth_num)
@@ -385,8 +384,9 @@ class kakaocallback(View):
                                                 email=json['kakao_account']['email'],
                                                 username=json['kakao_account']['profile']['nickname'],
                                                 )
-
-        return JsonResponse(user, status=200)
+        user.save()
+        auth.login(request, user)
+        return redirect('/index')
 
 
 class googlelogin(View):
