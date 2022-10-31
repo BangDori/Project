@@ -1,27 +1,20 @@
-from ast import Not
-from asyncio.windows_events import NULL
-from numbers import Number
-from tkinter import TRUE
+import json
+import os
+import random
+import time
 
+import requests
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import DetailView
 from dotenv import load_dotenv
-from django.views import View
 
 from project.settings import MAX_ARTICLES
 from .models import *
-import os
-import json
-import requests
-import time
-import random
-from django.http import JsonResponse
 from .utils import make_signature, getModelByName
 
 load_dotenv()

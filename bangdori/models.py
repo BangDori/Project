@@ -1,9 +1,7 @@
-import datetime
-from io import StringIO
-
-from django.conf import settings
+import django
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -31,16 +29,14 @@ class CustomerUser(AbstractUser):
     email = models.CharField(
         max_length=30, db_column='email', verbose_name='email', blank=True)
     birthday = models.DateField(
-        default=datetime.MINYEAR, db_column='birth', verbose_name='birth')
+        default=django.utils.timezone.now, db_column='birth', verbose_name='birth', null=True)
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
-    # addr = models.ForeignKey(
-    #     'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
-
-    # # Local Login , Social Login 구분자
-    # provider = models.CharField(
-    #     max_length=30, db_column='provider', verbose_name='provider', null=True
-    # )
+    addr = models.ForeignKey(
+        'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
+    # Local Login , Social Login 구분자
+    provider = models.CharField(
+        max_length=30, db_column='provider', verbose_name='provider', null=True)
 
     def __str__(self):
         return self.username
