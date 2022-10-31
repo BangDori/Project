@@ -133,17 +133,27 @@ def register(request):
 
 def id_check(request):
     username = request.GET.get('register_username')
-    try:
-        user = CustomerUser.objects.get(username=username)
-    except:
-        user = None
-
-    if user is None:
-        result = "success"
+    if CustomerUser.objects.filter(username=username).exists():
+        result = {
+            'result': 'success',
+            # 'data' : model_to_dict(user)  # console에서 확인
+            'data': "exist"
+        }
     else:
-        result = "fail"
-
-    context = {'result':result}
+        result = {
+            'result': 'success',
+            # 'data' : model_to_dict(user)  # console에서 확인
+            'data': "not exist"
+        }
+    # try:
+    #     user = CustomerUser.objects.get(username=username)
+    # except:
+    #     user = None
+    # if user is None:
+    #     result = "not exist"
+    # else:
+    #     result = "exist"
+    # context = {'result':result}
     return JsonResponse(result)
 
 
