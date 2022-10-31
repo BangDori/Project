@@ -136,10 +136,29 @@ def register(request):
         return render(request, 'register.html', context)
 
 
+def id_check(request):
+    username = request.GET.get('register_username')
+    try:
+        user = CustomerUser.objects.get(username=username)
+    except:
+        user = None
+
+    if user is None:
+        result = "success"
+    else:
+        result = "fail"
+
+    context = {'result':result}
+    return JsonResponse(result)
+
+
 class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
     template_name = 'view.html'
+    print(type(model))
+    print(type(context_object_name))
+    print(type(template_name))
 
 
 def dabang(request):
@@ -466,6 +485,5 @@ class address(View):
         addr.lng = float(request.POST.get('lng'))
 
         user = request.user
-
 
         return render(request, 'address.html')

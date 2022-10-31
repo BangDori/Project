@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
     <!-- title icon 설정 필요 -->
     <link rel="shortcum icon" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>회원가입</title>
 </head>
 <body>
@@ -23,8 +24,8 @@
             {% csrf_token %}
             <!-- 아이디 입력란 -->
             <div class="info-id">
-                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
-                <button class="check-btn">중복 확인</button>
+                <input id="id" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
+                <input class="check-btn" type="button" value="중복확인">
             </div>
 
             <!-- 패스워드 입력란 -->
@@ -90,5 +91,6 @@
 </div>
 
 <script src="{% static 'js/registerOption.js' %}"></script>
+<script src="{% static 'js/idcheck.js' %}"></script>
 </body>
 </html>

@@ -34,8 +34,8 @@ class CustomerUser(AbstractUser):
         default=datetime.MINYEAR, db_column='birth', verbose_name='birth')
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
-    addr = models.ForeignKey(
-        'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
+    # addr = models.ForeignKey(
+    #     'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
 
     def __str__(self):
         return self.username
