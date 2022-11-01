@@ -1,7 +1,5 @@
-console.log("DD");
-
-$(function(){
-	$('.check-btn').click(function() {
+$(function idCheck(){
+	$('#idBtn').click(function() {
 		var username = $('#idBox').val()
 		if(username == ''){
 			alert('아이디 좀 입력해라. 개씨발새키야.')
@@ -18,7 +16,7 @@ $(function(){
 					return;
 				}else{
 				    alert("써라 병신아" + username);
-					$('.check-btn').hide();
+					$('#idBtn').hide();
 					return;
 				}
 			},
