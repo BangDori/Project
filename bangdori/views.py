@@ -132,28 +132,18 @@ def register(request):
 
 
 def id_check(request):
-    username = request.GET.get('register_username')
-    if CustomerUser.objects.filter(username=username).exists():
-        result = {
-            'result': 'success',
-            # 'data' : model_to_dict(user)  # console에서 확인
-            'data': "exist"
-        }
-    else:
-        result = {
-            'result': 'success',
-            # 'data' : model_to_dict(user)  # console에서 확인
-            'data': "not exist"
-        }
-    # try:
-    #     user = CustomerUser.objects.get(username=username)
-    # except:
-    #     user = None
-    # if user is None:
-    #     result = "not exist"
-    # else:
-    #     result = "exist"
-    # context = {'result':result}
+    username = request.GET.get('user')
+    try:
+        user = CustomerUser.objects.get(username=username)
+    except Exception as e:
+        user = None
+    result = {
+        'result': 'success',
+        # 'data' : model_to_dict(user)  # console에서 확인
+        'data': "not exist" if user is None else "exist"
+    }
+    print(type(user))
+    print(type(result))
     return JsonResponse(result)
 
 
@@ -161,10 +151,6 @@ class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
     template_name = 'view.html'
-    print(type(model))
-    print(type(context_object_name))
-    print(type(template_name))
-
 
 def dabang(request):
     return render(request, 'dabang.html')

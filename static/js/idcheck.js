@@ -1,7 +1,7 @@
 console.log("DD");
 
 $(function(){
-	$('.check-btn').click(function() {
+	$('#idBtn').click(function() {
 		var username = $('#idBox').val()
 		if(username == ''){
 			alert('아이디 좀 입력해라. 개씨발새키야.')
@@ -10,15 +10,16 @@ $(function(){
 		$.ajax({
 			url:'/idcheck',
 			type:'get',
+			data:{'user':username},
 			dataType:'json',
 			success:function(response){
-				if(response.result == "exist"){
+				if(response.data == "exist"){
 					alert("아 씨발 이미 있는 아이디라고 병신새킨야");
 					$('#idBox').val('').focus();
 					return;
 				}else{
 				    alert("써라 병신아" + username);
-					$('.check-btn').hide();
+					$('#idBtn').hide();
 					return;
 				}
 			},
