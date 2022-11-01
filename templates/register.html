@@ -61,8 +61,11 @@
             </div>
 
             <!-- 닉네임 입력란 -->
-            <input class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
-
+            <div class="info-phone">
+                {% csrf_token %}
+                <input id="nicknameBox"class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
+                <input id="nicknameBtn" class="check-btn" type="button" value="중복확인">
+            </div>
             <div class="check-box">
                 <div class="check-essential">
                     <input type="checkbox" name="check1">
