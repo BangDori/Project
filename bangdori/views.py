@@ -321,6 +321,7 @@ class SmsSendView(View):
         # data = json.loads(request.body)
         try:
             input_mobile_num = request.POST['phone_number']
+            print(input_mobile_num)
             auth_num = random.randint(10000, 100000)  # 랜덤숫자 생성, 5자리로 계획하였다.
             auth_mobile = Authentication.objects.get(
                 phone_number=input_mobile_num)
@@ -342,18 +343,20 @@ class SmsVerifyView(View):
     def post(self, request):
         input_mobile_num = request.POST['phone_number']
         message = request.POST['message_number']
-        auth_mobile = Authentication.objects.get(
-            phone_number=input_mobile_num)
-        if (auth_mobile.auth_number == message):
-            user = CustomerUser.objects.get(
-                phone=input_mobile_num)
-            if (user):
-                auth_mobile.delete()
-                return JsonResponse({'message': str(user.username)}, status=200)
+        stragety = request.POST['stragety']
+        if(stragety == 'findID'):
+            auth_mobile = Authentication.objects.get(
+                phone_number=input_mobile_num)
+            if (auth_mobile.auth_number == message):
+                user = CustomerUser.objects.get(
+                    phone=input_mobile_num)
+                if (user):
+                    auth_mobile.delete()
+                    return JsonResponse({'message': str(user.username)}, status=200)
+                else:
+                    return JsonResponse({'message': 'Not User!'}, status=200)
             else:
-                return JsonResponse({'message': 'Not User!'}, status=200)
-        else:
-            return JsonResponse({'message': 'Not Correct Number!'}, status=200)
+                return JsonResponse({'message': 'Not Correct Number!'}, status=200)
 
 
 class kakaologin(View):

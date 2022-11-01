@@ -17,8 +17,9 @@ urlpatterns = [
 
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
-    path('findID/sms/send', views.SmsSendView.as_view()),
-    path('findID/sms/auth', views.SmsVerifyView.as_view()),
+    path('sms/send', views.SmsSendView.as_view()),
+
+    path('sms/auth', views.SmsVerifyView.as_view()),
     path('findPW1/', views.findPW1, name='findPW1'),
     path('findPW1/findPW2/', views.findPW2, name='findPW2'),
     path('login/kakao', views.kakaologin.as_view(), name='kakaoLogin'),

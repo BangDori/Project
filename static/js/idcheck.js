@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 console.log("DD");
 
 $(function(){
+=======
+$(function idCheck(){
+>>>>>>> a9617c8b05806f3151a615d332e9f27f5d5cdc82
 	$('#idBtn').click(function() {
 		var username = $('#idBox').val()
 		if(username == ''){

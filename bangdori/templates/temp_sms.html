@@ -87,8 +87,9 @@
             var csrftoken = getCookie('csrftoken');
             $.ajax({
                 type:'POST',
-                url:'./sms/send',
+                url:'/sms/send',
                 data:{
+                'stragety':'findID',
                 'phone_number':$('#phone_number').val(),
                 'csrfmiddlewaretoken':csrftoken,
                 },
