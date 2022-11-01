@@ -25,11 +25,7 @@
             <!-- 아이디 입력란 -->
             <div class="info-id">
                 <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
-<<<<<<< HEAD
                 <input id="idBtn" class="check-btn" type="button" value="중복확인">
-=======
-                <input id="idBtn" class="check-btn" type="button" value="중복확인" onclick="idCheck()">
->>>>>>> a9617c8b05806f3151a615d332e9f27f5d5cdc82
             </div>
 
             <!-- 패스워드 입력란 -->
@@ -61,7 +57,7 @@
             <div class="info-phone">
                 {% csrf_token %}
                 <input class="input-box" type="text" id ="register_user_phone" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
-                <button class="check-btn" onclick="SMS()">인증하기</button>
+                <input class="check-btn" type="button" onclick="SMS()" value="인증하기">
             </div>
 
             <!-- 닉네임 입력란 -->
