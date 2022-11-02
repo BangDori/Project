@@ -77,10 +77,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# MySQL로 DB 수정
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bangdori',
+        'USER': 'bangdori',
+        'PASSWORD': 'ys1CD8sMl2&g',
+        'HOST': 'bangdori.toygoon.com',
+        'PORT': '9500',
     }
 }
 

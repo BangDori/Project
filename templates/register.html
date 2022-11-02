@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
     <!-- title icon 설정 필요 -->
     <link rel="shortcum icon" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>회원가입</title>
 </head>
 <body>
@@ -24,7 +25,7 @@
             <!-- 아이디 입력란 -->
             <div class="info-id">
                 <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
-                <button class="check-btn">중복 확인</button>
+                <input id="idBtn" class="check-btn" type="button" value="중복확인">
             </div>
 
             <!-- 패스워드 입력란 -->
@@ -54,13 +55,17 @@
 
             <!-- 휴대폰 번호 입력란 -->
             <div class="info-phone">
-                <input class="input-box" type="text" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
-                <button class="check-btn">인증하기</button>
+                {% csrf_token %}
+                <input class="input-box" type="text" id ="register_user_phone" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+                <input class="check-btn" type="button" onclick="SMS()" value="인증하기">
             </div>
 
             <!-- 닉네임 입력란 -->
-            <input class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
-
+            <div class="info-phone">
+                {% csrf_token %}
+                <input id="nicknameBox"class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
+                <input id="nicknameBtn" class="check-btn" type="button" value="중복확인">
+            </div>
             <div class="check-box">
                 <div class="check-essential">
                     <input type="checkbox" name="check1">
@@ -88,7 +93,28 @@
         </form>
     </div>
 </div>
+<script>
+    function SMS(){
+        
+        var phone = $('#register_user_phone').val()
+        $.ajax({
+			url:'/sms/send',
+			type:'post',
+            headers:{"X-CSRFToken": '{{csrf_token}}' },
+            data: {'phone_number':phone},
+			dataType:'json',
+            success:(response)=>{
+                alert("문자 전송 완료!")
+            },
+            error : (xhr,err)=>{
+                alert("문자 전송 실패!")
+            }
+        })
+    }
+
+</script>
 
 <script src="{% static 'js/registerOption.js' %}"></script>
+<script src="{% static 'js/idcheck.js' %}"></script>
 </body>
 </html>

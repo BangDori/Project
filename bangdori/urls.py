@@ -8,14 +8,18 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
+    path('idcheck/', views.id_check, name='idcheck'),
     path('detail/<int:pk>', views.DetailView.as_view(), name='detail'),
     path('board/<str:name>/', views.board, name='board'),
     path('board/<str:name>/<int:pk>', views.article, name='article'),
-    path('board/<str:name>/write', views.write, name='write'),
+    path('board/<str:name>/write/', views.write, name='write'),
+    path('board/<str:name>/update/<int:pk>', views.update, name='update'),
+
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
-    path('findID/sms/send', views.SmsSendView.as_view()),
-    path('findID/sms/auth', views.SmsVerifyView.as_view()),
+    path('sms/send', views.SmsSendView.as_view()),
+
+    path('sms/auth', views.SmsVerifyView.as_view()),
     path('findPW1/', views.findPW1, name='findPW1'),
     path('findPW1/findPW2/', views.findPW2, name='findPW2'),
     path('login/kakao', views.kakaologin.as_view(), name='kakaoLogin'),
@@ -27,6 +31,6 @@ urlpatterns = [
     path('login/naver', views.naverlogin.as_view(), name='naverLogin'),
     path('login/naver/callback/',
          views.navercallback.as_view(), name='naverCallback'),
-    path('findPW1/findPW2/smspw', views.SMSPW, name = 'smspw'),
-
+    path('findPW1/findPW2/smspw', views.SMSPW, name='smspw'),
+    #path('address/', views.address.as_view(), name='address'),
 ]
