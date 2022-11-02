@@ -109,7 +109,6 @@ def register(request):
         month = request.POST.get('register_user_month', None)
         day = request.POST.get('register_user_day', None)
         phone = request.POST.get('register_user_phone', None)
-        nickname = request.POST.get('register_user_nickname', None)
 
         # 중복 확인 구현할 것
         if CustomerUser.objects.filter(username=username).exists():
@@ -118,15 +117,14 @@ def register(request):
         if password != password2:
             context['error'] = "비밀번호가 다릅니다."
         elif not (username and password and password2 and email_id and email_net
-                  and year and month and day and phone and nickname):
+                  and year and month and day and phone):
             context['error'] = "빈칸없이 입력해주세요."
         else:
             user = CustomerUser.objects.create_user(username=username,
                                                     password=password2,
                                                     email=f'{email_id}@{email_net}',
                                                     birthday=f'{year}-{month}-{day}',
-                                                    phone=phone,
-                                                    nickname=nickname)
+                                                    phone=phone)
             auth.login(request, user)
             return redirect('/')
 

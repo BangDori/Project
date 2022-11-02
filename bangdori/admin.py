@@ -7,7 +7,7 @@ from .models import Authentication
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'password', 'birthday', 'phone','nickname')
+    list_display = ('username', 'email', 'password', 'birthday', 'phone')
 
 
 class SMSAdmin(admin.ModelAdmin):
