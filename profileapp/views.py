@@ -22,3 +22,8 @@ class ProfileCreateView(CreateView):
         return super().form_valid(form)
 def view(request):
     return render(request, 'view.html')
+def profile(request) :
+    return render(request, 'profile.html')
+
+def mypage(request) :
+    return render(request, 'mypage.html')

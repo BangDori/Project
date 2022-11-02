@@ -25,21 +25,30 @@
                             <!-- 로그인 이후 박스 -->
                             <div class="login-box after-login">
                                 <div class="login-after-user-info">
-                                    <div class="login-user-img">
-                                        <img src="{{request.user.profile.image.url}}" alt="">
+<!--                                    <div class="login-user-img">-->
+<!--                                        <img src="{{request.user.profile.image.url}}" alt="">-->
+<!--                                    </div>-->
+<!--                                    <div class="login-user-info">-->
+<!--                                        <h6>{{ request.user.username }}님이 로그인중</h6>-->
+<!--                                        <a href={% url 'logout' %}>-->
+<!--                                            <button class="login_btn">로그아웃</button>-->
+<!--                                        </a>-->
+<!--                                        <h6>이메일: {{ request.user.email }}</h6>-->
+<!--                                        <h6>생년월일: {{ request.user.birthday }}</h6>-->
+<!--                                        <h6>전화번호: {{ request.user.phone }}</h6>-->
+<!--                                        <a href="{% url 'detail' pk=request.user.pk %}">-->
+<!--                                            <button class = "login_btn">프로필보기</button>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+                                    <div id = "userimg-box" class = "after-login-box">
+                                        <img style =" height : 100px; width : 100px; " src="{{request.user.profile.image.url}}" alt="">
                                     </div>
-                                    <div class="login-user-info">
-                                        <h6>{{ request.user.username }}님이 로그인중</h6>
-                                        <a href={% url 'logout' %}>
-                                            <button class="login_btn">로그아웃</button>
-                                        </a>
-                                        <h6>이메일: {{ request.user.email }}</h6>
-                                        <h6>생년월일: {{ request.user.birthday }}</h6>
-                                        <h6>전화번호: {{ request.user.phone }}</h6>
-                                        <a href="{% url 'detail' pk=request.user.pk %}">
-                                            <button class = "login_btn">프로필보기</button>
-                                        </a>
+                                    <div class = "after-login-box">닉네임</div>
+                                    <div>
+                                        <div class = "after-login-box">마일리지, 주소</div>
+                                        <div class = "after-login-box">마이페이지, 로그아웃</div>
                                     </div>
+
                                 </div>
                                 <hr style="border: 1px solid #ccc;">
                                 <div class="login-after-user-bar">

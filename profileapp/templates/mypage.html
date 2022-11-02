@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <script src="../../static/js/mypage.js">
+    </script>
+    <title>마이 페이지</title>
+</head>
+<body>
+    <div>
+        <div id = "header">
+            <div id = 'top'>
+                <a href="http://127.0.0.1:8000/index">
+                    <img src="../../static/imgs/logo.png" alt="로고자리" style ="height : 84px">
+                </a>
+            </div>
+            <div id="lnb">
+                <div id="lnb_contents">
+                    <div><h2>마이 페이지</h2></div>
+                </div>
+            </div>
+        </div>
+
+        <!--마이페이지 몸통-->
+        <div id="content-body">
+            <div id="index-box">
+                <div id="myinfo-list" class="index-list" onclick="
+                    var conlist = document.querySelectorAll('.content')
+                    var i = 0;
+                    while(i < conlist.length){
+                        conlist[i].style.display = 'none';
+                        i = i+1;
+                    }
+                    document.querySelector('#myinfo-box').style.display = 'block';
+
+
+                ">내 정보</div>
+                <div id="mynotice-list" class="index-list" onclick="
+                    var conlist = document.querySelectorAll('.content')
+                    var i = 0;
+                    while(i < conlist.length){
+                        conlist[i].style.display = 'none';
+                        i = i+1;
+                    }
+                    document.querySelector('#mypost-box').style.display = 'block';
+
+                " >내가 쓴 글</div>
+                <div id="bookmark-list" class="index-list" onclick="
+
+                    var conlist = document.querySelectorAll('.content')
+                    var i = 0;
+                    while(i < conlist.length){
+                        conlist[i].style.display = 'none';
+                        i = i+1;
+                    }
+                    document.querySelector('#bookmark-box').style.display = 'block';
+
+                ">즐겨찾기</div>
+                <div id="set-list" class="index-list" onclick="
+                    var conlist = document.querySelectorAll('.content')
+                    var i = 0;
+                    while(i < conlist.length){
+                        conlist[i].style.display = 'none';
+                        i = i+1;
+                    }
+                    document.querySelector('#set-box').style.display = 'block';
+
+                ">설정</div>
+            </div>
+        <!--            여백                  -->
+            <div id="content 여백" style="width : 10%"></div>
+
+            <div id="content-box">
+                <div >
+                    <div id = "myinfo-box" class ="content">
+                        <table>
+                            <tr>
+                                <th>닉네임</th>
+                                <td>
+                                    <input type="text" value ="기존 닉네임">
+                                    <input type="button" value ="중복확인">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td><input type="text" value = "사용자 이름"></td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td>
+                                    <input type="text" value ="사용자 아이디">
+                                    <input type="button" value ="확인">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td><input type="text" value ="사용자 비밀번호"></td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td><input type="text" value = "사용자 이메일"></td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td><input type="text" value = "사용자 전화번호"></td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td>
+                                    <input type="text" value = "사용자 주소">
+                                    <input type="button" value ="주소찾기">
+                                    <br>
+                                    <input type="text" value ="세부 주소">
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="mypost-box" class="content">
+                        <div>post</div>
+                    </div>
+
+                    <div id="bookmark-box" class="content">
+                        <div>bookmark</div>
+                    </div>
+
+                    <div id="set-box" class="content">
+                        <div>set</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -39,6 +39,8 @@ class CustomerUser(AbstractUser):
     # Local Login , Social Login 구분자
     provider = models.CharField(
         max_length=30, db_column='provider', verbose_name='provider', null=True)
+    nickname = models.CharField(
+        max_length=10, db_column='nickname', verbose_name='nickname', blank=True)
 
     def __str__(self):
         return self.username
