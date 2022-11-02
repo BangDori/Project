@@ -32,6 +32,8 @@ class CustomerUser(AbstractUser):
         default=django.utils.timezone.now, db_column='birth', verbose_name='birth', null=True)
     phone = models.CharField(
         max_length=30, db_column='phone', verbose_name='phone')
+    nickname = models.CharField(
+        max_length=30, db_column='nickname', verbose_name='nickname', blank=True)
     addr = models.ForeignKey(
         'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
     # Local Login , Social Login 구분자
