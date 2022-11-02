@@ -74,8 +74,7 @@
 }
 
 .login-after-user-info{
-  display: flex;
-  flex-direction: row;
+
   padding: 10px 15px;
   gap: 10px;
 }
@@ -150,4 +149,13 @@
 
 .board-banner {
   margin: 30px 0;
+}
+
+div{
+    border : 1px solid black;
+}
+
+.after-login-box{
+    display : flex;
+    text-align : center;
 }
