@@ -7,10 +7,14 @@ from .models import Authentication
 
 
 class UserAdmin(admin.ModelAdmin):
+<<<<<<< HEAD
 
     list_display = ('username', 'email', 'password', 'birthday', 'phone')
 
 
+=======
+    list_display = ('username', 'email', 'password', 'birthday', 'phone')
+>>>>>>> 5fb3e6ddd4a68a6d85ef8a1e8eab9d39cd35ad5d
 
 
 class SMSAdmin(admin.ModelAdmin):
