@@ -1,6 +1,3 @@
-div{
-
-}
 
 #header{
 
@@ -90,4 +87,78 @@ td{
 }
 #set-box{
 
+}
+
+
+.total-article-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px 0;
+}
+.top-info {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 5px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+}
+
+.paging-box {
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+.search-box {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+.search-type-box {
+    padding: 5px;
+    width: 100px;
+}
+.search-box {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+.board-search-keyword {
+    padding: 5px;
+    width: 192px;
+    padding-inline-start: 5px;
+}
+
+.id{
+  width : 96px;
+}
+
+.title{
+    flex-grow: 1;
+    text-align: center !important;
+}
+
+.writer{
+ width : 112px;
+}
+
+.date{
+  width : 112px;
+}
+
+.views{
+  width : 96px;
+}
+
+.recommendation {
+  width : 96px;
 }
