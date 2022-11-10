@@ -27,6 +27,9 @@
                             <div class="date js-date">{{ article.date }}</div>
                             <div class="views">{{ article.views }}</div>
                             <div class="recommendation">{{ article.upvote }}</div>
+                            {% if name == '승계' %}
+                                <button class="preview-article-btn">미리보기</button>
+                            {% endif %}
                     </div>
                 {% endfor %}
             {% endif %}

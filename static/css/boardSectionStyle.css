@@ -29,6 +29,7 @@
 }
 
 .article-info{
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -46,6 +47,13 @@
 
 .writer, .date{
     width: 112px;
+}
+
+.preview-article-btn {
+    position: absolute;
+    right: -70px;
+
+    cursor: pointer;
 }
 
 .lnb{
