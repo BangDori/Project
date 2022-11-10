@@ -40,25 +40,23 @@
 <!--                                            <button class = "login_btn">프로필보기</button>-->
 <!--                                        </a>-->
 <!--                                    </div>-->
-                                    <div id = "userimg-box" class = "after-login-box">
-                                        <img style =" height : 100px; width : 100px; " src="{{request.user.profile.image.url}}" alt="">
-                                    </div>
-                                    <div class = "after-login-box">닉네임</div>
-                                    <div>
-                                        <div class = "after-login-box">마일리지, 주소</div>
-                                        <div class = "after-login-box">마이페이지, 로그아웃</div>
-                                    </div>
+                                            <div style="border : 1px solid black; border-radius : 1rem;">
+                                          <div class="user-content-box"><img id = "profile-img" src="{{request.user.profile.image.url}}" alt="프로필 사진"></div>
+                                          <div class="user-content-box"><snap id="nickname" class="user-content">{{ request.user.username }}님이 로그인중</snap></div>
+                                          <hr>
+                                          <div>
+                                            <div class="user-content-box">
+                                              <div id ="mileage"class="user-content">마일리지 : 1,000,000</div>
+                                              <div id="address" class="user-content">경북 경산시 조영동</div>
+                                            </div>
+                                            <hr>
+                                            <div  class="user-content-box">
+                                              <div id="mypage" class="user-content"><a href="/profiles/mypage"><input type="button" id="mypage-button" value="My Page"></a></div>
 
-                                </div>
-                                <hr style="border: 1px solid #ccc;">
-                                <div class="login-after-user-bar">
-                                    1. 주소 등록하기 (등록시 주소 표시?)
-                                    <br>
-                                    2. 내 게시글 확인
-                                    <br>
-                                    3. 공동구매 참여 현황
-                                    <br>
-                                    4. 기타 등등의 정보 표시
+                                              <div id="logout" class="user-content"><a href="{% url 'logout' %}"><input type="button" id="logout-button" value="로그아웃"></a></div>
+                                            </div>
+                                          </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
