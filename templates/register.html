@@ -101,7 +101,10 @@
 			url:'/sms/send',
 			type:'post',
             headers:{"X-CSRFToken": '{{csrf_token}}' },
-            data: {'phone_number':phone},
+            data: {
+                    'phone_number':phone,
+                    'stragety':'verify',
+                    },
 			dataType:'json',
             success:(response)=>{
                 alert("문자 전송 완료!")

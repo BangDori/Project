@@ -152,6 +152,7 @@ class DetailView(DetailView):
     context_object_name = 'target_user'
     template_name = 'view.html'
 
+
 def dabang(request):
     return render(request, 'dabang.html')
 
@@ -344,19 +345,29 @@ class SmsVerifyView(View):
         input_mobile_num = request.POST['phone_number']
         message = request.POST['message_number']
         stragety = request.POST['stragety']
-        if(stragety == 'findID'):
-            auth_mobile = Authentication.objects.get(
-                phone_number=input_mobile_num)
-            if (auth_mobile.auth_number == message):
-                user = CustomerUser.objects.get(
-                    phone=input_mobile_num)
-                if (user):
-                    auth_mobile.delete()
-                    return JsonResponse({'message': str(user.username)}, status=200)
-                else:
-                    return JsonResponse({'message': 'Not User!'}, status=200)
+        auth_mobile = Authentication.objects.get(
+            phone_number=input_mobile_num)
+        state = auth_mobile.auth_number == message
+
+        if(stragety == 'verify'):
+            if(state):
+                return JsonResponse({'message': "Verify Completed!"}, status=200)
             else:
-                return JsonResponse({'message': 'Not Correct Number!'}, status=200)
+                return JsonResponse({'message': "Verify Failed!"}, status=200)
+
+        if(state):
+            user = CustomerUser.objects.get(
+                phone=input_mobile_num)
+            if (user):
+                auth_mobile.delete()
+                if(stragety=='findID'):
+                    return JsonResponse({'message': str(user.username)}, status=200)
+                if(stragety=='findPW'):
+                    return JsonResponse({'message':str(user.password)},status=200)
+            else:
+                return JsonResponse({'message': 'Not User!'}, status=200)
+        else:
+            return JsonResponse({'message': 'Not Correct Number!'}, status=200)
 
 
 class kakaologin(View):
