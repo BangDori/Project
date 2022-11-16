@@ -1,0 +1,52 @@
+{% extends "extends/base.html" %}
+
+{% block mypage %}
+    <div id="content-box">
+        <div>
+            <div id="myinfo-box" class="content">
+                <table>
+                    <tr>
+                        <th>닉네임</th>
+                        <td>
+                            <input type="text" value="기존 닉네임">
+                            <input type="button" value="중복확인">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td><input type="text" value="사용자 이름"></td>
+                    </tr>
+                    <tr>
+                        <th>아이디</th>
+                        <td>
+                            <input type="text" value="사용자 아이디">
+                            <input type="button" value="확인">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호</th>
+                        <td><input type="text" value="사용자 비밀번호"></td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td><input type="text" value="사용자 이메일"></td>
+                    </tr>
+                    <tr>
+                        <th>전화번호</th>
+                        <td><input type="text" value="사용자 전화번호"></td>
+                    </tr>
+                    <tr>
+                        <th>주소</th>
+                        <td>
+                            <input type="text" value="사용자 주소">
+                            <input type="button" value="주소찾기">
+                            <br>
+                            <input type="text" value="세부 주소">
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

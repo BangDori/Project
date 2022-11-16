@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../static/css/mypage.css">
+    <script src="../../../static/js/mypage.js">
+    </script>
+    <title>마이 페이지</title>
+</head>
+<body>
+<div>
+    <div id="header">
+        <div id='top'>
+            <a href="{% url 'index' %}">
+                <img src="{% static 'imgs/logo.png' %}" alt="로고자리" style="height : 84px">
+            </a>
+        </div>
+        <div id="lnb">
+            <div id="lnb_contents">
+                <div><h2>마이 페이지</h2></div>
+            </div>
+        </div>
+    </div>
+
+    <!--마이페이지 몸통-->
+    <div id="content-body">
+        {% include 'extends/menu.html' %}
+        <!--            여백                  -->
+        <div id="content 여백" style="width : 10%"></div>
+
+        {% block mypage %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
