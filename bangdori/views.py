@@ -531,3 +531,37 @@ class navercallback(View):
 
 
 #         return render(request, 'address.html')
+
+
+class SearchAll(View):
+    """
+    SearchAll : header에 위치하는 검색 기능을 사용하기 위한 클래스
+    """
+
+    def post(self, request):
+        # 페이지에 넘겨줄 Context
+        context = {}
+        context['is_search'] = True
+
+        # 모든 게시판 객체 가져옴
+        boards = getModelByName(None, True)
+        # 검색어 가져옴
+        keyword = request.POST.get('search_keyword')
+
+        # 게시물 검색해오는 부분
+        result = list()
+        for board in boards:
+            # 모든 게시판에서 키워드를 포함한 글을 가져옴
+            articles = board.objects.all().filter(title__contains=keyword)
+            # 검색 결과가 없는 것은 제외
+            if articles.count() > 0:
+                for article in articles:
+                    # dict로 변환하여 저장
+                    result.append(article.to_dict())
+
+        # 날짜순으로 정렬
+        result = sorted(result, key=lambda x: x['date'], reverse=True)
+        context['articles'] = result
+
+        # Pagination은 구현되어 있지 않음
+        return render(request, 'board.html', context)

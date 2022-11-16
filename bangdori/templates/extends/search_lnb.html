@@ -2,9 +2,13 @@
 
 <div class="lnb">
     {% if request.user.is_authenticated %}
-        <div class="writting-box">
-            <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
-        </div>
+        <!-- 검색 화면이면 검색 결과 출력되도록 설정,
+            검색이랑 공용 부분 -->
+        {% if not is_search %}
+            <div class="writting-box">
+                <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
+            </div>
+        {% endif %}
     {% endif %}
 
     <!-- 페이지 번호 영역 -->

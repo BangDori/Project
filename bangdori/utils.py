@@ -26,13 +26,14 @@ def make_signature(timestamp):
     return signingKey
 
 
-def getModelByName(name):
+def getModelByName(name, is_all=False):
     """
     getModelByName : name에 따라 적절한 Model 객체를 반환하는 클래스
 
     Parameters
     ----------
     name : url에 사용된 이름
+    is_all : 모든 객체를 가져올지 결정
     """
 
     articles = None
@@ -52,5 +53,8 @@ def getModelByName(name):
         articles = ContactArticle
     elif name == 'group':
         articles = GroupArticle
+    elif is_all:
+        articles = [BoardArticle, DabangArticle, SuccessionArticle,
+                    EssentialsArticle, NoticeArticle, ContactArticle, GroupArticle]
 
     return articles

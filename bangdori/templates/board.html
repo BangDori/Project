@@ -4,7 +4,13 @@
     <!-- 게시판 공통 레이아웃 -->
     <div class="board">
         <div class="preview-title board-title">
-            <span>{{ name }} 게시판</span>
+            <!-- 검색 화면이면 검색 결과 출력되도록 설정,
+            검색이랑 공용 부분 -->
+            {% if is_search %}
+                <span>검색 결과</span>
+            {% else %}
+                <span>{{ name }} 게시판</span>
+            {% endif %}
         </div>
 
         <div class="total-article-info">
@@ -21,20 +27,28 @@
             {% if articles %}
                 {% for article in articles %}
                     <div class="article-info">
-                            <div class="id">{{ forloop.counter }}</div>
-                            <div class="title"><a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a></div>
-                            <div class="writer">{{ article.writer }}</div>
-                            <div class="date js-date">{{ article.date }}</div>
-                            <div class="views">{{ article.views }}</div>
-                            <div class="recommendation">{{ article.upvote }}</div>
-                            {% if name == '승계' %}
-                                <button class="preview-article-btn">미리보기</button>
+                        <div class="id">{{ forloop.counter }}</div>
+                        <div class="title">
+                            <!-- 검색 화면이면 결과 주소로 출력되도록 설정,
+                            검색이랑 공용 부분 -->
+                            {% if is_search %}
+                                <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                            {% else %}
+                                <a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a>
                             {% endif %}
+                        </div>
+                        <div class="writer">{{ article.writer }}</div>
+                        <div class="date js-date">{{ article.date }}</div>
+                        <div class="views">{{ article.views }}</div>
+                        <div class="recommendation">{{ article.upvote }}</div>
+                        {% if name == '승계' %}
+                            <button class="preview-article-btn">미리보기</button>
+                        {% endif %}
                     </div>
                 {% endfor %}
             {% endif %}
         </div>
-        
+
         {% include 'extends/search_lnb.html' %}
     </div>
 

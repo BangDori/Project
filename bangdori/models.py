@@ -90,6 +90,13 @@ class Article(models.Model):
         # __str__ 오버라이드로 제목만 표시
         return self.title
 
+    def to_dict(self):
+        url = self._meta.db_table
+        url = url[url.rfind('_') + 1:]
+        return {'id': self.id, 'title': self.title, 'writer': self.writer,
+                'content': self.content, 'date': self.date, 'views': self.views,
+                'upvote': self.upvote, 'url': url}
+
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)
         abstract = True
