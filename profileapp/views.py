@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView
 
-from .decorator import profile_ownership_required
+import bangdori
+from bangdori.models import CustomerUser
 from .forms import ProfileCreateForm
 from .models import Profile
 
@@ -67,12 +67,15 @@ def settings(request):
 class Address(View):
     def get(self, request):
         if request.user.is_anonymous:
+            # 로그인되지 않은 상태
             return redirect(reverse('index'))
 
+        # 주소 등록 페이지
         return render(request, 'address.html')
 
     def post(self, request):
-        addr = Address()
+        # 주소 모델 생성
+        addr = bangdori.models.Address()
         try:
             addr.postcode = int(request.POST.get('postcode'))
         except:
@@ -87,6 +90,16 @@ class Address(View):
         addr.road_name = request.POST.get('roadname')
         addr.lat = float(request.POST.get('lat'))
         addr.lng = float(request.POST.get('lng'))
+        # 주소 모델 저장
+        addr.save()
 
-        user = request.user
+        # 사용자 모델 가져옴
+        user: CustomerUser = request.user
+        # 이미 등록되어 있으면 해당 데이터를 삭제하고 저장
+        if user.addr:
+            user.addr.delete()
+
+        # 저장
+        user.addr = addr
+        user.save()
         return render(request, 'address.html')

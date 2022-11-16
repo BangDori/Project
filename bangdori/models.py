@@ -35,10 +35,11 @@ class CustomerUser(AbstractUser):
     nickname = models.CharField(
         max_length=30, db_column='nickname', verbose_name='nickname', blank=True)
     addr = models.ForeignKey(
-        'CustomerUser', on_delete=models.CASCADE, verbose_name='address', null=True)
+        'Address', on_delete=models.SET_NULL, verbose_name='address', null=True, default=None)
     # Local Login , Social Login 구분자
     provider = models.CharField(
         max_length=30, db_column='provider', verbose_name='provider', null=True)
+
     # nickname = models.CharField(
     #     max_length=10, db_column='nickname', verbose_name='nickname', blank=True)
 
@@ -240,14 +241,14 @@ class Address(models.Model):
         경도
     """
     id = models.AutoField(primary_key=True)
-    postcode = models.IntegerField(verbose_name='우편번호', null=False)
-    road = models.CharField(max_length=50, verbose_name='도로명주소')
-    lot = models.CharField(max_length=50, verbose_name='지번주소')
-    detail = models.CharField(max_length=50, verbose_name='상세주소')
-    extra = models.CharField(max_length=50, verbose_name='참고항목')
-    city = models.CharField(max_length=10, verbose_name='도/시 이름')
-    state = models.CharField(max_length=10, verbose_name='시/군/구 이름')
-    road_name = models.CharField(max_length=10, verbose_name='도로명')
+    postcode = models.IntegerField(verbose_name='우편번호', null=True, default=None)
+    road = models.CharField(max_length=50, verbose_name='도로명주소', null=True, default=None)
+    lot = models.CharField(max_length=50, verbose_name='지번주소', null=True, default=None)
+    detail = models.CharField(max_length=50, verbose_name='상세주소', null=True, default=None)
+    extra = models.CharField(max_length=50, verbose_name='참고항목', null=True, default=None)
+    city = models.CharField(max_length=10, verbose_name='도/시 이름', null=True, default=None)
+    state = models.CharField(max_length=10, verbose_name='시/군/구 이름', null=True, default=None)
+    road_name = models.CharField(max_length=10, verbose_name='도로명', null=True, default=None)
     lat = models.FloatField(verbose_name='위도', null=False)
     lng = models.FloatField(verbose_name='경도', null=False)
 
