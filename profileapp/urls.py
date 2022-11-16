@@ -14,4 +14,5 @@ urlpatterns = [
     path('mypost/', views.mypost, name='mypost'),
     path('favorites/', views.favorites, name='favorites'),
     path('settings/', views.settings, name='settings'),
+    path('address/', views.Address.as_view(), name='address')
 ]

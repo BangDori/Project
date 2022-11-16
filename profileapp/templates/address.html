@@ -1,6 +1,6 @@
-{% extends 'extends/main.html' %}
+{% extends "extends/base.html" %}
 {% load static %}
-{% block content %}
+{% block mypage %}
     <div id="map" style="width:100%;height:350px;"></div>
     <form class="address-form" method="POST">
         {% csrf_token %}

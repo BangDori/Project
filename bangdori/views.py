@@ -349,21 +349,21 @@ class SmsVerifyView(View):
             phone_number=input_mobile_num)
         state = auth_mobile.auth_number == message
 
-        if(stragety == 'verify'):
-            if(state):
+        if (stragety == 'verify'):
+            if (state):
                 return JsonResponse({'message': "Verify Completed!"}, status=200)
             else:
                 return JsonResponse({'message': "Verify Failed!"}, status=200)
 
-        if(state):
+        if (state):
             user = CustomerUser.objects.get(
                 phone=input_mobile_num)
             if (user):
                 auth_mobile.delete()
-                if(stragety=='findID'):
+                if (stragety == 'findID'):
                     return JsonResponse({'message': str(user.username)}, status=200)
-                if(stragety=='findPW'):
-                    return JsonResponse({'message':str(user.password)},status=200)
+                if (stragety == 'findPW'):
+                    return JsonResponse({'message': str(user.password)}, status=200)
             else:
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
@@ -496,41 +496,12 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
+                                                         '-' + json['birthday'],
                                                 username=json['nickname'],
                                                 phone=json['mobile'],
                                                 )
         auth.login(request, user)
         return redirect('/index')
-
-# class address(View):
-#     def get(self, request):
-#         if request.user.is_anonymous:
-#             return redirect(reverse('index'))
-
-#         return render(request, 'address.html')
-
-#     def post(self, request):
-#         addr = Address()
-#         try:
-#             addr.postcode = int(request.POST.get('postcode'))
-#         except:
-#             pass
-
-#         addr.road = request.POST.get('road')
-#         addr.lot = request.POST.get('lot')
-#         addr.detail = request.POST.get('detail')
-#         addr.extra = request.POST.get('extra')
-#         addr.city = request.POST.get('sido')
-#         addr.state = request.POST.get('sigungu')
-#         addr.road_name = request.POST.get('roadname')
-#         addr.lat = float(request.POST.get('lat'))
-#         addr.lng = float(request.POST.get('lng'))
-
-#         user = request.user
-
-
-#         return render(request, 'address.html')
 
 
 class SearchAll(View):

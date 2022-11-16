@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import CreateView
 
 from .decorator import profile_ownership_required
@@ -61,3 +62,31 @@ def settings(request):
     설정
     """
     return render(request, 'settings.html')
+
+
+class Address(View):
+    def get(self, request):
+        if request.user.is_anonymous:
+            return redirect(reverse('index'))
+
+        return render(request, 'address.html')
+
+    def post(self, request):
+        addr = Address()
+        try:
+            addr.postcode = int(request.POST.get('postcode'))
+        except:
+            pass
+
+        addr.road = request.POST.get('road')
+        addr.lot = request.POST.get('lot')
+        addr.detail = request.POST.get('detail')
+        addr.extra = request.POST.get('extra')
+        addr.city = request.POST.get('sido')
+        addr.state = request.POST.get('sigungu')
+        addr.road_name = request.POST.get('roadname')
+        addr.lat = float(request.POST.get('lat'))
+        addr.lng = float(request.POST.get('lng'))
+
+        user = request.user
+        return render(request, 'address.html')
