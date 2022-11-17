@@ -98,8 +98,11 @@ class Address(View):
             # 로그인되지 않은 상태
             return redirect(reverse('index'))
 
+        context = {}
+        context['addr'] = request.user.addr
+
         # 주소 등록 페이지
-        return render(request, 'address.html')
+        return render(request, 'address.html', context)
 
     def post(self, request):
         # 주소 모델 생성
