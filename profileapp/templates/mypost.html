@@ -14,8 +14,22 @@
                     <div class="recommendation">추천</div>
                 </div>
                 <!-- 게시물 목록 -->
-                <div class="writting-box">
-
+                <div class="writing-box">
+                    <!-- 게시물 목록 영역 -->
+                    {% if articles %}
+                        {% for article in articles %}
+                            <div class="article-info">
+                                <div class="id">{{ forloop.counter }}</div>
+                                <div class="title">
+                                    <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                </div>
+                                <div class="writer">{{ article.writer }}</div>
+                                <div class="date js-date">{{ article.date }}</div>
+                                <div class="views">{{ article.views }}</div>
+                                <div class="recommendation">{{ article.upvote }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <!-- 페이지 번호 영역 -->
                 <div class="paging-box">
