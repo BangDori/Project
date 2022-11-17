@@ -63,8 +63,11 @@ def getModelByName(name, is_all=False):
 
 
 def getArticlesByAddress(user: CustomerUser, articles: QuerySet):
-    # addr : 게시글을 Key로, 사용자와의 거리를 Value로 가지는 dict
-    addr = {article: user.addr.calcDistance(article.addr) for article in articles}
+    try:
+        # addr : 게시글을 Key로, 사용자와의 거리를 Value로 가지는 dict
+        addr = {article: user.addr.calcDistance(article.addr) for article in articles}
+    except:
+        return articles
 
     # 거리가 가까운 순으로 정렬
     addr = {k: v for k, v in sorted(addr.items(), key=lambda x: x[1])}
