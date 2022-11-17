@@ -27,16 +27,21 @@
     </div>
 
     <div class="search-box">
-        <select class="search-type-box" name="search-type" id="">
-            <option value="">제목+내용</option>
-            <option value="">제목</option>
-            <option value="">제목</option>
-            <option value="">글쓴이</option>
-            <option value="">댓글</option>
-        </select>
         <div class="board-search-keyword-box">
-            <form action="" method="get">
-                <input class="board-search-keyword" type="text" placeholder="검색어 입력"/>
+            <form action="{% url 'searcharticle' name=url %}" method="post">
+                {% csrf_token %}
+                <select class="search-type-box" name="search-type" id="">
+                    <option value="search-tc">제목+내용</option>
+                    <option value="search-t">제목</option>
+                    <option value="search-c">내용</option>
+                    <option value="search-w">글쓴이</option>
+                    <option value="search-cmt">댓글</option>
+                </select>
+                <input name="board-search-keyword" class="board-search-keyword" type="text" placeholder="검색어 입력" required/>
+                <!-- 검색 버튼 -->
+                <input type="image" class="search_lnb"
+                       src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
+                       alt="search" width="25px"/>
             </form>
         </div>
     </div>

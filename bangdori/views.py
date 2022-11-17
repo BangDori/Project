@@ -542,6 +542,7 @@ class SearchAll(View):
         # 페이지에 넘겨줄 Context
         context = {}
         context['is_search'] = True
+        context['is_global_search'] = True
 
         # 모든 게시판 객체 가져옴
         boards = getModelByName(None, True)
@@ -562,6 +563,50 @@ class SearchAll(View):
         # 날짜순으로 정렬
         result = sorted(result, key=lambda x: x['date'], reverse=True)
         context['articles'] = result
+
+        # Pagination은 구현되어 있지 않음
+        return render(request, 'board.html', context)
+
+
+class SearchArticle(View):
+    """
+    SearchArticle : 게시판 내에서 검색을 위한 클래스
+    """
+
+    def post(self, request, name):
+        # 페이지에 넘겨줄 Context
+        context = {}
+        context['is_search'] = True
+        options = request.POST.get('search-type')
+
+        # 모든 게시판 객체 가져옴
+        board = getModelByName(name)
+        # 검색어 가져옴
+        keyword = request.POST.get('board-search-keyword')
+
+        # 게시물 검색해오는 부분
+        result = board.objects.all()
+
+        # 조건에 맞도록 검색하는 부분
+        if options == 'search-tc':
+            x = result.filter(title__contains=keyword)
+            x |= result.filter(content__contains=keyword)
+            result = x
+        elif options == 'search-t':
+            result = result.filter(title__contains=keyword)
+        elif options == 'search-c':
+            result = result.filter(content__contains=keyword)
+        elif options == 'search-w':
+            result = result.filter(writer__username=keyword)
+        elif options == 'search-cmt':
+            pass
+
+        # 날짜 순으로 정렬
+        result = result.order_by('-date')
+
+        context['articles'] = result
+        # 게시판 내 검색이므로, 주소를 지정해주어야 함
+        context['url'] = name
 
         # Pagination은 구현되어 있지 않음
         return render(request, 'board.html', context)

@@ -31,7 +31,7 @@
                         <div class="title">
                             <!-- 검색 화면이면 결과 주소로 출력되도록 설정,
                             검색이랑 공용 부분 -->
-                            {% if is_search %}
+                            {% if is_global_search %}
                                 <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                             {% else %}
                                 <a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a>
@@ -48,8 +48,10 @@
                 {% endfor %}
             {% endif %}
         </div>
-
-        {% include 'extends/search_lnb.html' %}
+        <!-- 전체 검색이 아니면 아래에 있는 검색은 뺄게용 -->
+        {% if not is_global_search %}
+            {% include 'extends/search_lnb.html' %}
+        {% endif %}
     </div>
 
     {% include 'extends/banner.html' %}
