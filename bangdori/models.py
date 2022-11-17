@@ -20,7 +20,11 @@ class CustomerUser(AbstractUser):
         전화번호
     nickname : CharField
         닉네임
-    blocked_at : DateField
+    addr : ForeignKey
+        주소 테이블의 ID를 나타냄
+    provider : CharField
+        Local Login , Social Login 구분자
+    blocked_at : DateTimeField
         (예정 : is_active 필드와 함께 작동) 사용자가 비활성화된 날짜를 알려줌
     corp_num : CharField
         사업자 등록번호
@@ -36,12 +40,11 @@ class CustomerUser(AbstractUser):
         max_length=30, db_column='nickname', verbose_name='nickname', blank=True)
     addr = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, verbose_name='address', null=True, default=None)
-    # Local Login , Social Login 구분자
     provider = models.CharField(
         max_length=30, db_column='provider', verbose_name='provider', null=True)
-
-    # nickname = models.CharField(
-    #     max_length=10, db_column='nickname', verbose_name='nickname', blank=True)
+    blocked_at = models.DateTimeField(db_column='blocked_at', null=True, default=None)
+    corp_num = models.CharField(max_length=30, verbose_name='corp_num', null=True, default=None)
+    mileage = models.PositiveIntegerField(verbose_name='mileage', default=0)
 
     def __str__(self):
         return self.username
@@ -63,7 +66,7 @@ class Article(models.Model):
     Parameters
     ----------
     id : AutoField
-        Integer 형식의 SeqID를 나타내는 PK
+        Integer 형식의 Auto Increment를 나타내는 PK
     title : CharField
         게시글 제목
     writer : ForeignKey
@@ -77,6 +80,10 @@ class Article(models.Model):
         조회수, 음수가 없으므로 unsigned int 사용
     upvote : PositiveIntegerField
         추천수, 조회수와 마찬가지의 형식 사용
+    addr : ForeignKey
+        주소 테이블의 ID를 나타냄
+    need_addr : BooleanField
+        주소 등록이 필요한 게시판인지 확인
     """
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, verbose_name='제목')
@@ -86,6 +93,9 @@ class Article(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name='작성일')
     views = models.PositiveIntegerField(default=0, verbose_name='조회')
     upvote = models.PositiveIntegerField(default=0, verbose_name='추천')
+    addr = models.ForeignKey(
+        'Address', on_delete=models.SET_NULL, verbose_name='주소', null=True, default=None)
+    need_addr = models.BooleanField(verbose_name='주소필요', default=False)
 
     def __str__(self):
         # __str__ 오버라이드로 제목만 표시
@@ -96,7 +106,7 @@ class Article(models.Model):
         url = url[url.rfind('_') + 1:]
         return {'id': self.id, 'title': self.title, 'writer': self.writer,
                 'content': self.content, 'date': self.date, 'views': self.views,
-                'upvote': self.upvote, 'url': url}
+                'upvote': self.upvote, 'need_addr': self.need_addr, 'url': url}
 
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)
@@ -220,7 +230,7 @@ class Address(models.Model):
     Parameters
     ----------
     id : AutoField
-        Integer 형식의 SeqID를 나타내는 PK
+        Integer 형식의 Auto Increment를 나타내는 PK
     postcode : IntegerField
         우편번호 (예시 : 13536)
     road : CharField
