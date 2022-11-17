@@ -82,8 +82,6 @@ class Article(models.Model):
         추천수, 조회수와 마찬가지의 형식 사용
     addr : ForeignKey
         주소 테이블의 ID를 나타냄
-    need_addr : BooleanField
-        주소 등록이 필요한 게시판인지 확인
     """
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, verbose_name='제목')
@@ -95,11 +93,14 @@ class Article(models.Model):
     upvote = models.PositiveIntegerField(default=0, verbose_name='추천')
     addr = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, verbose_name='주소', null=True, default=None)
-    need_addr = models.BooleanField(verbose_name='주소필요', default=False)
 
     def __str__(self):
         # __str__ 오버라이드로 제목만 표시
         return self.title
+
+    def need_addr(self):
+        # 주소가 필요한 경우, 해당 메서드를 오버라이드하여 True를 반환
+        return False
 
     def to_dict(self):
         url = self._meta.db_table
@@ -129,6 +130,10 @@ class DabangArticle(Article):
     다방 게시판으로, Article을 상속받음
     """
 
+    # 주소가 필요한 게시판
+    def need_addr(self):
+        return True
+
     class Meta:
         db_table = 'article_dabang'
         verbose_name = '다방'
@@ -139,6 +144,10 @@ class SuccessionArticle(Article):
     """
     승계 게시판으로, Article을 상속받음
     """
+
+    # 주소가 필요한 게시판
+    def need_addr(self):
+        return True
 
     class Meta:
         db_table = 'article_succession'

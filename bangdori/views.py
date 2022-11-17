@@ -255,25 +255,28 @@ def write(request, name):
     """
     write : 게시글을 작성하는 view
     """
+    context = {}
+
     # 현재 로그인된 사용자의 정보를 가져옴
     user = request.user
 
-    if request.method == "POST":
-        # 현재 게시판에 맞는 모델을 가져옴
-        article = getModelByName(name)
+    # 현재 게시판에 맞는 모델을 가져옴
+    article = getModelByName(name)
 
+    if request.method == "POST":
         # 게시글 작성
         article = article(title=request.POST.get('title'),
                           writer=CustomerUser.objects.get(username=user),
                           content=request.POST.get('content'))
 
         # 게시글 저장
-
         article.save()
+
         # 게시판으로 다시 돌아감
         return redirect('board', name=name)
 
-    return render(request, 'write.html')
+    context['need_addr'] = article().need_addr()
+    return render(request, 'write.html', context)
 
 
 def findID(request):
