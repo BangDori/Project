@@ -104,6 +104,10 @@ class Article(models.Model):
         # 주소가 필요한 경우, 해당 메서드를 오버라이드하여 True를 반환
         return False
 
+    def need_sorted_addr(self):
+        # 주소 순으로 정렬해야 하는 경우, 해당 메서드를 오버라이드하여 True를 반환
+        return False
+
     def to_dict(self):
         url = self._meta.db_table
         url = url[url.rfind('_') + 1:]
@@ -132,8 +136,12 @@ class DabangArticle(Article):
     다방 게시판으로, Article을 상속받음
     """
 
-    # 주소가 필요한 게시판
+    # 주소 등록이 필요한 게시판
     def need_addr(self):
+        return True
+
+    # 주소 정렬이 필요한 게시판
+    def need_sorted_addr(self):
         return True
 
     class Meta:
@@ -147,8 +155,12 @@ class SuccessionArticle(Article):
     승계 게시판으로, Article을 상속받음
     """
 
-    # 주소가 필요한 게시판
+    # 주소 등록이 필요한 게시판
     def need_addr(self):
+        return True
+
+    # 주소 정렬이 필요한 게시판
+    def need_sorted_addr(self):
         return True
 
     class Meta:
@@ -173,6 +185,10 @@ class EssentialsArticle(Article):
     필수템 게시판으로, Article을 상속받음
     """
 
+    # 주소 정렬이 필요한 게시판
+    def need_sorted_addr(self):
+        return True
+
     class Meta:
         db_table = 'article_essentials'
         verbose_name = '필수템'
@@ -183,6 +199,10 @@ class GroupArticle(Article):
     """
     공동구매 게시판으로, Article을 상속받음
     """
+
+    # 주소 정렬이 필요한 게시판
+    def need_sorted_addr(self):
+        return True
 
     class Meta:
         db_table = 'article_group'

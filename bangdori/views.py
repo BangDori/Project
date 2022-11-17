@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import bangdori.models
 from project.settings import MAX_ARTICLES
 from .models import *
-from .utils import make_signature, getModelByName
+from .utils import make_signature, getModelByName, getArticlesByAddress
 
 load_dotenv()
 
@@ -180,6 +180,7 @@ def board(request, name):
 
     # 게시판 내용 불러올 Article 객체
     articles = getModelByName(name)
+    need_sorted_addr = articles().need_sorted_addr()
 
     # 페이지 정보 전달
     # context['name'] : 페이지가 표시되는 한글 이름
@@ -189,6 +190,11 @@ def board(request, name):
 
     # 모든 글 가져옴, 날짜 내림차순으로 조회
     articles = articles.objects.all().order_by('-date')
+
+    # 주소 순으로 정렬이 필요한 경우
+    if need_sorted_addr:
+        articles = getArticlesByAddress(request.user, articles)
+
     # Paginator 사용
     paginator = Paginator(articles, MAX_ARTICLES)
     # GET 요청이 들어오면 page 파라미터를 읽어옴
