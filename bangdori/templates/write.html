@@ -31,13 +31,13 @@
                 <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."
                 >{{ content }}</textarea>
             </div>
-            {% if need_addr %}
-                <!-- 주소 등록 영역 -->
-                <div class="address-box">
-                    {% include 'address_form.html' %}
-                </div>
-            {% endif %}
             <div class="write-footer">
+                {% if need_addr %}
+                    <!-- 주소 등록 영역 -->
+                    <div class="address-box">
+                        {% include 'address_form.html' %}
+                    </div>
+                {% endif %}
                 <input type="submit" value="글쓰기">
             </div>
         </form>

@@ -58,3 +58,4 @@ def getModelByName(name, is_all=False):
                     EssentialsArticle, NoticeArticle, ContactArticle, GroupArticle]
 
     return articles
+
