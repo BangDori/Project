@@ -1,3 +1,5 @@
+import math
+
 import django
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -301,3 +303,10 @@ class Address(models.Model):
         self.save()
 
         return self
+
+    def calcDistance(self, another):
+        # another 파라미터로 전달받은 다른 객체와의 거리를 계산
+        # 경도 Lat, 위도 Lng과의 직선 거리 차이를 계산하여 출력함
+
+        # 점과 점 사이의 거리이므로, 피타고라스 정리 이용
+        return math.sqrt(math.pow(another.lat - self.lat, 2) + math.pow(another.lng - self.lng, 2))
