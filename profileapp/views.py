@@ -40,7 +40,13 @@ def myinfo(request):
     """
     내 정보
     """
-    return render(request, 'myinfo.html')
+    context = {}
+    user: CustomerUser = request.user
+    context['nickname'] = user.nickname
+    context['email'] = user.email
+    context['phone'] = user.phone
+
+    return render(request, 'myinfo.html', context)
 
 
 def mypost(request):
