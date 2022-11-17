@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 
 import bangdori
 from bangdori.models import CustomerUser
+from bangdori.utils import getModelByName
 from .forms import ProfileCreateForm
 from .models import Profile
 
@@ -53,7 +54,28 @@ def mypost(request):
     """
     내가 쓴 글
     """
-    return render(request, 'mypost.html')
+
+    context = {}
+
+    # 모든 게시판 객체 가져옴
+    boards = getModelByName(None, True)
+
+    # 게시물 검색해오는 부분
+    result = list()
+    for board in boards:
+        # 모든 게시판에서 키워드를 포함한 글을 가져옴
+        articles = board.objects.all().filter(writer=request.user)
+        # 검색 결과가 없는 것은 제외
+        if articles.count() > 0:
+            for article in articles:
+                # dict로 변환하여 저장
+                result.append(article.to_dict())
+
+    # 날짜순으로 정렬
+    result = sorted(result, key=lambda x: x['date'], reverse=True)
+    context['articles'] = result
+
+    return render(request, 'mypost.html', context)
 
 
 def favorites(request):
