@@ -75,23 +75,7 @@ class Address(View):
 
     def post(self, request):
         # 주소 모델 생성
-        addr = bangdori.models.Address()
-        try:
-            addr.postcode = int(request.POST.get('postcode'))
-        except:
-            pass
-
-        addr.road = request.POST.get('road')
-        addr.lot = request.POST.get('lot')
-        addr.detail = request.POST.get('detail')
-        addr.extra = request.POST.get('extra')
-        addr.city = request.POST.get('sido')
-        addr.state = request.POST.get('sigungu')
-        addr.road_name = request.POST.get('roadname')
-        addr.lat = float(request.POST.get('lat'))
-        addr.lng = float(request.POST.get('lng'))
-        # 주소 모델 저장
-        addr.save()
+        addr = bangdori.models.Address().createFromPost(request)
 
         # 사용자 모델 가져옴
         user: CustomerUser = request.user

@@ -13,6 +13,7 @@ from django.views import View
 from django.views.generic import DetailView
 from dotenv import load_dotenv
 
+import bangdori.models
 from project.settings import MAX_ARTICLES
 from .models import *
 from .utils import make_signature, getModelByName
@@ -262,6 +263,13 @@ def write(request, name):
 
     # 현재 게시판에 맞는 모델을 가져옴
     article = getModelByName(name)
+    need_addr = article().need_addr()
+
+    # 페이지 정보 전달
+    # context['name'] : 페이지가 표시되는 한글 이름
+    context['name'] = article._meta.verbose_name
+    # context['need_addr'] : 주소 등록이 필요한지에 대한 여부
+    context['need_addr'] = need_addr
 
     if request.method == "POST":
         # 게시글 작성
@@ -269,13 +277,16 @@ def write(request, name):
                           writer=CustomerUser.objects.get(username=user),
                           content=request.POST.get('content'))
 
+        # 주소가 필요한 경우, article의 FK 필드인 addr에 새로운 주소를 만들어 저장
+        if need_addr:
+            article.addr = bangdori.models.Address().createFromPost(request)
+
         # 게시글 저장
         article.save()
 
         # 게시판으로 다시 돌아감
         return redirect('board', name=name)
 
-    context['need_addr'] = article().need_addr()
     return render(request, 'write.html', context)
 
 

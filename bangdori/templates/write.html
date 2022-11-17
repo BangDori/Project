@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="board-title-name">
-        게시판 글쓰기
+        {{ name }} 게시판 글쓰기
     </div>
 
     <div class="col-12 write-container">
@@ -16,8 +16,8 @@
                     <option value="group">공동 구매 게시판</option>
                     <option value="board">자유 게시판</option>
                 </select>
-    
-                <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요." value ="{{title}}">
+
+                <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요." value="{{ title }}">
             </div>
 
             <div class="write-btn-box">
@@ -31,6 +31,12 @@
                 <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."
                 >{{ content }}</textarea>
             </div>
+            {% if need_addr %}
+                <!-- 주소 등록 영역 -->
+                <div class="address-box">
+                    {% include 'address_form.html' %}
+                </div>
+            {% endif %}
             <div class="write-footer">
                 <input type="submit" value="글쓰기">
             </div>

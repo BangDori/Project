@@ -279,3 +279,25 @@ class Address(models.Model):
 
     def __str__(self):
         return f'{self.road}{self.extra}{self.detail}'
+
+    def createFromPost(self, request):
+        # WSGIRequest를 통해 데이터를 받아와서 만들어줌
+        try:
+            self.postcode = int(request.POST.get('postcode'))
+        except:
+            pass
+
+        self.road = request.POST.get('road')
+        self.lot = request.POST.get('lot')
+        self.detail = request.POST.get('detail')
+        self.extra = request.POST.get('extra')
+        self.city = request.POST.get('sido')
+        self.state = request.POST.get('sigungu')
+        self.road_name = request.POST.get('roadname')
+        self.lat = float(request.POST.get('lat'))
+        self.lng = float(request.POST.get('lng'))
+
+        # 주소 모델 저장
+        self.save()
+
+        return self
