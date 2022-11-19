@@ -570,6 +570,7 @@ class SearchAll(View):
         # 날짜순으로 정렬
         result = sorted(result, key=lambda x: x['date'], reverse=True)
         context['articles'] = result
+        context['keyword'] = keyword
 
         # Pagination은 구현되어 있지 않음
         return render(request, 'board.html', context)

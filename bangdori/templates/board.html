@@ -7,7 +7,11 @@
             <!-- 검색 화면이면 검색 결과 출력되도록 설정,
             검색이랑 공용 부분 -->
             {% if is_search %}
-                <span>검색 결과</span>
+                <span>
+                    {% if keyword %}
+                        {{ keyword }}
+                    {% endif %}
+                    검색 결과</span>
             {% else %}
                 <span>{{ name }} 게시판</span>
             {% endif %}
