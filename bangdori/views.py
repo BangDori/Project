@@ -14,9 +14,9 @@ from django.views.generic import DetailView
 from dotenv import load_dotenv
 
 import bangdori.models
-from project.settings import MAX_ARTICLES
+from project.settings import MAX_ARTICLES, INDEX_ARTICLES
 from .models import *
-from .utils import make_signature, getModelByName, getArticlesByAddress
+from .utils import make_signature, getModelByName, getArticlesByAddress, getAllArticles
 
 load_dotenv()
 
@@ -29,22 +29,29 @@ def goIndex(request):
 
 def index(request):
     context = {}
-    """
-    로그인 정보는 Session에 기록되도록 설정되어 있음.
-    dict 형식으로 request 전달 비활성화
-    """
-    # logged_user = request.session.get('user')
-    # print(logged_user)
-    # logged_user = {}
-    # if logged_user:
-    #     user = CustomerUser.objects.get(username=username)
-    #     username['username'] = user.username
-    #     username['user_email'] = user.email
-    #     username['user_birth'] = user.birthday
-    #     username['user_phone'] = user.phone
-    #     username['user_logged_in'] = TRUE
+    # 게시글 정보를 저장할 dict
+    articles = {}
+    # 게시글 데이터 가져옴
+    data = getAllArticles()
 
-    return render(request, 'index.html', {})
+    # 자를 갯수
+    cut = INDEX_ARTICLES
+
+    # 게시글이 없는 경우에 예외처리를 하지 않으면 오류가 날 수 있음
+    if len(data) > 0:
+        # 핫 게시물은 upvote 순으로 정렬
+        articles['best'] = sorted(data, key=lambda x: x['upvote'], reverse=True)[:cut]
+        # 최신 게시물은 date 순으로 정렬
+        articles['new'] = sorted(data, key=lambda x: x['date'], reverse=True)[:cut]
+
+        # 각 게시판별 글
+        articles['board'] = [x.to_dict() for x in BoardArticle.objects.all().order_by('-date')][:cut]
+        articles['dabang'] = [x.to_dict() for x in DabangArticle.objects.all().order_by('-date')][:cut]
+        articles['succession'] = [x.to_dict() for x in SuccessionArticle.objects.all().order_by('-date')][:cut]
+        articles['group'] = [x.to_dict() for x in GroupArticle.objects.all().order_by('-date')][:cut]
+
+    context['articles'] = articles
+    return render(request, 'index.html', context)
 
 
 def login(request):

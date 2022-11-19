@@ -74,3 +74,19 @@ def getArticlesByAddress(user: CustomerUser, articles: QuerySet):
 
     # list로 변환하여 반환
     return list(addr.keys())
+
+
+def getAllArticles():
+    # 모든 게시판 객체 가져옴
+    boards = getModelByName(None, True)
+
+    result = list()
+    for board in boards:
+        articles = board.objects.all().filter()
+        # 게시글이 없는 게시판은 제외
+        if articles.count() > 0:
+            for article in articles:
+                # dict로 변환하여 저장
+                result.append(article.to_dict())
+
+    return result

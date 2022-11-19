@@ -12,9 +12,22 @@
                     <div class="recommendation"><span>추천</span></div>
                 </div>
 
-                <div class="preview-post-box">content</div>
+                <div class="preview-post-box">
+                    {% if articles.best %}
+                        {% for article in articles.best %}
+                            <div class="article-info">
+                                <div class="id">{{ forloop.counter }}</div>
+                                <div class="title">
+                                    <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                </div>
+                                <div class="recommendation">{{ article.upvote }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
+
         <div class="preview-post">
             <div class="preview-title">최신 게시물</div>
             <div class="preview-post-content">
@@ -24,7 +37,19 @@
                     <div class="writer"><span>글쓴이</span></div>
                 </div>
 
-                <div class="preview-post-box">content</div>
+                <div class="preview-post-box">
+                    {% if articles.new %}
+                        {% for article in articles.new %}
+                            <div class="article-info">
+                                <div class="id">{{ forloop.counter }}</div>
+                                <div class="title">
+                                    <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                </div>
+                                <div class="recommendation">{{ article.writer }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -36,7 +61,17 @@
         <div class="preview-title">자유 게시판</div>
 
         <div class="preview-article">
-            자유 게시판
+            {% if articles.board %}
+                {% for article in articles.board %}
+                    <div class="article-info">
+                        <div class="id">{{ forloop.counter }}</div>
+                        <div class="title">
+                            <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                        </div>
+                        <div class="recommendation">{{ article.writer }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="preview-more">
                 <a class="more" href={% url 'board' name='board' %}>더보기 ...</a>
             </div>
@@ -48,7 +83,16 @@
         <div class="preview-dabang">
             <div class="preview-title">다방</div>
             <div class="preview-article">
-                다방 게시판
+                {% if articles.dabang %}
+                    {% for article in articles.dabang %}
+                        <div class="article-info">
+                            <div class="id">{{ forloop.counter }}</div>
+                            <div class="title">
+                                <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='dabang' %}>더보기 ...</a>
                 </div>
@@ -59,7 +103,16 @@
             <div class="preview-title">승계</div>
 
             <div class="preview-article">
-                승계 게시판
+                {% if articles.succession %}
+                    {% for article in articles.succession %}
+                        <div class="article-info">
+                            <div class="id">{{ forloop.counter }}</div>
+                            <div class="title">
+                                <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='succession' %}>더보기 ...</a>
                 </div>
@@ -72,7 +125,17 @@
         <div class="preview-title">공동 구매</div>
 
         <div class="preview-article">
-            게시판
+            {% if articles.group %}
+                {% for article in articles.group %}
+                    <div class="article-info">
+                        <div class="id">{{ forloop.counter }}</div>
+                        <div class="title">
+                            <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                        </div>
+                        <div class="recommendation">{{ article.writer }}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="preview-more">
                 <a class="more" href={% url 'board' name='group' %}>더보기 ...</a>
             </div>
