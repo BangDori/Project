@@ -16,7 +16,8 @@ class ProfileCreateView(CreateView):
     context_object_name = 'target_profile'
     form_class = ProfileCreateForm
     success_url = reverse_lazy('profileapp:view')
-    template_name = 'create.html'
+    # template_name = 'profile.html'
+    template_name = 'profile.html'
 
     def form_valid(self, form):  # ProfileCreationForm의 data가 2번째 파라미터에 들어 있어요.
         temp_profile = form.save(commit=False)  # 임시로 저장함.<commit=False> 키워드 인자를 이용해서
