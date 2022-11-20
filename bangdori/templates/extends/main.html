@@ -13,6 +13,17 @@
 
                         <div class="preview-article essentials-board-size">
                             height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                            {% if articles.essentials %}
+                                {% for article in articles.essentials %}
+                                    <div class="article-info">
+                                        <div class="id">{{ forloop.counter }}</div>
+                                        <div class="title">
+                                            <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                        </div>
+                                        <div class="recommendation">{{ article.upvote }}</div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                             <div class="preview-more">
                                 <a class="more" href={% url 'board' name='essentials' %}>더보기 ...</a>
                             </div>
@@ -52,12 +63,14 @@
                                         <hr>
                                         <div>
                                             <div class="user-content-box">
-                                                <div id="mileage" class="user-content">마일리지 : {{ request.user.mileage }}</div>
+                                                <div id="mileage" class="user-content">마일리지
+                                                    : {{ request.user.mileage }}</div>
                                                 <div id="address" class="user-content">{{ request.user.addr }}</div>
                                             </div>
                                             <hr>
                                             <div class="user-content-box">
-                                                <div id="mypage" class="user-content"><a href="{% url 'profileapp:myinfo' %}"><input
+                                                <div id="mypage" class="user-content"><a
+                                                        href="{% url 'profileapp:myinfo' %}"><input
                                                         type="button" id="mypage-button" value="My Page"></a></div>
 
                                                 <div id="logout" class="user-content"><a

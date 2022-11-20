@@ -49,6 +49,7 @@ def index(request):
         articles['dabang'] = [x.to_dict() for x in DabangArticle.objects.all().order_by('-date')][:cut]
         articles['succession'] = [x.to_dict() for x in SuccessionArticle.objects.all().order_by('-date')][:cut]
         articles['group'] = [x.to_dict() for x in GroupArticle.objects.all().order_by('-date')][:cut]
+        articles['essentials'] = [x.to_dict() for x in EssentialsArticle.objects.all().order_by('-date')][:cut]
 
     context['articles'] = articles
     return render(request, 'index.html', context)
