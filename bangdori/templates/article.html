@@ -58,7 +58,20 @@
                 댓글 ??개
             </div>
             <div class="comment-box">
-                <!-- 댓글 동적으로 받아주세요 -->
+                <form class="comment-form" method="post" action="">
+                    {% csrf_token %}
+                    <span class="comment-username">{{ request.user }}</span>
+                    <div class="comment-textbox">
+                        <textarea class="comment-textarea" type="textarea" placeholder="댓글을 입력하세요." name="comment" rows="3" cols="100"></textarea>
+                        <input class="comment-submit-box" type="submit" value="등록">    
+                    </div>
+                </form>
+            </div>
+            <!-- 댓글 받아주세요 -->
+            <div class="user-comment-box">
+                <!-- {% if comment %}
+                comment 출력하기
+                {% endif %} -->
                 댓글 -------
             </div>
         </div>
