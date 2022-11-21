@@ -159,7 +159,7 @@ def id_check(request):
 class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
-    template_name = 'view.html'
+    template_name = 'profile.html'
 
 
 def dabang(request):

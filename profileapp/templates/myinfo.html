@@ -36,6 +36,10 @@
                         <th>전화번호</th>
                         <td><input type="text" value="{{ phone }}"></td>
                     </tr>
+                     <tr>
+                        <th>프로필</th>
+                        <td><a href="{% url 'detail' pk=user.pk %}">프로필</a></td>
+                    </tr>
                     <!--
                     <tr>
                         <th>주소</th>

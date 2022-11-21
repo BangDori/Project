@@ -6,9 +6,10 @@ from .views import ProfileCreateView
 app_name = 'profileapp'
 
 urlpatterns = [
-    path('create/', ProfileCreateView.as_view(), name='create'),
+    # path('create/', ProfileCreateView.as_view(), name='create'),
     path('view', views.view, name='view'),
-    path('profile/', views.profile),
+    path('profile/', ProfileCreateView.as_view(), name='profile'),
+    # path('profile/', views.profile),
     path('mypage/', views.mypage),
     path('myinfo/', views.myinfo, name='myinfo'),
     path('mypost/', views.mypost, name='mypost'),
