@@ -17,54 +17,6 @@
     <link rel="stylesheet" href="{% static 'css/writeStyle.css' %}"/>
 
     <title>방도리</title>
-    <style>
-        .testABC{
-            position: absolute;
-            font-size: 46px;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .moving-board{
-            left: -440px;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .house-section{
-            z-index: 1;
-            position: absolute;
-            top: 46px;
-            left: 1008px;
-            width: 848px;
-            height: 100%;
-            
-            opacity: 0;
-            display: flex;
-            gap: 15px;
-            flex-direction: row;
-        }
-
-        .house-article{
-            flex-grow: 1;
-            padding: 20px 15px;
-            border: 1px solid #ccc;
-        }
-
-        .house-article:first-child{
-            border-right: 1px solid #ccc;
-        }
-
-        .show-house-box{
-            opacity: 1;
-
-            transition: all 1s ease-in-out;
-        }
-
-        .none {
-            display: none;
-        }
-    </style>
 </head>
 <body>
 <div class="wrapper">
