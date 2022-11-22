@@ -240,7 +240,7 @@ def article(request, name, pk):
     article = getModelByName(name)
     article = article.objects.all().get(id=pk)
 
-    comments = Comment.objects.all().get(article_id=article.id)
+    # comments = Comment.objects.all().get(article_id=article.id)
 
     # 조회수 올림
     article.views = article.views + 1
@@ -249,7 +249,7 @@ def article(request, name, pk):
     # Context에 전달
     context['article'] = article
     context['url'] = name
-    context['comment'] = comments
+    # context['comment'] = comments
 
     return render(request, 'article.html', context)
 
