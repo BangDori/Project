@@ -11,11 +11,11 @@ function setAddress() {
     let option;
 
     let address = [
-        {value: 'direct', register_user_email: '직접 입력'},
         {value: 'gmail.com', register_user_email: 'gmail.com'},
         {value: 'naver.com', register_user_email: 'naver.com'},
         {value: 'daum.com', register_user_email: 'daum.com'},
         {value: 'kakao.com', register_user_email: 'kakao.com'},
+        {value: 'direct', register_user_email: '직접 입력'},
     ];
 
     address.unshift({value: '', register_user_email: '주소 선택'});

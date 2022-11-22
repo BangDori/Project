@@ -121,7 +121,12 @@ def register(request):
         password = request.POST.get('register_user_pwd', None)
         password2 = request.POST.get('register_user_repwd', None)
         email_id = request.POST.get('register_user_email_id', None)
+        # 이메일 도메인을 선택에 따라 분기
         email_net = request.POST.get('register_user_email', None)
+        if email_net == 'direct':
+            # 선택 상자의 const가 direct인 경우, 직접 입력된 칸을 받아옴
+            email_net = request.POST.get('register_user_direct_email', None)
+
         year = request.POST.get('register_user_year', None)
         month = request.POST.get('register_user_month', None)
         day = request.POST.get('register_user_day', None)
@@ -132,13 +137,11 @@ def register(request):
         if CustomerUser.objects.filter(username=username).exists():
             context['error'] = "사용할 수 없는 ID입니다."
 
-        # 비밀번호 틀림
         if password != password2:
+            # 비밀번호 틀림
             context['error'] = "비밀번호가 다릅니다."
-        elif not (username and password and password2 and email_id and email_net
-                  and year and month and day and phone):
-            # HTML에서 required 필드로 추가 할 것
-            context['error'] = "빈칸없이 입력해주세요."
+        elif not email_net:
+            context['error'] = "이메일 주소를 입력해주세요."
         else:
             # DB에 저장
             user = CustomerUser.objects.create_user(username=username,
@@ -152,22 +155,30 @@ def register(request):
             auth.login(request, user)
             return redirect('/')
 
+
         return render(request, 'register.html', context)
 
 
 def id_check(request):
-    username = request.GET.get('user')
+    # 아이디나 닉네임이 존재하는지 확인, 둘 중 하나를 가져옴
+    username = request.GET.get('user', None)
+    nickname = request.GET.get('nickname', None)
+
     try:
-        user = CustomerUser.objects.get(username=username)
+        user = None
+
+        # 경우에 따른 유효성 검사
+        if username:
+            user = CustomerUser.objects.all().filter(username=username).last()
+        elif nickname:
+            user = CustomerUser.objects.all().filter(nickname=nickname).last()
     except Exception as e:
         user = None
     result = {
         'result': 'success',
-        # 'data' : model_to_dict(user)  # console에서 확인
         'data': "not exist" if user is None else "exist"
     }
-    print(type(user))
-    print(type(result))
+
     return JsonResponse(result)
 
 
