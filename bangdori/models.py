@@ -44,8 +44,10 @@ class CustomerUser(AbstractUser):
         'Address', on_delete=models.SET_NULL, verbose_name='address', null=True, default=None)
     provider = models.CharField(
         max_length=30, db_column='provider', verbose_name='provider', null=True)
-    blocked_at = models.DateTimeField(db_column='blocked_at', null=True, default=None)
-    corp_num = models.CharField(max_length=30, verbose_name='corp_num', null=True, default=None)
+    blocked_at = models.DateTimeField(
+        db_column='blocked_at', null=True, default=None)
+    corp_num = models.CharField(
+        max_length=30, verbose_name='corp_num', null=True, default=None)
     mileage = models.PositiveIntegerField(verbose_name='mileage', default=0)
 
     def __str__(self):
@@ -122,6 +124,7 @@ class Article(models.Model):
 
 class Comment(models.Model):
     # Article과 유사하게 abstract로 선언후 필요 Article에만 사용
+
     content = models.TextField()
     writer = models.TextField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -173,6 +176,8 @@ class SuccessionComment(Comment):
     """
     승계 댓글로, Comment를 상속받음
     """
+    article_id = models.ForeignKey(
+        'SuccessionArticle', on_delete=models.CASCADE, verbose_name='게시글')
 
     class Meta:
         db_table = 'comment_succession'
@@ -225,6 +230,8 @@ class BoardComment(Comment):
     """
     자유 게시판 댓글로, Comment를 상속받음
     """
+    article_id = models.ForeignKey(
+        'BoardArticle', on_delete=models.CASCADE, verbose_name='게시글')
 
     class Meta:
         db_table = 'comment_board'
@@ -282,14 +289,22 @@ class Address(models.Model):
         경도
     """
     id = models.AutoField(primary_key=True)
-    postcode = models.IntegerField(verbose_name='우편번호', null=True, default=None)
-    road = models.CharField(max_length=50, verbose_name='도로명주소', null=True, default=None)
-    lot = models.CharField(max_length=50, verbose_name='지번주소', null=True, default=None)
-    detail = models.CharField(max_length=50, verbose_name='상세주소', null=True, default=None)
-    extra = models.CharField(max_length=50, verbose_name='참고항목', null=True, default=None)
-    city = models.CharField(max_length=10, verbose_name='도/시 이름', null=True, default=None)
-    state = models.CharField(max_length=10, verbose_name='시/군/구 이름', null=True, default=None)
-    road_name = models.CharField(max_length=10, verbose_name='도로명', null=True, default=None)
+    postcode = models.IntegerField(
+        verbose_name='우편번호', null=True, default=None)
+    road = models.CharField(
+        max_length=50, verbose_name='도로명주소', null=True, default=None)
+    lot = models.CharField(
+        max_length=50, verbose_name='지번주소', null=True, default=None)
+    detail = models.CharField(
+        max_length=50, verbose_name='상세주소', null=True, default=None)
+    extra = models.CharField(
+        max_length=50, verbose_name='참고항목', null=True, default=None)
+    city = models.CharField(
+        max_length=10, verbose_name='도/시 이름', null=True, default=None)
+    state = models.CharField(
+        max_length=10, verbose_name='시/군/구 이름', null=True, default=None)
+    road_name = models.CharField(
+        max_length=10, verbose_name='도로명', null=True, default=None)
     lat = models.FloatField(verbose_name='위도', null=False)
     lng = models.FloatField(verbose_name='경도', null=False)
 
