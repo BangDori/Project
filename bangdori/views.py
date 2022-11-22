@@ -40,16 +40,23 @@ def index(request):
     # 게시글이 없는 경우에 예외처리를 하지 않으면 오류가 날 수 있음
     if len(data) > 0:
         # 핫 게시물은 upvote 순으로 정렬
-        articles['best'] = sorted(data, key=lambda x: x['upvote'], reverse=True)[:cut]
+        articles['best'] = sorted(
+            data, key=lambda x: x['upvote'], reverse=True)[:cut]
         # 최신 게시물은 date 순으로 정렬
-        articles['new'] = sorted(data, key=lambda x: x['date'], reverse=True)[:cut]
+        articles['new'] = sorted(
+            data, key=lambda x: x['date'], reverse=True)[:cut]
 
         # 각 게시판별 글
-        articles['board'] = [x.to_dict() for x in BoardArticle.objects.all().order_by('-date')][:cut]
-        articles['dabang'] = [x.to_dict() for x in DabangArticle.objects.all().order_by('-date')][:cut]
-        articles['succession'] = [x.to_dict() for x in SuccessionArticle.objects.all().order_by('-date')][:cut]
-        articles['group'] = [x.to_dict() for x in GroupArticle.objects.all().order_by('-date')][:cut]
-        articles['essentials'] = [x.to_dict() for x in EssentialsArticle.objects.all().order_by('-date')][:cut]
+        articles['board'] = [x.to_dict()
+                             for x in BoardArticle.objects.all().order_by('-date')][:cut]
+        articles['dabang'] = [x.to_dict()
+                              for x in DabangArticle.objects.all().order_by('-date')][:cut]
+        articles['succession'] = [x.to_dict()
+                                  for x in SuccessionArticle.objects.all().order_by('-date')][:cut]
+        articles['group'] = [x.to_dict()
+                             for x in GroupArticle.objects.all().order_by('-date')][:cut]
+        articles['essentials'] = [x.to_dict()
+                                  for x in EssentialsArticle.objects.all().order_by('-date')][:cut]
 
     context['articles'] = articles
     return render(request, 'index.html', context)
@@ -233,6 +240,8 @@ def article(request, name, pk):
     article = getModelByName(name)
     article = article.objects.all().get(id=pk)
 
+    # comments = Comment.objects.all().get(article_id=article.id)
+
     # 조회수 올림
     article.views = article.views + 1
     article.save()
@@ -240,8 +249,21 @@ def article(request, name, pk):
     # Context에 전달
     context['article'] = article
     context['url'] = name
+    # context['comment'] = comments
 
     return render(request, 'article.html', context)
+
+
+def comment(request, name, pk):
+    user = request.user
+    Article = getModelByName(name)
+    article = Article.objects.all().get(id=pk)
+    if request.method == "POST":
+        Comment.objects.create(article_id=article.id,
+                               content=request.POST.get('comment'),
+                               writer=user.nickname
+                               )
+        return redirect('article', name=name, pk=pk)
 
 
 def update(request, name, pk):
@@ -263,6 +285,7 @@ def update(request, name, pk):
     context = {}
     context['title'] = article.title
     context['content'] = article.content
+
     return render(request, 'update.html', context)
 
 
@@ -533,7 +556,7 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                         '-' + json['birthday'],
+                                                '-' + json['birthday'],
                                                 username=json['nickname'],
                                                 phone=json['mobile'],
                                                 )

@@ -58,7 +58,7 @@
                 댓글 ??개
             </div>
             <div class="comment-box">
-                <form class="comment-form" method="post" action="">
+                <form class="comment-form" method="post" action={% url 'comment' name=url pk=article.id%} >
                     {% csrf_token %}
                     <span class="comment-username">{{ request.user }}</span>
                     <div class="comment-textbox">
@@ -69,9 +69,9 @@
             </div>
             <!-- 댓글 받아주세요 -->
             <div class="user-comment-box">
-                <!-- {% if comment %}
-                comment 출력하기
-                {% endif %} -->
+                {% if comment %}
+                
+                {% endif %}
                 댓글 -------
             </div>
         </div>

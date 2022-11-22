@@ -10,10 +10,12 @@ urlpatterns = [
     path('idcheck/', views.id_check, name='idcheck'),
     path('detail/<int:pk>', views.DetailView.as_view(), name='detail'),
     path('board/<str:name>/', views.board, name='board'),
-    path('board/<str:name>/search/', views.SearchArticle.as_view(), name='searcharticle'),
+    path('board/<str:name>/search/',
+         views.SearchArticle.as_view(), name='searcharticle'),
     path('board/<str:name>/<int:pk>', views.article, name='article'),
     path('board/<str:name>/write/', views.write, name='write'),
     path('board/<str:name>/update/<int:pk>', views.update, name='update'),
+    path('board/<str:name>/<int:pk>/comment', views.comment, name='comment'),
 
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
