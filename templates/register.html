@@ -24,7 +24,7 @@
             {% csrf_token %}
             <!-- 아이디 입력란 -->
             <div class="info-id">
-                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)" value="{{ username }}"
+                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)""
                        required>
                 <input id="idBtn" class="check-btn" type="button" value="중복확인">
             </div>
@@ -38,7 +38,7 @@
 
             <!-- 이메일 입력받는 란 -->
             <div class="input-email">
-                <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소" value="{{  }}"required>
+                <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소" required>
                 <span class="separte-line email-separate">@</span>
                 <div class="js-email">
                     <div class="select-email-box"></div>
