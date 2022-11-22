@@ -6,119 +6,113 @@
         <div class="container">
             <div class="section">
                 {% if name == null %}
-                <!-- 자취생 필수템 및 로그인 박스 -->
-                <div class="article">
-                    <!-- 자취생 필수템 미리보기 -->
-                    <div class="preview-essentials">
-                        <div class="preview-title">자취생 필수템</div>
+                    <!-- 자취생 필수템 및 로그인 박스 -->
+                    <div class="article">
+                        <!-- 자취생 필수템 미리보기 -->
+                        <div class="preview-essentials">
+                            <div class="preview-title">자취생 필수템</div>
 
-                        <div class="preview-article essential-board essentials-board-size">
-                            {% if articles.essentials %}
-                                {% for article in articles.essentials %}
-                                    {% if forloop.counter <= 3 %}
-                                        <div class="box">
-                                            <div class="card-title">
-                                                <a href="{% url 'article' name=article.url pk=article.id %}">
-                                                    <img src="" alt="" width="208px" height="128px">
-                                                    {{ article.title }}
-                                                </a>
+                            <div class="preview-article essential-board essentials-board-size">
+                                {% if articles.essentials %}
+                                    {% for article in articles.essentials %}
+                                        {% if forloop.counter <= 3 %}
+                                            <div class="box">
+                                                <div class="card-title">
+                                                    <a href="{% url 'article' name=article.url pk=article.id %}">
+                                                        <img src="" alt="" width="208px" height="128px">
+                                                        {{ article.title }}
+                                                    </a>
+                                                </div>
+                                                <div class="card-writer">
+                                                    <span>{{ article.writer }}</span>
+                                                </div>
+                                                <div class="card-info">
+                                                    <span class="js-date">{{ article.date }}</span>
+                                                    <span>| 추천수: {{ article.upvote }}</span>
+                                                </div>
                                             </div>
-                                            <div class="card-writer">
-                                                <span>{{ article.writer }}</span>
-                                            </div>
-                                            <div class="card-info">
-                                                <span class="js-date">{{ article.date }}</span>
-                                                <span>| 추천수: {{ article.upvote }}</span>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <div class="preview-more">
-                                <a class="more" href={% url 'board' name='essentials' %}>더보기 ...</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="preview-more">
+                                    <a class="more" href={% url 'board' name='essentials' %}>더보기 ...</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {% if request.user.is_authenticated %}
-                        <!-- 로그인 이후 -->
-                        <div id="after-login" class="article-box">
-                            <!-- 로그인 이후 박스 -->
-                            <div class="login-box after-login">
-                                <div class="login-after-user-info">
-                                    <!--                                    <div class="login-user-img">-->
-                                    <!--                                        <img src="{{request.user.profile.image.url}}" alt="">-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="login-user-info">-->
-                                    <!--                                        <h6>{{ request.user.username }}님이 로그인중</h6>-->
-                                    <!--                                        <a href={% url 'logout' %}>-->
-                                    <!--                                            <button class="login_btn">로그아웃</button>-->
-                                    <!--                                        </a>-->
-                                    <!--                                        <h6>이메일: {{ request.user.email }}</h6>-->
-                                    <!--                                        <h6>생년월일: {{ request.user.birthday }}</h6>-->
-                                    <!--                                        <h6>전화번호: {{ request.user.phone }}</h6>-->
-                                    <!--                                        <a href="{% url 'detail' pk=request.user.pk %}">-->
-                                    <!--                                            <button class = "login_btn">프로필보기</button>-->
-                                    <!--                                        </a>-->
-                                    <!--                                    </div>-->
-                                    <div style="border : 1px solid black; border-radius : 1rem;">
-                                        <div class="user-content-box"><img id="profile-img"
-                                                                           src="{{ request.user.profile.image.url }}"
-                                                                           alt="프로필 사진"></div>
-                                        <div class="user-content-box">
-                                            <snap id="nickname" class="user-content">{{ request.user.username }}님이
-                                                로그인중
-                                            </snap>
-                                        </div>
-                                        <hr>
-                                        <div>
+                        {% if request.user.is_authenticated %}
+                            <!-- 로그인 이후 -->
+                            <div id="after-login" class="article-box">
+                                <!-- 로그인 이후 박스 -->
+                                <div class="login-box after-login">
+                                    <div class="login-after-user-info">
+                                        <div style="border : 1px solid black; border-radius : 1rem;">
+                                            <div class="user-content-box"><img id="profile-img"
+                                                                               src="{{ request.user.profile.image.url }}"
+                                                                               alt="프로필 사진"></div>
                                             <div class="user-content-box">
-                                                <div id="mileage" class="user-content">마일리지
-                                                    : {{ request.user.mileage }}</div>
-                                                <div id="address" class="user-content">{{ request.user.addr }}</div>
+                                                <snap id="nickname" class="user-content">{{ request.user.username }}님이
+                                                    로그인 중
+                                                </snap>
                                             </div>
                                             <hr>
-                                            <div class="user-content-box">
-                                                <div id="mypage" class="user-content"><a
-                                                        href="{% url 'profileapp:myinfo' %}"><input
-                                                        type="button" id="mypage-button" value="My Page"></a></div>
+                                            <div>
+                                                <div class="user-content-box">
+                                                    <div id="mileage" class="user-content">마일리지
+                                                        : {{ request.user.mileage }}</div>
+                                                    <div id="address" class="user-content">
+                                                        {% if request.user.addr %}
+                                                            <!-- 등록된 주소가 있는 경우, 주소를 출력 -->
+                                                            {{ request.user.addr }}
+                                                        {% else %}
+                                                            <!-- 등록된 주소가 없는 경우, 주소를 입력하는 사이트를 출력 -->
+                                                            <a href="{% url 'profileapp:address' %}">[주소등록]</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="user-content-box">
+                                                    <div id="mypage" class="user-content"><a
+                                                            href="{% url 'profileapp:myinfo' %}"><input
+                                                            type="button" id="mypage-button" value="My Page"></a></div>
 
-                                                <div id="logout" class="user-content"><a
-                                                        href="{% url 'logout' %}"><input type="button"
-                                                                                         id="logout-button"
-                                                                                         value="로그아웃"></a></div>
+                                                    <div id="logout" class="user-content"><a
+                                                            href="{% url 'logout' %}"><input type="button"
+                                                                                             id="logout-button"
+                                                                                             value="로그아웃"></a></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <!-- 로그인 이전 박스 및 광고 -->
-                        <div id="before-login" class="article-box">
-                            <!-- 로그인 박스 -->
-                            <div class="login-box">
-                                <div class="login-user">
-                                    <a href={% url 'login' %}>
-                                        <button id="login_btn">로그인</button>
-                                    </a>
+                        {% else %}
+                            <!-- 로그인 이전 박스 및 광고 -->
+                            <div id="before-login" class="article-box">
+                                <!-- 로그인 박스 -->
+                                <div class="login-box">
+                                    <div class="login-user">
+                                        <a href={% url 'login' %}>
+                                            <button id="login_btn">로그인</button>
+                                        </a>
+                                    </div>
+                                    <div class="info-user">
+                                        <a href={% url 'register' %}>회원가입</a>
+                                        <div class="separate-line">|</div>
+                                        <a href={% url 'findID' %}>아이디 찾기</a>
+                                        <div class="separate-line">|</div>
+                                        <a href={% url 'findPW1' %}>비밀번호 찾기</a>
+                                    </div>
                                 </div>
-                                <div class="info-user">
-                                    <a href={% url 'register' %}>회원가입</a>
-                                    <div class="separate-line">|</div>
-                                    <a href={% url 'findID' %}>아이디 찾기</a>
-                                    <div class="separate-line">|</div>
-                                    <a href={% url 'findPW1' %}>비밀번호 찾기</a>
+                                <!-- 광고 -->
+                                <div class="small-ad">
+                                    <img src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png"
+                                         alt="ad"
+                                         width="226px" height="127px"/>
                                 </div>
                             </div>
-                            <!-- 광고 -->
-                            <div class="small-ad">
-                                <img src="https://cdn.imweb.me/upload/S202012024cbcaa94f0469/3ef91e34b935f.png" alt="ad"
-                                     width="226px" height="127px"/>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
+                        {% endif %}
+                    </div>
                 {% endif %}
 
                 <!-- content -->
