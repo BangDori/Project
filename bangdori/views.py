@@ -116,6 +116,7 @@ def register(request):
         # register로 POST 요청이 들어오면, 새로운 User를 생성하는 절차
         context = {}
 
+        # 정보 저장
         username = request.POST.get('register_username', None)
         password = request.POST.get('register_user_pwd', None)
         password2 = request.POST.get('register_user_repwd', None)
@@ -125,22 +126,29 @@ def register(request):
         month = request.POST.get('register_user_month', None)
         day = request.POST.get('register_user_day', None)
         phone = request.POST.get('register_user_phone', None)
+        nickname = request.POST.get('register_user_nickname', None)
 
-        # 중복 확인 구현할 것
+        # 중복 확인
         if CustomerUser.objects.filter(username=username).exists():
             context['error'] = "사용할 수 없는 ID입니다."
 
+        # 비밀번호 틀림
         if password != password2:
             context['error'] = "비밀번호가 다릅니다."
         elif not (username and password and password2 and email_id and email_net
                   and year and month and day and phone):
+            # HTML에서 required 필드로 추가 할 것
             context['error'] = "빈칸없이 입력해주세요."
         else:
+            # DB에 저장
             user = CustomerUser.objects.create_user(username=username,
                                                     password=password2,
                                                     email=f'{email_id}@{email_net}',
                                                     birthday=f'{year}-{month}-{day}',
-                                                    phone=phone)
+                                                    phone=phone,
+                                                    nickname=nickname)
+
+            # 로그인 후 메인으로 이동
             auth.login(request, user)
             return redirect('/')
 
@@ -559,7 +567,7 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
+                                                         '-' + json['birthday'],
                                                 username=json['nickname'],
                                                 phone=json['mobile'],
                                                 )
