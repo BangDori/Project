@@ -146,4 +146,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MAX_ARTICLES = 10
 
 # 메인 화면에서 게시판당 표시할 게시글 개수
-INDEX_ARTICLES = 3
+INDEX_ARTICLES = 5

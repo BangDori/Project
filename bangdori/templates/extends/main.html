@@ -12,17 +12,26 @@
                     <div class="preview-essentials">
                         <div class="preview-title">자취생 필수템</div>
 
-                        <div class="preview-article essentials-board-size">
-                            height 임의로 설정해뒀음(content 작성 후 height style 제거)
+                        <div class="preview-article essential-board essentials-board-size">
                             {% if articles.essentials %}
                                 {% for article in articles.essentials %}
-                                    <div class="article-info">
-                                        <div class="id">{{ forloop.counter }}</div>
-                                        <div class="title">
-                                            <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                    {% if forloop.counter <= 3 %}
+                                        <div class="box">
+                                            <div class="card-title">
+                                                <a href="{% url 'article' name=article.url pk=article.id %}">
+                                                    <img src="" alt="" width="208px" height="128px">
+                                                    {{ article.title }}
+                                                </a>
+                                            </div>
+                                            <div class="card-writer">
+                                                <span>{{ article.writer }}</span>
+                                            </div>
+                                            <div class="card-info">
+                                                <span class="js-date">{{ article.date }}</span>
+                                                <span>| 추천수: {{ article.upvote }}</span>
+                                            </div>
                                         </div>
-                                        <div class="recommendation">{{ article.upvote }}</div>
-                                    </div>
+                                    {% endif %}
                                 {% endfor %}
                             {% endif %}
                             <div class="preview-more">

@@ -32,12 +32,17 @@
     position: relative;
     display: flex;
     flex-direction: row;
+    text-align: center;
     align-items: center;
     padding: 10px 0;
 }
 
 .id, .views, .recommendation{
     width: 96px;
+}
+
+.top-info>.title {
+    text-align: center !important;
 }
 
 .title{
