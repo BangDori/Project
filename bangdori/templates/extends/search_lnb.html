@@ -7,7 +7,6 @@
         {% if not is_search %}
             {% if name == '공지' %}
                 {% if request.user.id == 1 %}
-                    어드민입니다.
                     <div class="writting-box">
                         <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
                     </div>
