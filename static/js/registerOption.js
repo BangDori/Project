@@ -9,17 +9,18 @@ const DIRECT = "hidden";
 
 function setAddress() {
     let option;
-    
-    let addres = [
+
+    let address = [
+        {value: 'direct', register_user_email: '직접 입력'},
+        {value: 'gmail.com', register_user_email: 'gmail.com'},
         {value: 'naver.com', register_user_email: 'naver.com'},
         {value: 'daum.com', register_user_email: 'daum.com'},
-        {value: 'google.com', register_user_email: 'google.com'},
-        {value: 'direct', register_user_email: '직접 입력'},
+        {value: 'kakao.com', register_user_email: 'kakao.com'},
     ];
 
-    addres.unshift({value: '', register_user_email: '주소 입력'});
+    address.unshift({value: '', register_user_email: '주소 선택'});
 
-    for(const addr of addres) {
+    for (const addr of address) {
         option = document.createElement("option");
         option.value = addr.value;
         option.innerText = addr.register_user_email;
@@ -30,19 +31,19 @@ function setAddress() {
 function setBirth() {
     let option;
 
-    for(let i = 1970; i <= 2022; i++) {
+    for (let i = 1970; i <= 2022; i++) {
         option = document.createElement("option");
         option.value = i.toString();
         option.innerText = i.toString();
         year_box.appendChild(option);
     }
-    for(let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 12; i++) {
         option = document.createElement("option");
         option.value = i.toString().padStart(2, 0);
         option.innerText = i.toString();
         month_box.appendChild(option);
     }
-    for(let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= 31; i++) {
         option = document.createElement("option");
         option.value = i.toString().padStart(2, 0);
         option.innerText = i.toString();
@@ -51,14 +52,12 @@ function setBirth() {
 }
 
 function changeEmail(event) {
-    if(event.target.value === 'direct') {
-        console.log("yes");
+    if (event.target.value === 'direct') {
+        // console.log("yes");
         select_email_box.innerText = "";
-
 
         select_email_box.classList.add(DIRECT);
         input_email_box.classList.remove(DIRECT);
-
     } else {
         input_email_box.value = "";
 
