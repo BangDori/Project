@@ -5,9 +5,18 @@
         <!-- 검색 화면이면 검색 결과 출력되도록 설정,
             검색이랑 공용 부분 -->
         {% if not is_search %}
-            <div class="writting-box">
-                <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
-            </div>
+            {% if name == '공지' %}
+                {% if request.user.id == 1 %}
+                    어드민입니다.
+                    <div class="writting-box">
+                        <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="writting-box">
+                    <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
+                </div>
+            {% endif %}
         {% endif %}
     {% endif %}
 
