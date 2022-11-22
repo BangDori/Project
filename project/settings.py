@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bangdori',
     'profileapp',
+    'api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 한 페이지에 글을 몇 개 띄울지 설정
 MAX_ARTICLES = 10
+
+# 메인 화면에서 게시판당 표시할 게시글 개수
+INDEX_ARTICLES = 3

@@ -8,7 +8,7 @@
 
 <div style="text-align: center; max-width: 500px; margin: 4rem auto">
     <div><h4>Profile Create</h4></div>
-    <form action="{% url 'profileapp:create' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'profileapp:view' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ form }}

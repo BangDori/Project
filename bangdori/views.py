@@ -13,9 +13,10 @@ from django.views import View
 from django.views.generic import DetailView
 from dotenv import load_dotenv
 
-from project.settings import MAX_ARTICLES
+import bangdori.models
+from project.settings import MAX_ARTICLES, INDEX_ARTICLES
 from .models import *
-from .utils import make_signature, getModelByName
+from .utils import make_signature, getModelByName, getArticlesByAddress, getAllArticles
 
 load_dotenv()
 
@@ -28,22 +29,30 @@ def goIndex(request):
 
 def index(request):
     context = {}
-    """
-    로그인 정보는 Session에 기록되도록 설정되어 있음.
-    dict 형식으로 request 전달 비활성화
-    """
-    # logged_user = request.session.get('user')
-    # print(logged_user)
-    # logged_user = {}
-    # if logged_user:
-    #     user = CustomerUser.objects.get(username=username)
-    #     username['username'] = user.username
-    #     username['user_email'] = user.email
-    #     username['user_birth'] = user.birthday
-    #     username['user_phone'] = user.phone
-    #     username['user_logged_in'] = TRUE
+    # 게시글 정보를 저장할 dict
+    articles = {}
+    # 게시글 데이터 가져옴
+    data = getAllArticles()
 
-    return render(request, 'index.html', {})
+    # 자를 갯수
+    cut = INDEX_ARTICLES
+
+    # 게시글이 없는 경우에 예외처리를 하지 않으면 오류가 날 수 있음
+    if len(data) > 0:
+        # 핫 게시물은 upvote 순으로 정렬
+        articles['best'] = sorted(data, key=lambda x: x['upvote'], reverse=True)[:cut]
+        # 최신 게시물은 date 순으로 정렬
+        articles['new'] = sorted(data, key=lambda x: x['date'], reverse=True)[:cut]
+
+        # 각 게시판별 글
+        articles['board'] = [x.to_dict() for x in BoardArticle.objects.all().order_by('-date')][:cut]
+        articles['dabang'] = [x.to_dict() for x in DabangArticle.objects.all().order_by('-date')][:cut]
+        articles['succession'] = [x.to_dict() for x in SuccessionArticle.objects.all().order_by('-date')][:cut]
+        articles['group'] = [x.to_dict() for x in GroupArticle.objects.all().order_by('-date')][:cut]
+        articles['essentials'] = [x.to_dict() for x in EssentialsArticle.objects.all().order_by('-date')][:cut]
+
+    context['articles'] = articles
+    return render(request, 'index.html', context)
 
 
 def login(request):
@@ -150,7 +159,8 @@ def id_check(request):
 class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
-    template_name = 'view.html'
+    template_name = 'profile.html'
+
 
 def dabang(request):
     return render(request, 'dabang.html')
@@ -178,6 +188,7 @@ def board(request, name):
 
     # 게시판 내용 불러올 Article 객체
     articles = getModelByName(name)
+    need_sorted_addr = articles().need_sorted_addr()
 
     # 페이지 정보 전달
     # context['name'] : 페이지가 표시되는 한글 이름
@@ -187,6 +198,11 @@ def board(request, name):
 
     # 모든 글 가져옴, 날짜 내림차순으로 조회
     articles = articles.objects.all().order_by('-date')
+
+    # 주소 순으로 정렬이 필요한 경우
+    if need_sorted_addr:
+        articles = getArticlesByAddress(request.user, articles)
+
     # Paginator 사용
     paginator = Paginator(articles, MAX_ARTICLES)
     # GET 요청이 들어오면 page 파라미터를 읽어옴
@@ -254,25 +270,47 @@ def write(request, name):
     """
     write : 게시글을 작성하는 view
     """
+    context = {}
+
     # 현재 로그인된 사용자의 정보를 가져옴
-    user = request.user
+    user: CustomerUser = request.user
+
+    # 현재 게시판에 맞는 모델을 가져옴
+    article = getModelByName(name)
+    need_addr = article().need_addr()
+    need_sorted_addr = article().need_sorted_addr()
+
+    # 페이지 정보 전달
+    # context['name'] : 페이지가 표시되는 한글 이름
+    context['name'] = article._meta.verbose_name
+    # context['need_addr'] : 주소 등록이 필요한지에 대한 여부
+    context['need_addr'] = need_addr
 
     if request.method == "POST":
-        # 현재 게시판에 맞는 모델을 가져옴
-        article = getModelByName(name)
-
         # 게시글 작성
         article = article(title=request.POST.get('title'),
                           writer=CustomerUser.objects.get(username=user),
                           content=request.POST.get('content'))
 
-        # 게시글 저장
+        # 주소가 필요한 경우, article의 FK 필드인 addr에 새로운 주소를 만들어 저장
+        if need_addr:
+            article.addr = bangdori.models.Address().createFromPost(request)
 
+        # 글에 주소 등록은 필요 없는데, 이를 사용자의 주소로 가져와야 할 경우
+        if not need_addr and need_sorted_addr:
+            # need_addr은 주소 등록이 필요 없으므로 False이고,
+            # need_sorted_addr은 주소 순으로 정렬해야 할 경우 True이면,
+            # 주소 등록은 없지만 주소 순으로 정렬해야 한다는 의미가 되므로,
+            # 이러한 경우 사용자의 주소를 가져와 해당 글의 주소로 등록한다.
+            article.addr = user.addr
+
+        # 게시글 저장
         article.save()
+
         # 게시판으로 다시 돌아감
         return redirect('board', name=name)
 
-    return render(request, 'write.html')
+    return render(request, 'write.html', context)
 
 
 def findID(request):
@@ -344,19 +382,29 @@ class SmsVerifyView(View):
         input_mobile_num = request.POST['phone_number']
         message = request.POST['message_number']
         stragety = request.POST['stragety']
-        if(stragety == 'findID'):
-            auth_mobile = Authentication.objects.get(
-                phone_number=input_mobile_num)
-            if (auth_mobile.auth_number == message):
-                user = CustomerUser.objects.get(
-                    phone=input_mobile_num)
-                if (user):
-                    auth_mobile.delete()
-                    return JsonResponse({'message': str(user.username)}, status=200)
-                else:
-                    return JsonResponse({'message': 'Not User!'}, status=200)
+        auth_mobile = Authentication.objects.get(
+            phone_number=input_mobile_num)
+        state = auth_mobile.auth_number == message
+
+        if (stragety == 'verify'):
+            if (state):
+                return JsonResponse({'message': "Verify Completed!"}, status=200)
             else:
-                return JsonResponse({'message': 'Not Correct Number!'}, status=200)
+                return JsonResponse({'message': "Verify Failed!"}, status=200)
+
+        if (state):
+            user = CustomerUser.objects.get(
+                phone=input_mobile_num)
+            if (user):
+                auth_mobile.delete()
+                if (stragety == 'findID'):
+                    return JsonResponse({'message': str(user.username)}, status=200)
+                if (stragety == 'findPW'):
+                    return JsonResponse({'message': str(user.password)}, status=200)
+            else:
+                return JsonResponse({'message': 'Not User!'}, status=200)
+        else:
+            return JsonResponse({'message': 'Not Correct Number!'}, status=200)
 
 
 class kakaologin(View):
@@ -485,38 +533,89 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
+                                                         '-' + json['birthday'],
                                                 username=json['nickname'],
                                                 phone=json['mobile'],
                                                 )
         auth.login(request, user)
         return redirect('/index')
 
-# class address(View):
-#     def get(self, request):
-#         if request.user.is_anonymous:
-#             return redirect(reverse('index'))
 
-#         return render(request, 'address.html')
+class SearchAll(View):
+    """
+    SearchAll : header에 위치하는 검색 기능을 사용하기 위한 클래스
+    """
 
-#     def post(self, request):
-#         addr = Address()
-#         try:
-#             addr.postcode = int(request.POST.get('postcode'))
-#         except:
-#             pass
+    def post(self, request):
+        # 페이지에 넘겨줄 Context
+        context = {}
+        context['is_search'] = True
+        context['is_global_search'] = True
 
-#         addr.road = request.POST.get('road')
-#         addr.lot = request.POST.get('lot')
-#         addr.detail = request.POST.get('detail')
-#         addr.extra = request.POST.get('extra')
-#         addr.city = request.POST.get('sido')
-#         addr.state = request.POST.get('sigungu')
-#         addr.road_name = request.POST.get('roadname')
-#         addr.lat = float(request.POST.get('lat'))
-#         addr.lng = float(request.POST.get('lng'))
+        # 모든 게시판 객체 가져옴
+        boards = getModelByName(None, True)
+        # 검색어 가져옴
+        keyword = request.POST.get('search_keyword')
 
-#         user = request.user
+        # 게시물 검색해오는 부분
+        result = list()
+        for board in boards:
+            # 모든 게시판에서 키워드를 포함한 글을 가져옴
+            articles = board.objects.all().filter(title__contains=keyword)
+            # 검색 결과가 없는 것은 제외
+            if articles.count() > 0:
+                for article in articles:
+                    # dict로 변환하여 저장
+                    result.append(article.to_dict())
+
+        # 날짜순으로 정렬
+        result = sorted(result, key=lambda x: x['date'], reverse=True)
+        context['articles'] = result
+        context['keyword'] = keyword
+
+        # Pagination은 구현되어 있지 않음
+        return render(request, 'board.html', context)
 
 
-#         return render(request, 'address.html')
+class SearchArticle(View):
+    """
+    SearchArticle : 게시판 내에서 검색을 위한 클래스
+    """
+
+    def post(self, request, name):
+        # 페이지에 넘겨줄 Context
+        context = {}
+        context['is_search'] = True
+        options = request.POST.get('search-type')
+
+        # 모든 게시판 객체 가져옴
+        board = getModelByName(name)
+        # 검색어 가져옴
+        keyword = request.POST.get('board-search-keyword')
+
+        # 게시물 검색해오는 부분
+        result = board.objects.all()
+
+        # 조건에 맞도록 검색하는 부분
+        if options == 'search-tc':
+            x = result.filter(title__contains=keyword)
+            x |= result.filter(content__contains=keyword)
+            result = x
+        elif options == 'search-t':
+            result = result.filter(title__contains=keyword)
+        elif options == 'search-c':
+            result = result.filter(content__contains=keyword)
+        elif options == 'search-w':
+            result = result.filter(writer__username=keyword)
+        elif options == 'search-cmt':
+            pass
+
+        # 날짜 순으로 정렬
+        result = result.order_by('-date')
+
+        context['articles'] = result
+        # 게시판 내 검색이므로, 주소를 지정해주어야 함
+        context['url'] = name
+
+        # Pagination은 구현되어 있지 않음
+        return render(request, 'board.html', context)

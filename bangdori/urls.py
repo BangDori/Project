@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-
 NAME = 'APP'
 urlpatterns = [
     path('', views.goIndex, name='go'),
@@ -11,6 +10,7 @@ urlpatterns = [
     path('idcheck/', views.id_check, name='idcheck'),
     path('detail/<int:pk>', views.DetailView.as_view(), name='detail'),
     path('board/<str:name>/', views.board, name='board'),
+    path('board/<str:name>/search/', views.SearchArticle.as_view(), name='searcharticle'),
     path('board/<str:name>/<int:pk>', views.article, name='article'),
     path('board/<str:name>/write/', views.write, name='write'),
     path('board/<str:name>/update/<int:pk>', views.update, name='update'),
@@ -32,5 +32,5 @@ urlpatterns = [
     path('login/naver/callback/',
          views.navercallback.as_view(), name='naverCallback'),
     path('findPW1/findPW2/smspw', views.SMSPW, name='smspw'),
-    #path('address/', views.address.as_view(), name='address'),
+    path('search/', views.SearchAll.as_view(), name='searchall')
 ]
