@@ -47,9 +47,18 @@
                                 <div class="login-box after-login">
                                     <div class="login-after-user-info">
                                         <div style="border : 1px solid black; border-radius : 1rem;">
-                                            <div class="user-content-box"><img id="profile-img"
-                                                                               src="{{ request.user.profile.image.url }}"
-                                                                               alt="프로필 사진"></div>
+                                            <div class="user-content-box">
+                                                {% if request.user.profile.image.url %}
+                                                    <img id="profile-img"
+                                                         src="{{ request.user.profile.image.url }}"
+                                                         alt="프로필 사진">
+                                                {% else %}
+                                                    <!-- 등록해놓은 이미지가 없으면 기본 이미지를 출력하도록 설정 -->
+                                                    <img id="profile-img"
+                                                         src="{% get_media_prefix %}profile/default_profile.png"
+                                                         alt="프로필 사진">
+                                                {% endif %}
+                                            </div>
                                             <div class="user-content-box">
                                                 <snap id="nickname" class="user-content">{{ request.user.username }}님이
                                                     로그인 중
