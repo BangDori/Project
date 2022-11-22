@@ -241,7 +241,6 @@ def article(request, name, pk):
     article = article.objects.all().get(id=pk)
     comment = getCommentModelByName(name)
     try:
-
         comments = comment.objects.all().filter(article_id=article.id)
     except Exception as e:
         comments = None

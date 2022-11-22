@@ -34,6 +34,12 @@
                 <div class="article-content">
                     {{ article.content }}
                 </div>
+
+                {% if request.user == article.writer %}
+                    <div class="board-article-update">
+                        <a class="move-article-update" href={% url 'update' name=url pk=article.id%}>수정</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
 
@@ -43,9 +49,6 @@
             </div>
             <div class="board-article-home">
                 <a class="move-article-list" href={% url 'board' name=url %}>목록으로</a>
-            </div>
-            <div class="board-article-update">
-                <a class="move-article-update" href={% url 'update' name=url pk=article.id%}>수정</a>
             </div>
             <div class="board-article-after">
                 <a class="move-article" href="">다음 글 ></a>
