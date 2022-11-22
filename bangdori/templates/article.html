@@ -69,8 +69,10 @@
             </div>
             <!-- 댓글 받아주세요 -->
             <div class="user-comment-box">
-                {% if comment %}
-                
+                {% if comments %}
+                    {%for comment in comments %}
+                        {{comment.content}}
+                    {% endfor %}
                 {% endif %}
                 댓글 -------
             </div>

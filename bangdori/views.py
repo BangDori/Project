@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import bangdori.models
 from project.settings import MAX_ARTICLES, INDEX_ARTICLES
 from .models import *
-from .utils import make_signature, getModelByName, getArticlesByAddress, getAllArticles
+from .utils import make_signature, getModelByName, getCommentModelByName, getArticlesByAddress, getAllArticles
 
 load_dotenv()
 
@@ -239,9 +239,12 @@ def article(request, name, pk):
     # 게시글 정보 불러옴
     article = getModelByName(name)
     article = article.objects.all().get(id=pk)
+    comment = getCommentModelByName(name)
+    try:
 
-    # comments = Comment.objects.all().get(article_id=article.id)
-
+        comments = comment.objects.all().filter(article_id=article.id)
+    except Exception as e:
+        comments = None
     # 조회수 올림
     article.views = article.views + 1
     article.save()
@@ -249,7 +252,7 @@ def article(request, name, pk):
     # Context에 전달
     context['article'] = article
     context['url'] = name
-    # context['comment'] = comments
+    context['comments'] = comments
 
     return render(request, 'article.html', context)
 
@@ -258,8 +261,9 @@ def comment(request, name, pk):
     user = request.user
     Article = getModelByName(name)
     article = Article.objects.all().get(id=pk)
+    comment = getCommentModelByName(name)
     if request.method == "POST":
-        Comment.objects.create(article_id=article.id,
+        comment.objects.create(article_id=article,
                                content=request.POST.get('comment'),
                                writer=user.nickname
                                )

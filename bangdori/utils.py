@@ -28,6 +28,15 @@ def make_signature(timestamp):
     return signingKey
 
 
+def getCommentModelByName(name):
+    comments = None
+    if name == 'board':
+        comments = BoardComment
+    elif name == 'succession':
+        comments = SuccessionComment
+    return comments
+
+
 def getModelByName(name, is_all=False):
     """
     getModelByName : name에 따라 적절한 Model 객체를 반환하는 클래스
@@ -65,7 +74,8 @@ def getModelByName(name, is_all=False):
 def getArticlesByAddress(user: CustomerUser, articles: QuerySet):
     try:
         # addr : 게시글을 Key로, 사용자와의 거리를 Value로 가지는 dict
-        addr = {article: user.addr.calcDistance(article.addr) for article in articles}
+        addr = {article: user.addr.calcDistance(
+            article.addr) for article in articles}
     except:
         return articles
 
