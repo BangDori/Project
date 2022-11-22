@@ -54,8 +54,7 @@
 
         <div class="board-article-comment">
             <div class="comment-count">
-                <!-- ??에 댓글 수 받아주세요 -->
-                댓글 ??개
+                댓글 {{ comments.count }}개
             </div>
             <div class="comment-box">
                 <form class="comment-form" method="post" action={% url 'comment' name=url pk=article.id%} >
@@ -67,14 +66,26 @@
                     </div>
                 </form>
             </div>
-            <!-- 댓글 받아주세요 -->
-            <div class="user-comment-box">
+            <div class="user-comment-box comment-box">
                 {% if comments %}
-                    {%for comment in comments %}
-                        {{comment.content}}
+                    {% for comment in comments %}
+                        <div class="user-comment">
+                            <div class="user-info">
+                                <span class="comment-username">{{ comment.writer }}</span>
+                                <span class="comment-day">{{ comment.updated_at }}</span>
+                            </div>
+                            <div class="comment">
+                                {{ comment.content }}
+                            </div>
+                            {% if request.user == comment.writer %}
+                                <div class="removal-comment">
+                                    <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
+                                    alt="cancel" width="8px">    
+                                </div>
+                            {% endif %}
+                        </div>
                     {% endfor %}
                 {% endif %}
-                댓글 -------
             </div>
         </div>
     </div>

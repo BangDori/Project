@@ -265,7 +265,7 @@ def comment(request, name, pk):
     if request.method == "POST":
         comment.objects.create(article_id=article,
                                content=request.POST.get('comment'),
-                               writer=user.nickname
+                               writer=user
                                )
         return redirect('article', name=name, pk=pk)
 

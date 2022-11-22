@@ -97,8 +97,7 @@
 }
 
 .board-article-comment{
-    border-top: 1px solid #ccc;
-    padding: 15px 0;
+    padding: 16px 0;
 }
 
 .comment-count{
@@ -135,10 +134,12 @@
 }
 
 .comment-form .comment-textarea {
+    flex-grow: 1;
     resize: none;
     border-radius: .4rem;
     padding-top: 8px;
     padding-inline-start: 8px;
+    font-size: 16px;
 
     z-index: 0;
 }
@@ -154,4 +155,54 @@
     cursor: pointer;
     border: 3px solid gray;
     border-radius: .4rem;
+}
+
+.user-comment-box {
+    margin-top: 32px;
+    padding: 0 16px;
+    font-size: 16px;
+}
+
+.user-comment {
+    position: relative;
+    border: 1px solid gray;
+    border-radius: .7rem;
+    margin: 16px 0;
+}
+
+.user-comment .user-info{
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-comment .user-info .comment-username {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.user-comment .user-info .comment-day {
+    font-size: 12px;
+}
+
+.user-comment .comment {
+    margin-top: 14px;
+    padding: 8px;
+}
+
+.user-comment .removal-comment {
+    position: absolute;
+
+    right: 8px;
+    bottom: 2px;
+}
+
+.user-comment .removal-comment>img{
+    cursor: pointer;
+}
+
+.user-comment .removal-comment>img:hover {
+    border: 1px solid gray;
+    border-radius: 50%;
 }
