@@ -32,8 +32,19 @@ def getCommentModelByName(name):
     comments = None
     if name == 'board':
         comments = BoardComment
+    elif name == 'dabang':
+        comments = DabangComment
     elif name == 'succession':
         comments = SuccessionComment
+    elif name == 'essentials':
+        comments = EssentialsComment
+    elif name == 'notice':
+        comments = NoticeComment
+    elif name == 'contact':
+        comments = ContactComment
+    elif name == 'group':
+        comments = GroupComment
+
     return comments
 
 
