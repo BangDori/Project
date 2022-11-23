@@ -14,6 +14,7 @@ from django.views.generic import DetailView
 from dotenv import load_dotenv
 
 import bangdori.models
+from profileapp.models import Profile
 from project.settings import MAX_ARTICLES, INDEX_ARTICLES
 from .models import *
 from .utils import make_signature, getModelByName, getCommentModelByName, getArticlesByAddress, getAllArticles
@@ -266,10 +267,15 @@ def article(request, name, pk):
     article.views = article.views + 1
     article.save()
 
+    writer_img = Profile.objects.all().filter(user=article.writer).last()
+    if writer_img:
+        writer_img = writer_img.image.url
+
     # Context에 전달
     context['article'] = article
     context['url'] = name
     context['comments'] = comments
+    context['writer_img'] = writer_img
 
     return render(request, 'article.html', context)
 
