@@ -4,6 +4,7 @@ import base64
 import os
 
 from django.db.models import QuerySet
+from django.template.defaultfilters import register
 from dotenv import load_dotenv
 
 from bangdori.models import *
@@ -111,3 +112,12 @@ def getAllArticles():
                 result.append(article.to_dict())
 
     return result
+
+
+@register.filter(name='dict_key')
+def dictKey(d, k):
+    """
+    Django Template에서 Dict의 Key를 통해 Value를 얻고자 하는
+    Template용 함수
+    """
+    return d[k]

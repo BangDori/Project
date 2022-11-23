@@ -37,10 +37,15 @@
                                 <!-- 검색 화면이면 결과 주소로 출력되도록 설정,
                                 검색이랑 공용 부분 -->
                                 {% if is_global_search %}
-                                    <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
+                                    <a href="{% url 'article' name=article.url pk=article.id %}">
                                 {% else %}
-                                    <a href="{% url 'article' name=url pk=article.id %}">{{ article.title }}</a>
+                                    <a href="{% url 'article' name=url pk=article.id %}">
                                 {% endif %}
+                                {{ article.title }}
+                                {% if comments|dict_key:article.id %}
+                                    [{{ comments|dict_key:article.id }}]
+                                {% endif %}
+                                </a>
                             </div>
                             <div class="writer">{{ article.writer }}</div>
                             <div class="date js-date">{{ article.date }}</div>
@@ -63,15 +68,15 @@
                             <div class="card-title">
                                 {% if is_global_search %}
                                     <a href="{% url 'article' name=article.url pk=article.id %}">
-                                        <img src="" alt="" width="208px" height="128px">
-                                        {{ article.title }}
-                                    </a>
                                 {% else %}
                                     <a href="{% url 'article' name=url pk=article.id %}">
-                                        <img src="" alt="" width="208px" height="128px">
-                                        {{ article.title }}
-                                    </a>
                                 {% endif %}
+                                <img src="" alt="" width="208px" height="128px">
+                                {{ article.title }}
+                                {% if comments|dict_key:article.id %}
+                                    [{{ comments|dict_key:article.id }}]
+                                {% endif %}
+                                </a>
                             </div>
                             <div class="card-writer">
                                 <span>{{ article.writer }}</span>

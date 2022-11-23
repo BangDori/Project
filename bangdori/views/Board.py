@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
-from bangdori.utils import getModelByName, getArticlesByAddress
+from bangdori.utils import getModelByName, getArticlesByAddress, getCommentModelByName
 from project.settings import MAX_ARTICLES
 
 
@@ -38,4 +38,7 @@ def board(request, name):
     # 현재 페이지에 맞는 게시물 목록을 Context로 넘겨줌
     context['articles'] = paginator.get_page(page)
 
+    # 댓글 가져옴
+    comments = getCommentModelByName(name)
+    context['comments'] = {x.id: comments.objects.all().filter(article_id=x).count() for x in context['articles']}
     return render(request, 'board.html', context)
