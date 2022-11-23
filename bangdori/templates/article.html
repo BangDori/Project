@@ -26,16 +26,17 @@
                         </div>
                         <div class="article-comment">
                             <!-- ??에 댓글 수 받아주세요 -->
-                            댓글 수 ??
+                            댓글 수 {{ comments.count }}
                         </div>
                     </div>
                 </div>
+
                 <div class="article-content-box">
                     <div class="article-content">
                         {{ article.content }}
                     </div>
 
-                    {% if request.user == article.writer %}
+                    {% if request.user.id == article.writer.id %}
                         <div class="board-article-update">
                             <a class="move-article-update" href={% url 'update' name=url pk=article.id %}>수정</a>
                         </div>
@@ -84,7 +85,7 @@
                                 <div class="comment">
                                     {{ comment.content }}
                                 </div>
-                                {% if request.user == comment.writer %}
+                                {% if request.user.id == comment.writer.id %}
                                     <div class="removal-comment">
                                         <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
                                              alt="cancel" width="8px">
