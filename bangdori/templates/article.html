@@ -86,6 +86,7 @@
                             <div class="user-comment">
                                 <div class="user-info">
                                     <span class="comment-username">{{ comment.writer }}</span>
+                                      
                                     <span class="comment-day">{{ comment.updated_at }}</span>
                                 </div>
                                 <div class="comment">
@@ -93,8 +94,13 @@
                                 </div>
                                 {% if request.user.id == comment.writer.id %}
                                     <div class="removal-comment">
+                                        <form action={% url 'commentDelete' name=url pk=article.id commentId=comment.id %} method="get">
+                                        <input type="hidden" value = "{{comment.id}}"/>
+                                        <button type="submit" value="">
                                         <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
                                              alt="cancel" width="8px">
+                                        </button>
+                                        </form>
                                     </div>
                                 {% endif %}
                             </div>
