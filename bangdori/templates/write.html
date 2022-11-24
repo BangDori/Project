@@ -14,14 +14,6 @@
         <form class="write-form" method="POST">
             {% csrf_token %}
             <div class="write-title-box">
-                <select class="form-select" name="form-select" id="">
-                    <option value="tap" selected>선택</option>
-                    <option value="dabang">승계 게시판</option>
-                    <option value="essestials">자취생 필수템 게시판</option>
-                    <option value="group">공동 구매 게시판</option>
-                    <option value="board">자유 게시판</option>
-                </select>
-
                 <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요." value="{{ title }}" required>
             </div>
 
