@@ -2,7 +2,12 @@
 
 {% block content %}
     <div class="board-title-name">
-        {{ name }} 게시판 글쓰기
+        {{ name }} 게시판
+        {% if isEdit %}
+            수정
+        {% else %}
+            글쓰기
+        {% endif %}
     </div>
 
     <div class="col-12 write-container">
@@ -38,7 +43,11 @@
                         {% include 'address_form.html' %}
                     </div>
                 {% endif %}
-                <input type="submit" value="글쓰기">
+                {% if isEdit %}
+                    <input type="submit" value="수정">
+                {% else %}
+                    <input type="submit" value="글쓰기">
+                {% endif %}
             </div>
             <input type="hidden" name="alignStatus" value="left">
         </form>
