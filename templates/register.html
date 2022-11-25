@@ -60,7 +60,19 @@
                 {% csrf_token %}
                 <input class="input-box" type="text" id="register_user_phone" name="register_user_phone"
                        placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
-                <input class="check-btn" type="button" onclick="SMS()" value="인증하기">
+                <input class="check-btn" type="button" id = "send_btn" onclick="SMS(), toggleBtn(), ChangeName()" value="문자전송">
+            </div>
+
+             <div style = "display: none;" id = "count">
+                 <h3 class="count-down" id = "certi01"></h3>
+            </div>
+
+            <!-- 인증 번호 입력란 -->
+            <div class = "info-phone">
+                {% csrf_token %}
+                <input class="input-box" type="text" id="certification_user_phone" name="certification_user_phone"
+                       placeholder="인증번호 입력" required>
+                <input class = "check-btn" type="button" value="인증하기">
             </div>
 
             <!-- 닉네임 입력란 -->
@@ -118,6 +130,57 @@
         })
     }
 
+</script>
+
+<script>
+    const countDownTimer = function(id, date){
+        var _vDate = new Date(date);
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var timer;
+        var SetTime = 300;
+
+        function showRemaining(){
+
+            if (SetTime < 0) {
+            clearInterval(timer);
+            document.getElementById(id).textContent = '시간 초과! 문자전송을 다시해주세요!';
+            return;
+            }
+
+            var minutes = Math.floor(SetTime / 60);
+            var seconds = Math.floor(SetTime % 60);
+
+            document.getElementById(id).textContent = minutes + '분 ';
+			document.getElementById(id).textContent += seconds + '초';
+            SetTime --;
+        }
+
+       timer = setInterval(showRemaining, 1000);
+    }
+
+    var dateObj = new Date();
+    dateObj.setDate(dateObj.getDate() + 1);
+
+
+    countDownTimer('certi01', dateObj);
+</script>
+<script>
+    function toggleBtn(){
+        const count = document.getElementById('count');
+        if(count.style.display == 'none'){
+            count.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function ChangeName(){
+        const btnElement = document.getElementById('send_btn');
+
+        btnElement.value = "문자재전송";
+    }
 </script>
 
 <script src="{% static 'js/registerOption.js' %}"></script>

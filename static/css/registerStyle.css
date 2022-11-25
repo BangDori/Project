@@ -153,3 +153,9 @@ body{
 .check-option{
     color: #ccc;
 }
+
+.count-down{
+    margin-top: 0;
+    color: blue;
+    text-align: end;
+}

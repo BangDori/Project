@@ -19,3 +19,7 @@ def findPW1(request):
 
 def findPW2(request):
     return render(request, 'findPW2.html')
+
+
+def showID(request):
+    return render(request, 'showID.html')
