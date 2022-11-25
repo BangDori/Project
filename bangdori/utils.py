@@ -4,6 +4,7 @@ import base64
 import os
 
 from django.db.models import QuerySet
+from django.template.defaultfilters import register
 from dotenv import load_dotenv
 
 from bangdori.models import *
@@ -26,6 +27,26 @@ def make_signature(timestamp):
         hmac.new(secret_key, message, digestmod=hashlib.sha256).digest())
 
     return signingKey
+
+
+def getCommentModelByName(name):
+    comments = None
+    if name == 'board':
+        comments = BoardComment
+    elif name == 'dabang':
+        comments = DabangComment
+    elif name == 'succession':
+        comments = SuccessionComment
+    elif name == 'essentials':
+        comments = EssentialsComment
+    elif name == 'notice':
+        comments = NoticeComment
+    elif name == 'contact':
+        comments = ContactComment
+    elif name == 'group':
+        comments = GroupComment
+
+    return comments
 
 
 def getModelByName(name, is_all=False):
@@ -65,7 +86,8 @@ def getModelByName(name, is_all=False):
 def getArticlesByAddress(user: CustomerUser, articles: QuerySet):
     try:
         # addr : 게시글을 Key로, 사용자와의 거리를 Value로 가지는 dict
-        addr = {article: user.addr.calcDistance(article.addr) for article in articles}
+        addr = {article: user.addr.calcDistance(
+            article.addr) for article in articles}
     except:
         return articles
 
@@ -90,3 +112,12 @@ def getAllArticles():
                 result.append(article.to_dict())
 
     return result
+
+
+@register.filter(name='dict_key')
+def dictKey(d, k):
+    """
+    Django Template에서 Dict의 Key를 통해 Value를 얻고자 하는
+    Template용 함수
+    """
+    return d[k]

@@ -4,10 +4,10 @@ from django.views import View
 from django.views.generic import CreateView
 
 import bangdori
-from bangdori.models import CustomerUser
+from bangdori.models import *
 from bangdori.utils import getModelByName
 from .forms import ProfileCreateForm
-from .models import Profile
+from .models import *
 
 
 # Create your views here.

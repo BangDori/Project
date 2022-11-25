@@ -1,80 +1,107 @@
 {% extends 'extends/main.html' %}
+{% load static %}
 
 {% block content %}
-<div class="row mt-5">
-    <div class="col-12">
-        <div class="board-article">
-            <div class="article-top">
-                <div class="article-title">
-                    <span>{{ article.title }}</span>
-                </div>
-                <div class="article-date">
-                    <span>{{ article.date }}</span>
-                </div>
-            </div>
-            <div class="article-info">
-                <div class="article-writer">
-                    <!-- ㅇ 에 profile_image 받아주세요 -->
-                    ㅇ{{ article.writer }}
-                </div>
-                <div class="article-user">
-                    <div class="article-views">
-                        조회 수 {{ article.views }}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="board-article">
+                <div class="article-top">
+                    <div class="article-title">
+                        <span>{{ article.title }}</span>
                     </div>
-                    <div class="article-upvote">
-                        추천 수 {{ article.upvote }}
-                    </div>
-                    <div class="article-comment">
-                        <!-- ??에 댓글 수 받아주세요 -->
-                        댓글 수 ??
+                    <div class="article-date">
+                        <span>{{ article.date }}</span>
                     </div>
                 </div>
-            </div>
-            <div class="article-content-box">
-                <div class="article-content">
-                    {{ article.content }}
+                <div class="article-info">
+                    <div class="article-writer">
+                        {% if writer_img %}
+                            <img class="profile-img" src="{{ writer_img }}">
+                        {% else %}
+                            <!-- 등록해놓은 이미지가 없으면 기본 이미지를 출력하도록 설정 -->
+                            <img class="profile-img" src="{% get_media_prefix %}profile/default_profile.png">
+                        {% endif %}
+                        <span>{{ article.writer }}</span>
+                    </div>
+                    <div class="article-user">
+                        <div class="article-views">
+                            조회 수 {{ article.views }}
+                        </div>
+                        <div class="article-upvote">
+                            추천 수 {{ article.upvote }}
+                        </div>
+                        <div class="article-comment">
+                            <!-- ??에 댓글 수 받아주세요 -->
+                            댓글 수 {{ comments.count }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="board-article-lnb">
-            <div class="board-article-before">
-                <a class="move-article" href="">< 이전 글</a>
-            </div>
-            <div class="board-article-home">
-                <a class="move-article-list" href={% url 'board' name=url %}>목록으로</a>
-            </div>
-            <div class="board-article-update">
-                <a class="move-article-update" href={% url 'update' name=url pk=article.id%}>수정</a>
-            </div>
-            <div class="board-article-after">
-                <a class="move-article" href="">다음 글 ></a>
-            </div>
-        </div>
-
-        <div class="board-article-comment">
-            <div class="comment-count">
-                <!-- ??에 댓글 수 받아주세요 -->
-                댓글 ??개
-            </div>
-            <div class="comment-box">
-                <form class="comment-form" method="post" action="">
-                    {% csrf_token %}
-                    <span class="comment-username">{{ request.user }}</span>
-                    <div class="comment-textbox">
-                        <textarea class="comment-textarea" type="textarea" placeholder="댓글을 입력하세요." name="comment" rows="3" cols="100"></textarea>
-                        <input class="comment-submit-box" type="submit" value="등록">    
+                <div class="article-content-box">
+                    <div class="article-content">
+                        {{ article.content }}
                     </div>
-                </form>
+
+                    {% if request.user.id == article.writer.id %}
+                        <div class="board-article-update">
+                            <a class="move-article-update" href={% url 'update' name=url pk=article.id %}>수정</a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-            <!-- 댓글 받아주세요 -->
-            <div class="user-comment-box">
-                <!-- {% if comment %}
-                comment 출력하기
-                {% endif %} -->
-                댓글 -------
+
+            <div class="board-article-lnb">
+                <div class="board-article-before">
+                    <a class="move-article" href="">< 이전 글</a>
+                </div>
+                <div class="board-article-home">
+                    <a class="move-article-list" href={% url 'board' name=url %}>목록으로</a>
+                </div>
+                <div class="board-article-after">
+                    <a class="move-article" href="">다음 글 ></a>
+                </div>
+            </div>
+
+            <div class="board-article-comment">
+                <div class="comment-count">
+                    댓글 {{ comments.count }}개
+                </div>
+                {% if user.is_authenticated %}
+                    <!-- 로그인하지 않은 상태면 입력창 비활성화 -->
+                    <div class="comment-box">
+                        <form class="comment-form" method="post" action={% url 'comment' name=url pk=article.id %}>
+                            {% csrf_token %}
+                            <span class="comment-username">{{ request.user }}</span>
+                            <div class="comment-textbox">
+                                <textarea class="comment-textarea" type="textarea" placeholder="댓글을 입력하세요."
+                                          name="comment" rows="3" cols="100"></textarea>
+                                <input class="comment-submit-box" type="submit" value="등록">
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="user-comment-box comment-box">
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="user-comment">
+                                <div class="user-info">
+                                    <span class="comment-username">{{ comment.writer }}</span>
+                                    <span class="comment-day">{{ comment.updated_at }}</span>
+                                </div>
+                                <div class="comment">
+                                    {{ comment.content }}
+                                </div>
+                                {% if request.user.id == comment.writer.id %}
+                                    <div class="removal-comment">
+                                        <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
+                                             alt="cancel" width="8px">
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

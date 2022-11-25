@@ -20,27 +20,29 @@
         <label>{{ error }}</label>
     </div>
     <div class="main">
-        <form action="" method="post">
+        <form action="" onsubmit="return isValid()" method="post">
             {% csrf_token %}
             <!-- 아이디 입력란 -->
             <div class="info-id">
-                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)">
+                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)""
+                       required>
                 <input id="idBtn" class="check-btn" type="button" value="중복확인">
             </div>
 
             <!-- 패스워드 입력란 -->
-            <input class="input-box" type="password" name="register_user_pwd" placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)">
+            <input class="input-box" type="password" name="register_user_pwd"
+                   placeholder="패스워드 입력(문자, 숫자, 특수문자 포함 8~20자)" required>
 
             <!-- 패스워드 재입력란 -->
-            <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력">
+            <input class="input-box" type="password" name="register_user_repwd" placeholder="패스워드 재입력" required>
 
             <!-- 이메일 입력받는 란 -->
             <div class="input-email">
-                <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소">
+                <input class="input-box" type="text" name="register_user_email_id" placeholder="이메일 주소" required>
                 <span class="separte-line email-separate">@</span>
                 <div class="js-email">
                     <div class="select-email-box"></div>
-                    <input class="input-email-box hidden" type="text" name="register_user_email">
+                    <input class="input-email-box hidden" type="text" name="register_user_direct_email">
                 </div>
                 <select id="regEmail" class="input-box email-box" name="register_user_email">
                 </select>
@@ -56,27 +58,29 @@
             <!-- 휴대폰 번호 입력란 -->
             <div class="info-phone">
                 {% csrf_token %}
-                <input class="input-box" type="text" id ="register_user_phone" name="register_user_phone" placeholder="휴대폰 번호 입력('-'제외 11자리 입력)">
+                <input class="input-box" type="text" id="register_user_phone" name="register_user_phone"
+                       placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
                 <input class="check-btn" type="button" onclick="SMS()" value="인증하기">
             </div>
 
             <!-- 닉네임 입력란 -->
             <div class="info-phone">
                 {% csrf_token %}
-                <input id="nicknameBox"class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력">
+                <input id="nicknameBox" class="input-box" type="text" name="register_user_nickname" placeholder="닉네임 입력"
+                       required>
                 <input id="nicknameBtn" class="check-btn" type="button" value="중복확인">
             </div>
             <div class="check-box">
                 <div class="check-essential">
-                    <input type="checkbox" name="check1">
+                    <input type="checkbox" name="check1" required>
                     <span>[필수] 개인정보 수집 동의</span>
                 </div>
                 <div class="check-essential">
-                    <input type="checkbox" name="check2">
+                    <input type="checkbox" name="check2" required>
                     <span>[필수] 고유 식별정보 수집 동의</span>
                 </div>
                 <div class="check-essential">
-                    <input type="checkbox" name="check3">
+                    <input type="checkbox" name="check3" required>
                     <span>[필수] 개인정보 유출 동의</span>
                 </div>
                 <div class="check-option">
@@ -94,22 +98,21 @@
     </div>
 </div>
 <script>
-    function SMS(){
-        
+    function SMS() {
         var phone = $('#register_user_phone').val()
         $.ajax({
-			url:'/sms/send',
-			type:'post',
-            headers:{"X-CSRFToken": '{{csrf_token}}' },
+            url: '/sms/send',
+            type: 'post',
+            headers: {"X-CSRFToken": '{{csrf_token}}'},
             data: {
-                    'phone_number':phone,
-                    'stragety':'verify',
-                    },
-			dataType:'json',
-            success:(response)=>{
+                'phone_number': phone,
+                'stragety': 'verify',
+            },
+            dataType: 'json',
+            success: (response) => {
                 alert("문자 전송 완료!")
             },
-            error : (xhr,err)=>{
+            error: (xhr, err) => {
                 alert("문자 전송 실패!")
             }
         })
