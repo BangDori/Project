@@ -165,6 +165,10 @@ div{
   padding-left: 15px;
 }
 
+.profile-img{
+  width: 24px;
+}
+
 #profile-img{
   height: 100px;
   margin : 10px;

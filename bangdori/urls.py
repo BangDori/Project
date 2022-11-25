@@ -16,7 +16,8 @@ urlpatterns = [
     path('board/<str:name>/write/', views.write, name='write'),
     path('board/<str:name>/update/<int:pk>', views.update, name='update'),
     path('board/<str:name>/<int:pk>/comment', views.comment, name='comment'),
-
+    path('board/<str:name>/<int:pk>/comment/<int:commentId>',
+         views.commentDelete, name='commentDelete'),
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
     path('sms/send', views.SmsSendView.as_view()),
