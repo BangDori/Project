@@ -36,10 +36,18 @@
                         <th>전화번호</th>
                         <td><input type="text" value="{{ phone }}"></td>
                     </tr>
+                    <h1>{{target_user.profile}}</h1>
+                    {% if target_user.profile %}
                      <tr>
                         <th>프로필</th>
-                        <td><a href="{% url 'detail' pk=user.pk %}">프로필</a></td>
+                        <td><a href="{% url 'profileapp:update' pk=target_user.pk %}">프로필수정</a></td>
                     </tr>
+                    {% else %}
+                    <tr>
+                        <th>프로필</th>
+                        <td><a href="{% url 'profileapp:create' %}">프로필생성</a></td>
+                    </tr>
+                    {% endif %}
                     <!--
                     <tr>
                         <th>주소</th>

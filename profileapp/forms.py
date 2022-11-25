@@ -1,14 +1,13 @@
 from django import forms
-from django.forms import ClearableFileInput, FileInput
+from django.forms import ClearableFileInput, FileInput, ModelForm
 from .models import Profile
 
-
-class ProfileCreateForm(forms.ModelForm):
+class ProfileCreateForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ('image',)
-        widgets = {
-            'image': FileInput(attrs={
-                'class':'pt_btn1',
-            }),
-        }
+        fields = ['image']
+        # widgets = {
+        #     'image': FileInput(attrs={
+        #         'class':'pt_btn1',
+        #     }),
+        # }

@@ -34,24 +34,25 @@
                     <table class="tablestyle">
                         <tr class="tabletr">
                             <th class = "tableth">프로필 사진</th>
-<!--                            <form action="{% url 'profileapp:view' %}" method="post" enctype="multipart/form-data">-->
-<!--                                {% csrf_token %}-->
                             <td style = "padding : 0 50px; border-bottom : 1px solid #e5e5e5;">
                                 <div>
                                     <div>
-                                        <img id="profile_pt" src="{{target_user.profile.image.url}}" alt="프로필 사진">
+                                        <img id="profile_pt" src="{{target_profile.profile.image.url}}" alt="프로필 사진">
                                     </div>
 
                                     <div class ="pt_button">
+                                         <form action="{% url 'profileapp:create' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
                                         {{form.image}}
 <!--                                        <input class = "pt_btn1" type="file" value="파일">-->
-                                        <input class = "pt_btn" type="button" value="기본사진">
-                                        <input class = "pt_btn" type="button" value="삭제">
+<!--                                        <input class = "pt_btn" type="button" value="기본사진">-->
+<!--                                        <input class = "pt_btn" type="button" value="삭제">-->
                                         <input type="submit">
+                                         </form>
                                     </div>
                                 </div>
                             </td>
-<!--                             </form>-->
+                             </form>
                         </tr>
 
                         <tr class="tabletr">

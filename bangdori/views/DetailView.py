@@ -6,4 +6,4 @@ from bangdori.models import CustomerUser
 class DetailView(DetailView):
     model = CustomerUser
     context_object_name = 'target_user'
-    template_name = 'profile.html'
+    template_name = 'myinfo.html'

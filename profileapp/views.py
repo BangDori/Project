@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 import bangdori
 from bangdori.models import *
@@ -15,8 +15,7 @@ class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreateForm
-    success_url = reverse_lazy('profileapp:view')
-    # template_name = 'profile.html'
+    success_url = reverse_lazy('index')
     template_name = 'profile.html'
 
     def form_valid(self, form):  # ProfileCreationForm의 data가 2번째 파라미터에 들어 있어요.
@@ -25,6 +24,12 @@ class ProfileCreateView(CreateView):
         temp_profile.save()  # self는 view에서 가져온 self임. 또, 웹브라우저에서 입력 받은 값이 우항 좌항이 db에서 가져온값
         return super().form_valid(form)
 
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    context_object_name ='target_profile'
+    form_class = ProfileCreateForm
+    success_url = reverse_lazy('index')
+    template_name = 'update.html'
 
 def view(request):
     return render(request, 'view.html')
