@@ -13,5 +13,6 @@ from .Search import *
 from .SmsView import *
 from .Update import *
 from .Write import *
+from .CommentDelete import *
 
 load_dotenv()

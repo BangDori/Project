@@ -40,5 +40,6 @@ def board(request, name):
 
     # 댓글 가져옴
     comments = getCommentModelByName(name)
-    context['comments'] = {x.id: comments.objects.all().filter(article_id=x).count() for x in context['articles']}
+    context['comments'] = {x.id: comments.objects.all().filter(
+        article_id=x).count() for x in context['articles']}
     return render(request, 'board.html', context)

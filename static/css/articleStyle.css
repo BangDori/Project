@@ -9,7 +9,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
 
@@ -35,6 +34,10 @@
 .article-writer{
     padding-inline-start: 15px;
     font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .article-user{

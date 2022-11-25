@@ -22,5 +22,6 @@ def update(request, name, pk):
     context = {}
     context['title'] = article.title
     context['content'] = article.content
+    context['isEdit'] = True
 
-    return render(request, 'update.html', context)
+    return render(request, 'write.html', context)
