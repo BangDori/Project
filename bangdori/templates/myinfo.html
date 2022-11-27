@@ -8,7 +8,7 @@
                     <tr>
                         <th>닉네임</th>
                         <td>
-                            <input type="text" value="{{ nickname }}">
+                            <input type="text" value="{{request.user.nickname}}">
                             <input type="button" value="중복확인">
                         </td>
                     </tr>
@@ -36,11 +36,10 @@
                         <th>전화번호</th>
                         <td><input type="text" value="{{ phone }}"></td>
                     </tr>
-                    <h1>{{target_user.profile}}</h1>
                     {% if target_user.profile %}
                      <tr>
                         <th>프로필</th>
-                        <td><a href="{% url 'profileapp:update' pk=target_user.pk %}">프로필수정</a></td>
+                        <td><a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">프로필수정</a></td>
                     </tr>
                     {% else %}
                     <tr>
