@@ -18,6 +18,7 @@ urlpatterns = [
     path('board/<str:name>/<int:pk>/comment', views.comment, name='comment'),
     path('board/<str:name>/<int:pk>/comment/<int:commentId>',
          views.commentDelete, name='commentDelete'),
+    path('board/upvote', views.upvote, name='upvote'),
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
     path('sms/send', views.SmsSendView.as_view()),

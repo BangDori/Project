@@ -221,3 +221,10 @@
     border: 1px solid gray;
     border-radius: 50%;
 }
+
+.cancle-update{
+    background-color : white;
+    border : 3px solid gray;
+    border-radius : .5rem;
+    padding : 0 .5rem;
+}

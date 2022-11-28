@@ -23,6 +23,10 @@
                                 <div class="recommendation">{{ article.upvote }}</div>
                             </div>
                         {% endfor %}
+                     {% else %}
+                        <br>
+                        <br>
+                        <br>
                     {% endif %}
                 </div>
             </div>
@@ -48,6 +52,10 @@
                                 <div class="recommendation">{{ article.writer }}</div>
                             </div>
                         {% endfor %}
+                     {% else %}
+                        <br>
+                        <br>
+                        <br>
                     {% endif %}
                 </div>
             </div>
@@ -64,7 +72,7 @@
             <div class="top-info preview-top-info">
                     <div class="id"><span>순위</span></div>
                     <div class="title"><span>제목</span></div>
-                    <div class="recommendation"><span>추천</span></div>
+                    <div class="writer"><span>글쓴이</span></div>
             </div>
             {% if articles.board %}
                 {% for article in articles.board %}
@@ -76,6 +84,10 @@
                         <div class="recommendation">{{ article.writer }}</div>
                     </div>
                 {% endfor %}
+             {% else %}
+                <br>
+                <br>
+                <br>
             {% endif %}
             <div class="preview-more">
                 <a class="more" href={% url 'board' name='board' %}>더보기 ...</a>
@@ -91,12 +103,9 @@
                 <div class="top-info preview-top-info">
                     <div class="id"><span>순위</span></div>
                     <div class="title"><span>제목</span></div>
-                    <div class="recommendation"><span>추천</span></div>
+                    <div class="writer"><span>글쓴이</span></div>
                 </div>
-                {% if articles.dabang == null %}
-                <br>
-                <br>
-                {% endif %}
+
                 {% if articles.dabang %}
                     {% for article in articles.dabang %}
                         <div class="article-info">
@@ -106,6 +115,10 @@
                             </div>
                         </div>
                     {% endfor %}
+                {% else %}
+                <br>
+                <br>
+                <br>
                 {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='dabang' %}>더보기 ...</a>
@@ -120,7 +133,7 @@
                 <div class="top-info preview-top-info">
                     <div class="id"><span>순위</span></div>
                     <div class="title"><span>제목</span></div>
-                    <div class="recommendation"><span>추천</span></div>
+                    <div class="writer"><span>글쓴이</span></div>
                 </div>
                 {% if articles.succession %}
                     {% for article in articles.succession %}
@@ -131,6 +144,10 @@
                             </div>
                         </div>
                     {% endfor %}
+                 {% else %}
+                <br>
+                <br>
+                <br>
                 {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='succession' %}>더보기 ...</a>
@@ -147,7 +164,7 @@
             <div class="top-info preview-top-info">
                     <div class="id"><span>순위</span></div>
                     <div class="title"><span>제목</span></div>
-                    <div class="recommendation"><span>추천</span></div>
+                    <div class="writer"><span>글쓴이</span></div>
             </div>
 
 
@@ -161,6 +178,10 @@
                         <div class="recommendation">{{ article.writer }}</div>
                     </div>
                 {% endfor %}
+             {% else %}
+                <br>
+                <br>
+                <br>
             {% endif %}
             <div class="preview-more">
                 <a class="more" href={% url 'board' name='group' %}>더보기 ...</a>
