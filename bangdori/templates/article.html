@@ -101,11 +101,15 @@
                     {% if request.user.id == article.writer.id %}
                         <div class="board-article-update">
                             <button class = "cancle-update"> <a class="move-article-update" href={% url 'update' name=url pk=article.id %}>수정</a></button>
-                            <button class = "cancle-update" >삭제</button>
+                            <form action = {% url 'delete' name=url pk=article.id %} method="post">
+                                {% csrf_token %}
+                            <input class = "cancle-update" type="submit" value="삭제"></input>
+                            </form>
                         </div>
                     {% else %}
                         <div class="board-article-upvote">
                             <input type="hidden" id="board_name" value="{{url}}">
+                            
                             <input type="hidden" id="article_id" value="{{article.id}}">
                             <button id = "upvote_button">추천</button>
                             

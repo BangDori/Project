@@ -1,23 +1,24 @@
 import requests
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import redirect, render
 from django.views import View
 
 from bangdori.models import CustomerUser
 
-
 def login(request):
     # 기본이 POST로 수정
+    context = {}
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
     if request.method == "POST":
-        context = {}
         # AuthenticationForm으로부터 인증 Form을 받아옴
-        form = AuthenticationForm(request=request, data=request.POST)
 
+        form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
+
             # cleaned_data 형식으로 아이디와 비밀번호를 가져옴
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
             # Django의 auth 클래스를 사용해 로그인
             user = auth.authenticate(
                 request=request, username=username, password=password)
@@ -25,6 +26,17 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 return redirect('/index')
+        else:
+
+            if not (username and password):
+                context['error'] = "빈칸없이 입력해주세요."
+            else:
+                if CustomerUser.objects.filter(username=username):
+                    user = CustomerUser.objects.get(username=username)
+                    if not check_password(password, user.password):
+                        request.session['user'] = user.username
+                        context['error'] = "해당 회원정보가 존재하지 않습니다."
+                        return render(request, 'login.html', context)
 
         """
         DB에서 Filter를 이용하지 않고, auth 클래스를 이용하여 로그인하도록 수정함
@@ -43,7 +55,7 @@ def login(request):
         #     else:
         #         context['error'] = "해당 회원정보가 존재하지 않습니다."
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html', context)
 
     return render(request, 'login.html', context)
 
