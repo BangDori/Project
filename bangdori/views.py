@@ -366,6 +366,7 @@ def findPW2(request):
     return render(request, 'findPW2.html')
 
 
+
 class SmsSendView(View):
     def send_sms(self, phone_number, auth_number):
         timestamp = str(int(time.time() * 1000))

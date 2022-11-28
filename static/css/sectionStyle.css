@@ -51,10 +51,10 @@
 }
 
 .info-user {
+  padding: 5px 0px 5px 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 5px;
 }
 
 .separate-line {
