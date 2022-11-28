@@ -28,13 +28,10 @@
 
     <!--마이페이지 몸통-->
     <div id="content-body">
-        {% include 'extends/menu.html' %}
-        <!--            여백                  -->
-        <div id="content 여백" style="width : 10%"></div>
-
         {% block mypage %}
         {% endblock %}
     </div>
 </div>
+<script src="{% static 'js/mypage.js' %}"></script>
 </body>
 </html>

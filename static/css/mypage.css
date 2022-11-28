@@ -46,8 +46,7 @@
 }
 
 #myinfo-list{
-    color : white;
-    background-color : #367E18;
+
 }
 
 #content-box{
@@ -160,9 +159,13 @@ td{
   width : 96px;
 }
 
+.clicked {
+    background-color: green;
+    color: white;
+}
 
 .button{
-     border-top : none;
+    border-top : none;
     border-left : none;
     border-right: none;
     border-bottom : 3px solid #96ceb4;
