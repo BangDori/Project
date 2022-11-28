@@ -87,6 +87,7 @@
 .move-article{
     padding: 5px;
     border: 1px solid gray;
+    border-radius: 1rem;
     text-align: center;
 }
 
@@ -97,6 +98,7 @@
     text-align: center;
     width: 256px;
     border: 1px solid gray;
+    border-radius: 1rem;
     cursor: pointer;
 }
 
@@ -123,7 +125,7 @@
 .comment-box{
     /* padding-inline-start: 15px; */
     padding: 16px 0;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .comment-form{
