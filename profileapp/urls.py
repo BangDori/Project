@@ -15,6 +15,6 @@ urlpatterns = [
     path('myinfo/', views.myinfo, name='myinfo'),
     path('mypost/', views.mypost, name='mypost'),
     path('favorites/', views.favorites, name='favorites'),
-    path('settings/', views.settings, name='settings'),
-    path('address/', views.Address.as_view(), name='address')
+    path('address/', views.Address.as_view(), name='address'),
+    path('corporate/', views.corporate, name='register')
 ]

@@ -92,11 +92,12 @@ def favorites(request):
     return render(request, 'favorites.html')
 
 
-def settings(request):
+
+def corporate(request):
     """
-    설정
+    사업자 등록
     """
-    return render(request, 'settings.html')
+    return render(request, 'corporate-registration.html')
 
 
 class Address(View):

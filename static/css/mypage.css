@@ -6,14 +6,19 @@
 #top{
     max-width : 914px;
     padding : 0 100px;
+    height: 50px;
 }
 
 #lnb{
+<<<<<<< HEAD
+=======
+    display : flex;
+>>>>>>> 720d879f583605957686bd4179f3f909812c0193
     background-color : #96ceb4;
     padding : 0 100px;
-    color : white;
-    font-size : 1.2rem;
-    text-align :
+
+
+
 }
 
 #lnb_contents{
@@ -22,17 +27,16 @@
 
 #content-body{
     display : flex;
-    padding : 100px;
+    padding :50px 100px;
 
 }
 
 #index-box{
-    width : 25%;
+    width : 250px;
     padding-top : 10px;
     padding-bottom : 10px;
-    border-top : 2px solid #96ceb4;
     border-bottom : 2px solid #96ceb4;
-    height : 210px;
+    height : 320px;
 }
 
 .index-list{
@@ -40,13 +44,18 @@
     border-radius : 1rem;
     text-align : center;
     height : 36px;
-    item-align : center;
+    /* item-align : center; */
     padding-top : 15px;
+    cursor: pointer;
 }
 
 #myinfo-list{
+<<<<<<< HEAD
     color : white;
     background-color : #96ceb4;
+=======
+
+>>>>>>> 720d879f583605957686bd4179f3f909812c0193
 }
 
 #content-box{
@@ -54,11 +63,9 @@
 }
 
 .content{
-    border-top : 2px solid #367E18;
-    border-bottom : 2px solid #367E18;
-
+    width : 60%;
     height : 1000px;
-    padding : 48px;
+    padding : 0 48px;
 }
 
 table{
@@ -81,14 +88,11 @@ td{
 
 }
 #mypost-box{
-    display : none;
+
 }
 #bookmark-box{
-    display : none;
 }
-#set-box{
-    display : none;
-}
+
 
 
 .total-article-info {
@@ -162,4 +166,35 @@ td{
 
 .recommendation {
   width : 96px;
+}
+
+.clicked {
+    background-color: green;
+    color: white;
+}
+
+.button{
+    border-top : none;
+    border-left : none;
+    border-right: none;
+    border-bottom : 3px solid #96ceb4;
+    border-radius : .5rem;
+    cursor: pointer;
+}
+.input-text{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid #96ceb4;
+    padding-left: 20px;
+}
+
+#corporate-scroll{
+    width:600px;
+    height:300px;
+    line-height:1.5em;
+    overflow:scroll;
+    padding:5px;
+    border : 1px solid green;
+    border-radius : .5rem;
 }

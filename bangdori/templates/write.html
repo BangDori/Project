@@ -11,18 +11,25 @@
     </div>
 
     <div class="col-12 write-container">
-        <form class="write-form" method="POST">
+        <form class="write-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="write-title-box">
                 <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요." value="{{ title }}" required>
             </div>
 
             <div class="write-btn-box">
-                <button type="button" id="image_upload_btn" class="upload-btn" onclick="loadImage()">사진</button>
-                <button type="button" id="left_align_btn" class="upload-btn" onclick="leftAlign()">왼쪽 정렬</button>
-                <button type="button" id="middle_align_btn" class="upload-btn" onclick="middleAlign()">중앙 정렬</button>
-                <button type="button" id="right_align_btn" class="upload-btn" onclick="rightAlign()">오른쪽 정렬</button>
-                <button type="button" id="font_btn" class="upload-btn">글꼴</button>
+                <div class="write-upload">
+                    <input type="file" id="upload-image-file" name="upload-image-file" class="hidden"/>
+                    <label for="upload-image-file">사진</label>
+                </div>
+                <div class="write-tools" style="margin-left: auto; alignment: right">
+                    <button type="button" id="left_align_btn" class="upload-btn" onclick="leftAlign()">왼쪽 정렬</button>
+                    <button type="button" id="middle_align_btn" class="upload-btn" onclick="middleAlign()">중앙 정렬
+                    </button>
+                    <button type="button" id="right_align_btn" class="upload-btn" onclick="rightAlign()">오른쪽 정렬</button>
+                    <button type="button" id="font_btn" class="upload-btn">글꼴</button>
+                </div>
+
             </div>
             <div class="write-content-box">
                 <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."

@@ -72,6 +72,7 @@
 
 .after-login{
   margin: 0;
+  border: none !important;
 }
 
 .login-after-user-info{

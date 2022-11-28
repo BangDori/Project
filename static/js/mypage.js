@@ -1,51 +1,40 @@
-console.log("H");
+function changeMenu() {
+    var path = window.location.pathname;
+    const previous_menu = document.querySelector(".clicked");
+    
+    document.querySelector("#myinfo-list").addEventListener("click", (e) => {
+        previous_menu.classList.remove(".clicked");
+        window.location.href = "/profiles/myinfo";
+        document.querySelector("#myinfo-list").classList.add(".clicked");
+    })
 
+    document.querySelector("#mynotice-list").addEventListener("click", (e) => {
+        previous_menu.classList.remove(".clicked");
+        window.location.href = "/profiles/mypost";
+        document.querySelector("#mynotice-list").classList.add(".clicked");
+    })
 
+    document.querySelector("#bookmark-list").addEventListener("click", (e) => {
+        previous_menu.classList.remove(".clicked");
+        document.querySelector("#bookmark-list").classList.add(".clicked");
+        window.location.href = "/profiles/favorites";
+    })
 
-function changeNone() {
-var consist = document.querySelectorAll('.content');
-var index = document.querySelectorAll('.index-list');
-                    var i = 0;
-                    while(i < consist.length){
-                        consist[i].style.display = 'none';
-                        index[i].style.backgroundColor='white';
-                        index[i].style.color='black';
-                        i = i+1;
-                    }
+    document.querySelector("#address-list").addEventListener("click", (e) => {
+        previous_menu.classList.remove(".clicked");
+        document.querySelector("#address-list").classList.add(".clicked");
+        window.location.href = "/profiles/address";
+    })
+
+    document.querySelector("#corporate-list").addEventListener("click", (e) => {
+        previous_menu.classList.remove(".clicked");
+        document.querySelector("#corporate-list").classList.add(".clicked");
+        window.location.href = "/profiles/corporate";
+    })
 }
 
-
-function changeInfo(){
-                    changeNone();
-                    document.querySelector('#myinfo-box').style.display = 'block';
-                    document.querySelector('#myinfo-list').style.backgroundColor ='green';
-                    document.querySelector('#myinfo-list').style.color ='white';
-
-
+function init() {
+    changeMenu();
 }
 
-function changePost(){
-                    changeNone();
-                    document.querySelector('#mypost-box').style.display = 'block';
-                    document.querySelector('#mynotice-list').style.backgroundColor ='green';
-                    document.querySelector('#mynotice-list').style.color ='white';
-
-
-}
-
-function changeBookmark(){
-                    changeNone();
-                    document.querySelector('#bookmark-box').style.display = 'block';
-                    document.querySelector('#bookmark-list').style.backgroundColor ='green';
-                    document.querySelector('#bookmark-list').style.color ='white';
-}
-
-function changeSet(){
-                    changeNone();
-                    document.querySelector('#set-box').style.display = 'block';
-                    document.querySelector('#set-list').style.backgroundColor ='green';
-                    document.querySelector('#set-list').style.color ='white';
-
-}
-
-
+init();

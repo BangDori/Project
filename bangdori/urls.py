@@ -15,9 +15,11 @@ urlpatterns = [
     path('board/<str:name>/<int:pk>', views.article, name='article'),
     path('board/<str:name>/write/', views.write, name='write'),
     path('board/<str:name>/update/<int:pk>', views.update, name='update'),
+    path('board/<str:name>/delete/<int:pk>', views.delete, name='delete'),
     path('board/<str:name>/<int:pk>/comment', views.comment, name='comment'),
     path('board/<str:name>/<int:pk>/comment/<int:commentId>',
          views.commentDelete, name='commentDelete'),
+    path('board/upvote', views.upvote, name='upvote'),
     path('findID/', views.findID, name='findID'),
     path('findID/sms', views.SMS),
     path('sms/send', views.SmsSendView.as_view()),
@@ -36,6 +38,10 @@ urlpatterns = [
          views.navercallback.as_view(), name='naverCallback'),
     path('findPW1/findPW2/smspw', views.SMSPW, name='smspw'),
     path('search/', views.SearchAll.as_view(), name='searchall'),
+<<<<<<< HEAD
     path('findID/sms/ShowID', views.showID, name='showID'),
     path('findPW1/findPW2/smspw/showPW/', views.showPW, name='showPW')
+=======
+
+>>>>>>> 720d879f583605957686bd4179f3f909812c0193
 ]

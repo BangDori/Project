@@ -1,6 +1,5 @@
 {% extends 'extends/main.html' %}
 {% load static %}
-
 {% block content %}
     <div class="row mt-5">
         <div class="col-12">
@@ -28,7 +27,9 @@
                             조회 수 {{ article.views }}
                         </div>
                         <div class="article-upvote">
-                            추천 수 {{ article.upvote }}
+                            추천 수
+                            <span id="upvote_count">{{ article.upvote }}</span>
+
                         </div>
                         <div class="article-comment">
                             <!-- ??에 댓글 수 받아주세요 -->
@@ -63,22 +64,58 @@
                             content: '<div style="width:150px;text-align:center;padding:6px 0;">{{ article.title }}</div>'
                         });
                         infowindow.open(map, marker);
+
+                        {% if request.user and request.user.addr %}
+                            // 마커가 표시될 위치입니다
+                            var markerPosition = new kakao.maps.LatLng({{ request.user.addr.lat }}, {{ request.user.addr.lng }});
+
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: markerPosition
+                            });
+                            /*
+                            var userinfo = new kakao.maps.InfoWindow({
+                                position: markerPosition,
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">
+                            {{ request.user.nickname }}</div>'
+                            });
+
+                            userinfo.open(map);
+                            */
+                        {% endif %}
                     </script>
                     <div id="addr">{{ addr }}</div>
                 {% endif %}
 
                 <div class="article-content-box">
                     <div class="article-content">
+                        {% if article.img %}
+                        <!-- 사진 있으면 출력 -->
+                            <div class="article-img">
+                            <img id="article-img" src="{{ article.img.url }}" alt="사진">
+                            </div>
+                        {% endif %}
                         {{ article.content }}
                     </div>
 
                     {% if request.user.id == article.writer.id %}
                         <div class="board-article-update">
-                            <a class="move-article-update" href={% url 'update' name=url pk=article.id %}>수정</a>
+                            <button class="cancle-update"><a class="move-article-update"
+                                                             href={% url 'update' name=url pk=article.id %}>수정</a>
+                            </button>
+                            <form action={% url 'delete' name=url pk=article.id %} method="post">
+                                {% csrf_token %}
+                                <input class="cancle-update" type="submit" value="삭제"></input>
+                            </form>
                         </div>
                     {% else %}
                         <div class="board-article-upvote">
-                            <a class="move-article-upvote" href="">추천</a>
+                            <input type="hidden" id="board_name" value="{{ url }}">
+
+                            <input type="hidden" id="article_id" value="{{ article.id }}">
+                            <button id="upvote_button">추천</button>
+
                         </div>
                     {% endif %}
                 </div>
@@ -144,4 +181,34 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $('#upvote_button').on('click', function (e) {
+            var boardname = $('#board_name').val()
+            var article_id = $('#article_id').val()
+            $.ajax({
+                url: '/board/upvote',
+                type: 'get',
+                data: {'board': boardname, 'article_id': article_id},
+                dataType: 'json',
+                success: function (response) {
+                    if (response.state === 'NotLogin')
+                        alert('로그인 해주세요!')
+                    else if (response.state === 'duplicated')
+                        alert('추천 중복입니다!')
+                    else if (response.state === 'success') {
+                        //$('#upvote_count').text = $('#upvote_count').val() +1
+
+                        alert('추천 완료했습니다!')
+                    }
+                },
+                error: function (xhr, error) {
+                    alert("서버와의 통신에서 문제가 발생했습니다.");
+                    console.error("error : " + error);
+                }
+            })
+        })
+    </script>
 {% endblock %}
+
