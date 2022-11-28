@@ -40,8 +40,9 @@
     border-radius : 1rem;
     text-align : center;
     height : 36px;
-    item-align : center;
+    /* item-align : center; */
     padding-top : 15px;
+    cursor: pointer;
 }
 
 #myinfo-list{
@@ -166,6 +167,7 @@ td{
     border-right: none;
     border-bottom : 3px solid #96ceb4;
     border-radius : .5rem;
+    cursor: pointer;
 }
 .input-text{
     border-top: none;
