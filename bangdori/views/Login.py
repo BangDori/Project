@@ -7,6 +7,7 @@ from django.views import View
 
 from bangdori.models import CustomerUser
 
+
 def login(request):
     # 기본이 POST로 수정
     context = {}
@@ -14,10 +15,8 @@ def login(request):
     password = request.POST.get('password', None)
     if request.method == "POST":
         # AuthenticationForm으로부터 인증 Form을 받아옴
-
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
-
             # cleaned_data 형식으로 아이디와 비밀번호를 가져옴
             # Django의 auth 클래스를 사용해 로그인
             user = auth.authenticate(
@@ -27,7 +26,6 @@ def login(request):
                 auth.login(request, user)
                 return redirect('/index')
         else:
-
             if not (username and password):
                 context['error'] = "빈칸없이 입력해주세요."
             else:
@@ -37,23 +35,6 @@ def login(request):
                         request.session['user'] = user.username
                         context['error'] = "해당 회원정보가 존재하지 않습니다."
                         return render(request, 'login.html', context)
-
-        """
-        DB에서 Filter를 이용하지 않고, auth 클래스를 이용하여 로그인하도록 수정함
-        오류 메시지는 아직 구현되지 않음
-        """
-        # if not (username and password):
-        #     context['error'] = "빈칸없이 입력해주세요."
-        # else:
-        #     if CustomerUser.objects.filter(username=username):
-        #         user = CustomerUser.objects.get(username=username)
-        #         if check_password(password, user.password):
-        #             request.session['user'] = user.username
-        #             return redirect('/index')
-        #         else:
-        #             context['error'] = "해당 회원정보가 존재하지 않습니다."
-        #     else:
-        #         context['error'] = "해당 회원정보가 존재하지 않습니다."
     else:
         return render(request, 'login.html', context)
 
@@ -95,9 +76,9 @@ class kakaocallback(View):
         user = CustomerUser.objects.create_user(provider=json['id'],
                                                 email=json['kakao_account']['email'],
                                                 username='kakao_' +
-                                                json['kakao_account']['profile']['nickname'],
+                                                         json['kakao_account']['profile']['nickname'],
                                                 nickname='kakao_' +
-                                                json['kakao_account']['profile']['nickname']
+                                                         json['kakao_account']['profile']['nickname']
                                                 )
         user.save()
         auth.login(request, user)
@@ -145,9 +126,9 @@ class googlecallback(View):
         user = CustomerUser.objects.create_user(provider=json['sub'],
                                                 email=json['email'],
                                                 username='google_' +
-                                                json['name'],
+                                                         json['name'],
                                                 nickname='google_' +
-                                                json['name'],
+                                                         json['name'],
                                                 )
         auth.login(request, user)
         return redirect('/index')
@@ -192,11 +173,11 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
+                                                         '-' + json['birthday'],
                                                 username='naver_' +
-                                                json['nickname'],
+                                                         json['nickname'],
                                                 nickname='naver_' +
-                                                json['nickname'],
+                                                         json['nickname'],
                                                 phone=json['mobile'],
                                                 )
         auth.login(request, user)

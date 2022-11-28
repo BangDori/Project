@@ -11,7 +11,7 @@
     </div>
 
     <div class="col-12 write-container">
-        <form class="write-form" method="POST">
+        <form class="write-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="write-title-box">
                 <input id="post_title" type="text" name="title" placeholder="제목을 입력하세요." value="{{ title }}" required>
@@ -19,8 +19,8 @@
 
             <div class="write-btn-box">
                 <div class="write-upload">
-                    <input type="file" id="upload-image-label" class="hidden"/>
-                    <label for="upload-image-label">사진</label>
+                    <input type="file" id="upload-image-file" name="upload-image-file" class="hidden"/>
+                    <label for="upload-image-file">사진</label>
                 </div>
                 <div class="write-tools" style="margin-left: auto; alignment: right">
                     <button type="button" id="left_align_btn" class="upload-btn" onclick="leftAlign()">왼쪽 정렬</button>
