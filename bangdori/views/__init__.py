@@ -15,5 +15,6 @@ from .Update import *
 from .Write import *
 from .CommentDelete import *
 from .Upvote import *
+from .Delete import *
 
 load_dotenv()

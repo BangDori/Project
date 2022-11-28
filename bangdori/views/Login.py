@@ -12,9 +12,11 @@ def login(request):
     if request.method == "POST":
         context = {}
         # AuthenticationForm으로부터 인증 Form을 받아옴
+
         form = AuthenticationForm(request=request, data=request.POST)
 
         if form.is_valid():
+
             # cleaned_data 형식으로 아이디와 비밀번호를 가져옴
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
