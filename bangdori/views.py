@@ -64,11 +64,10 @@ def index(request):
 
 def login(request):
     # 기본이 POST로 수정
+    context = {}
     if request.method == "POST":
-        context = {}
         # AuthenticationForm으로부터 인증 Form을 받아옴
         form = AuthenticationForm(request=request, data=request.POST)
-
         if form.is_valid():
             # cleaned_data 형식으로 아이디와 비밀번호를 가져옴
             username = form.cleaned_data.get('username')
@@ -79,8 +78,11 @@ def login(request):
             # 해당하는 유저가 존재해서 로그인이 가능한 경우
             if user is not None:
                 auth.login(request, user)
+                context['error'] = "이건 왜 됨?"
+                return render(request, 'login.html', context)
+                # return redirect('/index')
+            else:
                 return redirect('/index')
-
         """
         DB에서 Filter를 이용하지 않고, auth 클래스를 이용하여 로그인하도록 수정함
         오류 메시지는 아직 구현되지 않음
@@ -98,9 +100,10 @@ def login(request):
         #     else:
         #         context['error'] = "해당 회원정보가 존재하지 않습니다."
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html', context)
 
     return render(request, 'login.html', context)
+
 
 
 def logout(request):
