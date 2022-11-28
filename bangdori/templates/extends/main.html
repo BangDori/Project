@@ -5,7 +5,7 @@
     <div class="main dabang_board">
         <div class="container">
             <div class="section">
-                {% if url == null and name == null %}
+                {% if 'index' in request.get_full_path %}
                     <!-- 자취생 필수템 및 로그인 박스 -->
                     <div class="article">
                         <!-- 자취생 필수템 미리보기 -->
