@@ -66,9 +66,9 @@ class SmsVerifyView(View):
 
         if (stragety == 'verify'):
             if (state):
-                return JsonResponse({'message': "Verify Completed!"}, status=200)
+                return JsonResponse({'message': "Verify Completed!", 'state': 'success'}, status=200)
             else:
-                return JsonResponse({'message': "Verify Failed!"}, status=200)
+                return JsonResponse({'message': "Verify Failed!", 'state': 'failure'}, status=200)
 
         if (state):
             user = CustomerUser.objects.get(
