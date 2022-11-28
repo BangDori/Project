@@ -7,7 +7,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    border: none !important;
+    /* border: none !important; */
 }
 
 .essential-board .box {
