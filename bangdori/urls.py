@@ -37,5 +37,5 @@ urlpatterns = [
          views.navercallback.as_view(), name='naverCallback'),
     path('findPW1/findPW2/smspw', views.SMSPW, name='smspw'),
     path('search/', views.SearchAll.as_view(), name='searchall'),
-    path('findID/sms/ShowID', views.showID, name='showID')
+
 ]

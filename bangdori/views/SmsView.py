@@ -5,6 +5,7 @@ import time
 
 import requests
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views import View
 
 from bangdori.models import CustomerUser, Authentication
@@ -58,6 +59,7 @@ class SmsSendView(View):
 class SmsVerifyView(View):
     def post(self, request):
         input_mobile_num = request.POST['phone_number']
+
         message = request.POST['message_number']
         stragety = request.POST['stragety']
         auth_mobile = Authentication.objects.get(
@@ -75,10 +77,13 @@ class SmsVerifyView(View):
                 phone=input_mobile_num)
             if (user):
                 auth_mobile.delete()
+                context = {}
                 if (stragety == 'findID'):
-                    return JsonResponse({'message': str(user.username)}, status=200)
+                    context['id'] = user.username
+                    return render(request, 'showID.html', context)
                 if (stragety == 'findPW'):
-                    return JsonResponse({'message': str(user.password)}, status=200)
+                    context['password'] = user.password
+                    return render(request, 'showID.html', context)
             else:
                 return JsonResponse({'message': 'Not User!'}, status=200)
         else:
