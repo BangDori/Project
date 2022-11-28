@@ -46,6 +46,10 @@
                         <div class="board-article-update">
                             <a class="move-article-update" href={% url 'update' name=url pk=article.id %}>수정</a>
                         </div>
+                    {% else %}
+                        <div class="board-article-upvote">
+                            <a class="move-article-upvote" href="">추천</a>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -86,7 +90,7 @@
                             <div class="user-comment">
                                 <div class="user-info">
                                     <span class="comment-username">{{ comment.writer }}</span>
-                                      
+
                                     <span class="comment-day">{{ comment.updated_at }}</span>
                                 </div>
                                 <div class="comment">
@@ -95,11 +99,11 @@
                                 {% if request.user.id == comment.writer.id %}
                                     <div class="removal-comment">
                                         <form action={% url 'commentDelete' name=url pk=article.id commentId=comment.id %} method="get">
-                                        <input type="hidden" value = "{{comment.id}}"/>
-                                        <button type="submit" value="">
-                                        <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
-                                             alt="cancel" width="8px">
-                                        </button>
+                                            <input type="hidden" value="{{ comment.id }}"/>
+                                            <button type="submit" value="">
+                                                <img src="https://www.clipartmax.com/png/middle/108-1087676_close-remove-delete-exit-cross-cancel-trash-comments-close-button-icon-png.png"
+                                                     alt="cancel" width="8px">
+                                            </button>
                                         </form>
                                     </div>
                                 {% endif %}
