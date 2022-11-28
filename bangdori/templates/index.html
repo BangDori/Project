@@ -61,6 +61,11 @@
         <div class="preview-title">자유 게시판</div>
 
         <div class="preview-article">
+            <div class="top-info preview-top-info">
+                    <div class="id"><span>순위</span></div>
+                    <div class="title"><span>제목</span></div>
+                    <div class="recommendation"><span>추천</span></div>
+            </div>
             {% if articles.board %}
                 {% for article in articles.board %}
                     <div class="article-info">
@@ -83,6 +88,15 @@
         <div class="preview-dabang">
             <div class="preview-title">다방</div>
             <div class="preview-article">
+                <div class="top-info preview-top-info">
+                    <div class="id"><span>순위</span></div>
+                    <div class="title"><span>제목</span></div>
+                    <div class="recommendation"><span>추천</span></div>
+                </div>
+                {% if articles.dabang == null %}
+                <br>
+                <br>
+                {% endif %}
                 {% if articles.dabang %}
                     {% for article in articles.dabang %}
                         <div class="article-info">
@@ -103,6 +117,11 @@
             <div class="preview-title">승계</div>
 
             <div class="preview-article">
+                <div class="top-info preview-top-info">
+                    <div class="id"><span>순위</span></div>
+                    <div class="title"><span>제목</span></div>
+                    <div class="recommendation"><span>추천</span></div>
+                </div>
                 {% if articles.succession %}
                     {% for article in articles.succession %}
                         <div class="article-info">
@@ -125,6 +144,13 @@
         <div class="preview-title">공동 구매</div>
 
         <div class="preview-article">
+            <div class="top-info preview-top-info">
+                    <div class="id"><span>순위</span></div>
+                    <div class="title"><span>제목</span></div>
+                    <div class="recommendation"><span>추천</span></div>
+            </div>
+
+
             {% if articles.group %}
                 {% for article in articles.group %}
                     <div class="article-info">

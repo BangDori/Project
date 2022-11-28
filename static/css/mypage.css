@@ -174,3 +174,13 @@ td{
     border-bottom: 3px solid #96ceb4;
     padding-left: 20px;
 }
+
+#corporate-scroll{
+    width:600px;
+    height:300px;
+    line-height:1.5em;
+    overflow:scroll;
+    padding:5px;
+    border : 1px solid green;
+    border-radius : .5rem;
+}
