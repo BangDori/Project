@@ -1,14 +1,15 @@
 from django.urls import path
 
 from . import views
-from .views import ProfileCreateView
+from .views import ProfileCreateView, ProfileUpdateView
 
 app_name = 'profileapp'
 
 urlpatterns = [
-    # path('create/', ProfileCreateView.as_view(), name='create'),
+    path('create/', ProfileCreateView.as_view(), name='create'),
     path('view', views.view, name='view'),
-    path('profile/', ProfileCreateView.as_view(), name='profile'),
+    path('update/<int:pk>', ProfileUpdateView.as_view(), name='update'),
+    # path('profile/', ProfileCreateView.as_view(), name='profile'),
     # path('profile/', views.profile),
     path('mypage/', views.mypage),
     path('myinfo/', views.myinfo, name='myinfo'),

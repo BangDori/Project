@@ -1,3 +1,5 @@
+import math
+
 from django.db import models
 
 
@@ -55,7 +57,7 @@ class Address(models.Model):
                 'state': 'sigungu', 'road_name': 'roadname'}
 
     def __str__(self):
-        return f'{self.road}{self.extra}{self.detail}'
+        return f'{self.road}{self.extra} {self.detail}'
 
     def createFromPost(self, request):
         # WSGIRequest를 통해 데이터를 받아와서 만들어줌

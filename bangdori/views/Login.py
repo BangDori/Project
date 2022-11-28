@@ -82,7 +82,10 @@ class kakaocallback(View):
             return redirect('/index')
         user = CustomerUser.objects.create_user(provider=json['id'],
                                                 email=json['kakao_account']['email'],
-                                                username=json['kakao_account']['profile']['nickname'],
+                                                username='kakao_' +
+                                                json['kakao_account']['profile']['nickname'],
+                                                nickname='kakao_' +
+                                                json['kakao_account']['profile']['nickname']
                                                 )
         user.save()
         auth.login(request, user)
@@ -129,7 +132,10 @@ class googlecallback(View):
 
         user = CustomerUser.objects.create_user(provider=json['sub'],
                                                 email=json['email'],
-                                                username=json['name'],
+                                                username='google_' +
+                                                json['name'],
+                                                nickname='google_' +
+                                                json['name'],
                                                 )
         auth.login(request, user)
         return redirect('/index')
@@ -174,8 +180,11 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                         '-' + json['birthday'],
-                                                username=json['nickname'],
+                                                '-' + json['birthday'],
+                                                username='naver_' +
+                                                json['nickname'],
+                                                nickname='naver_' +
+                                                json['nickname'],
                                                 phone=json['mobile'],
                                                 )
         auth.login(request, user)
