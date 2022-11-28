@@ -60,7 +60,7 @@
                 {% csrf_token %}
                 <input class="input-box" type="text" id="register_user_phone" name="register_user_phone"
                        placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
-                <input class="check-btn" type="button" id = "send_btn" onclick="SMS(), toggleBtn(), ChangeName()" value="문자전송">
+                <input class="check-btn" type="button" id = "send_btn" onclick="toggleBtn(), ChangeName()" value="문자전송">
             </div>
 
              <div style = "display: none;" id = "count">
@@ -70,9 +70,9 @@
             <!-- 인증 번호 입력란 -->
             <div class = "info-phone">
                 {% csrf_token %}
-                <input class="input-box" type="text" id="certification_user_phone" name="certification_user_phone"
+                <input class="input-box" type="text" id="verify_user_phone" name="verify_user_phone"
                        placeholder="인증번호 입력" required>
-                <input class = "check-btn" type="button" value="인증하기">
+                <input class = "check-btn" type="button" value="인증하기" id="verify_btn">
             </div>
 
             <!-- 닉네임 입력란 -->
@@ -109,16 +109,16 @@
         </form>
     </div>
 </div>
-<script>
-    function SMS() {
-        var phone = $('#register_user_phone').val()
+<script type="text/javascript">
+    $('#send_btn').on('click', function(e) {
+        
         $.ajax({
             url: '/sms/send',
             type: 'post',
             headers: {"X-CSRFToken": '{{csrf_token}}'},
             data: {
-                'phone_number': phone,
-                'stragety': 'verify',
+                'phone_number': $('#register_user_phone').val(),
+                
             },
             dataType: 'json',
             success: (response) => {
@@ -128,8 +128,30 @@
                 alert("문자 전송 실패!")
             }
         })
-    }
-
+    })
+    $('#verify_btn').on('click', function(e) {
+        console.log($('#verify_user_phone').val())
+        $.ajax({
+            url: '/sms/auth',
+            type: 'post',
+            headers: {"X-CSRFToken": '{{csrf_token}}'},
+            data: {
+                'phone_number': $('#register_user_phone').val(),
+                'message_number':$('#verify_user_phone').val(),
+                'stragety':'verify'
+            },
+            dataType: 'json',
+            success: (response) => {
+                if(response.state==='success')
+                    alert("인증 성공!")
+                else if(response.state==='failure')
+                    alert("인증 실패했습니다!")
+            },
+            error: (xhr, err) => {
+                alert("문자 전송 실패!")
+            }
+        })
+    })
 </script>
 
 <script>

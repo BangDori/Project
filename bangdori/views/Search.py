@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from bangdori.utils import getModelByName
+from bangdori.utils import getModelByName, getCommentModelByName
 
 
 class SearchAll(View):
@@ -35,6 +35,11 @@ class SearchAll(View):
         result = sorted(result, key=lambda x: x['date'], reverse=True)
         context['articles'] = result
         context['keyword'] = keyword
+
+        # 댓글 가져옴
+        context['comments'] = {x['id']: getCommentModelByName(x['url']).objects.all().filter(
+            article_id=x['id']).count() for x in context['articles']}
+
 
         # Pagination은 구현되어 있지 않음
         return render(request, 'board.html', context)
@@ -79,6 +84,11 @@ class SearchArticle(View):
         context['articles'] = result
         # 게시판 내 검색이므로, 주소를 지정해주어야 함
         context['url'] = name
+
+        # 댓글 가져옴
+        comments = getCommentModelByName(name)
+        context['comments'] = {x.id: comments.objects.all().filter(
+            article_id=x).count() for x in context['articles']}
 
         # Pagination은 구현되어 있지 않음
         return render(request, 'board.html', context)
