@@ -14,5 +14,6 @@ from .SmsView import *
 from .Update import *
 from .Write import *
 from .CommentDelete import *
+from .Upvote import *
 
 load_dotenv()

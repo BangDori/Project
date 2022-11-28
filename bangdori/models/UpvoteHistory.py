@@ -20,7 +20,9 @@ class UpvoteHistory(models.Model):
     """
 
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey('CustomerUser', on_delete=models.CASCADE, verbose_name='user')
+    user = models.ForeignKey(
+        'CustomerUser', on_delete=models.CASCADE, verbose_name='user')
     board = models.CharField(max_length=50, verbose_name='board')
-    article_id = models.PositiveIntegerField(db_column='article_id', null=False)
+    article_id = models.PositiveIntegerField(
+        db_column='article_id', null=False)
     upvote_at = models.DateTimeField(db_column='upvote_at', auto_now_add=True)
