@@ -38,5 +38,11 @@ function changeAddress(){
                     document.querySelector('#address-list').style.color ='white';
 }
 
+function changeCorporate(){
+                    changeNone();
+                    document.querySelector('#corporate-list').style.backgroundColor ='green';
+                    document.querySelector('#corporate-list').style.color ='white';
+}
+
 
 
