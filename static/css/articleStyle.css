@@ -228,3 +228,9 @@
     border-radius : .5rem;
     padding : 0 .5rem;
 }
+.article-detail{
+    text-align: center;
+    padding: 16px 0px 16px 0px;
+    border-top: 1px solid #ccc;
+    font-size: 15px;
+}

@@ -77,7 +77,7 @@
 
 .login-after-user-info{
 
-  padding: 10px 15px;
+  padding: 10px 0px 10px 15px;
   gap: 10px;
 }
 
@@ -100,7 +100,10 @@
   gap: 10px;
 }
 
-.preview-post,
+.preview-post{
+    flex-grow: 1;
+    width: 50%;
+}
 .preview-dabang,
 .preview-succession {
   flex-grow: 1;
@@ -108,7 +111,7 @@
 
 .preview-post-content {
   position: relative;
-  border: 1px solid #ccc;
+  border: 2px solid #96CEB4;
 }
 
 .preview-top-info {
@@ -123,8 +126,8 @@
 .preview-title {
   text-align: left;
   font-size: 20px;
-  padding: 8px 0;
   margin-bottom: 5px;
+  color: #FF8C46;
 }
 
 .board-title {
@@ -134,7 +137,7 @@
 
 .preview-article {
   position: relative;
-  border: 1px solid #ccc;
+  border: 1px solid #96CEB4;
 }
 
 .preview-more {

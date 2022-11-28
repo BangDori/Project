@@ -14,13 +14,15 @@
 }
 
 .logo {
+  margin-left: 5px;
+  width: 100%;
   vertical-align: bottom;
   height: 90px;
 }
 
 .logo-title {
   display: inline-block;
-  color: #ccc;
+  color: #8C8C8C;
   font-size: 14px;
   align-items: flex-end;
 
