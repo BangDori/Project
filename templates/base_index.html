@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'css/articleStyle.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/writeStyle.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/essentialStyle.css' %}"/>
-
+    <link rel="stylesheet" href="{% static 'css/previewModal.css' %}"/>
     <title>방도리</title>
 </head>
 <body>
@@ -27,6 +27,7 @@
     {% block main %}
     {% endblock %}
 
+    {% include "extends/modal.html" %}
     {% include "extends/footer.html" %}
 </div>
 
@@ -35,5 +36,6 @@
 <script src="{% static 'js/topMove.js' %}"></script>
 <script src="{% static 'js/topSearch.js' %}"></script>
 <script src="{% static 'js/sliderBanner.js' %}"></script>
+<script src="{% static 'js/previewModal.js' %}"></script>
 </body>
 </html>
