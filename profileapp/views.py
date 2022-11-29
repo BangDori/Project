@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, UpdateView
@@ -8,6 +8,7 @@ from bangdori.models import *
 from bangdori.utils import getModelByName
 from .forms import ProfileCreateForm
 from .models import *
+from bangdori.models import CustomerUser
 
 
 # Create your views here.
@@ -30,19 +31,20 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileCreateForm
     success_url = reverse_lazy('index')
     template_name = 'update.html'
-
+    def update(request, user_id):
+        user = get_object_or_404(CustomerUser, pk=user_id)
+        user.nickname = request.GET['nickname']
+        user.save()
+        return redirect('/index')
 
 def view(request):
     return render(request, 'view.html')
 
-
 def profile(request):
     return render(request, 'profile.html')
 
-
 def mypage(request):
     return redirect('profileapp:myinfo')
-
 
 def myinfo(request):
     """
@@ -55,7 +57,6 @@ def myinfo(request):
     context['phone'] = user.phone
 
     return render(request, 'myinfo.html', context)
-
 
 def mypost(request):
     """
@@ -84,21 +85,17 @@ def mypost(request):
 
     return render(request, 'mypost.html', context)
 
-
 def favorites(request):
     """
     즐겨찾기
     """
     return render(request, 'favorites.html')
 
-
-
 def corporate(request):
     """
     사업자 등록
     """
     return render(request, 'corporate-registration.html')
-
 
 class Address(View):
     def get(self, request):

@@ -9,12 +9,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from dotenv import load_dotenv
 
 import bangdori.models
 from project.settings import MAX_ARTICLES, INDEX_ARTICLES
+
+from .forms import UserUpdateForm
 from .models import *
 from .utils import make_signature, getModelByName, getCommentModelByName, getArticlesByAddress, getAllArticles
 

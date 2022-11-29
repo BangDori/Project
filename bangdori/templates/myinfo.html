@@ -10,9 +10,8 @@
                     <tr>
                         <th>닉네임</th>
                         <td>
-                            <input type="text" value="{{ nickname }}">
+                            <input type="text" value="{{ request.user.nickname }}">
                             <input type="button" value="중복확인" class="button">
-                            <input type="text" value="{{request.user.nickname}}">
                             <input type="button" value="중복확인">
                         </td>
                     </tr>
@@ -34,20 +33,17 @@
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td><input type="text" value="{{ email }}"></td>
+                        <td><input type="text" value="{{ request.user.email }}"></td>
                     </tr>
                     <tr>
                         <th>전화번호</th>
-                        <td><input type="text" value="{{ phone }}"></td>
+                        <td><input type="text" value="{{ request.user.phone }}"></td>
                     </tr>
                     {% if target_user.profile %}
                      <tr>
                         <th>프로필</th>
-<<<<<<< HEAD:profileapp/templates/myinfo.html
                         <td><input type="button" class= "button" value ="프로필" onClick="location.href={% url 'detail' pk=user.pk %}"></td>
-=======
                         <td><a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">프로필수정</a></td>
->>>>>>> 21cd9f66711fe615fc1112a1646e1fb5e7b0552a:bangdori/templates/myinfo.html
                     </tr>
                     {% else %}
                     <tr>
@@ -63,7 +59,6 @@
                             <input type="button" value="주소찾기">
                             <br>
                             <input type="text" value="세부 주소">
-
                         </td>
                     </tr>-->
                 </table>
