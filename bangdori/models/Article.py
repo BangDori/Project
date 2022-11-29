@@ -63,7 +63,8 @@ class Article(models.Model):
         url = url[url.rfind('_') + 1:]
         return {'id': self.id, 'title': self.title, 'writer': self.writer,
                 'content': self.content, 'date': self.date, 'views': self.views,
-                'upvote': self.upvote, 'need_addr': self.need_addr(), 'url': url}
+                'upvote': self.upvote, 'need_addr': self.need_addr(), 'url': url,
+                'img': self.img}
 
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)
