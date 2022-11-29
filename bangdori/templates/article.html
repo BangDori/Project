@@ -41,7 +41,7 @@
 
                 <div">
                     <div class="article-detail" id="addr">상세주소 : {{ addr }}</div>
-                    <div id="map" style="width:100%; height:350px; border: 2px solid #96ceb4; margin-bottom: 20px;"></div>
+                    <div id="map" style="width:100%; height:350px; border: 2px solid #96ceb4; margin: 0px 0px 20px 0px;"></div>
                 </div>
                     <script type="text/javascript"
                             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42a75472a2c1f5dc76966d731fce7707"></script>
@@ -105,13 +105,17 @@
 
                     {% if request.user.id == article.writer.id %}
                         <div class="board-article-update">
-                            <button class="cancle-update"><a class="move-article-update"
-                                                             href={% url 'update' name=url pk=article.id %}>수정</a>
-                            </button>
-                            <form action={% url 'delete' name=url pk=article.id %} method="post">
-                                {% csrf_token %}
-                                <input class="cancle-update" type="submit" value="삭제"></input>
-                            </form>
+                           <span class = "board-article-modifybox">
+                                <button class="cancle-update"><a class="move-article-update"
+                                                                 href={% url 'update' name=url pk=article.id %}>수정</a>
+                                </button>
+                           </span>
+                            <span class="board-article-modifybox">
+                                <form action={% url 'delete' name=url pk=article.id %} method="post">
+                                    {% csrf_token %}
+                                    <input class="cancle-update" type="submit" value="삭제"></input>
+                                </form>
+                            </span>
                         </div>
                     {% else %}
                         <div class="board-article-upvote">

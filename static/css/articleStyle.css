@@ -67,6 +67,9 @@
 .board-article-update>a:hover {
     text-decoration: underline;
 }
+.board-article-modifybox{
+    display: inline-block;
+}
 
 .board-article-lnb{
     margin: 30px 0;
