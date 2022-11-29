@@ -91,6 +91,11 @@ def favorites(request):
     """
     return render(request, 'favorites.html')
 
+def small(request):
+    """
+    닉네임 변경 작은 창
+    """
+    return render(request,'small.html')
 def corporate(request):
     """
     사업자 등록
