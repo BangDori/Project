@@ -5,8 +5,13 @@ const preview_btn = document.querySelector(".preview-article-btn"),
 const OPEN = "open";
 
 function openModal() {
-    console.log("open");
     modal.classList.add(OPEN);
+    overlay.classList.add(OPEN);
+}
+
+function closeModal() {
+    modal.classList.remove(OPEN);
+    overlay.classList.remove(OPEN);
 }
 
 function init() {
