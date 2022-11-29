@@ -71,7 +71,13 @@
                                 {% else %}
                                     <a href="{% url 'article' name=url pk=article.id %}">
                                 {% endif %}
-                                <img src="" alt="" width="208px" height="128px">
+                                <img
+                                        {% if article.img %}
+                                            src="{{ article.img.url }}"
+                                        {% else %}
+                                            src="{% get_media_prefix %}defaults/no_image.jpg"
+                                        {% endif %}
+                                            alt="게시글 이미지" width="208px" height="128px">
                                 {{ article.title }}
                                 {% if comments|dict_key:article.id %}
                                     [{{ comments|dict_key:article.id }}]
