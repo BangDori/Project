@@ -3,7 +3,7 @@
 <form class="address-form" method="POST">
     {% csrf_token %}
 
-    <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}">
+    <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}" required>
     <input type="button" class ="button" onclick="launchDaum()" value="우편번호 찾기"><br>
     <div id="여백2" style ="height : 10px;"></div>
     <input type="text" class="input-text" id="road" name="road" placeholder="도로명주소" value="{{ addr.road }}">
@@ -18,6 +18,7 @@
     <input type="hidden" id="sido" name="sido" value="{{ addr.sido }}">
     <input type="hidden" id="sigungu" name="sigungu" value="{{ addr.sigungu }}">
     <input type="hidden" id="roadname" name="roadname" value="{{ addr.roadname }}">
+    <input type="hidden" id="addr_filled" name="addr_filled">
 
     {% if not need_addr %}
         <!-- 만약 게시판인 경우, 버튼을 안 보여줘도 됨 -->
@@ -31,6 +32,7 @@
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=42a75472a2c1f5dc76966d731fce7707&libraries=services"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(35.8304916312343, 128.75218013148), // 지도의 중심좌표
@@ -132,6 +134,7 @@
 
                 document.getElementById("lat").value = coords.getLat();
                 document.getElementById("lng").value = coords.getLng();
+                document.getElementById("addr_filled").value = "yes";
             }
         });
 
