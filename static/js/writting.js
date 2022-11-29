@@ -15,17 +15,22 @@ function loadImage() {
     input.click();
 }
 
+document.getElementById('upload-image-file').onchange = function () {
+    var src = URL.createObjectURL(this.files[0]);
+    document.getElementById('upload-image-file-label').textContent = "사진 첨부됨";
+}
+
 function leftAlign() {
-    document.querySelector(".write-content").style.textAlign="left";
+    document.querySelector(".write-content").style.textAlign = "left";
     document.getElementsByName("alignStatus").value = "left";
 }
 
 function middleAlign() {
-    document.querySelector(".write-content").style.textAlign="center";
+    document.querySelector(".write-content").style.textAlign = "center";
     document.getElementsByName("alignStatus").value = "center";
 }
 
 function rightAlign() {
-    document.querySelector(".write-content").style.textAlign="right";
+    document.querySelector(".write-content").style.textAlign = "right";
     document.getElementsByName("alignStatus").value = "right";
 }
