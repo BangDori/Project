@@ -1,11 +1,12 @@
 .essential-board {
     /* border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc; */
-    margin: 32px 0;
-
+    margin: 8px 0;
+    padding: 16px 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    border-top: 1px solid #ccc;
 
     /* border: none !important; */
 }
