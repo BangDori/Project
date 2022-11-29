@@ -30,7 +30,7 @@
                 <!-- 게시물 목록 영역 -->
                 {% if articles %}
                     {% for article in articles %}
-                        <div class="article-info">
+                        <div class="article-info top-info">
                             <div class="id">{{ forloop.counter }}</div>
                             <div class="title">
                                 <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
