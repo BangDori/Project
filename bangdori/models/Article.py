@@ -1,4 +1,11 @@
+import uuid
+
 from django.db import models
+
+
+def random_filename(instance, name):
+    """ 무작위로 파일 이름 생성 """
+    return "files/%s.%s" % (uuid.uuid4(), name.split('.')[-1])
 
 
 class Article(models.Model):
@@ -24,6 +31,8 @@ class Article(models.Model):
         추천수, 조회수와 마찬가지의 형식 사용
     addr : ForeignKey
         주소 테이블의 ID를 나타냄
+    img : ImageFIeld
+        게시글의 첨부파일이며, 이미지 경로를 나타냄
     """
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, verbose_name='제목')
@@ -35,6 +44,7 @@ class Article(models.Model):
     upvote = models.PositiveIntegerField(default=0, verbose_name='추천')
     addr = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, verbose_name='주소', null=True, default=None)
+    img = models.ImageField(upload_to=random_filename, null=True, verbose_name='사진')
 
     def __str__(self):
         # __str__ 오버라이드로 제목만 표시

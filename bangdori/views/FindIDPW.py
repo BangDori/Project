@@ -23,3 +23,6 @@ def findPW2(request):
 
 def showID(request):
     return render(request, 'showID.html')
+
+def showPW(request):
+    return render(request, 'showPW.html')

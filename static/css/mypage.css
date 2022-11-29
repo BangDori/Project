@@ -10,7 +10,10 @@
 }
 
 #lnb{
+<<<<<<< HEAD
+=======
     display : flex;
+>>>>>>> 720d879f583605957686bd4179f3f909812c0193
     background-color : #96ceb4;
     padding : 0 100px;
 
@@ -37,6 +40,7 @@
 }
 
 .index-list{
+    cursor: pointer;
     border-radius : 1rem;
     text-align : center;
     height : 36px;
@@ -46,8 +50,12 @@
 }
 
 #myinfo-list{
+<<<<<<< HEAD
     color : white;
-    background-color : #367E18;
+    background-color : #96ceb4;
+=======
+
+>>>>>>> 720d879f583605957686bd4179f3f909812c0193
 }
 
 #content-box{
@@ -160,9 +168,13 @@ td{
   width : 96px;
 }
 
+.clicked {
+    background-color: green;
+    color: white;
+}
 
 .button{
-     border-top : none;
+    border-top : none;
     border-left : none;
     border-right: none;
     border-bottom : 3px solid #96ceb4;

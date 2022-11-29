@@ -26,10 +26,20 @@ def write(request, name):
     context['need_addr'] = need_addr
 
     if request.method == "POST":
+        # 이미지 받아옴
+
         # 게시글 작성
         article = article(title=request.POST.get('title'),
                           writer=CustomerUser.objects.get(username=user),
                           content=request.POST.get('content'))
+
+        # 사진 업로드
+        try:
+            _, img = request.FILES.popitem()
+            img = img[0]
+            article.img = img
+        except:
+            pass
 
         # 주소가 필요한 경우, article의 FK 필드인 addr에 새로운 주소를 만들어 저장
         if need_addr:

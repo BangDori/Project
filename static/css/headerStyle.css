@@ -14,13 +14,15 @@
 }
 
 .logo {
+  margin-left: 5px;
+  width: 100%;
   vertical-align: bottom;
   height: 90px;
 }
 
 .logo-title {
   display: inline-block;
-  color: #ccc;
+  color: #8C8C8C;
   font-size: 14px;
   align-items: flex-end;
 
@@ -31,8 +33,8 @@
 .logo-on-search{
     display: inline-block;
     position: relative;
-    top: 10px;
-    left: 112px;
+    top: 7px;
+    left: 105px;
 }
 
 .top-content-search {

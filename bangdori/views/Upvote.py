@@ -8,10 +8,6 @@ def upvote(request):
     board = request.GET.get('board')
     article_id = request.GET.get('article_id')
 
-    article = getModelByName(board)
-    article = article.objects.all().get(id=article_id)
-    article.upvote = article.upvote+1
-    article.save()
 
     if(user == None):
         return JsonResponse({'message': '로그인 해주세요!', 'state': 'NotLogin'}, status=200)
@@ -27,4 +23,8 @@ def upvote(request):
                 article_id=article_id,
                 user=user
             ).save()
+            article = getModelByName(board)
+            article = article.objects.all().get(id=article_id)
+            article.upvote = article.upvote+1
+            article.save()
         return JsonResponse({'message': '추천 완료', 'state': 'success'}, status=200)
