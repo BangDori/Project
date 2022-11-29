@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from bangdori.models import Article
-from bangdori.utils import getModelByName
+from bangdori.utils import getModelByName, getCommentModelByName
 
 
 class ArticleInfo(APIView):
@@ -30,10 +30,11 @@ class ArticleInfo(APIView):
         url = url[url.rfind('_') + 1:]
 
         addr = article.addr
-        print(addr)
+
+        comments = getCommentModelByName(url).objects.all().filter(article_id=article.id).count()
 
         data = {'id': article.id, 'title': article.title, 'writer': article.writer.username,
-                'content': article.content, 'date': article.date, 'views': article.views,
-                'upvote': article.upvote, 'url': url}
+                'content': article.content, 'date': article.date.strftime("%Y-%m-%d %H:%M:%S"), 'views': article.views,
+                'upvote': article.upvote, 'url': url, 'comments': comments}
 
         return Response(data, status=status.HTTP_200_OK)
