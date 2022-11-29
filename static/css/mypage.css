@@ -1,4 +1,3 @@
-
 #header{
 
 }
@@ -10,24 +9,18 @@
 }
 
 #lnb{
-<<<<<<< HEAD
-=======
-    display : flex;
->>>>>>> 720d879f583605957686bd4179f3f909812c0193
     background-color : #96ceb4;
     padding : 0 100px;
-
-
-
 }
 
 #lnb_contents{
-
+    font-size: 24px;
+    font-weight: bold;
 }
 
 #content-body{
-    display : flex;
-    padding :50px 100px;
+    display: flex;
+    padding: 32px 100px;
 
 }
 
@@ -50,12 +43,8 @@
 }
 
 #myinfo-list{
-<<<<<<< HEAD
     color : white;
     background-color : #96ceb4;
-=======
-
->>>>>>> 720d879f583605957686bd4179f3f909812c0193
 }
 
 #content-box{
@@ -93,8 +82,6 @@ td{
 #bookmark-box{
 }
 
-
-
 .total-article-info {
     display: flex;
     flex-direction: column;
@@ -116,6 +103,7 @@ td{
     color: black;
     font-weight: bold;
     font-size: 14px;
+    margin: 16px 0;
 }
 .search-box {
     margin-top: 20px;
@@ -141,6 +129,10 @@ td{
     padding: 5px;
     width: 192px;
     padding-inline-start: 5px;
+}
+
+.article-info {
+    font-weight: normal !important;
 }
 
 .id{
@@ -197,4 +189,12 @@ td{
     padding:5px;
     border : 1px solid green;
     border-radius : .5rem;
+}
+
+.addr-click-btn {
+    padding: 16px;
+}
+
+.addr-click-btn>input{
+    padding: 8px 16px;
 }
