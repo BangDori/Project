@@ -2,20 +2,14 @@
 <div id="여백" style="height : 30px;"></div>
 <form class="address-form" method="POST">
     {% csrf_token %}
-
-<<<<<<< HEAD
-    <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}">
-    <input type="button" class ="button write-btn" style = "font-size: 12px;" onclick="launchDaum()" value="우편번호 찾기"><br>
-=======
-    <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}" required>
-    <input type="button" class ="button" onclick="launchDaum()" value="우편번호 찾기"><br>
->>>>>>> 30d2fda9ca63857ede2bff90b7a772b0cdf2c5a0
-    <div id="여백2" style ="height : 10px;"></div>
+    <input type="text" class="input-text" id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}">
+    <input type="button" class="button write-btn" style="font-size: 12px;" onclick="launchDaum()" value="우편번호 찾기"><br>
+    <div id="여백2" style="height : 10px;"></div>
     <input type="text" class="input-text" id="road" name="road" placeholder="도로명주소" value="{{ addr.road }}">
     <input type="text" class="input-text" id="jibun" name="jibun" placeholder="지번주소" value="">
     <span id="guide" style="color:#999;display:none"></span>
     <input type="text" class="input-text" id="detail" name="detail" placeholder="상세주소" value="{{ addr.detail }}">
-    <div id="여백3" style ="height : 10px;"></div>
+    <div id="여백3" style="height : 10px;"></div>
     <input type="text" class="input-text" id="extra" name="extra" placeholder="참고항목" value="{{ addr.extra }}">
 
     <input type="hidden" id="lat" name="lat" value="{{ addr.lat }}">
@@ -28,7 +22,7 @@
     {% if not need_addr %}
         <!-- 만약 게시판인 경우, 버튼을 안 보여줘도 됨 -->
         <div class="addr-click-btn">
-            <input type="submit" class ="button" value="주소 등록하기">
+            <input type="submit" class="button" value="주소 등록하기">
         </div>
     {% endif %}
 </form>
