@@ -190,3 +190,11 @@ td{
     border : 1px solid green;
     border-radius : .5rem;
 }
+
+.addr-click-btn {
+    padding: 16px;
+}
+
+.addr-click-btn>input{
+    padding: 8px 16px;
+}
