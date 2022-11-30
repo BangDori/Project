@@ -22,11 +22,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://bangdori.toygoon.com:8080",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080"
-]
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

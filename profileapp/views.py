@@ -11,7 +11,7 @@ from .models import *
 
 
 # Create your views here.
-class ProfileCreateView(CreateView):
+class ProfileCreateView1(CreateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreateForm
@@ -20,12 +20,40 @@ class ProfileCreateView(CreateView):
 
     def form_valid(self, form):  # ProfileCreationForm의 data가 2번째 파라미터에 들어 있어요.
         # 임시로 저장함.<commit=False> 키워드 인자를 이용해서
-
         temp_profile = form.save(commit=False)
         temp_profile.user = self.request.user
 
         temp_profile.save()  # self는 view에서 가져온 self임. 또, 웹브라우저에서 입력 받은 값이 우항 좌항이 db에서 가져온값
         return super().form_valid(form)
+
+class ProfileCreateView(View):
+    def get(self, request):
+        context = {}
+
+        return render(request, 'create.html', context)
+
+    def post(self, request):
+        context = {}
+        # 사진 업로드
+        try:
+            _, img = request.FILES.popitem()
+            img = img[0]
+
+            profile = None
+            try:
+                profile = Profile.objects.all().filter(user_id=request.user.id)
+            except:
+                profile = Profile(user_id=request.user.id)
+
+            profile.image = img
+            profile.save()
+        except:
+            pass
+
+        request.user.nickname = request.POST.get('nicknameBox')
+        request.user.save()
+
+        return redirect('index')
 
 
 class ProfileUpdateView(UpdateView):
