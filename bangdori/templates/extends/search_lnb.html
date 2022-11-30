@@ -5,8 +5,15 @@
         <!-- 검색 화면이면 검색 결과 출력되도록 설정,
             검색이랑 공용 부분 -->
         {% if not is_search %}
-            {% if name == '공지' %}
-                {% if request.user.id == 1 %}
+            <!-- 공지, 다방 게시판인 경우 글쓰기 버튼이 때에 따라 다르게 동작 -->
+            {% if url == 'notice' %}
+                {% if request.user.is_superuser %}
+                    <div class="writting-box">
+                        <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
+                    </div>
+                {% endif %}
+            {% elif url == 'dabang' %}
+                {% if request.user.is_superuser or request.user.corp_num %}
                     <div class="writting-box">
                         <a class="writting-btn" href={% url 'write' name=url %}>글쓰기</a>
                     </div>
@@ -45,7 +52,8 @@
                     <option value="search-w">글쓴이</option>
                     <option value="search-cmt">댓글</option>
                 </select>
-                <input name="board-search-keyword" class="board-search-keyword" type="text" placeholder="검색어 입력" required/>
+                <input name="board-search-keyword" class="board-search-keyword" type="text" placeholder="검색어 입력"
+                       required/>
                 <!-- 검색 버튼 -->
                 <input type="image" class="search_lnb"
                        src="https://www.pngall.com/wp-content/uploads/8/Vector-Search.png"
