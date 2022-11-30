@@ -4,23 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>profile</title>
-    <link rel="stylesheet" href="../../static/css/profile.css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div>
         <div id ="header">
             <div id ='top' style="font-size:1.8rem">
-                <!-- TODO : 고쳐야함 -->
-                <a href="http://127.0.0.1:8000/index">
-                    <img src="../../static/imgs/logo.png" alt="로고자리" style ="height : 50px">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'imgs/logo.png' %}" alt="로고자리" style ="height : 50px">
                 </a>
             </div>
             <div id ="lnb">
                 <div class="lnb_contents">
                     <div ><h2>방도리 간편 프로필 변경</h2></div>
                     <div style ="width : 600px"></div>
-                    <div class="lnb_mypage"><a href="http://127.0.0.1:8000/profiles/myinfo/"><b>My Page →</b></a></div>
+                    <div class="lnb_mypage"><a href="{% url 'myinfo' %}"><b>My Page →</b></a></div>
 
                 </div>
             </div>

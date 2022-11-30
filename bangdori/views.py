@@ -86,27 +86,10 @@ def login(request):
                 # return redirect('/index')
             else:
                 return redirect('/index')
-        """
-        DB에서 Filter를 이용하지 않고, auth 클래스를 이용하여 로그인하도록 수정함
-        오류 메시지는 아직 구현되지 않음
-        """
-        # if not (username and password):
-        #     context['error'] = "빈칸없이 입력해주세요."
-        # else:
-        #     if CustomerUser.objects.filter(username=username):
-        #         user = CustomerUser.objects.get(username=username)
-        #         if check_password(password, user.password):
-        #             request.session['user'] = user.username
-        #             return redirect('/index')
-        #         else:
-        #             context['error'] = "해당 회원정보가 존재하지 않습니다."
-        #     else:
-        #         context['error'] = "해당 회원정보가 존재하지 않습니다."
     else:
         return render(request, 'login.html', context)
 
     return render(request, 'login.html', context)
-
 
 
 def logout(request):
@@ -372,7 +355,6 @@ def findPW2(request):
     return render(request, 'findPW2.html')
 
 
-
 class SmsSendView(View):
     def send_sms(self, phone_number, auth_number):
         timestamp = str(int(time.time() * 1000))
@@ -573,7 +555,7 @@ class navercallback(View):
         user = CustomerUser.objects.create_user(provider=uid,
                                                 email=json['email'],
                                                 birthday=json['birthyear'] +
-                                                '-' + json['birthday'],
+                                                         '-' + json['birthday'],
                                                 username=json['nickname'],
                                                 phone=json['mobile'],
                                                 )
