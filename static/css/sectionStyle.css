@@ -164,11 +164,13 @@ div{
 .user-content-box{
   display : flex;
   justify-content: center;
+  padding-bottom: 7px;
 }
 
 .user-content{
   height : 100%;
   padding-left: 5px;
+  text-align: center;
 }
 
 .profile-img{
@@ -203,6 +205,10 @@ div{
 #mypage-button{
   height : 3rem;
   width : 7rem;
+  background-color: #FF8C46;
+  color: white;
+  border: 1px solid white;
+  border-radius: 17px;
 }
 #logout{
   width : 40%;
@@ -211,6 +217,10 @@ div{
 #logout-button{
   height : 3rem;
   width : 7rem;
+  background-color: #FF8C46;
+  color: white;
+  border: 1px solid white;
+  border-radius: 17px;
 }
 
 
