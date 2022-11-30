@@ -169,6 +169,8 @@ class Address(View):
         # 저장
         user.addr = addr
         user.save()
+
+        context = {}
         context['addr'] = request.user.addr
 
         # 주소 등록 페이지
