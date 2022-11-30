@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 import bangdori.models
 from project.settings import MAX_ARTICLES, INDEX_ARTICLES
 
+from django.accountapp.forms import AccountUpdateForm
 from .forms import UserUpdateForm
 from .models import *
 from .utils import make_signature, getModelByName, getCommentModelByName, getArticlesByAddress, getAllArticles
@@ -174,6 +175,12 @@ class DetailView(DetailView):
     context_object_name = 'target_user'
     template_name = 'profile.html'
 
+# class AccountUpdateView(UpdateView):
+#     model = CustomerUser
+#     form_class = AccountUpdateForm
+#     context_object_name = 'target_user'
+#     success_url = reverse_lazy('index')
+#     template_name = 'small.html'
 
 def dabang(request):
     return render(request, 'dabang.html')
