@@ -164,7 +164,6 @@ div{
 .user-content-box{
   display : flex;
   justify-content: center;
-  padding-bottom: 7px;
 }
 
 .user-content{
