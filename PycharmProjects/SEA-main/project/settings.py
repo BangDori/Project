@@ -147,6 +147,3 @@ MAX_ARTICLES = 10
 
 # 메인 화면에서 게시판당 표시할 게시글 개수
 INDEX_ARTICLES = 5
-
-# 메인 화면에서 표시할 게시글의 글자 수 제한
-INDEX_ARTICLE_TITLE_COUNT = 15
