@@ -12,6 +12,8 @@
 .write-form {
     position: relative;
     padding: 15px 10px;
+    border: 1px solid black;
+    background-color: rgba(127, 127, 127, 0.05);
 }
 
 .write-title-box{
@@ -67,4 +69,20 @@
   overflow: hidden;
   clip:rect(0,0,0,0);
   border: 0;
+}
+.write-btn{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 15px;
+    color: black;
+    padding: 4px 8px;
+}
+.write-btn-compl{
+    font-size: 15px;
+    padding: 4px 8px;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 3px;
 }

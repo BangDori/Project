@@ -6,9 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../../static/css/mypage.css">
-    <script src="../../../static/js/mypage.js">
-    </script>
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
     <title>마이 페이지</title>
 </head>
 <body>
@@ -21,7 +19,7 @@
         </div>
         <div id="lnb">
             <div id="lnb_contents">
-                <div><h2>마이 페이지</h2></div>
+                <span>마이 페이지</span>
             </div>
         </div>
     </div>
@@ -32,6 +30,8 @@
         {% endblock %}
     </div>
 </div>
+
 <script src="{% static 'js/mypage.js' %}"></script>
+<script src="{% static 'js/checkDate.js' %}"></script>
 </body>
 </html>

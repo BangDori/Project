@@ -31,8 +31,10 @@ class Article(models.Model):
         추천수, 조회수와 마찬가지의 형식 사용
     addr : ForeignKey
         주소 테이블의 ID를 나타냄
-    img : ImageFIeld
+    img : ImageField
         게시글의 첨부파일이며, 이미지 경로를 나타냄
+    attr : CharField
+        게시글이 정렬된 상태를 나타냄
     """
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, verbose_name='제목')
@@ -45,6 +47,7 @@ class Article(models.Model):
     addr = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, verbose_name='주소', null=True, default=None)
     img = models.ImageField(upload_to=random_filename, null=True, verbose_name='사진')
+    # attr = models.CharField(max_length=50, verbose_name='정렬')
 
     def __str__(self):
         # __str__ 오버라이드로 제목만 표시
@@ -63,7 +66,8 @@ class Article(models.Model):
         url = url[url.rfind('_') + 1:]
         return {'id': self.id, 'title': self.title, 'writer': self.writer,
                 'content': self.content, 'date': self.date, 'views': self.views,
-                'upvote': self.upvote, 'need_addr': self.need_addr(), 'url': url}
+                'upvote': self.upvote, 'need_addr': self.need_addr(), 'url': url,
+                'img': self.img}
 
     class Meta:
         # Meta 클래스 오버라이드로 상세 내용 지정 (Form을 위함)

@@ -121,3 +121,45 @@ def dictKey(d, k):
     Template용 함수
     """
     return d[k]
+
+
+def addCommentsToTitle(articles: list, name=None):
+    """
+    Index에 출력할 게시글 목록 위젯에 사용됨
+    게시글 제목의 댓글 수를 '제목 [댓글수]' 형식으로 만들어줌
+
+    Parameters
+    ----------
+    articles : list
+        게시글의 정보인 Article을 dict 형식으로 저장한 후, 이를 list로 만듬
+    name : str
+        게시판 이름({{ url }})을 가져옴. 만약 지정되어 있지 않다면(=None),
+        게시판 내에 포함된 변수를 이용하여 getCommentModelByName 함수를 매번 호출함. (핫, 최근 게시물)
+        그렇지 않고, 게시판이 특정되어 있다면 getCommentModelByName를 매번 호출하지 않고,
+        로드 시간을 아낄 수 있으므로 해당 파라미터를 이용
+
+    Returns
+    ----------
+    articles의 모든 항목(Article)의 'title' 변수에 댓글 수가 추가된 변수 (dict로 구성된 list)
+    """
+    # Comment Model을 특정할 수 있을 경우, 코드 중복을 막기 위해 미리 가져옴
+    model = None
+    if name is not None:
+        model = getCommentModelByName(name).objects.all()
+
+    for a in articles:
+        # list에 포함된 각 title을 가져옴
+        title = a['title']
+
+        if name is not None:
+            # 이름이 특정된 경우, 미리 가져온 Model에서 갯수를 가져옴
+            count = model.filter(article_id=a['id']).count()
+        else:
+            # 이름이 특정되지 않은 경우, url 변수를 이용하여 Model을 가져온 뒤, 갯수를 가져옴
+            count = getCommentModelByName(a['url']).objects.all().filter(article_id=a['id']).count()
+
+        # 해당 게시글에 댓글이 있는 경우에만 추가해 줌
+        if count > 0:
+            a['title'] = f'{title} [{count}]'
+
+    return articles

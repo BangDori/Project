@@ -155,8 +155,7 @@
 }
 
 div{
-  margin : 2px;
-
+  /* margin : 2px; */
 }
 
 .user-content-box{
@@ -166,7 +165,7 @@ div{
 
 .user-content{
   height : 100%;
-  padding-left: 15px;
+  padding-left: 5px;
 }
 
 .profile-img{
@@ -195,7 +194,6 @@ div{
 
 #mypage{
   width : 40%;
-  border-right : 1px solid black;
 
 }
 

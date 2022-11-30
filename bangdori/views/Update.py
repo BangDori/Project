@@ -29,5 +29,9 @@ def update(request, name, pk):
     context['title'] = article.title
     context['content'] = article.content
     context['isEdit'] = True
+    try:
+        context['img'] = article.img.url
+    except:
+        pass
 
     return render(request, 'write.html', context)
