@@ -21,9 +21,12 @@ def article(request, name, pk):
         comments = comment.objects.all().filter(article_id=article.id)
     except Exception as e:
         comments = None
+
     # 조회수 올림
-    article.views = article.views + 1
-    
+    if request.user.id != article.writer_id or request.user.is_authenticated:
+        # 본인 게시글이 아니면 조회수 올림
+        article.views += 1
+
     article.save()
 
     writer_img = Profile.objects.all().filter(user=article.writer).last()
