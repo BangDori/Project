@@ -16,6 +16,12 @@ def update(request, name, pk):
         # 게시글 수정
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        try:
+            _, img = request.FILES.popitem()
+            img = img[0]
+            article.img = img
+        except:
+            pass
         article.save()
         return redirect('article', name=name, pk=pk)
 
