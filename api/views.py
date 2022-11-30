@@ -33,8 +33,13 @@ class ArticleInfo(APIView):
 
         comments = getCommentModelByName(url).objects.all().filter(article_id=article.id).count()
 
+        try:
+            img = article.img.url
+        except:
+            img = None
+
         data = {'id': article.id, 'title': article.title, 'writer': article.writer.username,
                 'content': article.content, 'date': article.date.strftime("%Y-%m-%d %H:%M:%S"), 'views': article.views,
-                'upvote': article.upvote, 'url': url, 'comments': comments}
+                'upvote': article.upvote, 'url': url, 'comments': comments, 'img': img}
 
         return Response(data, status=status.HTTP_200_OK)

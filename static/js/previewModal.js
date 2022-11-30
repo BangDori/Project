@@ -32,6 +32,9 @@ function getArticleInfo(name, pk) {
             document.getElementById("modal-title").textContent = response.title;
             document.getElementById("modal-article-user").textContent = info;
             document.getElementById("modal-content").textContent = response.content;
+            let img = response.img;
+            console.log(img);
+            $(".modal-img").attr("src",img)
         },
         error: function () {
             alert("게시글 정보를 불러올 수 없습니다.");
