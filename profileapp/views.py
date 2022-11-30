@@ -6,7 +6,7 @@ from django.views.generic import CreateView, UpdateView
 import bangdori
 from bangdori.models import CustomerUser, UpvoteHistory
 from bangdori.utils import getModelByName
-from .forms import ProfileCreateForm
+from .forms import ProfileCreateForm, AccountUpdateForm
 from .models import *
 
 
@@ -60,9 +60,17 @@ def myinfo(request):
     """
     context = {}
     user: CustomerUser = request.user
-    context['nickname'] = user.nickname
     context['email'] = user.email
     context['phone'] = user.phone
+
+    if request.method == 'POST':
+        user.set_password(request.POST.get('password'))
+        user.email = request.POST.get('email')
+        user.phone = request.POST.get('phone')
+
+        user.save()
+
+        return redirect('index')
 
     return render(request, 'myinfo.html', context)
 
@@ -175,3 +183,11 @@ class Address(View):
 
         # 주소 등록 페이지
         return render(request, 'address.html', context)
+
+
+class AccountUpdateView(UpdateView):
+    model = CustomerUser
+    form_class = AccountUpdateForm
+    context_object_name = 'target_user'
+    success_url = reverse_lazy('index')
+    template_name = 'small.html'
