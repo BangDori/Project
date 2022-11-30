@@ -38,7 +38,7 @@
             </div>
             <div class="write-content-box">
                 <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."
-                          required>{{ content }}</textarea>
+                          style="text-align: {{ attr }}" required>{{ content }}</textarea>
             </div>
             <div class="write-footer">
                 {% if need_addr %}
