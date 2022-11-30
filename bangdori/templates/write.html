@@ -34,9 +34,7 @@
                     <button type="button" id="right_align_btn" class="upload-btn, write-btn" onclick="rightAlign()">오른쪽
                         정렬
                     </button>
-                    <button type="button" id="font_btn" class="upload-btn, write-btn">글꼴</button>
                 </div>
-
             </div>
             <div class="write-content-box">
                 <textarea class="write-content" rows="25" name="content" placeholder="내용을 입력하세요."
@@ -63,7 +61,7 @@
                     <input type="submit" class="write-btn-compl" style="margin-top: 5px;" value="글쓰기">
                 {% endif %}
             </div>
-            <input type="hidden" name="alignStatus" value="left">
+            <input type="hidden" id="alignStatus" name="alignStatus" value="{{ attr }}">
         </form>
     </div>
 {% endblock %}

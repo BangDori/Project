@@ -22,15 +22,15 @@ document.getElementById('upload-image-file').onchange = function () {
 
 function leftAlign() {
     document.querySelector(".write-content").style.textAlign = "left";
-    document.getElementsByName("alignStatus").value = "left";
+    document.getElementById("alignStatus").value = "left";
 }
 
 function middleAlign() {
     document.querySelector(".write-content").style.textAlign = "center";
-    document.getElementsByName("alignStatus").value = "center";
+    document.getElementById("alignStatus").value = "center";
 }
 
 function rightAlign() {
     document.querySelector(".write-content").style.textAlign = "right";
-    document.getElementsByName("alignStatus").value = "right";
+    document.getElementById("alignStatus").value = "right";
 }
