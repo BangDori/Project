@@ -41,9 +41,10 @@ class ProfileCreateView(View):
 
             profile = None
             try:
-                profile = Profile.objects.all().filter(user_id=request.user.id)
+                profile = Profile.objects.all().filter(user_id=request.user.id).last()
             except:
                 profile = Profile(user_id=request.user.id)
+
 
             profile.image = img
             profile.save()
