@@ -16,6 +16,7 @@
 #lnb_contents{
     font-size: 24px;
     font-weight: bold;
+    color: white;
 }
 
 #content-body{
@@ -160,7 +161,7 @@ td{
 }
 
 .clicked {
-    background-color: green;
+    background-color: #96ceb4;
     color: white;
 }
 
