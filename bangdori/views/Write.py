@@ -31,7 +31,8 @@ def write(request, name):
         # 게시글 작성
         article = article(title=request.POST.get('title'),
                           writer=CustomerUser.objects.get(username=user),
-                          content=request.POST.get('content'))
+                          content=request.POST.get('content'),
+                          attr=request.POST.get('alignStatus'))
 
         # 사진 업로드
         try:

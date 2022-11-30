@@ -6,10 +6,7 @@ from .models import UpvoteHistory
 
 
 class UserAdmin(admin.ModelAdmin):
-
-
     list_display = ('username', 'email', 'password', 'birthday', 'phone', 'nickname')
-
 
 
 class SMSAdmin(admin.ModelAdmin):

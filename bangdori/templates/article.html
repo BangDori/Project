@@ -93,7 +93,7 @@
                 {% endif %}
 
                 <div class="article-content-box">
-                    <div class="article-content">
+                    <div class="article-content" style="text-align: {{ article.attr }}">
                         {% if article.img %}
                         <!-- 사진 있으면 출력 -->
                             <div class="article-img">
@@ -122,7 +122,11 @@
                             <input type="hidden" id="board_name" value="{{ url }}">
 
                             <input type="hidden" id="article_id" value="{{ article.id }}">
-                            <button id="upvote_button">추천</button>
+                            <button id="upvote_button">
+                                <img src="https://thenounproject.com/api/private/icons/782919/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0&token=gAAAAABjhu74MD-k-4KGUHv9ET1vfItQR9WgTsMqeOEvnoJ9LY0QXT0SuMPYnZXYijmiYJNoM5F8Prwv6pduWh3LZHTLA34-Qg%3D%3D"
+                                alt="" width="32px"> <br>
+                                {{article.upvote}}
+                            </button>
 
                         </div>
                     {% endif %}

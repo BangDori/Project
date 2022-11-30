@@ -67,6 +67,26 @@
 .board-article-update>a:hover {
     text-decoration: underline;
 }
+
+.board-article-upvote {
+    text-align: center;
+    margin: 32px 0;
+}
+
+#upvote_button {
+    width: 60px;
+    height: 60pxpx;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+#upvote_button:hover {
+    background-color: rgba(127, 127, 127, 0.5);
+}
+
 .board-article-modifybox{
     display: inline-block;
 }
