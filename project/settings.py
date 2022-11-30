@@ -16,6 +16,18 @@ LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
 TSE_TZ = False
 
+# CORS 오류 방지
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://bangdori.toygoon.com:8080",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080"
+]
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
