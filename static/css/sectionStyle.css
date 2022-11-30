@@ -47,9 +47,12 @@
 #login_btn {
   width: 100px;
   height: 50px;
+  background-color: #FF8C46;
+  color: white;
+  border: 1px solid white;
+  border-radius: 15px;
   cursor: pointer;
 }
-
 .info-user {
   padding: 5px 0px 5px 0px;
   display: flex;
