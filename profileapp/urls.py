@@ -17,5 +17,5 @@ urlpatterns = [
     path('favorites/', views.favorites, name='favorites'),
     path('address/', views.Address.as_view(), name='address'),
     path('corporate/', views.corporate, name='corporate'),
-    path('create/small.html/', views.small, name='small')
+    path('create/small/', views.small, name='small')
 ]
