@@ -65,6 +65,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 8px;
+    margin-bottom: 32px;
 }
 
 .modal-article .modal-article-info .modal-article-writer{
