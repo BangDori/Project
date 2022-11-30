@@ -1,4 +1,4 @@
-const preview_btn = document.querySelector(".preview-article-btn"),
+const preview_btns = document.querySelectorAll(".preview-article-btn"),
     modal = document.querySelector(".preview-modal"),
     overlay = document.querySelector(".overlay");
 
@@ -12,10 +12,6 @@ function openModal() {
 function closeModal() {
     modal.classList.remove(OPEN);
     overlay.classList.remove(OPEN);
-}
-
-function init() {
-    preview_btn.addEventListener("click", openModal);
 }
 
 function getArticleInfo(name, pk) {
@@ -42,5 +38,3 @@ function getArticleInfo(name, pk) {
         }
     });
 }
-
-init();

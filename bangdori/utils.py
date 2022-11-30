@@ -8,6 +8,7 @@ from django.template.defaultfilters import register
 from dotenv import load_dotenv
 
 from bangdori.models import *
+from project.settings import INDEX_ARTICLE_TITLE_COUNT
 
 
 def make_signature(timestamp):
@@ -143,6 +144,7 @@ def addCommentsToTitle(articles: list, name=None):
     articles의 모든 항목(Article)의 'title' 변수에 댓글 수가 추가된 변수 (dict로 구성된 list)
     """
     # Comment Model을 특정할 수 있을 경우, 코드 중복을 막기 위해 미리 가져옴
+    cut = INDEX_ARTICLE_TITLE_COUNT
     model = None
     if name is not None:
         model = getCommentModelByName(name).objects.all()
@@ -151,15 +153,21 @@ def addCommentsToTitle(articles: list, name=None):
         if a.get('comment_added', None):
             continue
 
-        # list에 포함된 각 title을 가져옴
-        title = a['title']
-
         if name is not None:
             # 이름이 특정된 경우, 미리 가져온 Model에서 갯수를 가져옴
             count = model.filter(article_id=a['id']).count()
         else:
             # 이름이 특정되지 않은 경우, url 변수를 이용하여 Model을 가져온 뒤, 갯수를 가져옴
             count = getCommentModelByName(a['url']).objects.all().filter(article_id=a['id']).count()
+
+        # list에 포함된 각 title을 가져옴
+        title = a['title']
+
+        if len(a['title']) > cut:
+            # 글자수 자르기 적용
+            title = title[:cut]
+            title = f'{title}...'
+            a['title'] = title
 
         # 해당 게시글에 댓글이 있는 경우에만 추가해 줌
         if count > 0:

@@ -23,7 +23,7 @@ class Article(models.Model):
         1:N 특성을 가지므로, 계정 삭제시 같이 삭제될 수 있는 CASCADE 특성 사용
     content : TextField
         게시글 내용
-    date :
+    date : DateTimeField
         글 작성 일자, auto_now_add 파라미터를 True로 하여 INSERT시 자동으로 날짜가 생성되는 옵션 사용
     views : PositiveIntegerField
         조회수, 음수가 없으므로 unsigned int 사용
@@ -47,7 +47,7 @@ class Article(models.Model):
     addr = models.ForeignKey(
         'Address', on_delete=models.SET_NULL, verbose_name='주소', null=True, default=None)
     img = models.ImageField(upload_to=random_filename, null=True, verbose_name='사진')
-    # attr = models.CharField(max_length=50, verbose_name='정렬')
+    attr = models.CharField(max_length=50, verbose_name='정렬', null=True, default=None)
 
     def __str__(self):
         # __str__ 오버라이드로 제목만 표시

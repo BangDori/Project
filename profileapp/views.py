@@ -4,11 +4,10 @@ from django.views import View
 from django.views.generic import CreateView, UpdateView
 
 import bangdori
-from bangdori.models import *
+from bangdori.models import CustomerUser, UpvoteHistory
 from bangdori.utils import getModelByName
 from .forms import ProfileCreateForm
 from .models import *
-from bangdori.models import CustomerUser
 
 
 # Create your views here.
@@ -30,26 +29,30 @@ class ProfileCreateView(CreateView):
 
 
 class ProfileUpdateView(UpdateView):
-
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreateForm
     success_url = reverse_lazy('index')
     template_name = 'update.html'
+
     def update(request, user_id):
         user = get_object_or_404(CustomerUser, pk=user_id)
         user.nickname = request.GET['nickname']
         user.save()
         return redirect('/index')
 
+
 def view(request):
     return render(request, 'view.html')
+
 
 def profile(request):
     return render(request, 'profile.html')
 
+
 def mypage(request):
     return redirect('profileapp:myinfo')
+
 
 def myinfo(request):
     """
@@ -63,11 +66,11 @@ def myinfo(request):
 
     return render(request, 'myinfo.html', context)
 
+
 def mypost(request):
     """
     내가 쓴 글
     """
-
     context = {}
 
     # 모든 게시판 객체 가져옴
@@ -76,7 +79,7 @@ def mypost(request):
     # 게시물 검색해오는 부분
     result = list()
     for board in boards:
-        # 모든 게시판에서 키워드를 포함한 글을 가져옴
+        # 모든 게시판에서 작성자가 현재 작성자인 글을 찾아옴
         articles = board.objects.all().filter(writer=request.user)
         # 검색 결과가 없는 것은 제외
         if articles.count() > 0:
@@ -90,23 +93,56 @@ def mypost(request):
 
     return render(request, 'mypost.html', context)
 
+
 def favorites(request):
     """
     즐겨찾기
     """
-    return render(request, 'favorites.html')
+    context = {}
+
+    # 내가 추천한 게시글 가져옴
+    history = UpvoteHistory.objects.all().filter(user_id=request.user)
+
+    # 모든 게시판 객체 가져옴
+    boards = getModelByName(None, True)
+
+    # 게시물 검색해오는 부분
+    result = list()
+
+    for h in history:
+        # 추천한 게시판 객체 가져옴
+        board = getModelByName(h.board)
+        # 결과에 추가
+        result.append(board.objects.all().filter(id=h.article_id).last().to_dict())
+
+    # 날짜순으로 정렬
+    result = sorted(result, key=lambda x: x['date'], reverse=True)
+    context['articles'] = result
+    return render(request, 'favorites.html', context)
 
 
 def small(request):
     """
     닉네임 변경 작은 창
     """
-    return render(request,'small.html')
+    return render(request, 'small.html')
+
+
 def corporate(request):
     """
     사업자 등록
     """
-    return render(request, 'corporate-registration.html')
+    context = {}
+    context['corp'] = request.user.corp_num
+
+    if request.method == 'POST':
+        request.user.corp_num = request.POST.get('corp')
+        request.user.save()
+
+        return redirect('profileapp:corporate')
+
+    return render(request, 'corporate-registration.html', context)
+
 
 class Address(View):
     def get(self, request):

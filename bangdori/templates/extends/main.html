@@ -53,7 +53,7 @@
                                 <!-- 로그인 이후 박스 -->
                                 <div class="login-box after-login">
                                     <div class="login-after-user-info">
-                                        <div style="border : 1px solid black; border-radius : 1rem;">
+                                        <div style="border : 1px solid black; border-radius : 1rem; padding: 8px;">
                                             <div class="user-content-box">
                                                 {% if request.user.profile.image.url %}
                                                     <img id="profile-img"
@@ -79,7 +79,7 @@
                                                     <div id="address" class="user-content">
                                                         {% if request.user.addr %}
                                                             <!-- 등록된 주소가 있는 경우, 주소를 출력 -->
-                                                            {{ request.user.addr }}
+                                                            {{ request.user.addr.city }} {{ request.user.addr.state }}
                                                         {% else %}
                                                             <!-- 등록된 주소가 없는 경우, 주소를 입력하는 사이트를 출력 -->
                                                             <a href="{% url 'profileapp:address' %}">[주소등록]</a>

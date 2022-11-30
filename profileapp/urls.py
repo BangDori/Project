@@ -16,6 +16,6 @@ urlpatterns = [
     path('mypost/', views.mypost, name='mypost'),
     path('favorites/', views.favorites, name='favorites'),
     path('address/', views.Address.as_view(), name='address'),
-    path('corporate/', views.corporate, name='register'),
-    path('create/small.html/', views.small, name='small')
+    path('corporate/', views.corporate, name='corporate'),
+    path('create/small/', views.small, name='small')
 ]
