@@ -148,6 +148,9 @@ def addCommentsToTitle(articles: list, name=None):
         model = getCommentModelByName(name).objects.all()
 
     for a in articles:
+        if a.get('comment_added', None):
+            continue
+
         # list에 포함된 각 title을 가져옴
         title = a['title']
 
@@ -161,5 +164,6 @@ def addCommentsToTitle(articles: list, name=None):
         # 해당 게시글에 댓글이 있는 경우에만 추가해 줌
         if count > 0:
             a['title'] = f'{title} [{count}]'
+            a['comment_added'] = True
 
     return articles
