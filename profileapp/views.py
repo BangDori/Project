@@ -169,4 +169,7 @@ class Address(View):
         # 저장
         user.addr = addr
         user.save()
-        return render(request, 'address.html')
+        context['addr'] = request.user.addr
+
+        # 주소 등록 페이지
+        return render(request, 'address.html', context)

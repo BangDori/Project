@@ -34,7 +34,11 @@
 
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(35.8304916312343, 128.75218013148), // 지도의 중심좌표
+            {% if addr %}
+                center: new kakao.maps.LatLng({{ addr.lat }}, {{ addr.lng }}), // 지도의 중심좌표
+            {% else %}
+                center: new kakao.maps.LatLng(35.8304916312343, 128.75218013148), // 지도의 중심좌표
+            {% endif %}
             level: 3 // 지도의 확대 레벨
         };
 
