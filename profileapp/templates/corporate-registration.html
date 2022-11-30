@@ -1,6 +1,11 @@
 {% extends "extends/base.html" %}
 
 {% block mypage %}
+    <script type="text/javascript">
+    function onUpdate() {
+        alert("인증 완료되었습니다.");
+    }
+    </script>
     <div id="index-box">
         <div style="border-bottom :2px solid #96ceb4;"><br><br></div>
         <br>
@@ -89,8 +94,11 @@
             </div>
         </div>
         <br>
-        <input type="text" value="사업자 번호">
-        <input type="button" class="button" value="인증하기">
-
+        <form method="post" action="">
+            {% csrf_token %}
+            사업자 번호 :
+            <input type="text" name="corp" value="{{ corp }}">
+            <input type="submit" class="button" value="인증하기" onclick="onUpdate()" >
+        </form>
     </div>
 {% endblock %}
