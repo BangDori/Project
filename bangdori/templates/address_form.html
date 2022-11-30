@@ -3,13 +3,10 @@
 <form class="address-form" method="POST">
     {% csrf_token %}
 
-<<<<<<< HEAD
     <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}">
     <input type="button" class ="button write-btn" style = "font-size: 12px;" onclick="launchDaum()" value="우편번호 찾기"><br>
-=======
     <input type="text" class="input-text"id="postcode" name="postcode" placeholder="우편번호" value="{{ addr.postcode }}" required>
     <input type="button" class ="button" onclick="launchDaum()" value="우편번호 찾기"><br>
->>>>>>> 30d2fda9ca63857ede2bff90b7a772b0cdf2c5a0
     <div id="여백2" style ="height : 10px;"></div>
     <input type="text" class="input-text" id="road" name="road" placeholder="도로명주소" value="{{ addr.road }}">
     <input type="text" class="input-text" id="jibun" name="jibun" placeholder="지번주소" value="">
