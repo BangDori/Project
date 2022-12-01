@@ -24,7 +24,7 @@
             {% csrf_token %}
             <!-- 아이디 입력란 -->
             <div class="info-id">
-                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)""
+                <input id="idBox" class="input-box" type="text" name="register_username" placeholder="아이디 입력(8~20자)"
                        required>
                 <input id="idBtn" class="check-btn" type="button" value="중복확인">
             </div>
@@ -60,19 +60,19 @@
                 {% csrf_token %}
                 <input class="input-box" type="text" id="register_user_phone" name="register_user_phone"
                        placeholder="휴대폰 번호 입력('-'제외 11자리 입력)" required>
-                <input class="check-btn" type="button" id = "send_btn" onclick="toggleBtn(), ChangeName()" value="문자전송">
+                <input class="check-btn" type="button" id="send_btn" value="문자전송">
             </div>
 
-             <div style = "display: none;" id = "count">
-                 <h3 class="count-down" id = "certi01"></h3>
+            <div style="display: none;" id="count">
+                <h3 class="count-down" id="certi01"></h3>
             </div>
 
             <!-- 인증 번호 입력란 -->
-            <div class = "info-phone">
+            <div class="info-phone">
                 {% csrf_token %}
                 <input class="input-box" type="text" id="verify_user_phone" name="verify_user_phone"
                        placeholder="인증번호 입력" required>
-                <input class = "check-btn" type="button" value="인증하기" id="verify_btn">
+                <input class="check-btn" type="button" value="인증하기" id="verify_btn">
             </div>
 
             <!-- 닉네임 입력란 -->
@@ -110,26 +110,34 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#send_btn').on('click', function(e) {
-        
+    $('#send_btn').on('click', function (e) {
+        let phone = $('#register_user_phone').val();
+
+        if (phone.length < 1) {
+            alert("전화번호를 입력해주세요.");
+            return;
+        }
+
+        toggleBtn();
+        ChangeName();
+
         $.ajax({
             url: '/sms/send',
             type: 'post',
             headers: {"X-CSRFToken": '{{csrf_token}}'},
             data: {
-                'phone_number': $('#register_user_phone').val(),
-                
+                'phone_number': phone,
             },
             dataType: 'json',
             success: (response) => {
-                alert("문자 전송 완료!")
+                alert("인증번호가 전송되었습니다.")
             },
             error: (xhr, err) => {
-                alert("문자 전송 실패!")
+                alert("인증번호 전송에 실패했습니다.")
             }
         })
     })
-    $('#verify_btn').on('click', function(e) {
+    $('#verify_btn').on('click', function (e) {
         console.log($('#verify_user_phone').val())
         $.ajax({
             url: '/sms/auth',
@@ -137,25 +145,25 @@
             headers: {"X-CSRFToken": '{{csrf_token}}'},
             data: {
                 'phone_number': $('#register_user_phone').val(),
-                'message_number':$('#verify_user_phone').val(),
-                'stragety':'verify'
+                'message_number': $('#verify_user_phone').val(),
+                'stragety': 'verify'
             },
             dataType: 'json',
             success: (response) => {
-                if(response.state==='success')
-                    alert("인증 성공!")
-                else if(response.state==='failure')
-                    alert("인증 실패했습니다!")
+                if (response.state === 'success')
+                    alert("문자 인증에 성공했습니다.")
+                else if (response.state === 'failure')
+                    alert("인증번호가 일치하지 않습니다.")
             },
             error: (xhr, err) => {
-                alert("문자 전송 실패!")
+                alert("문자 전송에 실패했습니다.")
             }
         })
     })
 </script>
 
 <script>
-    const countDownTimer = function(id, date){
+    const countDownTimer = function (id, date) {
         var _vDate = new Date(date);
         var _second = 1000;
         var _minute = _second * 60;
@@ -163,23 +171,23 @@
         var timer;
         var SetTime = 300;
 
-        function showRemaining(){
+        function showRemaining() {
 
             if (SetTime < 0) {
-            clearInterval(timer);
-            document.getElementById(id).textContent = '시간 초과! 문자전송을 다시해주세요!';
-            return;
+                clearInterval(timer);
+                document.getElementById(id).textContent = '시간 초과! 문자 전송을 다시해주세요!';
+                return;
             }
 
             var minutes = Math.floor(SetTime / 60);
             var seconds = Math.floor(SetTime % 60);
 
             document.getElementById(id).textContent = minutes + '분 ';
-			document.getElementById(id).textContent += seconds + '초';
-            SetTime --;
+            document.getElementById(id).textContent += seconds + '초';
+            SetTime--;
         }
 
-       timer = setInterval(showRemaining, 1000);
+        timer = setInterval(showRemaining, 1000);
     }
 
     var dateObj = new Date();
@@ -189,19 +197,19 @@
     countDownTimer('certi01', dateObj);
 </script>
 <script>
-    function toggleBtn(){
+    function toggleBtn() {
         const count = document.getElementById('count');
-        if(count.style.display == 'none'){
+        if (count.style.display === 'none') {
             count.style.display = 'block';
         }
     }
 </script>
 
 <script>
-    function ChangeName(){
+    function ChangeName() {
         const btnElement = document.getElementById('send_btn');
 
-        btnElement.value = "문자재전송";
+        btnElement.value = "문자 재전송";
     }
 </script>
 

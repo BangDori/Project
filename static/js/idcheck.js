@@ -4,7 +4,13 @@ let validNickname = Boolean(false);
 
 $(function () {
     $('#idBtn').click(function () {
-        var username = $('#idBox').val()
+        let username = $('#idBox').val();
+
+        if (username.length < 1) {
+            alert("사용하실 아이디를 입력해주세요.");
+            return;
+        }
+
         $.ajax({
             url: '/idcheck',
             type: 'get',
@@ -29,7 +35,13 @@ $(function () {
 
 $(function () {
     $('#nicknameBtn').click(function () {
-        var nickname = $('#nicknameBox').val()
+        let nickname = $('#nicknameBox').val();
+
+        if (nickname.length < 1) {
+            alert("사용하실 닉네임을 입력해주세요.");
+            return;
+        }
+
         $.ajax({
             url: '/idcheck',
             type: 'get',

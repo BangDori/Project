@@ -26,7 +26,7 @@ class SmsSendView(View):
             "contentType": "COMM",
             # 사전에 등록해놓은 발신용 번호 입력, 타 번호 입력시 오류
             "from": os.getenv('call_number'),
-            "content": f"BangDori에서 보낸 인증번호입니다. [{auth_number}]]",  # 메세지를 이쁘게 꾸며보자
+            "content": f"BangDori에서 보낸 인증번호입니다. [{auth_number}]",  # 메세지를 이쁘게 꾸며보자
             "messages": [{"to": f"{phone_number}"}]
         }
         body = json.dumps(body)
