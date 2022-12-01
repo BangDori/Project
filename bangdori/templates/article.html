@@ -18,7 +18,7 @@
                             <img class="profile-img" src="{{ writer_img }}">
                         {% else %}
                             <!-- 등록해놓은 이미지가 없으면 기본 이미지를 출력하도록 설정 -->
-                            <img class="profile-img" src="{% get_media_prefix %}profile/default_profile.png">
+                            <img class="profile-img" src="{% get_media_prefix %}defaults/default_profile.png">
                         {% endif %}
                         <span>{{ article.writer }}</span>
                     </div>

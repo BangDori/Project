@@ -41,7 +41,7 @@
                                     {% if request.user.profile %}
                                         <img id="profile_pt" src="{{ request.user.profile.image.url }}" alt="프로필 사진">
                                     {% else %}
-                                        <img id="profile_pt" src="{% get_media_prefix %}profile/default_profile.png"
+                                        <img id="profile_pt" src="{% get_media_prefix %}defaults/default_profile.png"
                                              alt="프로필 사진">
                                     {% endif %}
                                 </div>
