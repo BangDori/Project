@@ -24,7 +24,7 @@ function getArticleInfo(name, pk) {
             let info = `조회 수 ${response.views} 추천 수 ${response.upvote} 댓글 수 ${response.comments}`
             document.getElementById("modal-title").textContent = response.title;
             document.getElementById("modal-date").textContent = response.date;
-            document.getElementById("modal-article-writer").textContent = response.writer;
+            document.getElementById("modal-article-writer").textContent = response.nickname;
             document.getElementById("modal-title").textContent = response.title;
             document.getElementById("modal-article-user").textContent = info;
             document.getElementById("modal-content").textContent = response.content;

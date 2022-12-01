@@ -38,7 +38,7 @@ class ArticleInfo(APIView):
         except:
             img = None
 
-        data = {'id': article.id, 'title': article.title, 'writer': article.writer.username,
+        data = {'id': article.id, 'title': article.title, 'writer': article.writer.username, 'nickname': article.writer.nickname,
                 'content': article.content, 'date': article.date.strftime("%Y-%m-%d %H:%M:%S"), 'views': article.views,
                 'upvote': article.upvote, 'url': url, 'comments': comments, 'img': img}
 
