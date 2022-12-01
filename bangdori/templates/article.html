@@ -154,7 +154,7 @@
                     <div class="comment-box">
                         <form class="comment-form" method="post" action={% url 'comment' name=url pk=article.id %}>
                             {% csrf_token %}
-                            <span class="comment-username">{{ request.user }}</span>
+                            <span class="comment-username">{{ request.user.nickname }}</span>
                             <div class="comment-textbox">
                                 <textarea class="comment-textarea" type="textarea" placeholder="댓글을 입력하세요."
                                           name="comment" rows="3" cols="100"></textarea>
