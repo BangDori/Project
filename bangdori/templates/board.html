@@ -47,7 +47,7 @@
                                 {% endif %}
                                 </a>
                             </div>
-                            <div class="writer">{{ article.writer }}</div>
+                            <div class="writer">{{ article.writer.nickname }}</div>
                             <div class="date js-date">{{ article.date }}</div>
                             <div class="views">{{ article.views }}</div>
                             <div class="recommendation">{{ article.upvote }}</div>
@@ -86,7 +86,7 @@
                                 </a>
                             </div>
                             <div class="card-writer">
-                                <span>{{ article.writer }}</span>
+                                <span>{{ article.writer.nickname }}</span>
                             </div>
                             <div class="card-info">
                                 <span class="js-date">{{ article.date }}</span>

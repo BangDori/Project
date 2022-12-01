@@ -20,7 +20,7 @@
                             <!-- 등록해놓은 이미지가 없으면 기본 이미지를 출력하도록 설정 -->
                             <img class="profile-img" src="{% get_media_prefix %}defaults/default_profile.png">
                         {% endif %}
-                        <span>{{ article.writer }}</span>
+                        <span>{{ article.writer.nickname }}</span>
                     </div>
                     <div class="article-user">
                         <div class="article-views">
@@ -100,7 +100,7 @@
                             <img class = "img-size" id="article-img" src="{{ article.img.url }}" alt="사진">
                             </div>
                         {% endif %}
-                        {{ article.content }}
+                        {{ article.content|linebreaks }}
                     </div>
 
                     {% if request.user.id == article.writer.id %}
@@ -173,7 +173,7 @@
                                     <span class="comment-day">{{ comment.updated_at }}</span>
                                 </div>
                                 <div class="comment">
-                                    {{ comment.content }}
+                                    {{ comment.content|linebreaks }}
                                 </div>
                                 {% if request.user.id == comment.writer.id %}
                                     <div class="removal-comment">
