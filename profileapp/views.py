@@ -26,6 +26,7 @@ class ProfileCreateView1(CreateView):
         temp_profile.save()  # self는 view에서 가져온 self임. 또, 웹브라우저에서 입력 받은 값이 우항 좌항이 db에서 가져온값
         return super().form_valid(form)
 
+
 class ProfileCreateView(View):
     def get(self, request):
         context = {}
@@ -35,21 +36,20 @@ class ProfileCreateView(View):
     def post(self, request):
         context = {}
         # 사진 업로드
+        img = None
         try:
             _, img = request.FILES.popitem()
             img = img[0]
+        except:
+            pass
 
-            profile = None
-            try:
-                profile = Profile.objects.all().filter(user_id=request.user.id).last()
-            except:
-                profile = Profile(user_id=request.user.id)
-
+        if img:
+            profile = Profile.objects.all().filter(user=request.user).last()
+            if profile is None:
+                profile = Profile(user=request.user)
 
             profile.image = img
             profile.save()
-        except:
-            pass
 
         request.user.nickname = request.POST.get('nicknameBox')
         request.user.save()
