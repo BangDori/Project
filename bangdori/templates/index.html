@@ -23,7 +23,7 @@
                                 <div class="recommendation">{{ article.upvote }}</div>
                             </div>
                         {% endfor %}
-                     {% else %}
+                    {% else %}
                         <br>
                         <br>
                         <br>
@@ -49,10 +49,10 @@
                                 <div class="title">
                                     <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                                 </div>
-                                <div class="recommendation">{{ article.writer }}</div>
+                                <div class="recommendation">{{ article.writer.nickname }}</div>
                             </div>
                         {% endfor %}
-                     {% else %}
+                    {% else %}
                         <br>
                         <br>
                         <br>
@@ -70,9 +70,9 @@
 
         <div class="preview-article">
             <div class="top-info preview-top-info">
-                    <div class="id"><span>순위</span></div>
-                    <div class="title"><span>제목</span></div>
-                    <div class="writer"><span>글쓴이</span></div>
+                <div class="id"><span>순위</span></div>
+                <div class="title"><span>제목</span></div>
+                <div class="writer"><span>글쓴이</span></div>
             </div>
             {% if articles.board %}
                 {% for article in articles.board %}
@@ -81,10 +81,10 @@
                         <div class="title">
                             <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                         </div>
-                        <div class="recommendation">{{ article.writer }}</div>
+                        <div class="recommendation">{{ article.writer.nickname }}</div>
                     </div>
                 {% endfor %}
-             {% else %}
+            {% else %}
                 <br>
                 <br>
                 <br>
@@ -101,7 +101,7 @@
             <div class="preview-title">다방</div>
             <div class="preview-article">
                 <div class="top-info preview-top-info">
-                    <div class="id"><span>순위</span></div>
+                    <div class="id"><span>번호</span></div>
                     <div class="title"><span>제목</span></div>
                     <div class="writer"><span>글쓴이</span></div>
                 </div>
@@ -113,12 +113,13 @@
                             <div class="title">
                                 <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                             </div>
+                            <div class="recommendation">{{ article.writer.nickname }}</div>
                         </div>
                     {% endfor %}
                 {% else %}
-                <br>
-                <br>
-                <br>
+                    <br>
+                    <br>
+                    <br>
                 {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='dabang' %}>더보기 ...</a>
@@ -131,7 +132,7 @@
 
             <div class="preview-article">
                 <div class="top-info preview-top-info">
-                    <div class="id"><span>순위</span></div>
+                    <div class="id"><span>번호</span></div>
                     <div class="title"><span>제목</span></div>
                     <div class="writer"><span>글쓴이</span></div>
                 </div>
@@ -142,12 +143,13 @@
                             <div class="title">
                                 <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                             </div>
+                            <div class="recommendation">{{ article.writer.nickname }}</div>
                         </div>
                     {% endfor %}
-                 {% else %}
-                <br>
-                <br>
-                <br>
+                {% else %}
+                    <br>
+                    <br>
+                    <br>
                 {% endif %}
                 <div class="preview-more">
                     <a class="more" href={% url 'board' name='succession' %}>더보기 ...</a>
@@ -162,12 +164,10 @@
 
         <div class="preview-article">
             <div class="top-info preview-top-info">
-                    <div class="id"><span>순위</span></div>
-                    <div class="title"><span>제목</span></div>
-                    <div class="writer"><span>글쓴이</span></div>
+                <div class="id"><span>번호</span></div>
+                <div class="title"><span>제목</span></div>
+                <div class="writer"><span>글쓴이</span></div>
             </div>
-
-
             {% if articles.group %}
                 {% for article in articles.group %}
                     <div class="article-info">
@@ -175,10 +175,10 @@
                         <div class="title">
                             <a href="{% url 'article' name=article.url pk=article.id %}">{{ article.title }}</a>
                         </div>
-                        <div class="recommendation">{{ article.writer }}</div>
+                        <div class="recommendation">{{ article.writer.nickname }}</div>
                     </div>
                 {% endfor %}
-             {% else %}
+            {% else %}
                 <br>
                 <br>
                 <br>
