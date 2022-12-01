@@ -150,10 +150,12 @@
             },
             dataType: 'json',
             success: (response) => {
-                if (response.state === 'success')
-                    alert("문자 인증에 성공했습니다.")
-                else if (response.state === 'failure')
-                    alert("인증번호가 일치하지 않습니다.")
+                if (response.state === 'success') {
+                    toggleBtn();
+                    alert("문자 인증에 성공했습니다.");
+                } else if (response.state === 'failure') {
+                    alert("인증번호가 일치하지 않습니다.");
+                }
             },
             error: (xhr, err) => {
                 alert("문자 전송에 실패했습니다.")
