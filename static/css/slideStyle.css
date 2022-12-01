@@ -1,16 +1,16 @@
-.ad-banner{
+ .ad-banner {
     overflow: hidden;
 }
 
-.banner-content{
+.banner-content {
     position: relative;
     display: inline-block;
     width: 100%;
-    height: 128px;
+    height: 240px;
     overflow: hidden;
 }
 
-.banner{
+.banner {
     position: absolute;
     left: 0;
     width: inherit;
@@ -18,19 +18,20 @@
     opacity: 0;
 }
 
-.showing{
+.showing {
     opacity: 1;
 
     transition: all 0.8s ease-in-out;
 }
-.banner-count{
+
+.banner-count {
     display: inline-block;
     position: absolute;
     right: 20px;
     bottom: 5px;
 }
 
-.count{
+.count {
     display: inline-block;
     border: 1px solid black;
     background: transparent;
@@ -42,6 +43,6 @@
     transition: background 0.2s ease-in-out;
 }
 
-.js-clicked-count{
+.js-clicked-count {
     background: black;
 }
