@@ -168,7 +168,7 @@
                         {% for comment in comments %}
                             <div class="user-comment">
                                 <div class="user-info">
-                                    <span class="comment-username">{{ comment.writer }}</span>
+                                    <span class="comment-username">{{ comment.writer.nickname }}</span>
 
                                     <span class="comment-day">{{ comment.updated_at }}</span>
                                 </div>
