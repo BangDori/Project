@@ -170,7 +170,11 @@ def corporate(request):
     사업자 등록
     """
     context = {}
-    context['corp'] = request.user.corp_num
+
+    corp = request.user.corp_num
+    if not corp:
+        corp = ""
+    context['corp'] = corp
 
     if request.method == 'POST':
         request.user.corp_num = request.POST.get('corp')
